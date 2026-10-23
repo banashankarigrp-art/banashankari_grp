@@ -122,16 +122,25 @@ export const HomePage: React.FC = () => {
         <div className="absolute top-1/2 -right-32 w-96 h-96 bg-navy-700/30 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative max-w-5xl mx-auto text-center space-y-6">
-          {/* Trust badge */}
-          <div className="inline-flex items-center space-x-2 bg-navy-900/90 border border-gold-500/30 text-gold-300 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest shadow-md">
-            <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-            <span>Trusted Real Estate & Construction Services in Bengaluru</span>
+          {/* Company Brand Badge */}
+          <div className="inline-flex items-center space-x-2 bg-navy-900/90 border border-gold-500/40 text-gold-300 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest shadow-md backdrop-blur-sm">
+            <Building2 className="w-3.5 h-3.5 text-gold-400" />
+            <span className="text-gold-300 font-bold tracking-wider">BANASHANKARI ENTERPRISES</span>
+            <span className="text-gold-500/50">•</span>
+            <span className="text-slate-300 font-normal">Bengaluru</span>
           </div>
 
-          {/* Heading from screenshot */}
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-white leading-[1.15]">
-            Your Land. Your Dream Home.{' '}
-            <span className="text-gold-400 italic block font-serif">Our Commitment.</span>
+          {/* Main Hero Heading with Company Name and Slogan */}
+          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15]">
+            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-amber-200 via-gold-400 to-amber-100 bg-clip-text text-transparent mb-2.5 sm:mb-3 drop-shadow-sm font-sans">
+              Banashankari Enterprises
+            </span>
+            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
+              Your Land. Your Dream Home.
+            </span>
+            <span className="text-gold-400 italic block font-serif text-3xl sm:text-4xl md:text-5xl mt-1.5 sm:mt-2">
+              Our Commitment.
+            </span>
           </h1>
 
           {/* Subtext */}
@@ -649,7 +658,7 @@ export const HomePage: React.FC = () => {
                 Direct Consultation
               </span>
               <h3 className="font-heading text-2xl sm:text-3xl font-bold leading-tight">
-                Connect with Ramesh S H & Our Team
+                Connect with Ramesh S H & Banashankari Enterprises
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
                 Whether you need assistance with plot purchase, turnkey home construction, rental agreements, or KHB title verification, our team is ready to assist.
