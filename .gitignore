@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+*/node_modules/
+
+# Production / Build output
+dist/
+*/dist/
+build/
+*/build/
+
+# Environment variables & secrets (Explicitly ignore .env files)
+.env
+.env.local
+.env.*.local
+.env.development
+.env.test
+.env.production
+*.env
+**/.env
+**/.env.*
+
+# Keep .env.example files committed for reference
+!.env.example
+!**/.env.example
+
+# Local uploads & user media
+uploads/
+*/uploads/
+!uploads/.gitkeep
+!*/uploads/.gitkeep
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

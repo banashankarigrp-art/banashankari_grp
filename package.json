@@ -1,0 +1,22 @@
+{
+  "name": "banashankari-enterprises",
+  "version": "1.0.0",
+  "description": "Full-stack real estate, construction, loan assistance, and KHB transaction portal for Banashankari Enterprises",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "npm run --prefix server dev",
+    "dev:client": "npm run --prefix client dev",
+    "build": "npm run --prefix server build && npm run --prefix client build",
+    "start": "npm run --prefix server start",
+    "seed": "npm run --prefix server seed",
+    "bootstrap:admin": "npm run --prefix server bootstrap:admin",
+    "test": "npm run --prefix server test"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "dependencies": {
+    "vite": "^8.3.5"
+  }
+}
