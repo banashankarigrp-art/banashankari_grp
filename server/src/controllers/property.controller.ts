@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
 import mongoose from 'mongoose';
+import fs from 'fs';
+import path from 'path';
 import { Property } from '../models/Property.js';
 import { SavedProperty } from '../models/SavedProperty.js';
 import { Notification } from '../models/Notification.js';
@@ -231,9 +233,6 @@ export const getPropertyBySlugOrId = async (req: Request, res: Response): Promis
     res.status(500).json({ success: false, message: error.message || 'Error fetching property' });
   }
 };
-
-import fs from 'fs';
-import path from 'path';
 
 // Helper to save base64 uploaded device images to disk in uploads/properties
 const saveBase64Images = (images: any[], referenceId: string) => {

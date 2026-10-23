@@ -6,10 +6,10 @@ import { IUserDocument } from '../models/User.js';
 export interface TokenPayload {
   userId: string;
   email: string;
-  role: 'customer' | 'admin';
+  role: 'customer' | 'seller' | 'admin';
 }
 
-export const generateAccessToken = (user: IUserDocument | { _id: any; email: string; role: 'customer' | 'admin' }): string => {
+export const generateAccessToken = (user: IUserDocument | { _id: any; email: string; role: 'customer' | 'seller' | 'admin' }): string => {
   return jwt.sign(
     {
       userId: user._id.toString(),
@@ -21,7 +21,7 @@ export const generateAccessToken = (user: IUserDocument | { _id: any; email: str
   );
 };
 
-export const generateRefreshToken = (user: IUserDocument | { _id: any; email: string; role: 'customer' | 'admin' }): string => {
+export const generateRefreshToken = (user: IUserDocument | { _id: any; email: string; role: 'customer' | 'seller' | 'admin' }): string => {
   return jwt.sign(
     {
       userId: user._id.toString(),
