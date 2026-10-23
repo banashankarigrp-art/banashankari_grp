@@ -99,14 +99,16 @@ export const MyEnquiriesPage: React.FC = () => {
 
   const getCategoryMeta = (cat: string) => {
     switch (cat) {
+      case 'property':
       case 'site_visit':
-        return { label: 'Site Visit Request', icon: Calendar, color: 'text-purple-600 bg-purple-50' };
       case 'plot_booking':
-        return { label: 'Plot / Property Booking', icon: Building2, color: 'text-navy-600 bg-navy-50' };
+        return { label: 'Property / Plot Booking', icon: Building2, color: 'text-navy-600 bg-navy-50' };
       case 'construction':
         return { label: 'Turnkey Construction', icon: Hammer, color: 'text-amber-600 bg-amber-50' };
+      case 'loan':
       case 'loan_assistance':
         return { label: 'Banking & Home Loan', icon: Landmark, color: 'text-emerald-600 bg-emerald-50' };
+      case 'khb':
       case 'khb_guidance':
         return { label: 'KHB Assistance', icon: ShieldCheck, color: 'text-teal-600 bg-teal-50' };
       default:
@@ -114,16 +116,17 @@ export const MyEnquiriesPage: React.FC = () => {
     }
   };
 
-  // Filter logic
+  // Filter logic (safely typed string comparisons to match standard & legacy categories)
   const filteredEnquiries = enquiries.filter((enq) => {
+    const cat = (enq.category as string) || '';
     if (selectedFilter === 'plots') {
-      return enq.category === 'site_visit' || enq.category === 'plot_booking';
+      return cat === 'property' || cat === 'site_visit' || cat === 'plot_booking';
     }
     if (selectedFilter === 'construction') {
-      return enq.category === 'construction';
+      return cat === 'construction';
     }
     if (selectedFilter === 'finance') {
-      return enq.category === 'loan_assistance' || enq.category === 'khb_guidance';
+      return cat === 'loan' || cat === 'loan_assistance' || cat === 'khb' || cat === 'khb_guidance';
     }
     return true;
   });
