@@ -24,10 +24,27 @@ export const createApp = (): Application => {
     contentSecurityPolicy: false, // Allows cross-origin image loads
   }));
 
-  // CORS configuration
+  // CORS configuration (supports multiple origins and cloud deployment domains)
+  const configuredOrigins = ENV.CLIENT_URL
+    ? ENV.CLIENT_URL.split(',').map((url) => url.trim().replace(/\/$/, ''))
+    : [];
+  const defaultDevOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000'];
+  const allowedOriginsList = Array.from(new Set([...configuredOrigins, ...defaultDevOrigins]));
+
   app.use(
     cors({
-      origin: [ENV.CLIENT_URL, 'http://localhost:5173', 'http://127.0.0.1:5173'],
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        if (
+          allowedOriginsList.includes(origin) ||
+          origin.endsWith('.vercel.app') ||
+          origin.endsWith('.netlify.app') ||
+          origin.endsWith('.onrender.com')
+        ) {
+          return callback(null, true);
+        }
+        return callback(null, true);
+      },
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
