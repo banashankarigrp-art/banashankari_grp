@@ -163,7 +163,7 @@ export const HomePage: React.FC = () => {
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-navy-900 hover:bg-navy-850 border border-navy-800 text-slate-200 text-sm font-medium transition flex items-center justify-center space-x-2"
             >
               <PhoneCall className="w-4 h-4 text-gold-400" />
-              <span>Talk to Ramesh S H</span>
+              <span>Talk to Ramesh S H --insert a photo here -- </span>
             </a>
           </div>
 
