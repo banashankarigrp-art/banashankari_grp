@@ -145,7 +145,7 @@ export const HomePage: React.FC = () => {
 
           {/* Subtext */}
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Discover verified plots, build your turnkey dream residence, and access construction finance with Banashankari Enterprises — led by Ramesh S H.
+            Discover verified plots, build your turnkey dream residence, and access construction finance with Banashankari Enterprises — led by Ramesh S H. --Insert the photo here--
           </p>
 
           {/* Hero CTAs */}
@@ -163,7 +163,7 @@ export const HomePage: React.FC = () => {
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-navy-900 hover:bg-navy-850 border border-navy-800 text-slate-200 text-sm font-medium transition flex items-center justify-center space-x-2"
             >
               <PhoneCall className="w-4 h-4 text-gold-400" />
-              <span>Talk to Ramesh S H --insert a photo here -- </span>
+              <span>Talk to Ramesh S H  </span>
             </a>
           </div>
 
