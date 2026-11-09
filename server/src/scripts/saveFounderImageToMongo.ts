@@ -75,3 +75,4 @@ run().catch((err) => {
   console.error('❌ Error saving founder image to MongoDB:', err);
   process.exit(1);
 });
+

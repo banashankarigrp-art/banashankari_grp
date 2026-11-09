@@ -177,10 +177,10 @@ export const HomePage: React.FC = () => {
                 {/* Founder Info Overlay at Bottom */}
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950 via-navy-950/70 to-transparent p-3 pt-6 text-center">
                   <p className="text-white font-bold text-sm sm:text-base tracking-wide drop-shadow">
-                    {founderName}
+
                   </p>
                   <p className="text-gold-300 text-xs font-medium tracking-tight">
-                    {founderTitle}
+
                   </p>
                 </div>
               </div>
@@ -189,7 +189,7 @@ export const HomePage: React.FC = () => {
             <div className="mt-2.5 text-center">
               <span className="inline-flex items-center space-x-1.5 text-xs text-slate-300 bg-navy-900/90 border border-gold-500/30 px-3.5 py-1 rounded-full shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span className="text-slate-200 font-medium">Founder & Project Supervision</span>
+                <span className="text-slate-200 font-medium">Founder</span>
               </span>
             </div>
           </div>
@@ -860,9 +860,8 @@ export const HomePage: React.FC = () => {
                 >
                   <span className="font-semibold text-sm text-navy-900">{faq.q}</span>
                   <ChevronDown
-                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${
-                      isOpen ? 'transform rotate-180 text-gold-600' : ''
-                    }`}
+                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? 'transform rotate-180 text-gold-600' : ''
+                      }`}
                   />
                 </button>
                 {isOpen && (
