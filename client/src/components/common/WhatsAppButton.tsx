@@ -59,7 +59,7 @@ export const WhatsAppButton: React.FC<{ defaultMessage?: string }> = ({
               className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-center space-x-2 shadow-sm transition"
             >
               <Send className="w-3.5 h-3.5" />
-              <span>Open in WhatsApp (+91 824 899 2779)</span>
+              <span>Open in WhatsApp (+91 997 253 6991)</span>
             </button>
           </div>
         </div>
