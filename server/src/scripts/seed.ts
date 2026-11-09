@@ -80,6 +80,8 @@ const seedDatabase = async () => {
     await SiteSettings.create({
       companyName: 'Banashankari Enterprises',
       founderName: 'Ramesh S H',
+      founderTitle: 'Founder & Managing Director',
+      founderPhoto: '/founder.jpg',
       primaryPhone: '+91 824 899 2779',
       whatsappNumber: '918248992779',
       email: 'contact@banashankarienterprises.com',

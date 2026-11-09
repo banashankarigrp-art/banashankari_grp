@@ -3,6 +3,8 @@ import mongoose, { Schema, Document } from 'mongoose';
 export interface ISiteSettingsDocument extends Document {
   companyName: string;
   founderName: string;
+  founderTitle?: string;
+  founderPhoto?: string;
   primaryPhone: string;
   whatsappNumber: string;
   email: string;
@@ -21,6 +23,8 @@ const SiteSettingsSchema = new Schema<ISiteSettingsDocument>(
   {
     companyName: { type: String, default: 'Banashankari Enterprises' },
     founderName: { type: String, default: 'Ramesh S H' },
+    founderTitle: { type: String, default: 'Founder & Managing Director' },
+    founderPhoto: { type: String, default: '' },
     primaryPhone: { type: String, default: '+91 824 899 2779' },
     whatsappNumber: { type: String, default: '918248992779' },
     email: { type: String, default: 'contact@banashankarienterprises.com' },

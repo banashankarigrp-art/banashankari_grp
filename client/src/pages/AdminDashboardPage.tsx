@@ -772,6 +772,37 @@ export const AdminDashboardPage: React.FC = () => {
                   className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
                 />
               </div>
+
+              <div>
+                <label className="font-semibold text-slate-300 block mb-1">Founder Title</label>
+                <input
+                  type="text"
+                  value={settings.founderTitle || ''}
+                  onChange={(e) => setSettings({ ...settings, founderTitle: e.target.value })}
+                  placeholder="Founder & Managing Director"
+                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
+                />
+              </div>
+
+              <div>
+                <label className="font-semibold text-slate-300 block mb-1">Founder Photo URL / Base64</label>
+                <div className="flex items-center space-x-3">
+                  {settings.founderPhoto && (
+                    <img
+                      src={settings.founderPhoto}
+                      alt="Founder Preview"
+                      className="w-12 h-12 object-cover object-top rounded-lg border border-amber-500/50"
+                    />
+                  )}
+                  <input
+                    type="text"
+                    value={settings.founderPhoto || ''}
+                    onChange={(e) => setSettings({ ...settings, founderPhoto: e.target.value })}
+                    placeholder="/founder.jpg or data:image/..."
+                    className="flex-1 p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 text-xs"
+                  />
+                </div>
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

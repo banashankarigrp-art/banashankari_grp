@@ -178,6 +178,8 @@ export interface IAuditLog {
 export interface ISiteSettings {
   companyName: string;
   founderName: string;
+  founderTitle?: string;
+  founderPhoto?: string;
   primaryPhone: string;
   whatsappNumber: string;
   email: string;
@@ -194,6 +196,8 @@ export interface ISiteSettings {
 export const COMPANY_INFO = {
   name: 'Banashankari Enterprises',
   founder: 'Ramesh S H',
+  founderTitle: 'Founder & Managing Director',
+  founderPhoto: '/founder.jpg',
   phone: '+91 824 899 2779',
   whatsappRaw: '918248992779',
   whatsappUrl: 'https://wa.me/918248992779',

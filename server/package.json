@@ -9,6 +9,7 @@
     "start": "node dist/server.js",
     "seed": "tsx src/scripts/seed.ts",
     "bootstrap:admin": "tsx src/scripts/bootstrapAdmin.ts",
+    "save:founder-image": "tsx src/scripts/saveFounderImageToMongo.ts",
     "test": "vitest run"
   },
   "dependencies": {

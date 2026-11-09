@@ -19,10 +19,11 @@ import {
 } from 'lucide-react';
 import { PropertyCard } from '../components/property/PropertyCard';
 import { api } from '../services/api';
-import { IProperty, COMPANY_INFO } from '@shared/types';
+import { IProperty, COMPANY_INFO, ISiteSettings } from '@shared/types';
 
 export const HomePage: React.FC = () => {
   const [properties, setProperties] = useState<IProperty[]>([]);
+  const [settings, setSettings] = useState<ISiteSettings | null>(null);
   const [loading, setLoading] = useState(true);
 
   // FAQ Accordion
@@ -40,20 +41,26 @@ export const HomePage: React.FC = () => {
   const [enquirySubmitting, setEnquirySubmitting] = useState(false);
 
   useEffect(() => {
-    const fetchFeatured = async () => {
+    const fetchPageData = async () => {
       try {
         setLoading(true);
-        const res: any = await api.get('/properties?limit=6');
-        if (res.success && res.data) {
-          setProperties(res.data);
+        const [propsRes, settingsRes]: any = await Promise.all([
+          api.get('/properties?limit=6').catch(() => ({ success: false, data: [] })),
+          api.get('/content/settings').catch(() => ({ success: false, data: null })),
+        ]);
+        if (propsRes.success && propsRes.data) {
+          setProperties(propsRes.data);
+        }
+        if (settingsRes?.data) {
+          setSettings(settingsRes.data);
         }
       } catch (err) {
-        console.error('Failed to load featured properties:', err);
+        console.error('Failed to load home page data:', err);
       } finally {
         setLoading(false);
       }
     };
-    fetchFeatured();
+    fetchPageData();
   }, []);
 
 
@@ -102,6 +109,10 @@ export const HomePage: React.FC = () => {
     },
   ];
 
+  const founderPhoto = settings?.founderPhoto || COMPANY_INFO.founderPhoto || '/founder.jpg';
+  const founderName = settings?.founderName || COMPANY_INFO.founder;
+  const founderTitle = settings?.founderTitle || COMPANY_INFO.founderTitle || 'Founder & Managing Director';
+
   return (
     <div className="space-y-16 sm:space-y-24 pb-20">
       {/* ======================================================== */}
@@ -145,8 +156,43 @@ export const HomePage: React.FC = () => {
 
           {/* Subtext */}
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Discover verified plots, build your turnkey dream residence, and access construction finance with Banashankari Enterprises — led by Ramesh S H. --Insert the photo here--
+            Discover verified plots, build your turnkey dream residence, and access construction finance with Banashankari Enterprises — led by {founderName}.
           </p>
+
+          {/* Founder Feature Spotlight (Square Shape above Explore Properties) */}
+          <div className="pt-2 pb-1 flex flex-col items-center justify-center">
+            <div className="relative group">
+              {/* Outer Golden Ambient Glow */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-400 via-gold-500 to-amber-300 rounded-3xl blur-md opacity-40 group-hover:opacity-75 transition duration-500" />
+
+              {/* Square Container */}
+              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-60 md:h-60 aspect-square rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-b from-gold-400 via-navy-800 to-navy-950 shadow-2xl border-2 border-gold-500/50 overflow-hidden">
+                <img
+                  src={founderPhoto}
+                  alt={founderName}
+                  className="w-full h-full object-cover object-top rounded-xl sm:rounded-2xl transition duration-500 group-hover:scale-105"
+                  loading="eager"
+                />
+
+                {/* Founder Info Overlay at Bottom */}
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950 via-navy-950/70 to-transparent p-3 pt-6 text-center">
+                  <p className="text-white font-bold text-sm sm:text-base tracking-wide drop-shadow">
+                    {founderName}
+                  </p>
+                  <p className="text-gold-300 text-xs font-medium tracking-tight">
+                    {founderTitle}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-2.5 text-center">
+              <span className="inline-flex items-center space-x-1.5 text-xs text-slate-300 bg-navy-900/90 border border-gold-500/30 px-3.5 py-1 rounded-full shadow-sm">
+                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                <span className="text-slate-200 font-medium">Founder & Project Supervision</span>
+              </span>
+            </div>
+          </div>
 
           {/* Hero CTAs */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
