@@ -365,7 +365,7 @@ export const PropertyDetailPage: React.FC = () => {
               className="w-full bg-white hover:bg-slate-100 text-emerald-900 py-3 rounded-xl text-xs font-bold flex items-center justify-center space-x-2 shadow transition"
             >
               <MessageSquare className="w-4 h-4 text-emerald-600" />
-              <span>Enquire on WhatsApp (+91 824 899 2779)</span>
+              <span>Enquire on WhatsApp (+91 997 253 6991)</span>
             </a>
           </div>
 
