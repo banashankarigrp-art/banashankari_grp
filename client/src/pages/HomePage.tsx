@@ -109,7 +109,7 @@ export const HomePage: React.FC = () => {
     },
   ];
 
-  const founderPhoto = settings?.founderPhoto || COMPANY_INFO.founderPhoto || '/founder.jpg';
+  const founderPhoto = settings?.founderPhoto || COMPANY_INFO.founderPhoto || '/Founder-BSK.jpg';
   const founderName = settings?.founderName || COMPANY_INFO.founder;
   const founderTitle = settings?.founderTitle || COMPANY_INFO.founderTitle || 'Founder & Managing Director';
 
