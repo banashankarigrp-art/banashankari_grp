@@ -151,6 +151,8 @@ export const HomePage: React.FC = () => {
             </span>
             <span className="text-gold-400 italic block font-serif text-3xl sm:text-4xl md:text-5xl mt-1.5 sm:mt-2">
               Our Commitment.
+            </span>
+            <span className="text-gold-400 italic block font-serif text-3xl sm:text-4xl md:text-5xl mt-1.5 sm:mt-2">
               One Stop Solution for all your Needs
             </span>
           </h1>
