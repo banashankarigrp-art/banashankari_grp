@@ -19,6 +19,8 @@ import {
   Sparkles,
   HelpCircle,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
 } from 'lucide-react';
 import { PropertyCard } from '../components/property/PropertyCard';
 import { api } from '../services/api';
@@ -208,6 +210,75 @@ export const HomePage: React.FC = () => {
     settings?.aboutCompanyText ||
     'With over 15 years of ground expertise, Banashankari Enterprises stands as South Bangalore’s most dependable real estate advisory and civil construction partner. From title-verified BDA plot procurement to comprehensive turnkey structural construction and KHB liaison, our hands-on leadership ensures every square foot reflects integrity, precision, and lasting family value.';
 
+  // End-to-End Property Solutions (User Uploaded Images)
+  const solutions = [
+    {
+      id: 'plots',
+      title: 'Residential Plots & Land',
+      category: 'Land & Plots',
+      image: '/solutions/plots.jpg',
+      description:
+        'Verified BDA, BMRDA, and DC-converted residential plots with complete legal title deeds and immediate registration readiness.',
+      highlights: ['Clear title deed verification', 'Cauvery & BESCOM infrastructure ready'],
+      link: '/properties?type=plot',
+      linkText: 'Explore Plots',
+    },
+    {
+      id: 'construction',
+      title: 'Bespoke Home Construction',
+      category: 'Civil & Building',
+      image: '/solutions/construction.jpg',
+      description:
+        'Architectural planning, structural RCC execution, and turnkey building coordination with stringent material grade checks.',
+      highlights: ['Direct oversight by Ramesh S H', 'Transparent itemized material billing'],
+      link: '/construction',
+      linkText: 'Explore Construction',
+    },
+    {
+      id: 'rentals',
+      title: 'Rentals & Leases',
+      category: 'Rental Spaces',
+      image: '/solutions/rental.jpg',
+      description:
+        'Curated residential apartments, independent duplex homes, and prime commercial retail spaces for verified tenants.',
+      highlights: ['Thorough tenant vetting', 'Formal rental agreements & deposit escrow'],
+      link: '/properties?purpose=rent',
+      linkText: 'Explore Rentals',
+    },
+    {
+      id: 'loans',
+      title: 'Loan & KHB Advisory',
+      category: 'Finance & Legal',
+      image: '/solutions/loan.jpg',
+      description:
+        'Home loan documentation assistance across premier banks and dedicated procedural guidance for KHB transfers.',
+      highlights: ['Multi-bank loan eligibility liaison', 'KHB statutory checklist verification'],
+      link: '/khb-assistance',
+      linkText: 'KHB & Loan Guidance',
+    },
+  ];
+
+  // Mobile 2s Card Shuffle & Rotational Animation State
+  const [activeSolutionIdx, setActiveSolutionIdx] = useState(0);
+  const [isShufflePaused, setIsShufflePaused] = useState(false);
+  const touchStartX = useRef<number | null>(null);
+
+  const handleNextSolution = () => {
+    setActiveSolutionIdx((prev) => (prev + 1) % solutions.length);
+  };
+
+  const handlePrevSolution = () => {
+    setActiveSolutionIdx((prev) => (prev - 1 + solutions.length) % solutions.length);
+  };
+
+  useEffect(() => {
+    if (isShufflePaused) return;
+    const shuffleTimer = setInterval(() => {
+      setActiveSolutionIdx((prev) => (prev + 1) % solutions.length);
+    }, 2000);
+    return () => clearInterval(shuffleTimer);
+  }, [isShufflePaused, solutions.length]);
+
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 overflow-x-hidden">
       {/* ======================================================== */}
@@ -296,134 +367,185 @@ export const HomePage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-          {/* Card 1 */}
-          <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-luxury hover:shadow-luxury-hover hover:border-gold-500/40 transition group flex flex-col justify-between">
-            <div>
-              <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-3 sm:mb-5 group-hover:scale-110 transition">
-                <Layers className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="font-heading text-sm sm:text-lg font-bold text-navy-900 mb-1 sm:mb-2 leading-tight">
-                Residential Plots & Land
-              </h3>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
-                Verified BDA, BMRDA, and DC-converted residential plots with complete legal title deeds and immediate registration readiness.
-              </p>
-              <ul className="hidden sm:block text-xs text-slate-500 space-y-1.5 mb-5 border-t border-slate-100 pt-3">
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Clear title deed verification</span>
-                </li>
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Cauvery & BESCOM infrastructure</span>
-                </li>
-              </ul>
-            </div>
-            <Link
-              to="/properties?type=plot"
-              className="text-[11px] sm:text-xs font-bold text-navy-900 group-hover:text-gold-600 inline-flex items-center space-x-1 transition mt-1"
-            >
-              <span>Explore Plots</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+        {/* ======================================================== */}
+        {/* MOBILE LAYOUT: Rotational Card Shuffle Animation (Every 2s) */}
+        {/* ======================================================== */}
+        <div
+          className="sm:hidden relative max-w-sm mx-auto pt-4 pb-6 px-1 select-none"
+          onTouchStart={(e) => {
+            setIsShufflePaused(true);
+            touchStartX.current = e.touches[0].clientX;
+          }}
+          onTouchEnd={(e) => {
+            setIsShufflePaused(false);
+            if (touchStartX.current !== null) {
+              const diff = touchStartX.current - e.changedTouches[0].clientX;
+              if (diff > 35) {
+                // Swiped left -> next card
+                handleNextSolution();
+              } else if (diff < -35) {
+                // Swiped right -> prev card
+                handlePrevSolution();
+              }
+              touchStartX.current = null;
+            }
+          }}
+          onMouseEnter={() => setIsShufflePaused(true)}
+          onMouseLeave={() => setIsShufflePaused(false)}
+        >
+          {/* Side Navigation Buttons (Tapping either side navigates cards) */}
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handlePrevSolution();
+            }}
+            className="absolute -left-2 top-1/2 -translate-y-6 z-20 w-8 h-8 rounded-full bg-white/95 text-navy-950 border border-slate-200 shadow-md flex items-center justify-center hover:bg-gold-500 hover:text-white transition active:scale-90"
+            aria-label="Previous solution card"
+          >
+            <ChevronLeft className="w-4 h-4" />
+          </button>
+          <button
+            type="button"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleNextSolution();
+            }}
+            className="absolute -right-2 top-1/2 -translate-y-6 z-20 w-8 h-8 rounded-full bg-white/95 text-navy-950 border border-slate-200 shadow-md flex items-center justify-center hover:bg-gold-500 hover:text-white transition active:scale-90"
+            aria-label="Next solution card"
+          >
+            <ChevronRight className="w-4 h-4" />
+          </button>
 
-          {/* Card 2 */}
-          <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-luxury hover:shadow-luxury-hover hover:border-gold-500/40 transition group flex flex-col justify-between">
-            <div>
-              <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-3 sm:mb-5 group-hover:scale-110 transition">
-                <Home className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="font-heading text-sm sm:text-lg font-bold text-navy-900 mb-1 sm:mb-2 leading-tight">
-                Bespoke Home Construction
-              </h3>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
-                Architectural planning, structural RCC execution, and turnkey building coordination with stringent material grade checks.
-              </p>
-              <ul className="hidden sm:block text-xs text-slate-500 space-y-1.5 mb-5 border-t border-slate-100 pt-3">
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Direct oversight by Ramesh S H</span>
-                </li>
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Transparent itemized billing</span>
-                </li>
-              </ul>
-            </div>
-            <Link
-              to="/construction"
-              className="text-[11px] sm:text-xs font-bold text-navy-900 group-hover:text-gold-600 inline-flex items-center space-x-1 transition mt-1"
-            >
-              <span>Construction</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+          {/* Fanned-out Rotated Deck Silhouettes for Realistic Card Rotation Effect */}
+          <div className="absolute inset-x-4 top-6 bottom-7 bg-slate-200 border border-slate-300 rounded-2xl transform -rotate-3 -translate-x-1.5 translate-y-3 shadow-sm pointer-events-none opacity-60" />
+          <div className="absolute inset-x-2 top-5 bottom-6 bg-slate-100 border border-slate-200 rounded-2xl transform rotate-3 translate-x-1.5 translate-y-1.5 shadow-sm pointer-events-none opacity-80" />
 
-          {/* Card 3 */}
-          <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-luxury hover:shadow-luxury-hover hover:border-gold-500/40 transition group flex flex-col justify-between">
-            <div>
-              <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-3 sm:mb-5 group-hover:scale-110 transition">
-                <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
-              </div>
-              <h3 className="font-heading text-sm sm:text-lg font-bold text-navy-900 mb-1 sm:mb-2 leading-tight">
-                Rentals & Leases
-              </h3>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
-                Curated residential apartments, independent duplex homes, and prime commercial retail spaces for verified tenants.
-              </p>
-              <ul className="hidden sm:block text-xs text-slate-500 space-y-1.5 mb-5 border-t border-slate-100 pt-3">
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Thorough tenant vetting</span>
-                </li>
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Formal rental agreements</span>
-                </li>
-              </ul>
-            </div>
-            <Link
-              to="/properties?purpose=rent"
-              className="text-[11px] sm:text-xs font-bold text-navy-900 group-hover:text-gold-600 inline-flex items-center space-x-1 transition mt-1"
-            >
-              <span>Rentals</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
-          </div>
+          {/* Active Top Card with Rotational Animation Entrance */}
+          {(() => {
+            const sol = solutions[activeSolutionIdx];
+            return (
+              <div
+                key={sol.id}
+                className="relative z-10 bg-white rounded-2xl border-2 border-gold-500/30 shadow-2xl overflow-hidden flex flex-col animate-card-rotate cursor-grab active:cursor-grabbing"
+              >
+                {/* Image Above Wording (Scaled compact so wording is fully visible on mobile) */}
+                <div className="relative h-36 sm:h-40 w-full overflow-hidden bg-slate-100 shrink-0">
+                  <img
+                    src={sol.image}
+                    alt={sol.title}
+                    className="w-full h-full object-cover pointer-events-none"
+                    loading="lazy"
+                  />
+                  <div className="absolute top-2.5 left-2.5 bg-navy-950/90 text-gold-400 border border-gold-500/30 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm">
+                    {sol.category}
+                  </div>
+                  <div className="absolute top-2.5 right-2.5 bg-white/95 backdrop-blur-sm text-navy-950 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm border border-slate-200">
+                    {activeSolutionIdx + 1} of {solutions.length}
+                  </div>
+                </div>
 
-          {/* Card 4 */}
-          <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-6 border border-slate-200/80 shadow-luxury hover:shadow-luxury-hover hover:border-gold-500/40 transition group flex flex-col justify-between">
-            <div>
-              <div className="w-9 h-9 sm:w-12 sm:h-12 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-3 sm:mb-5 group-hover:scale-110 transition">
-                <FileCheck2 className="w-5 h-5 sm:w-6 sm:h-6" />
+                {/* Content Wording Below Image - Prominently Displayed */}
+                <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-white">
+                  <div>
+                    <h3 className="font-heading text-lg font-bold text-navy-950 leading-snug mb-1">
+                      {sol.title}
+                    </h3>
+                    <p className="text-xs text-slate-700 leading-relaxed font-normal mb-3">
+                      {sol.description}
+                    </p>
+
+                    <ul className="text-xs text-slate-600 space-y-1.5 mb-3.5 border-t border-slate-100 pt-2.5">
+                      {sol.highlights.map((h, i) => (
+                        <li key={i} className="flex items-center space-x-1.5 font-medium">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-100">
+                    <Link
+                      to={sol.link}
+                      className="w-full inline-flex items-center justify-center space-x-1.5 px-4 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs shadow-md transition"
+                    >
+                      <span>{sol.linkText}</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-heading text-sm sm:text-lg font-bold text-navy-900 mb-1 sm:mb-2 leading-tight">
-                Loan & KHB Advisory
-              </h3>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed mb-2 sm:mb-4 line-clamp-3 sm:line-clamp-none">
-                Home loan documentation assistance across premier banks and dedicated procedural guidance for KHB transfers.
-              </p>
-              <ul className="hidden sm:block text-xs text-slate-500 space-y-1.5 mb-5 border-t border-slate-100 pt-3">
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>Multi-bank eligibility liaison</span>
-                </li>
-                <li className="flex items-center space-x-1.5">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>KHB checklist verification</span>
-                </li>
-              </ul>
-            </div>
-            <Link
-              to="/khb-assistance"
-              className="text-[11px] sm:text-xs font-bold text-navy-900 group-hover:text-gold-600 inline-flex items-center space-x-1 transition mt-1"
-            >
-              <span>KHB Guidance</span>
-              <ArrowRight className="w-3.5 h-3.5" />
-            </Link>
+            );
+          })()}
+
+          {/* Dot / Pill Indicators to navigate cards */}
+          <div className="flex items-center justify-center space-x-2 mt-4">
+            {solutions.map((s, idx) => (
+              <button
+                key={s.id}
+                onClick={() => setActiveSolutionIdx(idx)}
+                className={`h-2 rounded-full transition-all duration-300 ${activeSolutionIdx === idx
+                    ? 'w-7 bg-gold-500 shadow-sm'
+                    : 'w-2 bg-slate-300 hover:bg-slate-400'
+                  }`}
+                aria-label={`Show ${s.title}`}
+              />
+            ))}
           </div>
+        </div>
+
+        {/* ======================================================== */}
+        {/* DESKTOP / BIG SCREEN LAYOUT: Shown Separately in 4 Columns */}
+        {/* ======================================================== */}
+        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {solutions.map((sol) => (
+            <div
+              key={sol.id}
+              className="bg-white rounded-2xl border border-slate-200/90 shadow-luxury hover:shadow-luxury-hover hover:border-gold-500/40 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
+            >
+              {/* Image Above Wording */}
+              <div className="relative h-44 lg:h-48 w-full overflow-hidden bg-slate-100 shrink-0">
+                <img
+                  src={sol.image}
+                  alt={sol.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute top-2.5 left-2.5 bg-navy-950/90 text-gold-400 border border-gold-500/30 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm">
+                  {sol.category}
+                </div>
+              </div>
+
+              {/* Wording Below Image */}
+              <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
+                <div>
+                  <h3 className="font-heading text-base lg:text-lg font-bold text-navy-900 mb-1.5 leading-snug group-hover:text-gold-600 transition">
+                    {sol.title}
+                  </h3>
+                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
+                    {sol.description}
+                  </p>
+                  <ul className="text-xs text-slate-500 space-y-1.5 mb-4 border-t border-slate-100 pt-3">
+                    {sol.highlights.map((h, i) => (
+                      <li key={i} className="flex items-center space-x-1.5">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <Link
+                  to={sol.link}
+                  className="text-xs font-bold text-navy-900 group-hover:text-gold-600 inline-flex items-center space-x-1 transition mt-auto pt-2 border-t border-slate-50"
+                >
+                  <span>{sol.linkText}</span>
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -555,7 +677,7 @@ export const HomePage: React.FC = () => {
 
             {/* Content Layout: Mobile (Title -> Photo -> Text) vs Laptop (Text on Left, Photo on Right) */}
             <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 lg:gap-12 items-center">
-              
+
               {/* MOBILE-ONLY TITLE (Centered at Top above Photo) */}
               <div className="md:hidden text-center">
                 <h3 className="font-serif text-lg sm:text-xl text-[#D4AF37] font-medium tracking-wide">
@@ -589,10 +711,7 @@ export const HomePage: React.FC = () => {
                   Mr. {founderName}, the founder and Managing Director of Banashankari Enterprises, established the firm with decades of hands-on ground experience in real estate transactions, BDA layout verification, and turnkey residential construction across Bangalore. He holds comprehensive expertise in statutory due diligence and municipal development regulations.
                 </p>
 
-                {/* Paragraph 2 */}
-                <p className="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed sm:leading-relaxed lg:leading-loose font-light">
-                  With an uncompromising commitment to transparent documentation, personal contractor oversight, and direct client advocacy, he has guided hundreds of families across Bangalore in acquiring clear-title BDA plots and building bespoke residences with structural longevity, legal security, and zero middleman markups.
-                </p>
+
               </div>
 
             </div>
