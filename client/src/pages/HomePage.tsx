@@ -486,8 +486,8 @@ export const HomePage: React.FC = () => {
                 key={s.id}
                 onClick={() => setActiveSolutionIdx(idx)}
                 className={`h-2 rounded-full transition-all duration-300 ${activeSolutionIdx === idx
-                    ? 'w-7 bg-gold-500 shadow-sm'
-                    : 'w-2 bg-slate-300 hover:bg-slate-400'
+                  ? 'w-7 bg-gold-500 shadow-sm'
+                  : 'w-2 bg-slate-300 hover:bg-slate-400'
                   }`}
                 aria-label={`Show ${s.title}`}
               />
@@ -864,7 +864,7 @@ export const HomePage: React.FC = () => {
           {/* Stage 1 */}
           <div className="relative group rounded-2xl overflow-hidden shadow-luxury aspect-[4/5] bg-navy-950">
             <img
-              src="https://images.unsplash.com/photo-1541888946425-d0fbb1861564?auto=format&fit=crop&w=800&q=80"
+              src="https://images.unsplash.com/photo-1610079732288-72a77bd816c9?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
               alt="Foundation & Structural Framing"
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
             />
