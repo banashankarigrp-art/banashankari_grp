@@ -16,5 +16,5 @@ export const ENV = {
   INITIAL_ADMIN_EMAIL: process.env.INITIAL_ADMIN_EMAIL || 'admin@banashankarienterprises.com',
   INITIAL_ADMIN_PASSWORD: process.env.INITIAL_ADMIN_PASSWORD || 'Admin@Bana2025Secure',
   INITIAL_ADMIN_NAME: process.env.INITIAL_ADMIN_NAME || 'Ramesh S H (Admin)',
-  INITIAL_ADMIN_PHONE: process.env.INITIAL_ADMIN_PHONE || '+91 824 899 2779',
+  INITIAL_ADMIN_PHONE: process.env.INITIAL_ADMIN_PHONE || '+91 997 253 6991',
 };

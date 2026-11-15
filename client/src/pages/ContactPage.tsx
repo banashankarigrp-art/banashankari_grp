@@ -105,7 +105,7 @@ export const ContactPage: React.FC = () => {
                     rel="noopener noreferrer"
                     className="font-bold text-emerald-400 hover:text-emerald-300 text-sm"
                   >
-                    +91 824 899 2779 (Chat Now)
+                    +91 997 253 6991 (Chat Now)
                   </a>
                 </div>
               </div>

@@ -247,6 +247,9 @@ export const HomePage: React.FC = () => {
             <span className="text-gold-400 italic block font-serif text-3xl sm:text-4xl md:text-5xl mt-1.5 sm:mt-2">
               Our Commitment.
             </span>
+            <span className="text-gold-400 italic block font-serif text-3xl sm:text-4xl md:text-5xl mt-1.5 sm:mt-2">
+              One Stop Solution for all your Needs
+            </span>
           </h1>
 
           {/* Subtext */}
@@ -269,7 +272,7 @@ export const HomePage: React.FC = () => {
               className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-navy-900 hover:bg-navy-850 border border-navy-800 text-slate-200 text-sm font-medium transition flex items-center justify-center space-x-2"
             >
               <PhoneCall className="w-4 h-4 text-gold-400" />
-              <span>Talk to Ramesh S H  </span>
+              <span>Talk to Ramesh S H (9972536991 / 9880275925) </span>
             </a>
           </div>
 
