@@ -21,7 +21,10 @@ import {
   ChevronDown,
   ChevronLeft,
   ChevronRight,
+  Handshake,
+  Key,
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 import { PropertyCard } from '../components/property/PropertyCard';
 import { api } from '../services/api';
 import { IProperty, COMPANY_INFO, ISiteSettings } from '@shared/types';
@@ -107,9 +110,17 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
 };
 
 export const HomePage: React.FC = () => {
+  const { isAuthenticated, user } = useAuth();
   const [properties, setProperties] = useState<IProperty[]>([]);
   const [settings, setSettings] = useState<ISiteSettings | null>(null);
   const [loading, setLoading] = useState(true);
+
+  // Direct seller listing CTA link destination
+  const sellerListingLink = !isAuthenticated
+    ? '/register?role=seller'
+    : user?.role === 'seller' || user?.role === 'admin'
+      ? '/sell-property'
+      : '/register?role=seller';
 
   // FAQ Accordion
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -773,6 +784,135 @@ export const HomePage: React.FC = () => {
             ))}
           </div>
         )}
+      </section>
+
+      {/* ======================================================== */}
+      {/* PARTNERSHIP SECTION: SELL LAND, HOUSE, RENT & LEASE */}
+      {/* ======================================================== */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative rounded-3xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white overflow-hidden p-6 sm:p-10 lg:p-12 border border-gold-500/30 shadow-2xl">
+          {/* Ambient Glows */}
+          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
+          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+          {/* Section Heading & Introduction */}
+          <div className="relative z-10 max-w-3xl space-y-3 mb-8 sm:mb-10 text-center sm:text-left">
+            <div className="inline-flex items-center space-x-2 bg-gold-500/15 border border-gold-500/40 text-gold-300 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
+              <Handshake className="w-4 h-4 text-gold-400" />
+              <span>Owner & Seller Partnership</span>
+            </div>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+              Partner With Us to Sell, Rent & Lease Your Properties
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+              Our company helps you sell your land, independent house, or find dependable tenants for rent and lease. You can also showcase and list your properties directly on our website to reach thousands of verified buyers and active tenants across Bangalore.
+            </p>
+          </div>
+
+          {/* 4 Feature Columns: Land, House, Rent & Lease, Website Showcase */}
+          <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
+            {/* 1. Sell Land & Plots */}
+            <div className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 hover:border-gold-500/50 rounded-2xl p-5 transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-11 h-11 rounded-xl bg-gold-500/20 border border-gold-500/30 text-gold-400 flex items-center justify-center mb-3.5 shadow-sm">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <h3 className="font-heading font-bold text-base text-white mb-2">
+                  Sell Your Land & Plots
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Fast-track genuine buyers for BDA, BMRDA, DC-converted, and residential layout sites with complete title diligence and verification.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Immediate Buyer Match</span>
+              </div>
+            </div>
+
+            {/* 2. Sell House & Villas */}
+            <div className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 hover:border-gold-500/50 rounded-2xl p-5 transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-11 h-11 rounded-xl bg-gold-500/20 border border-gold-500/30 text-gold-400 flex items-center justify-center mb-3.5 shadow-sm">
+                  <Home className="w-5 h-5" />
+                </div>
+                <h3 className="font-heading font-bold text-base text-white mb-2">
+                  Sell Your House & Villas
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Showcase independent houses, duplex villas, and residential buildings to serious Bangalore buyers with transparent fair market pricing.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Guided Site Inspections</span>
+              </div>
+            </div>
+
+            {/* 3. Rent & Lease */}
+            <div className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 hover:border-gold-500/50 rounded-2xl p-5 transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-11 h-11 rounded-xl bg-gold-500/20 border border-gold-500/30 text-gold-400 flex items-center justify-center mb-3.5 shadow-sm">
+                  <Key className="w-5 h-5" />
+                </div>
+                <h3 className="font-heading font-bold text-base text-white mb-2">
+                  Rent & Lease Spaces
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  Connect with screened, verified tenants for apartments, homes, and commercial units with structured rental agreements and deposit support.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>Verified Tenant Vetting</span>
+              </div>
+            </div>
+
+            {/* 4. Showcase on Our Website */}
+            <div className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 hover:border-gold-500/50 rounded-2xl p-5 transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-11 h-11 rounded-xl bg-gold-500/20 border border-gold-500/30 text-gold-400 flex items-center justify-center mb-3.5 shadow-sm">
+                  <Building2 className="w-5 h-5" />
+                </div>
+                <h3 className="font-heading font-bold text-base text-white mb-2">
+                  Showcase on Our Website
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  List directly on Banashankari Enterprises with photographs, dimension details, and neighborhood perks to get instant high-intent inquiries.
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>High Digital Visibility</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Strip: Trust Highlights and "List the Properties" Button */}
+          <div className="relative z-10 pt-6 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6">
+            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 text-xs text-slate-300">
+
+              <div className="flex items-center space-x-2">
+                <ShieldCheck className="w-4 h-4 text-gold-400 shrink-0" />
+                <span>Zero Hidden Fees or Markups</span>
+              </div>
+              <div className="flex items-center space-x-2">
+                <ShieldCheck className="w-4 h-4 text-gold-400 shrink-0" />
+                <span>Instant Seller Registration</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+              <Link
+                to={sellerListingLink}
+                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm shadow-gold-glow transition transform hover:-translate-y-0.5"
+              >
+                <span>List the Properties</span>
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* ======================================================== */}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Building2,
@@ -25,15 +25,28 @@ export const RegisterPage: React.FC = () => {
   const redirectMessage = (location.state as any)?.message;
   const from = (location.state as any)?.from?.pathname || '/dashboard';
 
+  const queryParams = new URLSearchParams(location.search);
+  const initialRole: 'customer' | 'seller' =
+    queryParams.get('role') === 'seller' || (location.state as any)?.role === 'seller'
+      ? 'seller'
+      : 'customer';
+
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    role: 'customer' as 'customer' | 'seller',
+    role: initialRole,
     password: '',
     confirmPassword: '',
     agreeToTerms: true,
   });
+
+  useEffect(() => {
+    const roleParam = new URLSearchParams(location.search).get('role');
+    if (roleParam === 'seller' || roleParam === 'customer') {
+      setFormData((prev) => ({ ...prev, role: roleParam }));
+    }
+  }, [location.search]);
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
