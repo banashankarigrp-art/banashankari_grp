@@ -81,14 +81,8 @@ const seedDatabase = async () => {
       companyName: 'Banashankari Enterprises',
       founderName: 'Ramesh S H',
       founderTitle: 'Founder & Managing Director',
-<<<<<<< HEAD
       primaryPhone: '+91 824 899 2779',
       whatsappNumber: '918248992779',
-=======
-      founderPhoto: '/founder.jpg',
-      primaryPhone: '+91 997 253 6991',
-      whatsappNumber: '919972536991',
->>>>>>> 79d12fbae4ecd19cfc78b6d03e419ae2ea2185a5
       email: 'contact@banashankarienterprises.com',
       address: 'Banashankari, Bengaluru, Karnataka 560085',
       city: 'Bangalore',

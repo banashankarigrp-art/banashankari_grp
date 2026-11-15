@@ -28,14 +28,8 @@ const SiteSettingsSchema = new Schema<ISiteSettingsDocument>(
     companyName: { type: String, default: 'Banashankari Enterprises' },
     founderName: { type: String, default: 'Ramesh S H' },
     founderTitle: { type: String, default: 'Founder & Managing Director' },
-<<<<<<< HEAD
     primaryPhone: { type: String, default: '+91 824 899 2779' },
     whatsappNumber: { type: String, default: '918248992779' },
-=======
-    founderPhoto: { type: String, default: '' },
-    primaryPhone: { type: String, default: '+91 997 253 6991' },
-    whatsappNumber: { type: String, default: '919972536991' },
->>>>>>> 79d12fbae4ecd19cfc78b6d03e419ae2ea2185a5
     email: { type: String, default: 'contact@banashankarienterprises.com' },
     address: { type: String, default: 'Banashankari, Bengaluru' },
     city: { type: String, default: 'Bangalore' },
