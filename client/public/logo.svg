@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 200" fill="none">
+  <defs>
+    <!-- Pennant Drop Shadow -->
+    <filter id="badgeShadow" x="-15%" y="0%" width="130%" height="135%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="5" stdDeviation="5" flood-color="#0f172a" flood-opacity="0.18" />
+    </filter>
+  </defs>
+
+  <!-- Hanging White Pennant / Ribbon Shield with Pointed Chevron Bottom -->
+  <path
+    d="M 3 0 L 217 0 L 217 152 L 110 194 L 3 152 Z"
+    fill="#FFFFFF"
+    filter="url(#badgeShadow)"
+    stroke="#E2E8F0"
+    stroke-width="1.5"
+  />
+
+  <!-- Top Golden Trim Line -->
+  <line x1="3" y1="1.5" x2="217" y2="1.5" stroke="#F59E0B" stroke-width="3" stroke-linecap="round" />
+
+  <!-- 1. EMBLEM: House + Skyscraper Building (Gold & Navy) -->
+  <g transform="translate(110, 42) scale(0.22)">
+    <!-- Tower Body (Navy with Gold Outline) -->
+    <path
+      d="M -10 -40 L -10 -145 L 60 -168 L 60 120 L -10 120 Z"
+      fill="#1B2653"
+      stroke="#FFB800"
+      stroke-width="12"
+      stroke-linejoin="round"
+    />
+
+    <!-- House Body & Gable Roof (Navy with Gold Outline) -->
+    <path
+      d="M -125 0 L -40 -90 L 20 -35 L 20 120 L -125 120 Z"
+      fill="#1B2653"
+      stroke="#FFB800"
+      stroke-width="12"
+      stroke-linejoin="round"
+    />
+
+    <!-- Inner Navy Fill to merge seams -->
+    <path
+      d="M -120 0 L -40 -84 L 54 -160 L 54 114 L -120 114 Z"
+      fill="#1B2653"
+    />
+
+    <!-- Overhanging Gable Roof Trim -->
+    <path
+      d="M -145 15 L -40 -95 L 25 -38"
+      fill="none"
+      stroke="#FFB800"
+      stroke-width="16"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+
+    <!-- Tower Slanted Roof Peak Trim -->
+    <path
+      d="M -15 -144 L 65 -170"
+      fill="none"
+      stroke="#FFB800"
+      stroke-width="16"
+      stroke-linecap="round"
+    />
+
+    <!-- Curved Swoosh Foundation Beam -->
+    <path
+      d="M -150 140 Q -30 100 100 112 L 100 118 Q -30 106 -150 146 Z"
+      fill="#FFB800"
+    />
+
+    <!-- 4-Pane Square Window in House -->
+    <rect x="-90" y="10" width="22" height="22" rx="2" fill="#FFB800" />
+    <rect x="-62" y="10" width="22" height="22" rx="2" fill="#FFB800" />
+    <rect x="-90" y="38" width="22" height="22" rx="2" fill="#FFB800" />
+    <rect x="-62" y="38" width="22" height="22" rx="2" fill="#FFB800" />
+
+    <!-- 4 Vertical Windows in Tower -->
+    <rect x="15" y="-125" width="22" height="30" rx="3" fill="#FFB800" transform="skewY(-6)" />
+    <rect x="15" y="-82" width="22" height="30" rx="3" fill="#FFB800" transform="skewY(-6)" />
+    <rect x="15" y="-39" width="22" height="30" rx="3" fill="#FFB800" transform="skewY(-6)" />
+    <rect x="15" y="4" width="22" height="30" rx="3" fill="#FFB800" transform="skewY(-6)" />
+  </g>
+
+  <!-- 2. BRAND NAME: Banashankari® (Luxury Serif) -->
+  <text
+    x="110"
+    y="98"
+    text-anchor="middle"
+    fill="#1B2653"
+    font-family="'Playfair Display', Georgia, serif"
+    font-weight="700"
+    font-size="23.5"
+    letter-spacing="-0.3"
+  >
+    Banashankari
+  </text>
+
+  <!-- Registered Trademark Circle Symbol -->
+  <circle cx="199" cy="85" r="4.2" fill="none" stroke="#1B2653" stroke-width="0.8" />
+  <text
+    x="199"
+    y="87.5"
+    text-anchor="middle"
+    font-size="5"
+    font-family="system-ui, sans-serif"
+    font-weight="700"
+    fill="#1B2653"
+  >
+    R
+  </text>
+
+  <!-- 3. SUBTITLE: E N T E R P R I S E S -->
+  <text
+    x="110"
+    y="115"
+    text-anchor="middle"
+    fill="#1B2653"
+    font-family="'Outfit', system-ui, sans-serif"
+    font-weight="800"
+    font-size="11.5"
+    letter-spacing="4.5"
+  >
+    ENTERPRISES
+  </text>
+
+  <!-- 4. SLANTED RIBBON: REAL ESTATE & CONSTRUCTION -->
+  <path
+    d="M 16 127 L 204 127 L 194 148 L 26 148 Z"
+    fill="#1B2653"
+  />
+
+  <text
+    x="110"
+    y="141"
+    text-anchor="middle"
+    fill="#FFFFFF"
+    font-family="'Outfit', system-ui, sans-serif"
+    font-weight="800"
+    font-size="8.5"
+    letter-spacing="1.5"
+  >
+    REAL ESTATE &amp; CONSTRUCTION
+  </text>
+</svg>

@@ -369,7 +369,6 @@ export class InMemoryStore {
     companyName: 'Banashankari Enterprises',
     founderName: 'Ramesh S H',
     founderTitle: 'Founder & Managing Director',
-    founderPhoto: '/founder.jpg',
     primaryPhone: '+91 824 899 2779',
     whatsappNumber: '918248992779',
     email: 'contact@banashankarienterprises.com',
@@ -381,6 +380,11 @@ export class InMemoryStore {
     heroSubheadline: 'Discover verified property, build your dream home, and access construction finance with Banashankari Enterprises — led by Ramesh S H.',
     aboutText: 'Banashankari Enterprises is a premier real estate, construction, and loan assistance firm in Bangalore led by Ramesh S H.',
     whatsappTemplate: 'Hello Banashankari Enterprises, I would like to enquire about your real estate and construction services.',
+    clientsCount: 1000,
+    completedProjectsCount: 200,
+    yearsExperience: 15,
+    aboutCompanyHeading: 'Pioneering Bangalore’s Real Estate & Civil Construction with Unmatched Integrity',
+    aboutCompanyText: 'With over 15 years of ground expertise, Banashankari Enterprises stands as South Bangalore’s most dependable real estate advisory and civil construction partner. From title-verified BDA plot procurement to comprehensive turnkey structural construction and KHB liaison, our hands-on leadership ensures every square foot reflects integrity, precision, and lasting family value.',
   };
 
   constructor() {

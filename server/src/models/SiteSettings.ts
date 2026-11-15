@@ -4,7 +4,6 @@ export interface ISiteSettingsDocument extends Document {
   companyName: string;
   founderName: string;
   founderTitle?: string;
-  founderPhoto?: string;
   primaryPhone: string;
   whatsappNumber: string;
   email: string;
@@ -16,6 +15,11 @@ export interface ISiteSettingsDocument extends Document {
   heroSubheadline: string;
   aboutText: string;
   whatsappTemplate: string;
+  clientsCount?: number;
+  completedProjectsCount?: number;
+  yearsExperience?: number;
+  aboutCompanyHeading?: string;
+  aboutCompanyText?: string;
   updatedBy?: mongoose.Types.ObjectId;
 }
 
@@ -24,7 +28,6 @@ const SiteSettingsSchema = new Schema<ISiteSettingsDocument>(
     companyName: { type: String, default: 'Banashankari Enterprises' },
     founderName: { type: String, default: 'Ramesh S H' },
     founderTitle: { type: String, default: 'Founder & Managing Director' },
-    founderPhoto: { type: String, default: '' },
     primaryPhone: { type: String, default: '+91 824 899 2779' },
     whatsappNumber: { type: String, default: '918248992779' },
     email: { type: String, default: 'contact@banashankarienterprises.com' },
@@ -44,6 +47,17 @@ const SiteSettingsSchema = new Schema<ISiteSettingsDocument>(
     whatsappTemplate: {
       type: String,
       default: 'Hello Banashankari Enterprises, I would like to enquire about your property and real estate services in Bangalore.',
+    },
+    clientsCount: { type: Number, default: 1000 },
+    completedProjectsCount: { type: Number, default: 200 },
+    yearsExperience: { type: Number, default: 15 },
+    aboutCompanyHeading: {
+      type: String,
+      default: 'Pioneering Bangalore’s Real Estate & Civil Construction with Unmatched Integrity',
+    },
+    aboutCompanyText: {
+      type: String,
+      default: 'With over 15 years of ground expertise, Banashankari Enterprises stands as South Bangalore’s most dependable real estate advisory and civil construction partner. From title-verified BDA plot procurement to comprehensive turnkey structural construction and KHB liaison, our hands-on leadership ensures every square foot reflects integrity, precision, and lasting family value.',
     },
     updatedBy: { type: Schema.Types.ObjectId, ref: 'User' },
   },

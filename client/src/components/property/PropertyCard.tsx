@@ -57,11 +57,11 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
     'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80';
 
   const getPurposeBadge = () => {
-    if (property.propertyType === 'plot') return 'READY FOR REGISTRATION - PLOT';
-    if (property.listingPurpose === 'rent') return 'VERIFIED RENTAL APARTMENT';
-    if (property.listingPurpose === 'lease') return 'COMMERCIAL LEASE';
-    if (property.availabilityStatus === 'sold') return 'SOLD OUT';
-    return 'READY TO MOVE - RESIDENTIAL';
+    if (property.propertyType === 'plot') return 'BDA Plot';
+    if (property.listingPurpose === 'rent') return 'Rental';
+    if (property.listingPurpose === 'lease') return 'Lease';
+    if (property.availabilityStatus === 'sold') return 'Sold Out';
+    return property.propertyType === 'villa' ? 'Villa' : 'Residential';
   };
 
   return (
@@ -76,12 +76,12 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         />
 
         {/* Status / Category Badge */}
-        <div className="absolute top-2 left-2 sm:top-3 sm:left-3 flex flex-col gap-1 items-start max-w-[80%]">
-          <span className="text-[8px] sm:text-[10px] font-bold tracking-wider uppercase px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded bg-navy-950/90 text-gold-300 backdrop-blur-sm border border-gold-500/30 shadow-sm truncate max-w-full">
+        <div className="absolute top-1.5 left-1.5 sm:top-3 sm:left-3 flex flex-col gap-1 items-start max-w-[75%]">
+          <span className="text-[7px] sm:text-[10px] font-bold tracking-wider uppercase px-1 sm:px-2.5 py-0.5 sm:py-1 rounded bg-navy-950/90 text-gold-300 backdrop-blur-sm border border-gold-500/30 shadow-sm truncate max-w-full">
             {getPurposeBadge()}
           </span>
           {property.featured && (
-            <span className="text-[8px] sm:text-[10px] font-bold tracking-wider uppercase px-1.5 sm:px-2 py-0.5 rounded bg-amber-500 text-white shadow-sm">
+            <span className="text-[7px] sm:text-[10px] font-bold tracking-wider uppercase px-1 sm:px-2 py-0.5 rounded bg-amber-500 text-white shadow-sm">
               ★ Featured
             </span>
           )}
@@ -91,51 +91,51 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
         <button
           onClick={handleToggleSave}
           disabled={isToggling}
-          className="absolute top-2 right-2 sm:top-3 sm:right-3 w-7 h-7 sm:w-9 sm:h-9 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-red-500 transition shadow-sm"
+          className="absolute top-1.5 right-1.5 sm:top-3 sm:right-3 w-6 h-6 sm:w-9 sm:h-9 rounded-full bg-white/90 backdrop-blur-md flex items-center justify-center text-slate-600 hover:text-red-500 transition shadow-sm"
           aria-label="Save listing"
         >
-          <Heart className={`w-3.5 h-3.5 sm:w-4 sm:h-4 ${saved ? 'fill-red-500 text-red-500' : ''}`} />
+          <Heart className={`w-3 h-3 sm:w-4 sm:h-4 ${saved ? 'fill-red-500 text-red-500' : ''}`} />
         </button>
 
         {/* Purpose Chip */}
-        <div className="absolute bottom-2 right-2 sm:bottom-3 sm:right-3 bg-navy-900/90 text-white text-[9px] sm:text-xs font-semibold px-1.5 sm:px-2.5 py-0.5 sm:py-1 rounded backdrop-blur-sm capitalize">
+        <div className="absolute bottom-1.5 right-1.5 sm:bottom-3 sm:right-3 bg-navy-900/90 text-white text-[8px] sm:text-xs font-semibold px-1 sm:px-2 py-0.5 rounded backdrop-blur-sm capitalize">
           For {property.listingPurpose}
         </div>
       </div>
 
       {/* Content */}
-      <div className="p-3 sm:p-5 flex-1 flex flex-col justify-between">
+      <div className="p-2.5 sm:p-5 flex-1 flex flex-col justify-between">
         <div>
           {/* Location */}
-          <div className="flex items-center space-x-1 text-[10px] sm:text-xs font-medium text-slate-500 mb-1 sm:mb-2">
-            <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-gold-600 shrink-0" />
+          <div className="flex items-center space-x-1 text-[9px] sm:text-xs font-medium text-slate-500 mb-1 sm:mb-2">
+            <MapPin className="w-2.5 h-2.5 sm:w-3.5 sm:h-3.5 text-gold-600 shrink-0" />
             <span className="truncate">{property.location.locality}</span>
           </div>
 
           {/* Title */}
           <Link to={`/properties/${property.slug}`}>
-            <h3 className="font-heading text-xs sm:text-lg font-bold text-navy-900 hover:text-gold-600 transition line-clamp-2 leading-snug mb-2 sm:mb-3">
+            <h3 className="font-heading text-xs sm:text-base lg:text-lg font-bold text-navy-900 hover:text-gold-600 transition line-clamp-2 leading-snug mb-1.5 sm:mb-3">
               {property.title}
             </h3>
           </Link>
 
           {/* Key specs row */}
-          <div className="grid grid-cols-3 gap-1 py-1.5 sm:py-3 border-y border-slate-100 text-[10px] sm:text-xs text-slate-600 mb-2 sm:mb-4 bg-slate-50/60 rounded-lg px-1 sm:px-2 text-center">
-            <div className="flex flex-col items-center justify-center">
-              <span className="text-[8px] sm:text-[10px] text-slate-400 uppercase tracking-wider">Area</span>
-              <span className="font-semibold text-navy-900 text-[9px] sm:text-xs truncate max-w-full">
+          <div className="grid grid-cols-3 gap-0.5 sm:gap-1 py-1 sm:py-2.5 border-y border-slate-100 text-[9px] sm:text-xs text-slate-600 mb-1.5 sm:mb-4 bg-slate-50/70 rounded-md sm:rounded-lg px-0.5 sm:px-2 text-center">
+            <div className="flex flex-col items-center justify-center min-w-0">
+              <span className="text-[7px] sm:text-[10px] text-slate-400 uppercase tracking-wider">Area</span>
+              <span className="font-semibold text-navy-900 text-[8px] sm:text-xs truncate max-w-full">
                 {(property.builtUpArea || property.landArea || 0).toLocaleString()} {property.areaUnit}
               </span>
             </div>
 
-            <div className="flex flex-col items-center justify-center border-x border-slate-200">
-              <span className="text-[8px] sm:text-[10px] text-slate-400 uppercase tracking-wider">Type</span>
-              <span className="font-semibold text-navy-900 capitalize text-[9px] sm:text-xs truncate max-w-full">{property.propertyType}</span>
+            <div className="flex flex-col items-center justify-center border-x border-slate-200 min-w-0">
+              <span className="text-[7px] sm:text-[10px] text-slate-400 uppercase tracking-wider">Type</span>
+              <span className="font-semibold text-navy-900 capitalize text-[8px] sm:text-xs truncate max-w-full">{property.propertyType}</span>
             </div>
 
-            <div className="flex flex-col items-center justify-center">
-              <span className="text-[8px] sm:text-[10px] text-slate-400 uppercase tracking-wider">Rooms</span>
-              <span className="font-semibold text-navy-900 text-[9px] sm:text-xs truncate max-w-full">
+            <div className="flex flex-col items-center justify-center min-w-0">
+              <span className="text-[7px] sm:text-[10px] text-slate-400 uppercase tracking-wider">Rooms</span>
+              <span className="font-semibold text-navy-900 text-[8px] sm:text-xs truncate max-w-full">
                 {property.bedrooms ? `${property.bedrooms} BHK` : 'Plot'}
               </span>
             </div>
@@ -144,31 +144,31 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({
 
         {/* Pricing and Action CTAs */}
         <div>
-          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-2 sm:mb-3">
+          <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between mb-1.5 sm:mb-3">
             <div>
-              <span className="text-[9px] sm:text-[11px] text-slate-400 block font-medium">Expected Value</span>
-              <div className="text-sm sm:text-xl font-bold text-navy-900 tracking-tight font-sans">
+              <span className="text-[8px] sm:text-[11px] text-slate-400 block font-medium">Expected Value</span>
+              <div className="text-xs sm:text-lg lg:text-xl font-bold text-navy-900 tracking-tight font-sans truncate">
                 {formatIndianCurrency(property.pricing.price, property.listingPurpose)}
               </div>
             </div>
             {property.pricing.pricingTerms && (
-              <span className="text-[9px] sm:text-[11px] text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded mt-0.5 sm:mt-0 self-start sm:self-auto truncate max-w-full">
+              <span className="text-[8px] sm:text-[11px] text-slate-500 bg-slate-100 px-1 sm:px-1.5 py-0.5 rounded mt-0.5 sm:mt-0 self-start sm:self-auto truncate max-w-full">
                 {property.pricing.pricingTerms}
               </span>
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-1.5 sm:gap-2">
+          <div className="grid grid-cols-2 gap-1 sm:gap-2">
             <Link
               to={`/properties/${property.slug}`}
-              className="text-center py-1.5 sm:py-2.5 px-1.5 sm:px-3 rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-[10px] sm:text-xs transition truncate"
+              className="text-center py-1 sm:py-2.5 px-1 sm:px-3 rounded-md sm:rounded-lg border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold text-[9px] sm:text-xs transition truncate"
             >
               Details
             </Link>
 
             <Link
               to={`/properties/${property.slug}#enquire`}
-              className="text-center py-1.5 sm:py-2.5 px-1.5 sm:px-3 rounded-lg bg-gold-500 hover:bg-gold-600 text-white font-semibold text-[10px] sm:text-xs shadow-sm transition truncate"
+              className="text-center py-1 sm:py-2.5 px-1 sm:px-3 rounded-md sm:rounded-lg bg-gold-500 hover:bg-gold-600 text-white font-semibold text-[9px] sm:text-xs shadow-sm transition truncate"
             >
               Enquire
             </Link>

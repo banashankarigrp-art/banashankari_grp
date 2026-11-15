@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Building2, Lock, Mail, ArrowRight, AlertCircle, ShieldCheck, Eye, EyeOff } from 'lucide-react';
+import { Lock, Mail, ArrowRight, AlertCircle, ShieldCheck, Eye, EyeOff, UserPlus } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const LoginPage: React.FC = () => {
@@ -44,9 +44,6 @@ export const LoginPage: React.FC = () => {
     <div className="min-h-[80vh] flex items-center justify-center px-4 py-12">
       <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 p-8 sm:p-10 shadow-luxury space-y-6">
         <div className="text-center space-y-2">
-          <div className="w-12 h-12 rounded-xl bg-navy-950 text-gold-400 flex items-center justify-center mx-auto shadow-sm">
-            <Building2 className="w-6 h-6" />
-          </div>
           <h1 className="font-heading text-2xl font-bold text-navy-900">Sign in to Your Account</h1>
           <p className="text-xs text-slate-500">
             Access your property listings, review status, and enquiries.
@@ -118,20 +115,30 @@ export const LoginPage: React.FC = () => {
           </button>
         </form>
 
-        <div className="pt-4 border-t border-slate-100 text-center text-xs text-slate-500 space-y-2">
-          <p>
-            Don't have an account?{' '}
-            <Link
-              to="/register"
-              state={location.state}
-              className="font-bold text-navy-900 hover:text-gold-600"
-            >
-              Register here
-            </Link>
-          </p>
+        {/* Divider & Prominent Create Account Button */}
+        <div className="space-y-3 pt-2">
+          <div className="relative flex items-center justify-center">
+            <div className="flex-grow border-t border-slate-200"></div>
+            <span className="flex-shrink mx-3 text-slate-400 text-[11px] font-semibold uppercase tracking-wider">
+              Don't have an account?
+            </span>
+            <div className="flex-grow border-t border-slate-200"></div>
+          </div>
+
+          <Link
+            to="/register"
+            state={location.state}
+            className="w-full bg-slate-50 hover:bg-slate-100 border-2 border-slate-200 hover:border-gold-500 text-navy-900 hover:text-gold-600 font-bold py-3.5 rounded-xl transition shadow-2xs flex items-center justify-center space-x-2 text-sm"
+          >
+            <UserPlus className="w-4 h-4 text-gold-600" />
+            <span>Create Account / Sign Up</span>
+          </Link>
+        </div>
+
+        <div className="pt-2 text-center text-xs text-slate-500 space-y-2">
           <p className="text-[11px] text-slate-400">
             For administrator access, visit{' '}
-            <Link to="/admin/login" className="text-slate-500 hover:text-navy-900 underline">
+            <Link to="/admin/login" className="text-slate-500 hover:text-navy-900 underline font-semibold">
               Admin Login
             </Link>
           </p>

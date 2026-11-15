@@ -783,26 +783,6 @@ export const AdminDashboardPage: React.FC = () => {
                   className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
                 />
               </div>
-
-              <div>
-                <label className="font-semibold text-slate-300 block mb-1">Founder Photo URL / Base64</label>
-                <div className="flex items-center space-x-3">
-                  {settings.founderPhoto && (
-                    <img
-                      src={settings.founderPhoto}
-                      alt="Founder Preview"
-                      className="w-12 h-12 object-cover object-top rounded-lg border border-amber-500/50"
-                    />
-                  )}
-                  <input
-                    type="text"
-                    value={settings.founderPhoto || ''}
-                    onChange={(e) => setSettings({ ...settings, founderPhoto: e.target.value })}
-                    placeholder="/founder.jpg or data:image/..."
-                    className="flex-1 p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 text-xs"
-                  />
-                </div>
-              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -845,6 +825,94 @@ export const AdminDashboardPage: React.FC = () => {
                 onChange={(e) => setSettings({ ...settings, heroSubheadline: e.target.value })}
                 className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
               />
+            </div>
+
+            {/* About Company & Live Metrics */}
+            <div className="border-t border-navy-800 pt-6 mt-6">
+              <h3 className="text-sm font-bold text-amber-400 mb-1">
+                About Company Section &amp; Scroll-Animated Metrics
+              </h3>
+              <p className="text-[11px] text-slate-400 mb-4">
+                These numbers automatically animate upwards when visitors scroll into the &ldquo;About Company&rdquo; section on the home page.
+              </p>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label className="font-semibold text-slate-300 block mb-1">
+                    Happy Clients Count (e.g. 1000+)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={settings.clientsCount ?? 1000}
+                    onChange={(e) =>
+                      setSettings({ ...settings, clientsCount: parseInt(e.target.value, 10) || 0 })
+                    }
+                    className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
+                  />
+                  <span className="text-[10px] text-slate-500 mt-1 block">Displays as &quot;{settings.clientsCount ?? 1000}+&quot;</span>
+                </div>
+
+                <div>
+                  <label className="font-semibold text-slate-300 block mb-1">
+                    Completed Projects (e.g. 200+)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={settings.completedProjectsCount ?? 200}
+                    onChange={(e) =>
+                      setSettings({ ...settings, completedProjectsCount: parseInt(e.target.value, 10) || 0 })
+                    }
+                    className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
+                  />
+                  <span className="text-[10px] text-slate-500 mt-1 block">Displays as &quot;{settings.completedProjectsCount ?? 200}+&quot;</span>
+                </div>
+
+                <div>
+                  <label className="font-semibold text-slate-300 block mb-1">
+                    Years of Experience (e.g. 15+)
+                  </label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={settings.yearsExperience ?? 15}
+                    onChange={(e) =>
+                      setSettings({ ...settings, yearsExperience: parseInt(e.target.value, 10) || 0 })
+                    }
+                    className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
+                  />
+                  <span className="text-[10px] text-slate-500 mt-1 block">Displays as &quot;{settings.yearsExperience ?? 15}+ Years&quot;</span>
+                </div>
+              </div>
+
+              <div className="space-y-4">
+                <div>
+                  <label className="font-semibold text-slate-300 block mb-1">
+                    About Company Headline
+                  </label>
+                  <input
+                    type="text"
+                    value={settings.aboutCompanyHeading || ''}
+                    placeholder="Pioneering Bangalore’s Real Estate & Civil Construction with Unmatched Integrity"
+                    onChange={(e) => setSettings({ ...settings, aboutCompanyHeading: e.target.value })}
+                    className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
+                  />
+                </div>
+
+                <div>
+                  <label className="font-semibold text-slate-300 block mb-1">
+                    About Company Detailed Description
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={settings.aboutCompanyText || ''}
+                    placeholder="With over 15 years of ground expertise, Banashankari Enterprises stands as South Bangalore’s most dependable real estate advisory and civil construction partner..."
+                    onChange={(e) => setSettings({ ...settings, aboutCompanyText: e.target.value })}
+                    className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
+                  />
+                </div>
+              </div>
             </div>
 
             <div>

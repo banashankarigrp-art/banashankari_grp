@@ -179,7 +179,6 @@ export interface ISiteSettings {
   companyName: string;
   founderName: string;
   founderTitle?: string;
-  founderPhoto?: string;
   primaryPhone: string;
   whatsappNumber: string;
   email: string;
@@ -191,6 +190,12 @@ export interface ISiteSettings {
   heroSubheadline: string;
   aboutText: string;
   whatsappTemplate: string;
+  // Dynamic Company Metrics & About Info
+  clientsCount?: number;
+  completedProjectsCount?: number;
+  yearsExperience?: number;
+  aboutCompanyHeading?: string;
+  aboutCompanyText?: string;
 }
 
 export const COMPANY_INFO = {

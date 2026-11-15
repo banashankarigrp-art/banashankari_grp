@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import {
   MapPin,
@@ -11,6 +11,9 @@ import {
   Banknote,
   FileCheck2,
   Users2,
+  Users,
+  Award,
+  ShieldCheck,
   PhoneCall,
   Clock,
   Sparkles,
@@ -20,6 +23,86 @@ import {
 import { PropertyCard } from '../components/property/PropertyCard';
 import { api } from '../services/api';
 import { IProperty, COMPANY_INFO, ISiteSettings } from '@shared/types';
+
+interface AnimatedCounterProps {
+  target: number;
+  suffix?: string;
+  duration?: number;
+}
+
+const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
+  target,
+  suffix = '',
+  duration = 2000,
+}) => {
+  const [count, setCount] = useState(0);
+  const ref = useRef<HTMLSpanElement | null>(null);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+
+    if (target <= 0) {
+      setCount(0);
+      return;
+    }
+
+    if (typeof window !== 'undefined' && !('IntersectionObserver' in window)) {
+      setCount(target);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !hasAnimated) {
+            setHasAnimated(true);
+            let startTime: number | null = null;
+
+            const animate = (currentTime: number) => {
+              if (!startTime) startTime = currentTime;
+              const elapsed = currentTime - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              // Ease-out cubic formula for organic deceleration
+              const easeOut = 1 - Math.pow(1 - progress, 3);
+              const currentVal = Math.floor(easeOut * target);
+              setCount(currentVal);
+
+              if (progress < 1) {
+                requestAnimationFrame(animate);
+              } else {
+                setCount(target);
+              }
+            };
+
+            requestAnimationFrame(animate);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [target, duration, hasAnimated]);
+
+  useEffect(() => {
+    if (hasAnimated) {
+      setCount(target);
+    }
+  }, [target, hasAnimated]);
+
+  return (
+    <span ref={ref}>
+      {count.toLocaleString('en-IN')}
+      {suffix}
+    </span>
+  );
+};
 
 export const HomePage: React.FC = () => {
   const [properties, setProperties] = useState<IProperty[]>([]);
@@ -109,12 +192,24 @@ export const HomePage: React.FC = () => {
     },
   ];
 
-  const founderPhoto = settings?.founderPhoto || COMPANY_INFO.founderPhoto || '/founder.jpg';
+  // Load founder image directly from static folder
+  const founderPhoto = '/founder.jpg';
   const founderName = settings?.founderName || COMPANY_INFO.founder;
   const founderTitle = settings?.founderTitle || COMPANY_INFO.founderTitle || 'Founder & Managing Director';
 
+  // About Company & Dynamic Metrics
+  const clientsCount = settings?.clientsCount ?? 1000;
+  const completedProjectsCount = settings?.completedProjectsCount ?? 200;
+  const yearsExperience = settings?.yearsExperience ?? 15;
+  const aboutCompanyHeading =
+    settings?.aboutCompanyHeading ||
+    'Pioneering Bangalore’s Real Estate & Civil Construction with Unmatched Integrity';
+  const aboutCompanyText =
+    settings?.aboutCompanyText ||
+    'With over 15 years of ground expertise, Banashankari Enterprises stands as South Bangalore’s most dependable real estate advisory and civil construction partner. From title-verified BDA plot procurement to comprehensive turnkey structural construction and KHB liaison, our hands-on leadership ensures every square foot reflects integrity, precision, and lasting family value.';
+
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20">
+    <div className="space-y-16 sm:space-y-24 pb-20 overflow-x-hidden">
       {/* ======================================================== */}
       {/* 1. HERO SECTION (Matches Screenshot Exactly) */}
       {/* ======================================================== */}
@@ -156,46 +251,11 @@ export const HomePage: React.FC = () => {
 
           {/* Subtext */}
           <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Discover verified plots, build your turnkey dream residence, and access construction finance with Banashankari Enterprises — led by {founderName}.
+            Discover verified plots, build your turnkey dream residence, and access construction finance with Banashankari Enterprises.
           </p>
 
-          {/* Founder Feature Spotlight (Square Shape above Explore Properties) */}
-          <div className="pt-2 pb-1 flex flex-col items-center justify-center">
-            <div className="relative group">
-              {/* Outer Golden Ambient Glow */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-amber-400 via-gold-500 to-amber-300 rounded-3xl blur-md opacity-40 group-hover:opacity-75 transition duration-500" />
-
-              {/* Square Container */}
-              <div className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-60 md:h-60 aspect-square rounded-2xl sm:rounded-3xl p-1 bg-gradient-to-b from-gold-400 via-navy-800 to-navy-950 shadow-2xl border-2 border-gold-500/50 overflow-hidden">
-                <img
-                  src={founderPhoto}
-                  alt={founderName}
-                  className="w-full h-full object-cover object-top rounded-xl sm:rounded-2xl transition duration-500 group-hover:scale-105"
-                  loading="eager"
-                />
-
-                {/* Founder Info Overlay at Bottom */}
-                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-navy-950 via-navy-950/70 to-transparent p-3 pt-6 text-center">
-                  <p className="text-white font-bold text-sm sm:text-base tracking-wide drop-shadow">
-
-                  </p>
-                  <p className="text-gold-300 text-xs font-medium tracking-tight">
-
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-2.5 text-center">
-              <span className="inline-flex items-center space-x-1.5 text-xs text-slate-300 bg-navy-900/90 border border-gold-500/30 px-3.5 py-1 rounded-full shadow-sm">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span className="text-slate-200 font-medium">Founder</span>
-              </span>
-            </div>
-          </div>
-
           {/* Hero CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
             <Link
               to="/properties"
               className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-semibold text-sm shadow-gold-glow transition transform hover:-translate-y-0.5 flex items-center justify-center space-x-2"
@@ -365,15 +425,188 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ======================================================== */}
+      {/* 2.4. ABOUT COMPANY & LIVE METRICS (Scroll-Animated Stats) */}
+      {/* ======================================================== */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="bg-gradient-to-b from-slate-50 via-white to-slate-50 border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-12 shadow-luxury relative overflow-hidden">
+          {/* Subtle decorative background accent */}
+          <div
+            className="absolute top-0 right-0 w-80 h-80 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"
+            aria-hidden="true"
+          />
+
+          <div className="max-w-3xl mb-8 sm:mb-10">
+            <div className="inline-flex items-center space-x-2 bg-gold-50 border border-gold-200/80 text-gold-700 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 shadow-sm">
+              <Sparkles className="w-3.5 h-3.5 text-gold-600" />
+              <span>About Banashankari Enterprises</span>
+            </div>
+            <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-900 tracking-tight leading-tight mb-3 sm:mb-4">
+              {aboutCompanyHeading}
+            </h2>
+            <p className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">
+              {aboutCompanyText}
+            </p>
+          </div>
+
+          {/* Metric Counter Cards with Scroll-Animated Increase */}
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+            {/* Metric 1: Happy Clients */}
+            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
+                <Users className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+              <div className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-900 tracking-tight mb-1 text-gold-600">
+                <AnimatedCounter target={clientsCount} suffix="+" />
+              </div>
+              <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
+                Happy Clients
+              </h3>
+              <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
+                Families and investors guided with verified property purchases and advisory.
+              </p>
+            </div>
+
+            {/* Metric 2: Completed Projects */}
+            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
+                <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+              <div className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-900 tracking-tight mb-1 text-gold-600">
+                <AnimatedCounter target={completedProjectsCount} suffix="+" />
+              </div>
+              <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
+                Completed Projects
+              </h3>
+              <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
+                Turnkey residential buildings, plots registered, and civil structures delivered.
+              </p>
+            </div>
+
+            {/* Metric 3: Years of Experience */}
+            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
+                <Award className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+              <div className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-900 tracking-tight mb-1 text-gold-600">
+                <AnimatedCounter target={yearsExperience} suffix="+" />
+              </div>
+              <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
+                Years of Excellence
+              </h3>
+              <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
+                Continuous ground presence and transparent client advocacy in Bangalore.
+              </p>
+            </div>
+
+            {/* Metric 4: Verified Title Scrutiny */}
+            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+              <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
+                <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
+              </div>
+              <div className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-900 tracking-tight mb-1 text-emerald-600">
+                100%
+              </div>
+              <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
+                Title Transparency
+              </h3>
+              <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
+                All plots and listings undergo strict BDA, BBMP, and KHB title diligence.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 2.5. FOUNDER LEADERSHIP SPOTLIGHT (Exact Match to User Reference) */}
+      {/* ======================================================== */}
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative group">
+          {/* Ambient Under Dark Blue Glow / Shade */}
+          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-[#0B132B] to-blue-950 rounded-2xl sm:rounded-3xl blur-xl opacity-75 pointer-events-none" />
+
+          {/* Main Rectangular Container */}
+          <div className="relative bg-[#0B132B] border border-gold-500/25 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-12 shadow-2xl overflow-hidden">
+            {/* Geometric / Low-Poly Faceted Texture Overlay (Matching Reference Screenshot) */}
+            <svg
+              className="absolute inset-0 w-full h-full opacity-15 pointer-events-none"
+              xmlns="http://www.w3.org/2000/svg"
+              width="100%"
+              height="100%"
+              aria-hidden="true"
+            >
+              <defs>
+                <pattern id="founder-mesh" width="160" height="160" patternUnits="userSpaceOnUse">
+                  <path d="M0 0 L80 40 L160 0 L80 80 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.35" />
+                  <path d="M80 80 L160 0 L160 160 L80 120 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.3" />
+                  <path d="M0 0 L0 160 L80 120 L80 80 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.3" />
+                  <path d="M0 160 L80 120 L160 160 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.35" />
+                  <polygon points="0,0 80,40 0,80" fill="#1B2653" opacity="0.2" />
+                  <polygon points="80,40 160,0 160,80" fill="#0B132B" opacity="0.25" />
+                  <polygon points="80,80 160,160 80,120" fill="#1B2653" opacity="0.2" />
+                  <polygon points="0,80 80,120 0,160" fill="#0B132B" opacity="0.25" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#founder-mesh)" />
+            </svg>
+
+            {/* Content Layout: Mobile (Title -> Photo -> Text) vs Laptop (Text on Left, Photo on Right) */}
+            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 lg:gap-12 items-center">
+              
+              {/* MOBILE-ONLY TITLE (Centered at Top above Photo) */}
+              <div className="md:hidden text-center">
+                <h3 className="font-serif text-lg sm:text-xl text-[#D4AF37] font-medium tracking-wide">
+                  Mr. {founderName}, {founderTitle}
+                </h3>
+              </div>
+
+              {/* PHOTO: In Middle on Mobile, on Right on Laptop/Desktop */}
+              <div className="md:order-2 md:col-span-5 flex justify-center">
+                <div className="relative w-full max-w-[260px] sm:max-w-[300px] md:max-w-none aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-gold-500/30 bg-[#0F172A] mx-auto group/photo">
+                  <img
+                    src={founderPhoto}
+                    alt={founderName}
+                    className="w-full h-full object-cover object-top transition duration-700 group-hover/photo:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+              </div>
+
+              {/* TEXT: Below Photo on Mobile, on Left on Laptop/Desktop */}
+              <div className="md:order-1 md:col-span-7 space-y-4 lg:space-y-6 text-left">
+                {/* DESKTOP-ONLY TITLE (Left-aligned above Paragraphs) */}
+                <div className="hidden md:block">
+                  <h3 className="font-serif text-2xl lg:text-3xl xl:text-4xl text-[#D4AF37] font-medium tracking-wide leading-snug">
+                    Mr. {founderName}, {founderTitle}
+                  </h3>
+                </div>
+
+                {/* Paragraph 1 */}
+                <p className="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed sm:leading-relaxed lg:leading-loose font-light">
+                  Mr. {founderName}, the founder and Managing Director of Banashankari Enterprises, established the firm with decades of hands-on ground experience in real estate transactions, BDA layout verification, and turnkey residential construction across Bangalore. He holds comprehensive expertise in statutory due diligence and municipal development regulations.
+                </p>
+
+                {/* Paragraph 2 */}
+                <p className="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed sm:leading-relaxed lg:leading-loose font-light">
+                  With an uncompromising commitment to transparent documentation, personal contractor oversight, and direct client advocacy, he has guided hundreds of families across Bangalore in acquiring clear-title BDA plots and building bespoke residences with structural longevity, legal security, and zero middleman markups.
+                </p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
       {/* 3. FEATURED BENGALURU PROPERTIES (Screenshot Section 2) */}
       {/* ======================================================== */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-4 border-b border-slate-200">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 pb-3 sm:pb-4 border-b border-slate-200">
           <div>
             <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
               Handpicked Portfolio
             </span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-navy-900">
               Featured Bengaluru Properties
             </h2>
             <p className="text-xs sm:text-sm text-slate-500 mt-1">
@@ -383,7 +616,7 @@ export const HomePage: React.FC = () => {
 
           <Link
             to="/properties"
-            className="mt-4 md:mt-0 inline-flex items-center space-x-1.5 text-sm font-semibold text-navy-900 hover:text-gold-600 transition"
+            className="mt-3 md:mt-0 inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-navy-900 hover:text-gold-600 transition"
           >
             <span>View All Properties ({properties.length || '5+'})</span>
             <ArrowRight className="w-4 h-4" />
@@ -391,9 +624,9 @@ export const HomePage: React.FC = () => {
         </div>
 
         {loading ? (
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
             {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-2xl h-64 sm:h-80 animate-pulse border border-slate-100 p-4" />
+              <div key={i} className="bg-white rounded-xl sm:rounded-2xl h-60 sm:h-80 animate-pulse border border-slate-100 p-3 sm:p-4" />
             ))}
           </div>
         ) : properties.length === 0 ? (
@@ -411,7 +644,8 @@ export const HomePage: React.FC = () => {
             </Link>
           </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-6 lg:gap-8">
+          /* Showing two two in mobile view (grid-cols-2) and 3 in laptop view (lg:grid-cols-3) */
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-8">
             {properties.map((prop) => (
               <PropertyCard key={prop._id} property={prop} />
             ))}

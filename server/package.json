@@ -9,7 +9,6 @@
     "start": "node dist/server.js",
     "seed": "tsx src/scripts/seed.ts",
     "bootstrap:admin": "tsx src/scripts/bootstrapAdmin.ts",
-    "save:founder-image": "tsx src/scripts/saveFounderImageToMongo.ts",
     "test": "vitest run"
   },
   "dependencies": {
@@ -23,6 +22,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.9.5",
     "morgan": "^1.10.0",
+    "nodemailer": "^10.5.0",
     "zod": "^3.24.1"
   },
   "devDependencies": {
@@ -33,6 +33,7 @@
     "@types/jsonwebtoken": "^9.0.8",
     "@types/morgan": "^1.9.9",
     "@types/node": "^22.10.7",
+    "@types/nodemailer": "^8.0.2",
     "@types/supertest": "^6.0.2",
     "supertest": "^7.0.0",
     "tsx": "^4.19.2",

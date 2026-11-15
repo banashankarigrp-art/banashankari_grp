@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Building2, Phone, Mail, MapPin, MessageSquare, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, MessageSquare, ShieldCheck, ArrowRight } from 'lucide-react';
 import { COMPANY_INFO } from '@shared/types';
 
 export const Footer: React.FC = () => {
@@ -10,19 +10,14 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 pb-12 border-b border-navy-800">
           {/* Col 1: Brand Info */}
           <div className="space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-lg bg-navy-900 border border-gold-500/40 flex items-center justify-center text-gold-400">
-                <Building2 className="w-5 h-5" />
-              </div>
-              <div>
-                <span className="font-heading font-bold text-xl text-white tracking-tight block">
-                  BANASHANKARI
-                </span>
-                <span className="text-[10px] tracking-widest uppercase font-semibold text-gold-400 block">
-                  Enterprises
-                </span>
-              </div>
-            </div>
+            <Link to="/" className="inline-block group">
+              <span className="font-heading font-extrabold text-xl text-white tracking-tight block group-hover:text-gold-400 transition">
+                BANASHANKARI
+              </span>
+              <span className="text-[10px] tracking-[0.2em] uppercase font-bold text-gold-400 block mt-0.5">
+                ENTERPRISES
+              </span>
+            </Link>
 
             <p className="text-sm text-slate-400 leading-relaxed">
               Your trusted partner for real estate sales, plot purchases, turnkey home construction, residential rentals, and Karnataka Housing Board (KHB) documentation assistance in Bengaluru.
