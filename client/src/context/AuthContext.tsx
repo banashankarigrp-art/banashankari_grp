@@ -9,7 +9,7 @@ interface AuthContextType {
   isSeller: boolean;
   isCustomer: boolean;
   isLoading: boolean;
-  login: (credentials: { email: string; password: string }) => Promise<IUser>;
+  login: (credentials: { email?: string; identifier?: string; phone?: string; password: string }) => Promise<IUser>;
   register: (data: any) => Promise<IUser>;
   logout: () => Promise<void>;
   refreshUser: () => Promise<void>;
@@ -40,7 +40,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchCurrentUser();
   }, []);
 
-  const login = async (credentials: { email: string; password: string }): Promise<IUser> => {
+  const login = async (credentials: { email?: string; identifier?: string; phone?: string; password: string }): Promise<IUser> => {
     const res: any = await api.post('/auth/login', credentials);
     if (res.accessToken) {
       localStorage.setItem('bse_access_token', res.accessToken);

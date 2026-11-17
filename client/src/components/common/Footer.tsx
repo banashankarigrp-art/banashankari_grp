@@ -83,33 +83,39 @@ export const Footer: React.FC = () => {
             </h4>
             <ul className="space-y-2 text-sm text-slate-400">
               <li>
+                <Link to="/real-estate" className="hover:text-gold-400 transition flex items-center space-x-1.5">
+                  <ArrowRight className="w-3 h-3 text-gold-500" />
+                  <span>Real Estate & Plots</span>
+                </Link>
+              </li>
+              <li>
                 <Link to="/construction" className="hover:text-gold-400 transition flex items-center space-x-1.5">
                   <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>Turnkey Home Construction</span>
+                  <span>Turnkey Construction</span>
                 </Link>
               </li>
               <li>
-                <Link to="/loans" className="hover:text-gold-400 transition flex items-center space-x-1.5">
+                <Link to="/our-projects" className="hover:text-gold-400 transition flex items-center space-x-1.5">
                   <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>Home Loan Assistance</span>
+                  <span>Our Landmark Projects</span>
                 </Link>
               </li>
               <li>
-                <Link to="/khb-assistance" className="hover:text-gold-400 transition flex items-center space-x-1.5">
+                <Link to="/khb-property-services" className="hover:text-gold-400 transition flex items-center space-x-1.5">
                   <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>KHB Transaction Guidance</span>
+                  <span>KHB Property Services</span>
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="hover:text-gold-400 transition flex items-center space-x-1.5">
+                <Link to="/loans-made-easy" className="hover:text-gold-400 transition flex items-center space-x-1.5">
                   <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>Company Profile & Mission</span>
+                  <span>Loans Made Easy</span>
                 </Link>
               </li>
               <li>
                 <Link to="/contact" className="hover:text-gold-400 transition flex items-center space-x-1.5">
                   <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>Schedule Site Consultation</span>
+                  <span>Contact Us & Site Visits</span>
                 </Link>
               </li>
             </ul>
@@ -165,7 +171,6 @@ export const Footer: React.FC = () => {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 space-y-2 sm:space-y-0">
           <p>© {new Date().getFullYear()} Banashankari Enterprises. All Rights Reserved. Led by Ramesh S H.</p>
           <div className="flex space-x-6 text-slate-400">
-            <Link to="/about" className="hover:text-white transition">About</Link>
             <Link to="/contact" className="hover:text-white transition">Contact</Link>
             <Link to="/admin/login" className="hover:text-slate-500 transition text-[10px]">Admin Access</Link>
           </div>

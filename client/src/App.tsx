@@ -13,9 +13,9 @@ import { PropertyDetailPage } from './pages/PropertyDetailPage';
 import { SellPropertyPage } from './pages/SellPropertyPage';
 import { RentLeasePropertyPage } from './pages/RentLeasePropertyPage';
 import { ConstructionPage } from './pages/ConstructionPage';
+import { OurProjectsPage } from './pages/OurProjectsPage';
 import { LoanAssistancePage } from './pages/LoanAssistancePage';
 import { KhbAssistancePage } from './pages/KhbAssistancePage';
-import { AboutPage } from './pages/AboutPage';
 import { ContactPage } from './pages/ContactPage';
 import { LoginPage } from './pages/LoginPage';
 import { RegisterPage } from './pages/RegisterPage';
@@ -43,26 +43,41 @@ export const App: React.FC = () => {
       <AuthProvider>
         <BrowserRouter>
           <Routes>
-            {/* Public Layout Routes */}
+            {/* Public Layout Routes - All pages navigatable without login */}
             <Route element={<PublicLayout />}>
-              {/* Home Page: Publicly Viewable */}
+              {/* 1. Home */}
               <Route path="/" element={<HomePage />} />
+
+              {/* 2. Real Estate */}
+              <Route path="/real-estate" element={<PropertiesPage />} />
+              <Route path="/properties" element={<PropertiesPage />} />
+              <Route path="/properties/:id" element={<PropertyDetailPage />} />
+
+              {/* 3. Construction */}
+              <Route path="/construction" element={<ConstructionPage />} />
+
+              {/* 4. Our Projects */}
+              <Route path="/our-projects" element={<OurProjectsPage />} />
+              <Route path="/projects" element={<OurProjectsPage />} />
+
+              {/* 5. KHB Property Services */}
+              <Route path="/khb-property-services" element={<KhbAssistancePage />} />
+              <Route path="/khb-assistance" element={<KhbAssistancePage />} />
+
+              {/* 6. Loans Made Easy */}
+              <Route path="/loans-made-easy" element={<LoanAssistancePage />} />
+              <Route path="/loans" element={<LoanAssistancePage />} />
+
+              {/* 7. Contact Us */}
+              <Route path="/contact" element={<ContactPage />} />
+
+              {/* Auxiliary Public Flow Routes */}
+              <Route path="/sell-property" element={<SellPropertyPage />} />
+              <Route path="/rent-lease-property" element={<RentLeasePropertyPage />} />
+              <Route path="/my-enquiries" element={<MyEnquiriesPage />} />
+              <Route path="/about" element={<Navigate to="/" replace />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/register" element={<RegisterPage />} />
-
-              {/* All exploration routes require login or signup */}
-              <Route element={<RequireAuth />}>
-                <Route path="/properties" element={<PropertiesPage />} />
-                <Route path="/properties/:id" element={<PropertyDetailPage />} />
-                <Route path="/sell-property" element={<SellPropertyPage />} />
-                <Route path="/rent-lease-property" element={<RentLeasePropertyPage />} />
-                <Route path="/construction" element={<ConstructionPage />} />
-                <Route path="/loans" element={<LoanAssistancePage />} />
-                <Route path="/khb-assistance" element={<KhbAssistancePage />} />
-                <Route path="/about" element={<AboutPage />} />
-                <Route path="/contact" element={<ContactPage />} />
-                <Route path="/my-enquiries" element={<MyEnquiriesPage />} />
-              </Route>
             </Route>
 
             {/* Customer Dashboard Routes (Protected) */}

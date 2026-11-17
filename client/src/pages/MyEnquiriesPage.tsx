@@ -23,7 +23,7 @@ import { useAuth } from '../context/AuthContext';
 import { formatIndianCurrency } from '../components/property/PropertyCard';
 
 export const MyEnquiriesPage: React.FC = () => {
-  const { user } = useAuth();
+  const { user, isAuthenticated } = useAuth();
   const [enquiries, setEnquiries] = useState<IEnquiry[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -48,8 +48,12 @@ export const MyEnquiriesPage: React.FC = () => {
   };
 
   useEffect(() => {
-    fetchEnquiries();
-  }, []);
+    if (isAuthenticated) {
+      fetchEnquiries();
+    } else {
+      setLoading(false);
+    }
+  }, [isAuthenticated]);
 
   const getStatusBadge = (status: string) => {
     switch (status) {
@@ -133,6 +137,39 @@ export const MyEnquiriesPage: React.FC = () => {
 
   const activeCount = enquiries.filter((e) => e.status !== 'closed').length;
   const closedCount = enquiries.filter((e) => e.status === 'closed').length;
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-[75vh] flex items-center justify-center px-4 py-12">
+        <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 p-8 text-center space-y-4 shadow-luxury">
+          <div className="w-14 h-14 rounded-2xl bg-gold-50 text-gold-600 flex items-center justify-center mx-auto border border-gold-200">
+            <FileText className="w-7 h-7" />
+          </div>
+          <h2 className="font-heading text-xl font-bold text-navy-900">
+            Track Your Enquiries
+          </h2>
+          <p className="text-xs text-slate-500 leading-relaxed">
+            Please sign in or create an account to view and track your submitted property site visit requests, turnkey construction consultations, and loan assistance queries.
+          </p>
+          <div className="pt-2 flex flex-col gap-2.5">
+            <Link
+              to="/login"
+              state={{ from: { pathname: '/my-enquiries' } }}
+              className="w-full bg-gold-500 hover:bg-gold-600 text-white font-bold py-3 rounded-xl text-xs transition shadow text-center"
+            >
+              Log In to Track Enquiries
+            </Link>
+            <Link
+              to="/register"
+              className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-xs transition text-center"
+            >
+              Create Free Account
+            </Link>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-slate-50 py-8 sm:py-12">

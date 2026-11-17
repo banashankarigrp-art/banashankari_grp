@@ -97,13 +97,38 @@ export const register = async (req: Request, res: Response): Promise<void> => {
 
 export const login = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email, password } = req.body;
-    const normalizedEmail = email.toLowerCase().trim();
+    const { email, identifier, phone, password } = req.body;
+    const rawIdentifier = (identifier || email || phone || '').toString().trim();
+    if (!rawIdentifier) {
+      res.status(400).json({ success: false, message: 'Please provide either an email or mobile number.' });
+      return;
+    }
+
+    const isEmail = rawIdentifier.includes('@');
+    const normalizedEmail = rawIdentifier.toLowerCase();
+    const cleanDigits = rawIdentifier.replace(/\D/g, '');
+    const last10Digits = cleanDigits.slice(-10);
+
+    let query: any;
+    if (isEmail) {
+      query = { email: normalizedEmail };
+    } else {
+      const phoneRegex = new RegExp(last10Digits + '$');
+      query = {
+        $or: [
+          { phone: rawIdentifier },
+          { phone: `+91 ${last10Digits}` },
+          { phone: `+91${last10Digits}` },
+          { phone: last10Digits },
+          { phone: phoneRegex },
+        ],
+      };
+    }
 
     if (mongoose.connection.readyState === 1) {
-      const user = await User.findOne({ email: normalizedEmail }).select('+passwordHash');
+      const user = await User.findOne(query).select('+passwordHash');
       if (!user) {
-        res.status(401).json({ success: false, message: 'Invalid email or password.' });
+        res.status(401).json({ success: false, message: 'Invalid email/mobile number or password.' });
         return;
       }
 
@@ -114,7 +139,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
       const isMatch = await user.comparePassword(password);
       if (!isMatch) {
-        res.status(401).json({ success: false, message: 'Invalid email or password.' });
+        res.status(401).json({ success: false, message: 'Invalid email/mobile number or password.' });
         return;
       }
 
@@ -132,9 +157,19 @@ export const login = async (req: Request, res: Response): Promise<void> => {
         accessToken,
       });
     } else {
-      const user = inMemoryStore.users.find((u) => u.email === normalizedEmail);
+      const user = inMemoryStore.users.find((u) => {
+        if (isEmail) {
+          return u.email.toLowerCase() === normalizedEmail;
+        }
+        const uDigits = (u.phone || '').replace(/\D/g, '');
+        return (
+          u.phone === rawIdentifier ||
+          (last10Digits && uDigits.endsWith(last10Digits)) ||
+          uDigits === cleanDigits
+        );
+      });
       if (!user) {
-        res.status(401).json({ success: false, message: 'Invalid email or password.' });
+        res.status(401).json({ success: false, message: 'Invalid email/mobile number or password.' });
         return;
       }
 
@@ -145,7 +180,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
       const isMatch = await bcrypt.compare(password, user.passwordHash);
       if (!isMatch) {
-        res.status(401).json({ success: false, message: 'Invalid email or password.' });
+        res.status(401).json({ success: false, message: 'Invalid email/mobile number or password.' });
         return;
       }
 

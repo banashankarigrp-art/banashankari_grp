@@ -29,9 +29,17 @@ export const registerSchema = z.object({
 });
 
 export const loginSchema = z.object({
-  email: z.string().email('Invalid email address').toLowerCase(),
+  email: z.string().optional(),
+  identifier: z.string().optional(),
+  phone: z.string().optional(),
   password: z.string().min(1, 'Password is required'),
-});
+}).refine(
+  (data) => Boolean((data.email && data.email.trim()) || (data.identifier && data.identifier.trim()) || (data.phone && data.phone.trim())),
+  {
+    message: 'Please provide either an email or mobile number',
+    path: ['email'],
+  }
+);
 
 export const changePasswordSchema = z.object({
   currentPassword: z.string().min(1, 'Current password is required'),

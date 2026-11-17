@@ -115,12 +115,10 @@ export const HomePage: React.FC = () => {
   const [settings, setSettings] = useState<ISiteSettings | null>(null);
   const [loading, setLoading] = useState(true);
 
-  // Direct seller listing CTA link destination
+  // Direct property listing CTA link destination
   const sellerListingLink = !isAuthenticated
-    ? '/register?role=seller'
-    : user?.role === 'seller' || user?.role === 'admin'
-      ? '/sell-property'
-      : '/register?role=seller';
+    ? '/register'
+    : '/sell-property';
 
   // FAQ Accordion
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -309,56 +307,35 @@ export const HomePage: React.FC = () => {
         <div className="absolute -top-32 -left-32 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-1/2 -right-32 w-96 h-96 bg-navy-700/30 rounded-full blur-3xl pointer-events-none" />
 
-        <div className="relative max-w-5xl mx-auto text-center space-y-6">
-          {/* Company Brand Badge */}
-          <div className="inline-flex items-center space-x-2 bg-navy-900/90 border border-gold-500/40 text-gold-300 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-widest shadow-md backdrop-blur-sm">
-            <Building2 className="w-3.5 h-3.5 text-gold-400" />
-            <span className="text-gold-300 font-bold tracking-wider">BANASHANKARI ENTERPRISES</span>
-            <span className="text-gold-500/50">•</span>
-            <span className="text-slate-300 font-normal">Bengaluru</span>
-          </div>
-
-          {/* Main Hero Heading with Company Name and Slogan */}
-          <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white leading-[1.15]">
-            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold uppercase tracking-wide bg-gradient-to-r from-amber-200 via-gold-400 to-amber-100 bg-clip-text text-transparent mb-2.5 sm:mb-3 drop-shadow-sm font-sans">
-              Banashankari Enterprises
-            </span>
-            <span className="block text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white">
-              Your Land. Your Dream Home.
-            </span>
-            <span className="text-gold-400 italic block font-serif text-3xl sm:text-4xl md:text-5xl mt-1.5 sm:mt-2">
-              Our Commitment.
-            </span>
-            <span className="text-gold-400 italic block font-serif text-3xl sm:text-4xl md:text-5xl mt-1.5 sm:mt-2">
-              One Stop Solution for all your Needs
-            </span>
+        <div className="relative max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
+          {/* Main Hero Heading in Gold Color */}
+          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gold-400 leading-tight">
+            Buy and Build Your Dream House with Expert Guidance!
           </h1>
 
-          {/* Subtext */}
-          <p className="max-w-2xl mx-auto text-base sm:text-lg text-slate-300 font-light leading-relaxed">
-            Discover verified plots, build your turnkey dream residence, and access construction finance with Banashankari Enterprises.
+          {/* Subtext / Description */}
+          <p className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-slate-200 font-normal leading-relaxed">
+            Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.
           </p>
 
-          {/* Hero CTAs */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <Link
-              to="/properties"
-              className="w-full sm:w-auto px-8 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-semibold text-sm shadow-gold-glow transition transform hover:-translate-y-0.5 flex items-center justify-center space-x-2"
-            >
-              <span>Explore Properties</span>
-              <ArrowRight className="w-4 h-4" />
-            </Link>
-
-            <a
-              href={`tel:${COMPANY_INFO.phone}`}
-              className="w-full sm:w-auto px-6 py-3.5 rounded-xl bg-navy-900 hover:bg-navy-850 border border-navy-800 text-slate-200 text-sm font-medium transition flex items-center justify-center space-x-2"
-            >
-              <PhoneCall className="w-4 h-4 text-gold-400" />
-              <span>Talk to Ramesh S H (9972536991 / 9880275925) </span>
-            </a>
+          {/* Founder Image (Square & Bigger) above Contact Button */}
+          <div className="flex flex-col items-center justify-center pt-2 sm:pt-4">
+            <div className="relative group">
+              <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64 rounded-2xl overflow-hidden border-2 sm:border-3 border-gold-400 shadow-2xl shadow-black/50 ring-4 ring-gold-500/20 bg-navy-900">
+                <img
+                  src={founderPhoto}
+                  alt={founderName}
+                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
+                />
+              </div>
+              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-4 py-1 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap shadow-lg">
+                {founderName}
+              </div>
+            </div>
+            <p className="text-xs sm:text-sm text-gold-400/90 font-medium mt-4 tracking-wide">
+              {founderTitle}
+            </p>
           </div>
-
-
         </div>
       </section>
 

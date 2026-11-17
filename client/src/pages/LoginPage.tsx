@@ -1,6 +1,16 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Lock, Mail, ArrowRight, AlertCircle, ShieldCheck, Eye, EyeOff, UserPlus } from 'lucide-react';
+import {
+  Lock,
+  Mail,
+  Phone,
+  ArrowRight,
+  AlertCircle,
+  ShieldCheck,
+  Eye,
+  EyeOff,
+  UserPlus,
+} from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 
 export const LoginPage: React.FC = () => {
@@ -8,6 +18,8 @@ export const LoginPage: React.FC = () => {
   const location = useLocation();
   const { login } = useAuth();
 
+  const [loginMethod, setLoginMethod] = useState<'mobile' | 'email'>('mobile');
+  const [mobileNumber, setMobileNumber] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -18,23 +30,43 @@ export const LoginPage: React.FC = () => {
   const fromLocation = (location.state as any)?.from;
   const from = fromLocation
     ? `${fromLocation.pathname}${fromLocation.search || ''}`
-    : '/dashboard';
+    : '/properties';
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+
+    let identifier = '';
+    if (loginMethod === 'mobile') {
+      const cleanDigits = mobileNumber.replace(/\D/g, '');
+      if (cleanDigits.length < 10) {
+        setError('Please enter a valid 10-digit mobile number');
+        return;
+      }
+      identifier = `+91 ${cleanDigits}`;
+    } else {
+      if (!email.trim() || !email.includes('@')) {
+        setError('Please enter a valid Gmail / Email address');
+        return;
+      }
+      identifier = email.trim().toLowerCase();
+    }
+
     try {
       setIsSubmitting(true);
-      const user = await login({ email, password });
+      const user = await login({ identifier, password });
       if (user.role === 'admin') {
         navigate('/admin');
-      } else if (user.role === 'customer') {
-        navigate(fromLocation ? from : '/properties');
       } else {
-        navigate(fromLocation ? from : '/dashboard');
+        navigate(fromLocation ? from : '/properties');
       }
     } catch (err: any) {
-      setError(err.message || 'Invalid email or password');
+      setError(
+        err.message ||
+          (loginMethod === 'mobile'
+            ? 'Invalid mobile number or password'
+            : 'Invalid Gmail / Email or password')
+      );
     } finally {
       setIsSubmitting(false);
     }
@@ -46,7 +78,7 @@ export const LoginPage: React.FC = () => {
         <div className="text-center space-y-2">
           <h1 className="font-heading text-2xl font-bold text-navy-900">Sign in to Your Account</h1>
           <p className="text-xs text-slate-500">
-            Access your property listings, review status, and enquiries.
+            Sign in using your mobile number or Gmail address with your password.
           </p>
         </div>
 
@@ -64,25 +96,93 @@ export const LoginPage: React.FC = () => {
           </div>
         )}
 
+        {/* Login Method Toggle: Mobile (+91) vs Gmail / Email */}
+        <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-2xl">
+          <button
+            type="button"
+            onClick={() => {
+              setLoginMethod('mobile');
+              setError('');
+            }}
+            className={`py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
+              loginMethod === 'mobile'
+                ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60'
+                : 'text-slate-600 hover:text-navy-950'
+            }`}
+          >
+            <Phone className="w-3.5 h-3.5 text-gold-600" />
+            <span>Mobile (+91)</span>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setLoginMethod('email');
+              setError('');
+            }}
+            className={`py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
+              loginMethod === 'email'
+                ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60'
+                : 'text-slate-600 hover:text-navy-950'
+            }`}
+          >
+            <Mail className="w-3.5 h-3.5 text-gold-600" />
+            <span>Gmail / Email</span>
+          </button>
+        </div>
+
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-          <div>
-            <label className="font-semibold text-slate-700 block mb-1">Email Address</label>
-            <div className="relative">
-              <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="name@example.com"
-                className="w-full pl-9 pr-3 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
-              />
+          {loginMethod === 'mobile' ? (
+            /* Mobile Number Login with Static +91 Prefix */
+            <div>
+              <label className="font-semibold text-slate-700 block mb-1">Mobile Number *</label>
+              <div className="relative flex rounded-xl border border-slate-300 focus-within:ring-2 focus-within:ring-gold-500 overflow-hidden bg-white">
+                <span className="inline-flex items-center px-3.5 bg-slate-50 border-r border-slate-200 text-slate-800 font-bold text-xs select-none">
+                  +91
+                </span>
+                <input
+                  type="tel"
+                  required
+                  value={mobileNumber}
+                  onChange={(e) => {
+                    const digits = e.target.value.replace(/[^0-9]/g, '');
+                    setMobileNumber(digits);
+                  }}
+                  maxLength={10}
+                  placeholder="98450 12345"
+                  className="w-full px-3 py-3 text-xs focus:outline-none"
+                  autoFocus
+                />
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Enter your registered 10-digit mobile number
+              </p>
             </div>
-          </div>
+          ) : (
+            /* Gmail / Email Login */
+            <div>
+              <label className="font-semibold text-slate-700 block mb-1">Gmail / Email Address *</label>
+              <div className="relative">
+                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="name@gmail.com"
+                  className="w-full pl-9 pr-3 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
+                  autoFocus
+                />
+              </div>
+              <p className="text-[11px] text-slate-400 mt-1">
+                Enter your registered email address
+              </p>
+            </div>
+          )}
 
           <div>
             <div className="flex justify-between items-center mb-1">
-              <label className="font-semibold text-slate-700">Password</label>
+              <label className="font-semibold text-slate-700">Password *</label>
             </div>
             <div className="relative">
               <Lock className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />

@@ -29,39 +29,6 @@ export const SellPropertyPage: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<any>(null);
 
-  // Guard: Customers have no listing access
-  if (user?.role === 'customer') {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center px-4 py-12">
-        <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 p-8 text-center space-y-4 shadow-luxury">
-          <div className="w-14 h-14 rounded-2xl bg-amber-50 text-amber-600 flex items-center justify-center mx-auto border border-amber-200">
-            <Building2 className="w-7 h-7" />
-          </div>
-          <h2 className="font-heading text-xl font-bold text-navy-900">
-            Property Listing is for Sellers & Owners
-          </h2>
-          <p className="text-xs text-slate-500 leading-relaxed">
-            Your account is registered as a <strong>Customer</strong>. Customers have full access to explore all verified Bangalore properties, schedule site visits, and track service requests.
-          </p>
-          <div className="pt-2 flex flex-col gap-2">
-            <Link
-              to="/properties"
-              className="w-full bg-gold-500 hover:bg-gold-600 text-white font-bold py-3 rounded-xl text-xs transition shadow text-center"
-            >
-              Explore Verified Properties
-            </Link>
-            <Link
-              to="/my-enquiries"
-              className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold py-2.5 rounded-xl text-xs transition text-center"
-            >
-              View My Enquiries
-            </Link>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   // Form State
   const [formData, setFormData] = useState({
     // Step 1: Category & Purpose

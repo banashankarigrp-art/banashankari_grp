@@ -25,28 +25,15 @@ export const RegisterPage: React.FC = () => {
   const redirectMessage = (location.state as any)?.message;
   const from = (location.state as any)?.from?.pathname || '/dashboard';
 
-  const queryParams = new URLSearchParams(location.search);
-  const initialRole: 'customer' | 'seller' =
-    queryParams.get('role') === 'seller' || (location.state as any)?.role === 'seller'
-      ? 'seller'
-      : 'customer';
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
-    role: initialRole,
+    role: 'customer' as 'customer',
     password: '',
     confirmPassword: '',
     agreeToTerms: true,
   });
-
-  useEffect(() => {
-    const roleParam = new URLSearchParams(location.search).get('role');
-    if (roleParam === 'seller' || roleParam === 'customer') {
-      setFormData((prev) => ({ ...prev, role: roleParam }));
-    }
-  }, [location.search]);
 
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -98,11 +85,14 @@ export const RegisterPage: React.FC = () => {
 
     try {
       setIsSubmitting(true);
-      const registeredUser = await register({
+      const cleanPhone = formData.phone.trim().replace(/^(\+91\s*)/, '');
+      const formattedPhone = `+91 ${cleanPhone}`;
+
+      await register({
         name: formData.name.trim(),
         email: formData.email.trim().toLowerCase(),
-        phone: formData.phone.trim(),
-        role: formData.role,
+        phone: formattedPhone,
+        role: 'customer',
         password: formData.password,
         confirmPassword: formData.confirmPassword,
       });
@@ -110,8 +100,6 @@ export const RegisterPage: React.FC = () => {
       const fromLocation = (location.state as any)?.from;
       if (fromLocation) {
         navigate(`${fromLocation.pathname}${fromLocation.search || ''}`);
-      } else if (registeredUser.role === 'seller') {
-        navigate('/dashboard');
       } else {
         navigate('/properties');
       }
@@ -130,12 +118,10 @@ export const RegisterPage: React.FC = () => {
             <Building2 className="w-6 h-6" />
           </div>
           <h1 className="font-heading text-2xl font-bold text-navy-900">
-            Create {formData.role === 'seller' ? 'Seller / Owner' : 'Customer'} Account
+            Create Your Account
           </h1>
           <p className="text-xs text-slate-500">
-            {formData.role === 'seller'
-              ? 'List your Bangalore property, track verified buyers, and review approvals.'
-              : 'Discover verified plots, schedule site visits, apply for loans, and build turnkey homes.'}
+            Sign up to explore properties, schedule site visits, list properties, and access construction services.
           </p>
         </div>
 
@@ -154,70 +140,6 @@ export const RegisterPage: React.FC = () => {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-          {/* Role Selection Option: Customer vs Seller */}
-          <div>
-            <label className="font-semibold text-slate-700 block mb-2">I am registering as *</label>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, role: 'customer' })}
-                className={`p-3.5 rounded-2xl border text-left transition flex flex-col justify-between ${
-                  formData.role === 'customer'
-                    ? 'border-gold-500 bg-gold-50/60 ring-2 ring-gold-500/30 shadow-sm'
-                    : 'border-slate-200 bg-white hover:bg-slate-50'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center space-x-1.5">
-                    <User className={`w-3.5 h-3.5 ${formData.role === 'customer' ? 'text-gold-600' : 'text-slate-400'}`} />
-                    <span className={`text-xs font-bold ${formData.role === 'customer' ? 'text-navy-950' : 'text-slate-700'}`}>
-                      Customer
-                    </span>
-                  </div>
-                  <div
-                    className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      formData.role === 'customer' ? 'border-gold-600 bg-gold-600 text-white' : 'border-slate-300'
-                    }`}
-                  >
-                    {formData.role === 'customer' && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
-                  </div>
-                </div>
-                <p className="text-[10px] text-slate-500 leading-tight">
-                  Looking to buy plots, rent homes, or build turnkey house
-                </p>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setFormData({ ...formData, role: 'seller' })}
-                className={`p-3.5 rounded-2xl border text-left transition flex flex-col justify-between ${
-                  formData.role === 'seller'
-                    ? 'border-gold-500 bg-gold-50/60 ring-2 ring-gold-500/30 shadow-sm'
-                    : 'border-slate-200 bg-white hover:bg-slate-50'
-                }`}
-              >
-                <div className="flex items-center justify-between mb-1.5">
-                  <div className="flex items-center space-x-1.5">
-                    <Home className={`w-3.5 h-3.5 ${formData.role === 'seller' ? 'text-gold-600' : 'text-slate-400'}`} />
-                    <span className={`text-xs font-bold ${formData.role === 'seller' ? 'text-navy-950' : 'text-slate-700'}`}>
-                      Seller / Owner
-                    </span>
-                  </div>
-                  <div
-                    className={`w-4 h-4 rounded-full border flex items-center justify-center ${
-                      formData.role === 'seller' ? 'border-gold-600 bg-gold-600 text-white' : 'border-slate-300'
-                    }`}
-                  >
-                    {formData.role === 'seller' && <div className="w-1.5 h-1.5 bg-white rounded-full" />}
-                  </div>
-                </div>
-                <p className="text-[10px] text-slate-500 leading-tight">
-                  Have land, plot, or building to sell or rent in Bengaluru
-                </p>
-              </button>
-            </div>
-          </div>
-
           <div>
             <label className="font-semibold text-slate-700 block mb-1">Full Name *</label>
             <div className="relative">
@@ -250,16 +172,22 @@ export const RegisterPage: React.FC = () => {
             </div>
 
             <div>
-              <label className="font-semibold text-slate-700 block mb-1">Phone Number *</label>
-              <div className="relative">
-                <Phone className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
+              <label className="font-semibold text-slate-700 block mb-1">Mobile Number *</label>
+              <div className="relative flex rounded-xl border border-slate-300 focus-within:ring-2 focus-within:ring-gold-500 overflow-hidden bg-white">
+                <span className="inline-flex items-center px-3 bg-slate-50 border-r border-slate-200 text-slate-700 font-bold text-xs select-none">
+                  +91
+                </span>
                 <input
                   type="tel"
                   required
                   value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+91 98450 XXXXX"
-                  className="w-full pl-9 pr-3 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
+                  onChange={(e) => {
+                    const digits = e.target.value.replace(/[^0-9]/g, '');
+                    setFormData({ ...formData, phone: digits });
+                  }}
+                  maxLength={10}
+                  placeholder="98450 12345"
+                  className="w-full px-3 py-3 text-xs focus:outline-none"
                 />
               </div>
             </div>
@@ -427,11 +355,7 @@ export const RegisterPage: React.FC = () => {
             disabled={isSubmitting}
             className="w-full bg-gold-500 hover:bg-gold-600 text-white font-bold py-3.5 rounded-xl transition shadow flex items-center justify-center space-x-2"
           >
-            <span>
-              {isSubmitting
-                ? 'Creating Account...'
-                : `Register as ${formData.role === 'seller' ? 'Seller / Owner' : 'Customer'}`}
-            </span>
+            <span>{isSubmitting ? 'Creating Account...' : 'Create Account'}</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </form>

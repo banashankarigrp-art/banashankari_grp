@@ -1,80 +1,76 @@
-import React, { useState } from 'react';
-import { MessageSquare, X, Send } from 'lucide-react';
+import React from 'react';
 import { COMPANY_INFO } from '@shared/types';
 
-export const WhatsAppButton: React.FC<{ defaultMessage?: string }> = ({
-  defaultMessage = 'Hello Banashankari Enterprises, I would like to enquire about your properties and construction services in Bangalore.',
-}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState(defaultMessage);
+interface FloatingContactButtonsProps {
+  defaultMessage?: string;
+}
 
-  const handleSend = () => {
-    const encoded = encodeURIComponent(message);
-    window.open(`${COMPANY_INFO.whatsappUrl}?text=${encoded}`, '_blank');
-    setIsOpen(false);
-  };
+export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
+  defaultMessage = 'Hello Banashankari Enterprises, I would like to enquire about your properties and services in Bangalore.',
+}) => {
+  const whatsappUrl = defaultMessage
+    ? `${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(defaultMessage)}`
+    : COMPANY_INFO.whatsappUrl;
+
+  const phoneCallUrl = `tel:${COMPANY_INFO.phone}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-end">
-      {isOpen && (
-        <div className="mb-3 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-slate-100 overflow-hidden transform transition-all duration-200 ease-out animate-in fade-in slide-in-from-bottom-5">
-          {/* Header */}
-          <div className="bg-emerald-600 text-white p-4 flex justify-between items-center">
-            <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                <MessageSquare className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h4 className="font-semibold text-sm">Banashankari Enterprises</h4>
-                <p className="text-xs text-emerald-100">Direct WhatsApp Assistance</p>
-              </div>
-            </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="text-white/80 hover:text-white p-1 rounded-full hover:bg-white/10"
-              aria-label="Close WhatsApp chat"
-            >
-              <X className="w-5 h-5" />
-            </button>
-          </div>
-
-          {/* Body */}
-          <div className="p-4 bg-slate-50 space-y-3">
-            <div className="bg-white p-3 rounded-xl border border-slate-200 text-xs text-slate-700 shadow-sm leading-relaxed">
-              Hello! Reach out to Ramesh S H and our Bangalore property team directly on WhatsApp for instantaneous assistance.
-            </div>
-
-            <div className="space-y-1">
-              <label className="text-[11px] font-medium text-slate-500">Your message:</label>
-              <textarea
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                rows={3}
-                className="w-full text-xs p-2.5 rounded-lg border border-slate-300 focus:ring-2 focus:ring-emerald-500 focus:outline-none"
-              />
-            </div>
-
-            <button
-              onClick={handleSend}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 px-4 rounded-xl text-xs font-semibold flex items-center justify-center space-x-2 shadow-sm transition"
-            >
-              <Send className="w-3.5 h-3.5" />
-              <span>Open in WhatsApp (+91 997 253 6991)</span>
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* Trigger floating button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-14 h-14 rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-gold-glow flex items-center justify-center transition-all duration-200 hover:scale-105 active:scale-95 group relative focus:outline-none"
-        aria-label="Chat on WhatsApp with Banashankari Enterprises"
+    <aside
+      aria-label="Quick Connect Options"
+      className="fixed bottom-20 sm:bottom-28 right-4 sm:right-6 z-50 flex flex-col items-center gap-20 sm:gap-24 select-none"
+    >
+      {/* 1. WhatsApp Floating App Icon */}
+      <a
+        href={whatsappUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Chat directly on WhatsApp"
+        title="Chat on WhatsApp (+91 997 253 6991)"
+        className="w-14 h-14 sm:w-16 sm:h-16 rounded-[20px] sm:rounded-[22px] bg-gradient-to-b from-[#3CF36C] via-[#2CE161] to-[#20BA53] text-white flex items-center justify-center shadow-xl shadow-green-950/25 hover:shadow-2xl hover:shadow-green-950/35 transition-all duration-200 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
       >
-        <span className="absolute -top-1 -right-1 w-3.5 h-3.5 bg-gold-400 rounded-full border-2 border-white animate-pulse" />
-        <MessageSquare className="w-7 h-7" />
+        <svg
+          viewBox="0 0 32 32"
+          className="w-8 h-8 sm:w-9 sm:h-9"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          {/* White speech bubble outline */}
+          <path
+            d="M16 4.2C9.48 4.2 4.2 9.48 4.2 16c0 2.25.63 4.35 1.72 6.16L4.2 27.8l5.83-1.53c1.74 1 3.75 1.57 5.97 1.57 6.52 0 11.8-5.28 11.8-11.84C27.8 9.48 22.52 4.2 16 4.2z"
+            fill="none"
+            stroke="white"
+            strokeWidth="2.3"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          {/* White phone handset inside */}
+          <path
+            d="M21.2 19.1c-.28-.14-1.65-.81-1.9-.91-.25-.09-.44-.14-.62.14-.19.28-.72.91-.88 1.09-.16.19-.32.21-.6.07-.28-.14-1.18-.44-2.25-1.4-.84-.75-1.4-1.66-1.57-1.94-.17-.28-.02-.43.12-.57.13-.13.28-.33.42-.49.14-.17.19-.28.28-.47.09-.19.05-.35-.02-.49-.07-.14-.62-1.51-.86-2.07-.23-.54-.46-.47-.62-.48h-.53c-.19 0-.49.07-.75.35-.25.28-.98.96-.98 2.33 0 1.38 1.01 2.7 1.15 2.89.14.19 1.98 3.02 4.79 4.23.67.29 1.19.46 1.6.59.67.21 1.28.18 1.77.11.54-.08 1.65-.67 1.88-1.32.23-.65.23-1.21.16-1.32-.07-.11-.25-.19-.53-.33z"
+            fill="white"
+          />
+        </svg>
         <span className="sr-only">Chat on WhatsApp</span>
-      </button>
-    </div>
+      </a>
+
+      {/* 2. Direct Phone Call Floating App Icon */}
+      <a
+        href={phoneCallUrl}
+        aria-label="Direct Phone Call to Ramesh S H"
+        title="Direct Call (+91 997 253 6991)"
+        className="w-14 h-14 sm:w-16 sm:h-16 rounded-[20px] sm:rounded-[22px] bg-gradient-to-b from-[#FF6E40] via-[#FF5221] to-[#E63900] text-white flex items-center justify-center shadow-xl shadow-orange-950/25 hover:shadow-2xl hover:shadow-orange-950/35 transition-all duration-200 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          className="w-7 h-7 sm:w-8 sm:h-8 text-white fill-white"
+          xmlns="http://www.w3.org/2000/svg"
+          aria-hidden="true"
+        >
+          <path d="M6.62 10.79a15.053 15.053 0 0 0 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+        </svg>
+        <span className="sr-only">Call Banashankari Enterprises</span>
+      </a>
+    </aside>
   );
 };
+
+export const FloatingContactButtons = WhatsAppButton;
