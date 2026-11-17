@@ -17,9 +17,9 @@ export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
   return (
     <aside
       aria-label="Quick Connect Options"
-      className="fixed bottom-20 sm:bottom-28 right-4 sm:right-6 z-50 flex flex-col items-center gap-20 sm:gap-24 select-none"
+      className="fixed top-[60%] -translate-y-1/2 right-3 sm:right-5 z-50 flex flex-col items-center gap-3 sm:gap-3.5 select-none"
     >
-      {/* 1. WhatsApp Floating App Icon */}
+      {/* 1. WhatsApp Floating App Icon (First / On top) */}
       <a
         href={whatsappUrl}
         target="_blank"
@@ -52,7 +52,7 @@ export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
         <span className="sr-only">Chat on WhatsApp</span>
       </a>
 
-      {/* 2. Direct Phone Call Floating App Icon */}
+      {/* 2. Direct Phone Call Floating App Icon (Second / Below) */}
       <a
         href={phoneCallUrl}
         aria-label="Direct Phone Call to Ramesh S H"

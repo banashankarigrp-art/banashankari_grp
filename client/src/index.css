@@ -8,6 +8,10 @@
     font-family: 'Inter', system-ui, sans-serif;
   }
 
+  body {
+    background-color: #070E1A;
+  }
+
   h1, h2, h3, .font-heading {
     font-family: 'Playfair Display', Georgia, serif;
   }

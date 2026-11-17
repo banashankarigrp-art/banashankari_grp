@@ -219,109 +219,109 @@ export const HomePage: React.FC = () => {
     settings?.aboutCompanyText ||
     'With over 15 years of ground expertise, Banashankari Enterprises stands as South Bangalore’s most dependable real estate advisory and civil construction partner. From title-verified BDA plot procurement to comprehensive turnkey structural construction and KHB liaison, our hands-on leadership ensures every square foot reflects integrity, precision, and lasting family value.';
 
-  // End-to-End Property Solutions (User Uploaded Images)
-  const solutions = [
+  // One-Stop Solution Hero Banners Carousel (Services & 15 Years Experience Since 2011)
+  const heroServices = [
     {
-      id: 'plots',
-      title: 'Residential Plots & Land',
-      category: 'Land & Plots',
-      image: '/solutions/plots.jpg',
+      id: 'real-estate',
+      service: 'Real Estate',
+      tagline: 'SURYA NAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES',
+      headline: 'REAL ESTATE & LAND SOLUTIONS',
       description:
-        'Verified BDA, BMRDA, and DC-converted residential plots with complete legal title deeds and immediate registration readiness.',
-      highlights: ['Clear title deed verification', 'Cauvery & BESCOM infrastructure ready'],
-      link: '/properties?type=plot',
-      linkText: 'Explore Plots',
+        'Verified BDA, BMRDA, and KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.',
+      image:
+        'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1920&q=85',
+      fallbackImage: '/solutions/plots.jpg',
+      link: '/real-estate',
+      linkText: 'Explore Real Estate',
+      experience: '15 Years of Experience Since 2011',
     },
     {
       id: 'construction',
-      title: 'Bespoke Home Construction',
-      category: 'Civil & Building',
-      image: '/solutions/construction.jpg',
+      service: 'Construction',
+      tagline: 'GET YOUR DREAM HOME CONSTRUCTED BY THE EXPERTS',
+      headline: 'A RESIDENTIAL CONSTRUCTION COMPANY',
       description:
-        'Architectural planning, structural RCC execution, and turnkey building coordination with stringent material grade checks.',
-      highlights: ['Direct oversight by Ramesh S H', 'Transparent itemized material billing'],
+        'Turnkey architectural design, municipal plan sanctions, structural RCC execution, and bespoke interior finishes delivered with transparent itemized billing.',
+      image:
+        'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85',
+      fallbackImage: '/solutions/construction.jpg',
       link: '/construction',
       linkText: 'Explore Construction',
+      experience: '15 Years of Experience Since 2011',
     },
     {
-      id: 'rentals',
-      title: 'Rentals & Leases',
-      category: 'Rental Spaces',
-      image: '/solutions/rental.jpg',
+      id: 'khb-services',
+      service: 'KHB Property Services',
+      tagline: 'STATUTORY HOUSING BOARD DOCUMENTATION & TRANSFERS',
+      headline: 'KHB PROPERTY SERVICES',
       description:
-        'Curated residential apartments, independent duplex homes, and prime commercial retail spaces for verified tenants.',
-      highlights: ['Thorough tenant vetting', 'Formal rental agreements & deposit escrow'],
-      link: '/properties?purpose=rent',
-      linkText: 'Explore Rentals',
+        'Official procedural guidance for Karnataka Housing Board allotments, title deed scrutiny, ownership transfers, and encumbrance checks.',
+      image:
+        'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=85',
+      fallbackImage: '/solutions/plots.jpg',
+      link: '/khb-property-services',
+      linkText: 'Explore KHB Services',
+      experience: '15 Years of Experience Since 2011',
     },
     {
       id: 'loans',
-      title: 'Loan & KHB Advisory',
-      category: 'Finance & Legal',
-      image: '/solutions/loan.jpg',
+      service: 'Loans Made Easy',
+      tagline: 'HASSLE-FREE MULTI-BANK HOME & PLOT FINANCING',
+      headline: 'LOANS MADE EASY',
       description:
-        'Home loan documentation assistance across premier banks and dedicated procedural guidance for KHB transfers.',
-      highlights: ['Multi-bank loan eligibility liaison', 'KHB statutory checklist verification'],
-      link: '/khb-assistance',
-      linkText: 'KHB & Loan Guidance',
+        'Pre-qualification checks, documentation compilation, and dedicated liaison with SBI, HDFC, Canara Bank, and ICICI for fast-track loan approvals.',
+      image:
+        'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=85',
+      fallbackImage: '/solutions/loan.jpg',
+      link: '/loans-made-easy',
+      linkText: 'Explore Loan Assistance',
+      experience: '15 Years of Experience Since 2011',
     },
   ];
 
-  // Mobile 2s Card Shuffle & Rotational Animation State
-  const [activeSolutionIdx, setActiveSolutionIdx] = useState(0);
-  const [isShufflePaused, setIsShufflePaused] = useState(false);
-  const touchStartX = useRef<number | null>(null);
+  const [activeBannerIdx, setActiveBannerIdx] = useState(0);
+  const [isBannerPaused, setIsBannerPaused] = useState(false);
+  const bannerTouchStartX = useRef<number | null>(null);
 
-  const handleNextSolution = () => {
-    setActiveSolutionIdx((prev) => (prev + 1) % solutions.length);
+  const handleNextBanner = () => {
+    setActiveBannerIdx((prev) => (prev + 1) % heroServices.length);
   };
 
-  const handlePrevSolution = () => {
-    setActiveSolutionIdx((prev) => (prev - 1 + solutions.length) % solutions.length);
+  const handlePrevBanner = () => {
+    setActiveBannerIdx((prev) => (prev - 1 + heroServices.length) % heroServices.length);
   };
 
   useEffect(() => {
-    if (isShufflePaused) return;
-    const shuffleTimer = setInterval(() => {
-      setActiveSolutionIdx((prev) => (prev + 1) % solutions.length);
-    }, 2000);
-    return () => clearInterval(shuffleTimer);
-  }, [isShufflePaused, solutions.length]);
+    if (isBannerPaused) return;
+    const bannerTimer = setInterval(() => {
+      setActiveBannerIdx((prev) => (prev + 1) % heroServices.length);
+    }, 4500);
+    return () => clearInterval(bannerTimer);
+  }, [isBannerPaused, heroServices.length]);
 
   return (
     <div className="space-y-16 sm:space-y-24 pb-20 overflow-x-hidden">
       {/* ======================================================== */}
-      {/* 1. HERO SECTION (Matches Screenshot Exactly) */}
+      {/* 1. HERO SECTION (Transparent with Clear Background Image Behind) */}
       {/* ======================================================== */}
-      <section className="relative bg-navy-950 text-white pt-12 pb-24 sm:pb-32 px-4 sm:px-6 lg:px-8 overflow-hidden">
-        {/* Subtle architectural background texture */}
-        <div
-          className="absolute inset-0 opacity-15 bg-cover bg-center mix-blend-luminosity pointer-events-none"
-          style={{
-            backgroundImage:
-              'url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80")',
-          }}
-        />
+      <section className="relative bg-transparent text-white pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8">
 
-        {/* Ambient gradients */}
-        <div className="absolute -top-32 -left-32 w-96 h-96 bg-gold-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-1/2 -right-32 w-96 h-96 bg-navy-700/30 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="relative max-w-4xl mx-auto text-center space-y-6 sm:space-y-8">
+        {/* MOBILE & TABLET LAYOUT (< lg: 1024px): Centered Vertical Stack matching mobile view */}
+        <div className="lg:hidden relative max-w-xl mx-auto text-center space-y-5 sm:space-y-6 bg-black/45 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-gold-500/25 shadow-2xl">
           {/* Main Hero Heading in Gold Color */}
-          <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-gold-400 leading-tight">
+          <h1 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold tracking-tight text-gold-400 leading-tight">
             Buy and Build Your Dream House with Expert Guidance!
           </h1>
 
           {/* Subtext / Description */}
-          <p className="max-w-3xl mx-auto text-base sm:text-lg md:text-xl text-slate-200 font-normal leading-relaxed">
+          <p className="text-sm sm:text-base text-slate-100 font-normal leading-relaxed drop-shadow-sm">
             Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.
           </p>
 
-          {/* Founder Image (Square & Bigger) above Contact Button */}
-          <div className="flex flex-col items-center justify-center pt-2 sm:pt-4">
+          {/* Founder Image (Square & Bigger) above Contact/Enquiry Button */}
+          <div className="flex flex-col items-center justify-center pt-2">
             <div className="relative group">
-              <div className="w-44 h-44 sm:w-52 sm:h-52 md:w-60 md:h-60 lg:w-64 lg:h-64 rounded-2xl overflow-hidden border-2 sm:border-3 border-gold-400 shadow-2xl shadow-black/50 ring-4 ring-gold-500/20 bg-navy-900">
+              <div className="w-48 h-48 xs:w-52 xs:h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border-2 sm:border-3 border-gold-400 shadow-2xl shadow-black/50 ring-4 ring-gold-500/20 bg-navy-900">
                 <img
                   src={founderPhoto}
                   alt={founderName}
@@ -332,209 +332,241 @@ export const HomePage: React.FC = () => {
                 {founderName}
               </div>
             </div>
-            <p className="text-xs sm:text-sm text-gold-400/90 font-medium mt-4 tracking-wide">
+            <p className="text-xs text-gold-400 font-semibold mt-4 tracking-wide">
               {founderTitle}
             </p>
           </div>
+
+          {/* Enquiry Now Button (Reddish Brown, in Middle, Links to Contact Page) */}
+          <div className="flex items-center justify-center pt-2">
+            <Link
+              to="/contact"
+              className="inline-flex items-center justify-center px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl text-white font-bold text-sm sm:text-base bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl shadow-red-950/40 hover:shadow-2xl border border-red-900/40 transform hover:-translate-y-0.5 space-x-2"
+            >
+              <span>Enquiry Now</span>
+              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />
+            </Link>
+          </div>
         </div>
+
+        {/* LAPTOP & DESKTOP LAYOUT (>= lg: 1024px): 2-Column Balanced Luxury Grid */}
+        <div className="hidden lg:block relative max-w-6xl xl:max-w-7xl mx-auto bg-black/45 backdrop-blur-md p-8 lg:p-10 xl:p-12 rounded-3xl border border-gold-500/25 shadow-2xl">
+          <div className="grid grid-cols-12 gap-8 xl:gap-12 items-center">
+            {/* Left Column (7 cols): Heading, Paragraph, Trust Badges, Enquiry Now Button */}
+            <div className="col-span-7 space-y-6 text-left">
+              <div className="inline-flex items-center space-x-2 bg-gold-500/20 border border-gold-400/40 px-3.5 py-1 rounded-full text-gold-300 text-xs font-semibold tracking-wide shadow-sm">
+                <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                <span>KHB Surya nagar Specialist & Turnkey Construction</span>
+              </div>
+
+              <h1 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-gold-400 leading-tight">
+                Buy and Build Your Dream House with Expert Guidance!
+              </h1>
+
+              <p className="text-base xl:text-lg text-slate-100 font-normal leading-relaxed drop-shadow-sm max-w-2xl">
+                Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.
+              </p>
+
+              {/* Trust badges */}
+              <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-200">
+                <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
+                  <span>KHB Phase 1, 2, 3 & 4 Specialist</span>
+                </span>
+                <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
+                  <span>100% Clear Title Verification</span>
+                </span>
+                <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
+                  <span>Turnkey Home Construction</span>
+                </span>
+              </div>
+
+              {/* Enquiry Now Button */}
+              <div className="pt-2">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center px-8 xl:px-10 py-3.5 xl:py-4 rounded-xl text-white font-bold text-sm xl:text-base bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl shadow-red-950/40 hover:shadow-2xl border border-red-900/40 transform hover:-translate-y-0.5 space-x-2 group"
+                >
+                  <span>Enquiry Now</span>
+                  <ArrowRight className="w-4 h-4 xl:w-5 xl:h-5 text-amber-300 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Column (5 cols): Square Framed Founder Photo with Gold Border and Badges */}
+            <div className="col-span-5 flex flex-col items-center justify-center">
+              <div className="relative group">
+                <div className="absolute -inset-2 bg-gold-500/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition duration-300 pointer-events-none" />
+
+                <div className="relative w-64 h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-2xl overflow-hidden border-3 border-gold-400 shadow-2xl shadow-black/70 ring-4 ring-gold-500/20 bg-navy-900">
+                  <img
+                    src={founderPhoto}
+                    alt={founderName}
+                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+
+                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-4 xl:px-5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-bold uppercase tracking-wider whitespace-nowrap shadow-xl">
+                  {founderName}
+                </div>
+              </div>
+
+              <p className="text-xs xl:text-sm text-gold-400 font-semibold mt-5 tracking-wide text-center">
+                {founderTitle}
+              </p>
+            </div>
+          </div>
+        </div>
+
       </section>
 
       {/* ======================================================== */}
-      {/* 2. OUR ARCHITECTURAL & REAL ESTATE SOLUTIONS (Screenshot Section 1) */}
+      {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
       {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-2 mb-12">
-          <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
-            End-to-End Property Solutions
-          </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
-            Our Architectural & Real Estate Solutions
+      <section className="w-full bg-[#F5ECE1] py-12 sm:py-16 lg:py-20 border-y border-[#E2D2BF]/80 shadow-xs">
+
+        {/* HEADING / TOPIC (Centered container) */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-8 sm:mb-12">
+
+          <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
+            Our One-Stop Solution for All Real Estate & Construction Needs!
           </h2>
-          <p className="text-sm text-slate-600 leading-relaxed">
-            Delivering transparent property transactions, bespoke home construction, and institutional liaison across Bangalore.
-          </p>
         </div>
 
-        {/* ======================================================== */}
-        {/* MOBILE LAYOUT: Rotational Card Shuffle Animation (Every 2s) */}
-        {/* ======================================================== */}
+        {/* HERO BANNERS (Fully Covered Right and Left: w-full edge-to-edge, Arrows removed) */}
         <div
-          className="sm:hidden relative max-w-sm mx-auto pt-4 pb-6 px-1 select-none"
+          className="relative w-full overflow-hidden shadow-2xl group select-none min-h-[400px] sm:min-h-[460px] lg:min-h-[520px] flex items-center justify-center bg-navy-950"
+          onMouseEnter={() => setIsBannerPaused(true)}
+          onMouseLeave={() => setIsBannerPaused(false)}
           onTouchStart={(e) => {
-            setIsShufflePaused(true);
-            touchStartX.current = e.touches[0].clientX;
+            setIsBannerPaused(true);
+            bannerTouchStartX.current = e.touches[0].clientX;
           }}
           onTouchEnd={(e) => {
-            setIsShufflePaused(false);
-            if (touchStartX.current !== null) {
-              const diff = touchStartX.current - e.changedTouches[0].clientX;
-              if (diff > 35) {
-                // Swiped left -> next card
-                handleNextSolution();
-              } else if (diff < -35) {
-                // Swiped right -> prev card
-                handlePrevSolution();
-              }
-              touchStartX.current = null;
+            setIsBannerPaused(false);
+            if (bannerTouchStartX.current !== null) {
+              const diff = bannerTouchStartX.current - e.changedTouches[0].clientX;
+              if (diff > 35) handleNextBanner();
+              else if (diff < -35) handlePrevBanner();
+              bannerTouchStartX.current = null;
             }
           }}
-          onMouseEnter={() => setIsShufflePaused(true)}
-          onMouseLeave={() => setIsShufflePaused(false)}
         >
-          {/* Side Navigation Buttons (Tapping either side navigates cards) */}
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handlePrevSolution();
-            }}
-            className="absolute -left-2 top-1/2 -translate-y-6 z-20 w-8 h-8 rounded-full bg-white/95 text-navy-950 border border-slate-200 shadow-md flex items-center justify-center hover:bg-gold-500 hover:text-white transition active:scale-90"
-            aria-label="Previous solution card"
-          >
-            <ChevronLeft className="w-4 h-4" />
-          </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNextSolution();
-            }}
-            className="absolute -right-2 top-1/2 -translate-y-6 z-20 w-8 h-8 rounded-full bg-white/95 text-navy-950 border border-slate-200 shadow-md flex items-center justify-center hover:bg-gold-500 hover:text-white transition active:scale-90"
-            aria-label="Next solution card"
-          >
-            <ChevronRight className="w-4 h-4" />
-          </button>
-
-          {/* Fanned-out Rotated Deck Silhouettes for Realistic Card Rotation Effect */}
-          <div className="absolute inset-x-4 top-6 bottom-7 bg-slate-200 border border-slate-300 rounded-2xl transform -rotate-3 -translate-x-1.5 translate-y-3 shadow-sm pointer-events-none opacity-60" />
-          <div className="absolute inset-x-2 top-5 bottom-6 bg-slate-100 border border-slate-200 rounded-2xl transform rotate-3 translate-x-1.5 translate-y-1.5 shadow-sm pointer-events-none opacity-80" />
-
-          {/* Active Top Card with Rotational Animation Entrance */}
-          {(() => {
-            const sol = solutions[activeSolutionIdx];
+          {heroServices.map((slide, idx) => {
+            const isActive = activeBannerIdx === idx;
             return (
               <div
-                key={sol.id}
-                className="relative z-10 bg-white rounded-2xl border-2 border-gold-500/30 shadow-2xl overflow-hidden flex flex-col animate-card-rotate cursor-grab active:cursor-grabbing"
+                key={slide.id}
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
               >
-                {/* Image Above Wording (Scaled compact so wording is fully visible on mobile) */}
-                <div className="relative h-36 sm:h-40 w-full overflow-hidden bg-slate-100 shrink-0">
-                  <img
-                    src={sol.image}
-                    alt={sol.title}
-                    className="w-full h-full object-cover pointer-events-none"
-                    loading="lazy"
-                  />
-                  <div className="absolute top-2.5 left-2.5 bg-navy-950/90 text-gold-400 border border-gold-500/30 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm">
-                    {sol.category}
-                  </div>
-                  <div className="absolute top-2.5 right-2.5 bg-white/95 backdrop-blur-sm text-navy-950 text-[10px] font-bold px-2.5 py-0.5 rounded-full shadow-sm border border-slate-200">
-                    {activeSolutionIdx + 1} of {solutions.length}
-                  </div>
+                {/* Background Image */}
+                <img
+                  src={slide.image}
+                  alt={slide.headline}
+                  className="w-full h-full object-cover transform scale-105 group-hover:scale-100 transition-transform duration-1000"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).src = slide.fallbackImage;
+                  }}
+                  loading={idx === 0 ? 'eager' : 'lazy'}
+                />
+
+                {/* Dark Twilight Ambient Overlay matching the Reference Image */}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/65 to-navy-950/45" />
+
+                {/* Top Corner Milestone Badge on the Banner */}
+                <div className="absolute top-4 sm:top-6 right-4 sm:right-8 z-20">
+                  <span className="inline-flex items-center space-x-1.5 bg-black/60 backdrop-blur-md border border-gold-400/40 text-gold-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                    <Sparkles className="w-3.5 h-3.5 text-gold-400" />
+                    <span>15 Years Experience Since 2011</span>
+                  </span>
                 </div>
 
-                {/* Content Wording Below Image - Prominently Displayed */}
-                <div className="p-4 sm:p-5 flex flex-col justify-between flex-1 bg-white">
-                  <div>
-                    <h3 className="font-heading text-lg font-bold text-navy-950 leading-snug mb-1">
-                      {sol.title}
-                    </h3>
-                    <p className="text-xs text-slate-700 leading-relaxed font-normal mb-3">
-                      {sol.description}
-                    </p>
+                {/* Service Category Tag on Top Left */}
+                <div className="absolute top-4 sm:top-6 left-4 sm:left-8 z-20">
+                  <span className="inline-flex items-center bg-gold-500/20 backdrop-blur-md border border-gold-400/40 text-gold-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+                    {slide.service}
+                  </span>
+                </div>
 
-                    <ul className="text-xs text-slate-600 space-y-1.5 mb-3.5 border-t border-slate-100 pt-2.5">
-                      {sol.highlights.map((h, i) => (
-                        <li key={i} className="flex items-center space-x-1.5 font-medium">
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                          <span>{h}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                {/* Centered Content Typography (Matches Reference Screenshot Structure) */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-12 lg:px-20 z-10 max-w-4xl mx-auto space-y-3 sm:space-y-4">
+                  {/* Small Subtitle in All Caps with Wide Tracking */}
+                  <p className="font-sans font-semibold text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gold-300 drop-shadow-md">
+                    {slide.tagline}
+                  </p>
 
-                  <div className="pt-2 border-t border-slate-100">
+                  {/* Main Bold Headline */}
+                  <h3 className="font-heading font-extrabold text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white uppercase tracking-wider leading-tight drop-shadow-xl">
+                    {slide.headline}
+                  </h3>
+
+                  {/* Description Paragraph */}
+                  <p className="text-xs sm:text-sm md:text-base text-slate-100 font-light leading-relaxed max-w-2xl drop-shadow-md hidden xs:block">
+                    {slide.description}
+                  </p>
+
+                  {/* Action Link Button */}
+                  <div className="pt-2">
                     <Link
-                      to={sol.link}
-                      className="w-full inline-flex items-center justify-center space-x-1.5 px-4 py-2.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs shadow-md transition"
+                      to={slide.link}
+                      className="inline-flex items-center space-x-2 px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-xl shadow-gold-950/40 border border-gold-400/40 transition transform hover:-translate-y-0.5 group/btn"
                     >
-                      <span>{sol.linkText}</span>
-                      <ArrowRight className="w-3.5 h-3.5" />
+                      <span>{slide.linkText}</span>
+                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
                     </Link>
                   </div>
                 </div>
               </div>
             );
-          })()}
+          })}
 
-          {/* Dot / Pill Indicators to navigate cards */}
-          <div className="flex items-center justify-center space-x-2 mt-4">
-            {solutions.map((s, idx) => (
+          {/* Dash / Pill Indicators at Bottom Center (Exact match to reference photo '— — — —', Arrows removed) */}
+          <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-2 sm:space-x-3">
+            {heroServices.map((_, idx) => (
               <button
-                key={s.id}
-                onClick={() => setActiveSolutionIdx(idx)}
-                className={`h-2 rounded-full transition-all duration-300 ${activeSolutionIdx === idx
-                  ? 'w-7 bg-gold-500 shadow-sm'
-                  : 'w-2 bg-slate-300 hover:bg-slate-400'
+                key={idx}
+                onClick={() => setActiveBannerIdx(idx)}
+                className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${activeBannerIdx === idx
+                  ? 'w-8 sm:w-12 bg-gold-400 shadow-md ring-1 ring-gold-300'
+                  : 'w-4 sm:w-6 bg-white/40 hover:bg-white/70'
                   }`}
-                aria-label={`Show ${s.title}`}
+                aria-label={`Show ${heroServices[idx].service} slide`}
               />
             ))}
           </div>
         </div>
 
-        {/* ======================================================== */}
-        {/* DESKTOP / BIG SCREEN LAYOUT: Shown Separately in 4 Columns */}
-        {/* ======================================================== */}
-        <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {solutions.map((sol) => (
-            <div
-              key={sol.id}
-              className="bg-white rounded-2xl border border-slate-200/90 shadow-luxury hover:shadow-luxury-hover hover:border-gold-500/40 transition-all duration-300 flex flex-col justify-between overflow-hidden group"
-            >
-              {/* Image Above Wording */}
-              <div className="relative h-44 lg:h-48 w-full overflow-hidden bg-slate-100 shrink-0">
-                <img
-                  src={sol.image}
-                  alt={sol.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  loading="lazy"
-                />
-                <div className="absolute top-2.5 left-2.5 bg-navy-950/90 text-gold-400 border border-gold-500/30 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm">
-                  {sol.category}
-                </div>
-              </div>
-
-              {/* Wording Below Image */}
-              <div className="p-4 sm:p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-heading text-base lg:text-lg font-bold text-navy-900 mb-1.5 leading-snug group-hover:text-gold-600 transition">
-                    {sol.title}
-                  </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed mb-3">
-                    {sol.description}
-                  </p>
-                  <ul className="text-xs text-slate-500 space-y-1.5 mb-4 border-t border-slate-100 pt-3">
-                    {sol.highlights.map((h, i) => (
-                      <li key={i} className="flex items-center space-x-1.5">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500 shrink-0" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <Link
-                  to={sol.link}
-                  className="text-xs font-bold text-navy-900 group-hover:text-gold-600 inline-flex items-center space-x-1 transition mt-auto pt-2 border-t border-slate-50"
-                >
-                  <span>{sol.linkText}</span>
-                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
+        {/* CONTENT (Centered with max-w-4xl, directly below the edge-to-edge Hero Banner) */}
+        <div className="mt-8 sm:mt-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="relative bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#E2D2BF] shadow-luxury text-center space-y-4">
+            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mx-auto shadow-xs">
+              <Sparkles className="w-6 h-6" />
             </div>
-          ))}
+
+            <p className="text-base sm:text-lg lg:text-xl text-slate-800 font-medium leading-relaxed max-w-3xl mx-auto font-sans">
+              <strong className="text-navy-950 font-bold">Ramesh S H</strong> provides complete expert guidance and support under one roof for all KHB properties in Surya Nagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.
+            </p>
+
+            <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
+              <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Surya Nagar Phase 1, 2, 3 & 4 Specialist</span>
+              </span>
+              <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>15+ Years Experience Since 2011</span>
+              </span>
+              <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                <span>Direct Guidance from Ramesh S H</span>
+              </span>
+            </div>
+          </div>
         </div>
+
       </section>
 
       {/* ======================================================== */}
@@ -1116,54 +1148,6 @@ export const HomePage: React.FC = () => {
       </section>
 
 
-      {/* ======================================================== */}
-      {/* 8. VOICES OF TRUST IN BENGALURU (Screenshot Section 7) */}
-      {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-2 mb-12">
-          <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
-            Client Experiences
-          </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
-            Voices of Trust in Bengaluru
-          </h2>
-          <p className="text-sm text-slate-600">
-            Real feedback from Bangalore families who acquired plots or built homes with us.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-luxury flex flex-col justify-between">
-            <p className="text-xs text-slate-600 leading-relaxed italic mb-6">
-              "Banashankari Enterprises guided us through purchasing our plot in Kenchanahalli with complete title verification. Ramesh S H gave transparent advice on building regulations and bank approvals. Truly refreshing honesty!"
-            </p>
-            <div className="border-t border-slate-100 pt-4">
-              <h5 className="font-bold text-navy-900 text-sm">Anand & Sangeetha K.</h5>
-              <p className="text-[11px] text-slate-400">Kenchanahalli, Bangalore</p>
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-luxury flex flex-col justify-between">
-            <p className="text-xs text-slate-600 leading-relaxed italic mb-6">
-              "We entrusted Ramesh S H with the complete turnkey construction of our 3 BHK duplex home. The structural quality, daily photographic updates, and adherence to agreed budgets exceeded all our family expectations."
-            </p>
-            <div className="border-t border-slate-100 pt-4">
-              <h5 className="font-bold text-navy-900 text-sm">Dr. Manjunath Murthy</h5>
-              <p className="text-[11px] text-slate-400">Banashankari 3rd Stage</p>
-            </div>
-          </div>
-
-          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-luxury flex flex-col justify-between">
-            <p className="text-xs text-slate-600 leading-relaxed italic mb-6">
-              "Navigating KHB documentation and bank loan sanctions can be overwhelming in Bangalore. Banashankari Enterprises simplified every single step, cleared our paperwork, and got our loan sanctioned without hassles."
-            </p>
-            <div className="border-t border-slate-100 pt-4">
-              <h5 className="font-bold text-navy-900 text-sm">Bhavana Hegde</h5>
-              <p className="text-[11px] text-slate-400">Electronic City, Bangalore</p>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* ======================================================== */}
       {/* 9. CUSTOMER ENQUIRY & CONTACT FORM */}
@@ -1306,47 +1290,6 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-      {/* ======================================================== */}
-      {/* 10. FREQUENTLY ASKED QUESTIONS */}
-      {/* ======================================================== */}
-      <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-2 mb-10">
-          <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
-            Clear Answers
-          </span>
-          <h2 className="font-heading text-3xl font-bold text-navy-900">
-            Frequently Asked Questions
-          </h2>
-        </div>
-
-        <div className="space-y-3">
-          {faqs.map((faq, idx) => {
-            const isOpen = openFaq === idx;
-            return (
-              <div
-                key={idx}
-                className="bg-white rounded-2xl border border-slate-200/80 overflow-hidden shadow-sm transition"
-              >
-                <button
-                  onClick={() => setOpenFaq(isOpen ? null : idx)}
-                  className="w-full p-5 text-left flex justify-between items-center space-x-4 hover:bg-slate-50 transition"
-                >
-                  <span className="font-semibold text-sm text-navy-900">{faq.q}</span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-slate-400 shrink-0 transition-transform duration-200 ${isOpen ? 'transform rotate-180 text-gold-600' : ''
-                      }`}
-                  />
-                </button>
-                {isOpen && (
-                  <div className="px-5 pb-5 text-xs text-slate-600 leading-relaxed border-t border-slate-100 pt-3">
-                    {faq.a}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-      </section>
     </div>
   );
 };

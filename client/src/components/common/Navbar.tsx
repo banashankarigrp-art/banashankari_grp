@@ -118,35 +118,35 @@ export const Navbar: React.FC = () => {
         {/* Tier 1: Top Center Company Name with Circular Logo Left & Right */}
         {/* ======================================================== */}
         <div className="bg-white border-b border-slate-100">
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2.5 sm:py-3.5 lg:py-4 flex items-center justify-between gap-1.5 sm:gap-4">
+          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between gap-2 sm:gap-4">
             
-            {/* Top Left: Attached Circular Logo (Significantly enlarged on mobile) */}
+            {/* Top Left: Attached "Grow Together" Logo */}
             <Link
               to="/"
               className="flex items-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-gold-500 rounded-full"
               aria-label="Banashankari Enterprises - Return to Home"
             >
               <img
-                src="/khb-logo-circle.png"
-                alt="KHB Suryanagar Properties Emblem - Left"
-                className="w-20 h-20 xs:w-22 xs:h-22 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain rounded-full drop-shadow-sm group-hover:scale-105 transition-transform duration-200"
+                src="/grow-together-circle.png"
+                alt="Grow Together - Banashankari Enterprises"
+                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-sm group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
 
-            {/* Top Center: Official Company Name and Subtitle (Full of CAPS & Prominent in Mobile) */}
+            {/* Top Center: Official Company Name and Subtitle */}
             <div className="text-center flex-1 min-w-0 px-1 sm:px-4">
               <Link to="/" className="inline-block group focus:outline-none w-full">
-                <h1 className="font-heading font-black text-sm xs:text-base sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl text-navy-950 tracking-tight sm:tracking-wide uppercase leading-tight sm:leading-snug group-hover:text-gold-700 transition">
+                <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-navy-950 tracking-wide uppercase leading-tight sm:leading-snug group-hover:text-gold-700 transition">
                   <span className="block sm:inline">BANASHANKARI </span>
                   <span className="block sm:inline">ENTERPRISES</span>
                 </h1>
-                <p className="text-[8.5px] xs:text-[10px] sm:text-xs md:text-sm lg:text-base font-bold tracking-wider sm:tracking-widest uppercase text-gold-600 mt-0.5 sm:mt-1 font-sans leading-tight">
+                <p className="text-[8.5px] xs:text-[10px] sm:text-xs md:text-xs lg:text-sm font-bold tracking-wider sm:tracking-widest uppercase text-gold-600 mt-0.5 sm:mt-1 font-sans leading-tight">
                   REAL ESTATE AND CONSTRUCTIONS
                 </p>
               </Link>
             </div>
 
-            {/* Top Right: Attached Circular Logo (Significantly enlarged on mobile) */}
+            {/* Top Right: Attached Circular Logo */}
             <Link
               to="/"
               className="flex items-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-gold-500 rounded-full"
@@ -155,7 +155,7 @@ export const Navbar: React.FC = () => {
               <img
                 src="/khb-logo-circle.png"
                 alt="KHB Suryanagar Properties Emblem - Right"
-                className="w-20 h-20 xs:w-22 xs:h-22 sm:w-24 sm:h-24 md:w-28 md:h-28 lg:w-32 lg:h-32 object-contain rounded-full drop-shadow-sm group-hover:scale-105 transition-transform duration-200"
+                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-sm group-hover:scale-105 transition-transform duration-200"
               />
             </Link>
 
@@ -167,7 +167,7 @@ export const Navbar: React.FC = () => {
         {/* ======================================================== */}
         <div className="bg-slate-50/95 backdrop-blur-md border-b border-slate-200/80">
           <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between h-12 sm:h-13 gap-2">
+            <div className="flex items-center justify-end md:justify-between h-11 sm:h-12 gap-2">
               
               {/* Desktop Navigation Links */}
               <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 xl:space-x-2 flex-1 overflow-x-auto py-1 scrollbar-none" aria-label="Main Navigation">
@@ -190,26 +190,8 @@ export const Navbar: React.FC = () => {
                 })}
               </nav>
 
-              {/* Mobile: Hamburger Menu Toggle Button */}
-              <div className="md:hidden flex items-center">
-                <button
-                  type="button"
-                  onClick={() => setDrawerOpen(!drawerOpen)}
-                  className={`inline-flex items-center space-x-1.5 px-3 py-1.5 rounded-xl border text-xs font-bold transition focus:outline-hidden focus:ring-2 focus:ring-gold-500 shrink-0 ${
-                    drawerOpen
-                      ? 'bg-navy-950 text-white border-navy-950 shadow-sm'
-                      : 'text-navy-900 bg-white hover:bg-slate-100 border-slate-200 shadow-2xs'
-                  }`}
-                  aria-label="Navigation Menu"
-                  aria-expanded={drawerOpen}
-                >
-                  {drawerOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
-                  <span>Menu</span>
-                </button>
-              </div>
-
-              {/* Right: Auth Action (Login / Signup Button or User Dropdown) */}
-              <div className="flex items-center space-x-1.5 sm:space-x-2.5 shrink-0">
+              {/* Right: Actions Container (Login Button BEFORE Hamburger Menu, Hamburger Menu LAST) */}
+              <div className="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
                 {isAuthenticated ? (
                   /* Authenticated User Button / Dropdown */
                   <div className="relative">
@@ -314,14 +296,29 @@ export const Navbar: React.FC = () => {
                     )}
                   </div>
                 ) : (
-                  /* Unauthenticated: Combined single Login / Sign Up button (No door icon) */
+                  /* Unauthenticated: Login Button (before Hamburger Menu, signup wording removed) */
                   <Link
                     to="/login"
                     className="inline-flex items-center px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-amber-500 via-gold-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-sm hover:shadow transition transform hover:-translate-y-0.5 shrink-0"
                   >
-                    <span>Login / Sign Up</span>
+                    <span>Login</span>
                   </Link>
                 )}
+
+                {/* Hamburger Menu Toggle Button (Right side LAST, wording removed) */}
+                <button
+                  type="button"
+                  onClick={() => setDrawerOpen(!drawerOpen)}
+                  className={`md:hidden inline-flex items-center justify-center p-2 sm:p-2.5 rounded-xl border transition focus:outline-hidden focus:ring-2 focus:ring-gold-500 shrink-0 ${
+                    drawerOpen
+                      ? 'bg-navy-950 text-white border-navy-950 shadow-sm'
+                      : 'text-navy-900 bg-white hover:bg-slate-100 border-slate-200 shadow-2xs'
+                  }`}
+                  aria-label="Navigation Menu"
+                  aria-expanded={drawerOpen}
+                >
+                  {drawerOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                </button>
               </div>
             </div>
           </div>
