@@ -860,15 +860,33 @@ export const SellPropertyPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="text-xs font-semibold text-slate-700 block mb-1">Direct Contact Number *</label>
-                  <input
-                    type="tel"
-                    required
-                    value={formData.ownerPhone}
-                    onChange={(e) => setFormData({ ...formData, ownerPhone: e.target.value })}
-                    placeholder="+91 98450 XXXXX"
-                    className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
-                  />
+                  <label className="text-xs font-semibold text-slate-700 block mb-1">Direct Contact Number (10 digits) *</label>
+                  <div className="relative flex rounded-xl border border-slate-300 focus-within:ring-2 focus-within:ring-gold-500 overflow-hidden bg-white">
+                    <span className="inline-flex items-center px-3.5 bg-slate-50 border-r border-slate-200 text-slate-700 font-bold text-xs select-none">
+                      +91
+                    </span>
+                    <input
+                      type="tel"
+                      required
+                      inputMode="numeric"
+                      pattern="[0-9]{10}"
+                      maxLength={10}
+                      minLength={10}
+                      title="Please enter a 10-digit mobile number"
+                      value={formData.ownerPhone}
+                      onChange={(e) => {
+                        let digits = e.target.value.replace(/\D/g, '');
+                        if (digits.length === 12 && digits.startsWith('91')) {
+                          digits = digits.slice(2);
+                        } else if (digits.length === 11 && digits.startsWith('0')) {
+                          digits = digits.slice(1);
+                        }
+                        setFormData({ ...formData, ownerPhone: digits.slice(0, 10) });
+                      }}
+                      placeholder="98450 12345"
+                      className="w-full text-xs p-3 focus:outline-none bg-transparent"
+                    />
+                  </div>
                 </div>
               </div>
             </div>

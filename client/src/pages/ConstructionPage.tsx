@@ -23,7 +23,7 @@ export const ConstructionPage: React.FC = () => {
   // Form State
   const [formData, setFormData] = useState({
     customerName: user?.name || '',
-    phone: user?.phone || '',
+    phone: (user?.phone || '').replace(/\D/g, '').slice(-10),
     email: user?.email || '',
     projectLocation: 'Banashankari / Bengaluru',
     plotDimensions: '30x40 (1,200 Sqft)',
@@ -56,12 +56,16 @@ export const ConstructionPage: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (formData.phone.length !== 10) {
+      alert('Please enter a valid 10-digit mobile number');
+      return;
+    }
     try {
       setIsSubmitting(true);
       const res: any = await api.post('/enquiries', {
         category: 'construction',
         customerName: formData.customerName,
-        phone: formData.phone,
+        phone: `+91 ${formData.phone}`,
         email: formData.email,
         details: {
           projectLocation: formData.projectLocation,
@@ -207,15 +211,33 @@ export const ConstructionPage: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="font-semibold block mb-1">Phone Number *</label>
-                <input
-                  type="tel"
-                  required
-                  value={formData.phone}
-                  onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                  placeholder="+91 98450 XXXXX"
-                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-2 focus:ring-gold-500"
-                />
+                <label className="font-semibold block mb-1">Phone Number (10 digits) *</label>
+                <div className="relative flex rounded-xl border border-navy-800 focus-within:ring-2 focus-within:ring-gold-500 overflow-hidden bg-navy-900">
+                  <span className="inline-flex items-center px-3.5 bg-navy-950 border-r border-navy-800 text-gold-400 font-bold text-xs select-none">
+                    +91
+                  </span>
+                  <input
+                    type="tel"
+                    required
+                    inputMode="numeric"
+                    pattern="[0-9]{10}"
+                    maxLength={10}
+                    minLength={10}
+                    title="Please enter a 10-digit mobile number"
+                    value={formData.phone}
+                    onChange={(e) => {
+                      let digits = e.target.value.replace(/\D/g, '');
+                      if (digits.length === 12 && digits.startsWith('91')) {
+                        digits = digits.slice(2);
+                      } else if (digits.length === 11 && digits.startsWith('0')) {
+                        digits = digits.slice(1);
+                      }
+                      setFormData({ ...formData, phone: digits.slice(0, 10) });
+                    }}
+                    placeholder="98450 12345"
+                    className="w-full px-3 py-3 text-xs focus:outline-none bg-transparent text-white"
+                  />
+                </div>
               </div>
               <div>
                 <label className="font-semibold block mb-1">Email Address *</label>
