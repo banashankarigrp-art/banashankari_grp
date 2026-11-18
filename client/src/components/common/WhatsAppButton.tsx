@@ -1,5 +1,5 @@
 import React from 'react';
-import { COMPANY_INFO } from '@shared/types';
+import { useSettings } from '../../context/SettingsContext';
 
 interface FloatingContactButtonsProps {
   defaultMessage?: string;
@@ -8,11 +8,8 @@ interface FloatingContactButtonsProps {
 export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
   defaultMessage = 'Hello Banashankari Enterprises, I would like to enquire about your properties and services in Bangalore.',
 }) => {
-  const whatsappUrl = defaultMessage
-    ? `${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(defaultMessage)}`
-    : COMPANY_INFO.whatsappUrl;
-
-  const phoneCallUrl = `tel:${COMPANY_INFO.phone}`;
+  const { phone, phoneCallUrl, whatsappNumber, getWhatsAppUrl } = useSettings();
+  const whatsappUrl = getWhatsAppUrl(defaultMessage);
 
   return (
     <aside
@@ -25,7 +22,7 @@ export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat directly on WhatsApp"
-        title="Chat on WhatsApp (+91 997 253 6991)"
+        title={`Chat on WhatsApp (${whatsappNumber || phone})`}
         className="w-14 h-14 sm:w-16 sm:h-16 rounded-[20px] sm:rounded-[22px] bg-gradient-to-b from-[#3CF36C] via-[#2CE161] to-[#20BA53] text-white flex items-center justify-center shadow-xl shadow-green-950/25 hover:shadow-2xl hover:shadow-green-950/35 transition-all duration-200 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
       >
         <svg
@@ -56,7 +53,7 @@ export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
       <a
         href={phoneCallUrl}
         aria-label="Direct Phone Call to Ramesh S H"
-        title="Direct Call (+91 997 253 6991)"
+        title={`Direct Call (${phone})`}
         className="w-14 h-14 sm:w-16 sm:h-16 rounded-[20px] sm:rounded-[22px] bg-gradient-to-b from-[#FF6E40] via-[#FF5221] to-[#E63900] text-white flex items-center justify-center shadow-xl shadow-orange-950/25 hover:shadow-2xl hover:shadow-orange-950/35 transition-all duration-200 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
       >
         <svg

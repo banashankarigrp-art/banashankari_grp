@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, MessageSquare, ShieldCheck, ArrowRight } from 'lucide-react';
 import { COMPANY_INFO } from '@shared/types';
+import { useSettings } from '../../context/SettingsContext';
 
 export const Footer: React.FC = () => {
+  const { phone, phoneCallUrl, getWhatsAppUrl } = useSettings();
   return (
     <footer className="bg-navy-950 text-slate-300 pt-16 pb-12 border-t border-navy-850">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -128,17 +130,17 @@ export const Footer: React.FC = () => {
             </h4>
             <div className="space-y-3 text-sm text-slate-400">
               <a
-                href={`tel:${COMPANY_INFO.phone}`}
+                href={phoneCallUrl}
                 className="flex items-center space-x-3 text-white hover:text-gold-400 transition p-2.5 rounded-lg bg-navy-900 border border-navy-800"
               >
                 <Phone className="w-4 h-4 text-gold-400" />
-                <span className="font-semibold">{COMPANY_INFO.phone}</span>
+                <span className="font-semibold">{phone}</span>
               </a>
 
               <a
-                href={`${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(
+                href={getWhatsAppUrl(
                   'Hello Banashankari Enterprises, I would like to enquire about your property services.'
-                )}`}
+                )}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-3 text-emerald-400 hover:text-emerald-300 transition p-2.5 rounded-lg bg-emerald-950/40 border border-emerald-800/40"

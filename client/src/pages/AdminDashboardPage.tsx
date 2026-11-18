@@ -33,6 +33,7 @@ import {
   PlusCircle,
 } from 'lucide-react';
 import { api } from '../services/api';
+import { useSettings } from '../context/SettingsContext';
 import { formatIndianCurrency } from '../components/property/PropertyCard';
 import { IProperty, IEnquiry, IUser, IAuditLog, ISiteSettings } from '@shared/types';
 
@@ -51,12 +52,15 @@ export const AdminDashboardPage: React.FC = () => {
 
   // State
   const [analytics, setAnalytics] = useState<any>(null);
+  const { updateSettingsState, refreshSettings } = useSettings();
   const [properties, setProperties] = useState<IProperty[]>([]);
   const [enquiries, setEnquiries] = useState<IEnquiry[]>([]);
   const [users, setUsers] = useState<IUser[]>([]);
   const [auditLogs, setAuditLogs] = useState<IAuditLog[]>([]);
   const [settings, setSettings] = useState<ISiteSettings | null>(null);
   const [loading, setLoading] = useState(true);
+  const [savingSettings, setSavingSettings] = useState(false);
+  const [settingsSuccessMsg, setSettingsSuccessMsg] = useState('');
 
   // Rejection modal
   const [rejectModalProperty, setRejectModalProperty] = useState<IProperty | null>(null);
@@ -184,11 +188,30 @@ export const AdminDashboardPage: React.FC = () => {
   const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!settings) return;
+    setSavingSettings(true);
+    setSettingsSuccessMsg('');
     try {
-      await api.patch('/content/settings', settings);
-      alert('Website CMS settings saved successfully!');
+      const payload = {
+        primaryPhone: settings.primaryPhone,
+        whatsappNumber: settings.whatsappNumber,
+        clientsCount: Number(settings.clientsCount) || 0,
+        completedProjectsCount: Number(settings.completedProjectsCount) || 0,
+        yearsExperience: Number(settings.yearsExperience) || 0,
+      };
+      const res: any = await api.patch('/content/settings', payload);
+      if (res && res.data) {
+        setSettings(res.data);
+        updateSettingsState(res.data);
+      } else {
+        updateSettingsState(payload);
+      }
+      await refreshSettings();
+      setSettingsSuccessMsg('Website CMS settings saved successfully! Updated phone, WhatsApp, and metrics are now live.');
+      setTimeout(() => setSettingsSuccessMsg(''), 6000);
     } catch (err: any) {
       alert(err.message || 'Error saving settings');
+    } finally {
+      setSavingSettings(false);
     }
   };
 
@@ -747,87 +770,56 @@ export const AdminDashboardPage: React.FC = () => {
           <div>
             <h2 className="font-heading font-bold text-2xl text-white">Website CMS Content Settings</h2>
             <p className="text-xs text-slate-400">
-              Update hero typography, phone contacts, WhatsApp templates, and business hours without touching code.
+              Manage official phone number, WhatsApp contact number, and homepage About Company scroll-animated metrics.
             </p>
           </div>
 
+          {settingsSuccessMsg && (
+            <div className="p-4 rounded-2xl bg-emerald-950/60 border border-emerald-500/40 text-emerald-300 text-xs flex items-center space-x-3 shadow-lg">
+              <CheckCircle2 className="w-5 h-5 text-emerald-400 shrink-0" />
+              <span>{settingsSuccessMsg}</span>
+            </div>
+          )}
+
           <form onSubmit={handleSaveSettings} className="bg-navy-950 p-8 rounded-3xl border border-navy-800 space-y-6 text-xs">
+            {/* Phone & WhatsApp Contact Numbers */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">Company Display Name</label>
+                <label className="font-semibold text-slate-300 block mb-1">
+                  Phone Number (e.g. +91 997 253 6991)
+                </label>
                 <input
                   type="text"
-                  value={settings.companyName}
-                  onChange={(e) => setSettings({ ...settings, companyName: e.target.value })}
-                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-                />
-              </div>
-
-              <div>
-                <label className="font-semibold text-slate-300 block mb-1">Founder Name</label>
-                <input
-                  type="text"
-                  value={settings.founderName}
-                  onChange={(e) => setSettings({ ...settings, founderName: e.target.value })}
-                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-                />
-              </div>
-
-              <div>
-                <label className="font-semibold text-slate-300 block mb-1">Founder Title</label>
-                <input
-                  type="text"
-                  value={settings.founderTitle || ''}
-                  onChange={(e) => setSettings({ ...settings, founderTitle: e.target.value })}
-                  placeholder="Founder & Managing Director"
-                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-                />
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="font-semibold text-slate-300 block mb-1">Official Contact Phone</label>
-                <input
-                  type="text"
-                  value={settings.primaryPhone}
+                  value={settings.primaryPhone || ''}
                   onChange={(e) => setSettings({ ...settings, primaryPhone: e.target.value })}
-                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
+                  placeholder="+91 997 253 6991"
+                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
+                  required
                 />
+                <span className="text-[10px] text-slate-500 mt-1 block">
+                  Reflects across website header, footer, floating call button, and contact cards.
+                </span>
               </div>
 
               <div>
-                <label className="font-semibold text-slate-300 block mb-1">Business Hours</label>
+                <label className="font-semibold text-slate-300 block mb-1">
+                  WhatsApp Number (e.g. 919972536991 or +91 997 253 6991)
+                </label>
                 <input
                   type="text"
-                  value={settings.businessHours}
-                  onChange={(e) => setSettings({ ...settings, businessHours: e.target.value })}
-                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
+                  value={settings.whatsappNumber || ''}
+                  onChange={(e) => setSettings({ ...settings, whatsappNumber: e.target.value })}
+                  placeholder="919972536991"
+                  className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
+                  required
                 />
+                <span className="text-[10px] text-slate-500 mt-1 block">
+                  Reflects in floating WhatsApp button, direct chat links, and enquiry buttons.
+                </span>
               </div>
             </div>
 
-            <div>
-              <label className="font-semibold text-slate-300 block mb-1">Hero Main Headline</label>
-              <input
-                type="text"
-                value={settings.heroHeadline}
-                onChange={(e) => setSettings({ ...settings, heroHeadline: e.target.value })}
-                className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-              />
-            </div>
-
-            <div>
-              <label className="font-semibold text-slate-300 block mb-1">Hero Subheading</label>
-              <textarea
-                rows={2}
-                value={settings.heroSubheadline}
-                onChange={(e) => setSettings({ ...settings, heroSubheadline: e.target.value })}
-                className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-              />
-            </div>
-
-            {/* About Company & Live Metrics */}
+            {/* About Company Section & Scroll-Animated Metrics */}
             <div className="border-t border-navy-800 pt-6 mt-6">
               <h3 className="text-sm font-bold text-amber-400 mb-1">
                 About Company Section &amp; Scroll-Animated Metrics
@@ -836,7 +828,7 @@ export const AdminDashboardPage: React.FC = () => {
                 These numbers automatically animate upwards when visitors scroll into the &ldquo;About Company&rdquo; section on the home page.
               </p>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div>
                   <label className="font-semibold text-slate-300 block mb-1">
                     Happy Clients Count (e.g. 1000+)
@@ -850,7 +842,9 @@ export const AdminDashboardPage: React.FC = () => {
                     }
                     className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
                   />
-                  <span className="text-[10px] text-slate-500 mt-1 block">Displays as &quot;{settings.clientsCount ?? 1000}+&quot;</span>
+                  <span className="text-[10px] text-slate-500 mt-1 block">
+                    Displays as &quot;{settings.clientsCount ?? 1000}+&quot;
+                  </span>
                 </div>
 
                 <div>
@@ -866,7 +860,9 @@ export const AdminDashboardPage: React.FC = () => {
                     }
                     className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
                   />
-                  <span className="text-[10px] text-slate-500 mt-1 block">Displays as &quot;{settings.completedProjectsCount ?? 200}+&quot;</span>
+                  <span className="text-[10px] text-slate-500 mt-1 block">
+                    Displays as &quot;{settings.completedProjectsCount ?? 200}+&quot;
+                  </span>
                 </div>
 
                 <div>
@@ -882,55 +878,23 @@ export const AdminDashboardPage: React.FC = () => {
                     }
                     className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500 font-mono"
                   />
-                  <span className="text-[10px] text-slate-500 mt-1 block">Displays as &quot;{settings.yearsExperience ?? 15}+ Years&quot;</span>
-                </div>
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <label className="font-semibold text-slate-300 block mb-1">
-                    About Company Headline
-                  </label>
-                  <input
-                    type="text"
-                    value={settings.aboutCompanyHeading || ''}
-                    placeholder="Pioneering Bangalore’s Real Estate & Civil Construction with Unmatched Integrity"
-                    onChange={(e) => setSettings({ ...settings, aboutCompanyHeading: e.target.value })}
-                    className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-                  />
-                </div>
-
-                <div>
-                  <label className="font-semibold text-slate-300 block mb-1">
-                    About Company Detailed Description
-                  </label>
-                  <textarea
-                    rows={3}
-                    value={settings.aboutCompanyText || ''}
-                    placeholder="With over 15 years of ground expertise, Banashankari Enterprises stands as South Bangalore’s most dependable real estate advisory and civil construction partner..."
-                    onChange={(e) => setSettings({ ...settings, aboutCompanyText: e.target.value })}
-                    className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-                  />
+                  <span className="text-[10px] text-slate-500 mt-1 block">
+                    Displays as &quot;{settings.yearsExperience ?? 15}+ Years&quot;
+                  </span>
                 </div>
               </div>
             </div>
 
-            <div>
-              <label className="font-semibold text-slate-300 block mb-1">Default WhatsApp Message Template</label>
-              <textarea
-                rows={2}
-                value={settings.whatsappTemplate}
-                onChange={(e) => setSettings({ ...settings, whatsappTemplate: e.target.value })}
-                className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-1 focus:ring-amber-500"
-              />
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={savingSettings}
+                className="bg-amber-500 hover:bg-amber-400 disabled:opacity-50 text-navy-950 font-bold px-6 py-3 rounded-xl transition shadow flex items-center space-x-2"
+              >
+                {savingSettings && <RefreshCw className="w-4 h-4 animate-spin text-navy-950" />}
+                <span>{savingSettings ? 'Saving...' : 'Save Website CMS Settings'}</span>
+              </button>
             </div>
-
-            <button
-              type="submit"
-              className="bg-amber-500 hover:bg-amber-400 text-navy-950 font-bold px-6 py-3 rounded-xl transition shadow"
-            >
-              Save Website CMS Settings
-            </button>
           </form>
         </div>
       )}

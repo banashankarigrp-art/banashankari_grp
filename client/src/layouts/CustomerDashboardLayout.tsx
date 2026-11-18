@@ -12,10 +12,12 @@ import {
   ShieldCheck,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 import { COMPANY_INFO } from '@shared/types';
 
 export const CustomerDashboardLayout: React.FC = () => {
   const { user, logout } = useAuth();
+  const { phone, phoneCallUrl } = useSettings();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -192,7 +194,10 @@ export const CustomerDashboardLayout: React.FC = () => {
           </div>
 
           <div className="text-xs text-slate-500 shrink-0">
-            Support Desk: <strong className="text-navy-900">{COMPANY_INFO.phone}</strong>
+            Support Desk:{' '}
+            <a href={phoneCallUrl} className="hover:text-gold-600 transition">
+              <strong className="text-navy-900">{phone}</strong>
+            </a>
           </div>
         </div>
       </div>

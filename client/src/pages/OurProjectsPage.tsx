@@ -15,8 +15,10 @@ import {
 } from 'lucide-react';
 import { api } from '../services/api';
 import { IConstructionProject, COMPANY_INFO } from '@shared/types';
+import { useSettings } from '../context/SettingsContext';
 
 export const OurProjectsPage: React.FC = () => {
+  const { phoneCallUrl } = useSettings();
   const [projects, setProjects] = useState<IConstructionProject[]>([]);
   const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<'all' | 'completed' | 'in_progress'>('all');
@@ -252,7 +254,7 @@ export const OurProjectsPage: React.FC = () => {
               Get Free Estimate
             </Link>
             <a
-              href={`tel:${COMPANY_INFO.phone}`}
+              href={phoneCallUrl}
               className="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs transition flex items-center justify-center space-x-1.5"
             >
               <PhoneCall className="w-3.5 h-3.5 text-gold-400" />

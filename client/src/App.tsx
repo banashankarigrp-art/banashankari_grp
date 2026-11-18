@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { AuthProvider } from './context/AuthContext';
+import { SettingsProvider } from './context/SettingsContext';
 import { PublicLayout } from './layouts/PublicLayout';
 import { CustomerDashboardLayout } from './layouts/CustomerDashboardLayout';
 import { AdminDashboardLayout } from './layouts/AdminDashboardLayout';
@@ -41,8 +42,9 @@ export const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <BrowserRouter>
-          <Routes>
+        <SettingsProvider>
+          <BrowserRouter>
+            <Routes>
             {/* Public Layout Routes - All pages navigatable without login */}
             <Route element={<PublicLayout />}>
               {/* 1. Home */}
@@ -115,6 +117,7 @@ export const App: React.FC = () => {
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </BrowserRouter>
+        </SettingsProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

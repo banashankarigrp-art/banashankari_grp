@@ -24,18 +24,38 @@ export const getSiteSettings = async (req: Request, res: Response): Promise<void
 
 export const updateSiteSettings = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
+    const payload: any = { ...req.body };
+
+    if (payload.clientsCount !== undefined) {
+      payload.clientsCount = Math.max(0, parseInt(String(payload.clientsCount), 10) || 0);
+    }
+    if (payload.completedProjectsCount !== undefined) {
+      payload.completedProjectsCount = Math.max(0, parseInt(String(payload.completedProjectsCount), 10) || 0);
+    }
+    if (payload.yearsExperience !== undefined) {
+      payload.yearsExperience = Math.max(0, parseInt(String(payload.yearsExperience), 10) || 0);
+    }
+    if (payload.primaryPhone !== undefined) {
+      payload.primaryPhone = String(payload.primaryPhone).trim();
+    }
+    if (payload.whatsappNumber !== undefined) {
+      payload.whatsappNumber = String(payload.whatsappNumber).trim();
+    }
+
     if (mongoose.connection.readyState === 1) {
       let settings = await SiteSettings.findOne();
       if (!settings) {
-        settings = new SiteSettings(req.body);
+        settings = new SiteSettings(payload);
       } else {
-        Object.assign(settings, req.body);
+        Object.assign(settings, payload);
       }
-      settings.updatedBy = new mongoose.Types.ObjectId(req.user?.userId);
+      if (req.user?.userId) {
+        settings.updatedBy = new mongoose.Types.ObjectId(req.user.userId);
+      }
       await settings.save();
       res.json({ success: true, message: 'Website settings updated successfully', data: settings });
     } else {
-      Object.assign(inMemoryStore.settings, req.body);
+      Object.assign(inMemoryStore.settings, payload);
       res.json({ success: true, message: 'Website settings updated successfully', data: inMemoryStore.settings });
     }
   } catch (error: any) {

@@ -25,7 +25,7 @@ import {
   Key,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import { PropertyCard } from '../components/property/PropertyCard';
+import { useSettings } from '../context/SettingsContext';
 import { api } from '../services/api';
 import { IProperty, COMPANY_INFO, ISiteSettings } from '@shared/types';
 
@@ -111,8 +111,8 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
 
 export const HomePage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
+  const { phone, phoneCallUrl, clientsCount, completedProjectsCount, yearsExperience, settings } = useSettings();
   const [properties, setProperties] = useState<IProperty[]>([]);
-  const [settings, setSettings] = useState<ISiteSettings | null>(null);
   const [loading, setLoading] = useState(true);
 
   // Direct property listing CTA link destination
@@ -138,15 +138,9 @@ export const HomePage: React.FC = () => {
     const fetchPageData = async () => {
       try {
         setLoading(true);
-        const [propsRes, settingsRes]: any = await Promise.all([
-          api.get('/properties?limit=6').catch(() => ({ success: false, data: [] })),
-          api.get('/content/settings').catch(() => ({ success: false, data: null })),
-        ]);
+        const propsRes: any = await api.get('/properties?limit=6').catch(() => ({ success: false, data: [] }));
         if (propsRes.success && propsRes.data) {
           setProperties(propsRes.data);
-        }
-        if (settingsRes?.data) {
-          setSettings(settingsRes.data);
         }
       } catch (err) {
         console.error('Failed to load home page data:', err);
@@ -208,10 +202,6 @@ export const HomePage: React.FC = () => {
   const founderName = settings?.founderName || COMPANY_INFO.founder;
   const founderTitle = settings?.founderTitle || COMPANY_INFO.founderTitle || 'Founder & Managing Director';
 
-  // About Company & Dynamic Metrics
-  const clientsCount = settings?.clientsCount ?? 1000;
-  const completedProjectsCount = settings?.completedProjectsCount ?? 200;
-  const yearsExperience = settings?.yearsExperience ?? 15;
   const aboutCompanyHeading =
     settings?.aboutCompanyHeading ||
     'Pioneering Bangalore’s Real Estate & Civil Construction with Unmatched Integrity';
@@ -242,9 +232,8 @@ export const HomePage: React.FC = () => {
       headline: 'A RESIDENTIAL CONSTRUCTION COMPANY',
       description:
         'Turnkey architectural design, municipal plan sanctions, structural RCC execution, and bespoke interior finishes delivered with transparent itemized billing.',
-      image:
-        'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85',
-      fallbackImage: '/solutions/construction.jpg',
+      image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85',
+      fallbackImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85',
       link: '/construction',
       linkText: 'Explore Construction',
       experience: '15 Years of Experience Since 2011',
@@ -300,14 +289,14 @@ export const HomePage: React.FC = () => {
   }, [isBannerPaused, heroServices.length]);
 
   return (
-    <div className="space-y-16 sm:space-y-24 pb-20 overflow-x-hidden">
+    <div className="w-full flex flex-col space-y-12 sm:space-y-16 lg:space-y-20 pb-20 overflow-x-hidden">
       {/* ======================================================== */}
       {/* 1. HERO SECTION (Transparent with Clear Background Image Behind) */}
       {/* ======================================================== */}
-      <section className="relative bg-transparent text-white pt-4 sm:pt-6 lg:pt-8 pb-12 sm:pb-16 lg:pb-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative w-full bg-transparent text-white pt-4 sm:pt-6 lg:pt-8 pb-10 sm:pb-14 lg:pb-16 px-3 sm:px-6 lg:px-10 xl:px-14">
 
         {/* MOBILE & TABLET LAYOUT (< lg: 1024px): Centered Vertical Stack matching mobile view */}
-        <div className="lg:hidden relative max-w-xl mx-auto text-center space-y-5 sm:space-y-6 bg-black/45 backdrop-blur-md p-5 sm:p-8 rounded-3xl border border-gold-500/25 shadow-2xl">
+        <div className="lg:hidden relative w-full mx-auto text-center space-y-5 sm:space-y-6 bg-black/45 backdrop-blur-md p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-500/25 shadow-2xl">
           {/* Main Hero Heading in Gold Color */}
           <h1 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold tracking-tight text-gold-400 leading-tight">
             Buy and Build Your Dream House with Expert Guidance!
@@ -350,7 +339,7 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* LAPTOP & DESKTOP LAYOUT (>= lg: 1024px): 2-Column Balanced Luxury Grid */}
-        <div className="hidden lg:block relative max-w-6xl xl:max-w-7xl mx-auto bg-black/45 backdrop-blur-md p-8 lg:p-10 xl:p-12 rounded-3xl border border-gold-500/25 shadow-2xl">
+        <div className="hidden lg:block relative w-full mx-auto bg-black/45 backdrop-blur-md p-8 lg:p-10 xl:p-12 rounded-2xl sm:rounded-3xl border border-gold-500/25 shadow-2xl">
           <div className="grid grid-cols-12 gap-8 xl:gap-12 items-center">
             {/* Left Column (7 cols): Heading, Paragraph, Trust Badges, Enquiry Now Button */}
             <div className="col-span-7 space-y-6 text-left">
@@ -427,8 +416,8 @@ export const HomePage: React.FC = () => {
       {/* ======================================================== */}
       <section className="w-full bg-[#F5ECE1] py-12 sm:py-16 lg:py-20 border-y border-[#E2D2BF]/80 shadow-xs">
 
-        {/* HEADING / TOPIC (Centered container) */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-8 sm:mb-12">
+        {/* HEADING / TOPIC (Full width centered) */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-8 sm:mb-12">
 
           <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
             Our One-Stop Solution for All Real Estate & Construction Needs!
@@ -477,12 +466,7 @@ export const HomePage: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/65 to-navy-950/45" />
 
                 {/* Top Corner Milestone Badge on the Banner */}
-                <div className="absolute top-4 sm:top-6 right-4 sm:right-8 z-20">
-                  <span className="inline-flex items-center space-x-1.5 bg-black/60 backdrop-blur-md border border-gold-400/40 text-gold-300 text-[10px] sm:text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
-                    <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-                    <span>15 Years Experience Since 2011</span>
-                  </span>
-                </div>
+
 
                 {/* Service Category Tag on Top Left */}
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-8 z-20">
@@ -507,17 +491,6 @@ export const HomePage: React.FC = () => {
                   <p className="text-xs sm:text-sm md:text-base text-slate-100 font-light leading-relaxed max-w-2xl drop-shadow-md hidden xs:block">
                     {slide.description}
                   </p>
-
-                  {/* Action Link Button */}
-                  <div className="pt-2">
-                    <Link
-                      to={slide.link}
-                      className="inline-flex items-center space-x-2 px-6 sm:px-8 py-2.5 sm:py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 active:scale-95 text-white font-bold text-xs sm:text-sm shadow-xl shadow-gold-950/40 border border-gold-400/40 transition transform hover:-translate-y-0.5 group/btn"
-                    >
-                      <span>{slide.linkText}</span>
-                      <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
                 </div>
               </div>
             );
@@ -539,14 +512,14 @@ export const HomePage: React.FC = () => {
           </div>
         </div>
 
-        {/* CONTENT (Centered with max-w-4xl, directly below the edge-to-edge Hero Banner) */}
-        <div className="mt-8 sm:mt-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#E2D2BF] shadow-luxury text-center space-y-4">
+        {/* CONTENT (Covering full width right and left) */}
+        <div className="mt-8 sm:mt-12 w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+          <div className="relative w-full bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#E2D2BF] shadow-luxury text-center space-y-4">
             <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mx-auto shadow-xs">
               <Sparkles className="w-6 h-6" />
             </div>
 
-            <p className="text-base sm:text-lg lg:text-xl text-slate-800 font-medium leading-relaxed max-w-3xl mx-auto font-sans">
+            <p className="text-base sm:text-lg lg:text-xl text-slate-800 font-medium leading-relaxed max-w-4xl mx-auto font-sans">
               <strong className="text-navy-950 font-bold">Ramesh S H</strong> provides complete expert guidance and support under one roof for all KHB properties in Surya Nagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.
             </p>
 
@@ -555,10 +528,7 @@ export const HomePage: React.FC = () => {
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Surya Nagar Phase 1, 2, 3 & 4 Specialist</span>
               </span>
-              <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>15+ Years Experience Since 2011</span>
-              </span>
+
               <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>Direct Guidance from Ramesh S H</span>
@@ -570,33 +540,46 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ======================================================== */}
-      {/* 2.4. ABOUT COMPANY & LIVE METRICS (Scroll-Animated Stats) */}
+      {/* 2.4. ABOUT COMPANY & LIVE METRICS (Covering full width right and left) */}
       {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-gradient-to-b from-slate-50 via-white to-slate-50 border border-slate-200/90 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-12 shadow-luxury relative overflow-hidden">
-          {/* Subtle decorative background accent */}
-          <div
-            className="absolute top-0 right-0 w-80 h-80 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"
-            aria-hidden="true"
-          />
+      <section className="w-full bg-gradient-to-b from-slate-50 via-white to-slate-50 border-y border-slate-200/90 py-12 sm:py-16 lg:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs relative overflow-hidden">
+        {/* Subtle decorative background accent */}
+        <div
+          className="absolute top-0 right-0 w-80 h-80 bg-gold-500/5 rounded-full blur-3xl pointer-events-none"
+          aria-hidden="true"
+        />
 
-          <div className="max-w-3xl mb-8 sm:mb-10">
-            <div className="inline-flex items-center space-x-2 bg-gold-50 border border-gold-200/80 text-gold-700 px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 shadow-sm">
-              <Sparkles className="w-3.5 h-3.5 text-gold-600" />
-              <span>About Banashankari Enterprises</span>
+        <div className="w-full relative z-10">
+          <div className="w-full mb-8 sm:mb-10 text-center sm:text-left">
+            <div className="inline-flex items-center space-x-2 bg-gold-50 border border-gold-200/80 text-gold-700 px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 shadow-sm">
+              <Award className="w-3.5 h-3.5 text-gold-600" />
+              <span>Proven Track Record Since 2011</span>
             </div>
-            <h2 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold text-navy-900 tracking-tight leading-tight mb-3 sm:mb-4">
-              {aboutCompanyHeading}
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight mb-3 sm:mb-4">
+              Most Trusted Real Estate & Construction Partner Since 2011!
             </h2>
-            <p className="text-slate-600 text-xs sm:text-sm md:text-base leading-relaxed">
-              {aboutCompanyText}
+            <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed max-w-4xl">
+              With {yearsExperience} years of experience in the real estate and construction industry, <strong className="text-navy-950 font-semibold">Ramesh S H</strong> is committed on helping customers make confident property decisions through buying, construction, rental, lease and property loan assistance.
             </p>
+
+            {/* Core Decision Pillars mentioned in text */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4">
+              {['Property Buying', 'Turnkey Construction', 'House Rentals', 'Property Leases', 'Home Loan Assistance'].map((pillar) => (
+                <span
+                  key={pillar}
+                  className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <span>{pillar}</span>
+                </span>
+              ))}
+            </div>
           </div>
 
           {/* Metric Counter Cards with Scroll-Animated Increase */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 w-full">
             {/* Metric 1: Happy Clients */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <Users className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -612,7 +595,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Metric 2: Completed Projects */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -628,7 +611,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Metric 3: Years of Experience */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <Award className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -644,7 +627,7 @@ export const HomePage: React.FC = () => {
             </div>
 
             {/* Metric 4: Verified Title Scrutiny */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-3.5 sm:p-5 lg:p-6 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -663,149 +646,140 @@ export const HomePage: React.FC = () => {
       </section>
 
       {/* ======================================================== */}
-      {/* 2.5. FOUNDER LEADERSHIP SPOTLIGHT (Exact Match to User Reference) */}
+      {/* 3. AFFORDABLE PROPERTIES & SUPERIOR CONSTRUCTION (Covering full width) */}
       {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative group">
-          {/* Ambient Under Dark Blue Glow / Shade */}
-          <div className="absolute inset-0 bg-gradient-to-r from-navy-950 via-[#0B132B] to-blue-950 rounded-2xl sm:rounded-3xl blur-xl opacity-75 pointer-events-none" />
+      <section className="w-full bg-white/95 backdrop-blur-md py-12 sm:py-16 lg:py-20 border-y border-slate-200/90 px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs">
+        <div className="w-full text-center space-y-4">
+          <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-gold-600" />
+            <span>Value, Quality & Reliability</span>
+          </div>
 
-          {/* Main Rectangular Container */}
-          <div className="relative bg-[#0B132B] border border-gold-500/25 rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-12 shadow-2xl overflow-hidden">
-            {/* Geometric / Low-Poly Faceted Texture Overlay (Matching Reference Screenshot) */}
-            <svg
-              className="absolute inset-0 w-full h-full opacity-15 pointer-events-none"
-              xmlns="http://www.w3.org/2000/svg"
-              width="100%"
-              height="100%"
-              aria-hidden="true"
-            >
-              <defs>
-                <pattern id="founder-mesh" width="160" height="160" patternUnits="userSpaceOnUse">
-                  <path d="M0 0 L80 40 L160 0 L80 80 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.35" />
-                  <path d="M80 80 L160 0 L160 160 L80 120 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.3" />
-                  <path d="M0 0 L0 160 L80 120 L80 80 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.3" />
-                  <path d="M0 160 L80 120 L160 160 Z" fill="none" stroke="#D4AF37" strokeWidth="0.7" opacity="0.35" />
-                  <polygon points="0,0 80,40 0,80" fill="#1B2653" opacity="0.2" />
-                  <polygon points="80,40 160,0 160,80" fill="#0B132B" opacity="0.25" />
-                  <polygon points="80,80 160,160 80,120" fill="#1B2653" opacity="0.2" />
-                  <polygon points="0,80 80,120 0,160" fill="#0B132B" opacity="0.25" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#founder-mesh)" />
-            </svg>
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight">
+            Affordable Properties. Superior Construction. Timely Delivery!
+          </h2>
 
-            {/* Content Layout: Mobile (Title -> Photo -> Text) vs Laptop (Text on Left, Photo on Right) */}
-            <div className="relative z-10 grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-8 lg:gap-12 items-center">
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto">
+            We help you find the right property at a reasonable price and turn it into your dream home with quality construction, reliable workmanship and a commitment to timely delivery.
+          </p>
 
-              {/* MOBILE-ONLY TITLE (Centered at Top above Photo) */}
-              <div className="md:hidden text-center">
-                <h3 className="font-serif text-lg sm:text-xl text-[#D4AF37] font-medium tracking-wide">
-                  Mr. {founderName}, {founderTitle}
-                </h3>
-              </div>
-
-              {/* PHOTO: In Middle on Mobile, on Right on Laptop/Desktop */}
-              <div className="md:order-2 md:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-[260px] sm:max-w-[300px] md:max-w-none aspect-[4/5] rounded-xl sm:rounded-2xl overflow-hidden shadow-2xl border border-gold-500/30 bg-[#0F172A] mx-auto group/photo">
-                  <img
-                    src={founderPhoto}
-                    alt={founderName}
-                    className="w-full h-full object-cover object-top transition duration-700 group-hover/photo:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-
-              {/* TEXT: Below Photo on Mobile, on Left on Laptop/Desktop */}
-              <div className="md:order-1 md:col-span-7 space-y-4 lg:space-y-6 text-left">
-                {/* DESKTOP-ONLY TITLE (Left-aligned above Paragraphs) */}
-                <div className="hidden md:block">
-                  <h3 className="font-serif text-2xl lg:text-3xl xl:text-4xl text-[#D4AF37] font-medium tracking-wide leading-snug">
-                    Mr. {founderName}, {founderTitle}
-                  </h3>
-                </div>
-
-                {/* Paragraph 1 */}
-                <p className="text-slate-200 text-xs sm:text-sm lg:text-base leading-relaxed sm:leading-relaxed lg:leading-loose font-light">
-                  Mr. {founderName}, the founder and Managing Director of Banashankari Enterprises, established the firm with decades of hands-on ground experience in real estate transactions, BDA layout verification, and turnkey residential construction across Bangalore. He holds comprehensive expertise in statutory due diligence and municipal development regulations.
-                </p>
-
-
-              </div>
-
-            </div>
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
+            <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Affordable Pricing</span>
+            </span>
+            <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Superior Construction</span>
+            </span>
+            <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>Timely Delivery</span>
+            </span>
           </div>
         </div>
       </section>
 
+
+
       {/* ======================================================== */}
-      {/* 3. FEATURED BENGALURU PROPERTIES (Screenshot Section 2) */}
+      {/* 3.5. LOAN GUIDANCE SECTION */}
       {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-6 sm:mb-8 pb-3 sm:pb-4 border-b border-slate-200">
-          <div>
-            <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
-              Handpicked Portfolio
-            </span>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-navy-900">
-              Featured Bengaluru Properties
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
-              Real, verified listings ready for immediate site inspection.
-            </p>
+      <section className="w-full bg-[#FAF7F2] py-14 sm:py-20 border-y border-[#E8DFD3] px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs relative overflow-hidden">
+        {/* Subtle decorative background accent */}
+        <div
+          className="absolute -top-12 -right-12 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"
+          aria-hidden="true"
+        />
+
+        <div className="w-full relative z-10 text-center space-y-4">
+          <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <Banknote className="w-4 h-4 text-emerald-600" />
+            <span>Multi-Bank Loan Assistance</span>
           </div>
 
-          <Link
-            to="/properties"
-            className="mt-3 md:mt-0 inline-flex items-center space-x-1.5 text-xs sm:text-sm font-semibold text-navy-900 hover:text-gold-600 transition"
-          >
-            <span>View All Properties ({properties.length || '5+'})</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight max-w-4xl mx-auto">
+            The Right Loan Guidance for Your Dream Property!
+          </h2>
 
-        {loading ? (
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6">
-            {[1, 2, 3, 4].map((i) => (
-              <div key={i} className="bg-white rounded-xl sm:rounded-2xl h-60 sm:h-80 animate-pulse border border-slate-100 p-3 sm:p-4" />
-            ))}
+          <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto">
+            We help you understand the home loan process, documentation requirements and explore suitable loan options with competitive interest rates from available financial institutions.
+          </p>
+
+          {/* Key Loan Pillars */}
+          <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 text-left max-w-6xl mx-auto">
+            <div className="bg-white rounded-xl sm:rounded-2xl p-5 border border-[#E8DFD3] shadow-sm hover:shadow-luxury transition">
+              <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mb-3">
+                <Banknote className="w-5 h-5" />
+              </div>
+              <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
+                Home & Plot Loans
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Structured financing for KHB plots, residential sites, independent villas, and home construction.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl sm:rounded-2xl p-5 border border-[#E8DFD3] shadow-sm hover:shadow-luxury transition">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 flex items-center justify-center mb-3">
+                <FileCheck2 className="w-5 h-5" />
+              </div>
+              <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
+                Documentation Check
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Complete assistance compiling title deeds, Encumbrance Certificates, KYC, and builder agreements.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl sm:rounded-2xl p-5 border border-[#E8DFD3] shadow-sm hover:shadow-luxury transition">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 border border-blue-200 text-blue-700 flex items-center justify-center mb-3">
+                <ShieldCheck className="w-5 h-5" />
+              </div>
+              <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
+                Competitive Rates
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Direct coordination across SBI, HDFC, Canara Bank, and ICICI to find suitable borrowing terms.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-xl sm:rounded-2xl p-5 border border-[#E8DFD3] shadow-sm hover:shadow-luxury transition">
+              <div className="w-10 h-10 rounded-xl bg-purple-50 border border-purple-200 text-purple-700 flex items-center justify-center mb-3">
+                <Sparkles className="w-5 h-5" />
+              </div>
+              <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
+                Fast-Track Sanction
+              </h3>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                Pre-qualification checks and institutional follow-ups to minimize disbursement waiting times.
+              </p>
+            </div>
           </div>
-        ) : properties.length === 0 ? (
-          <div className="text-center py-12 bg-white rounded-2xl border border-slate-200 p-8">
-            <Building2 className="w-12 h-12 text-slate-300 mx-auto mb-3" />
-            <h4 className="font-heading font-bold text-lg text-navy-900">No properties published yet</h4>
-            <p className="text-xs text-slate-500 mt-1 mb-4">
-              Properties will appear once approved by the administrator in the moderation queue.
-            </p>
+
+          <div className="pt-6 flex flex-wrap items-center justify-center gap-4">
             <Link
-              to="/contact"
-              className="inline-block bg-gold-500 text-white px-5 py-2.5 rounded-lg text-xs font-semibold"
+              to="/loans-made-easy"
+              className="inline-flex items-center space-x-2 px-8 py-3.5 rounded-xl bg-navy-900 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-md transition transform hover:-translate-y-0.5"
             >
-              Contact Our Team
+              <span>Explore Loan Assistance</span>
+              <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
-        ) : (
-          /* Showing two two in mobile view (grid-cols-2) and 3 in laptop view (lg:grid-cols-3) */
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2.5 sm:gap-6 lg:gap-8">
-            {properties.map((prop) => (
-              <PropertyCard key={prop._id} property={prop} />
-            ))}
-          </div>
-        )}
+        </div>
       </section>
 
       {/* ======================================================== */}
       {/* PARTNERSHIP SECTION: SELL LAND, HOUSE, RENT & LEASE */}
       {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-3xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white overflow-hidden p-6 sm:p-10 lg:p-12 border border-gold-500/30 shadow-2xl">
-          {/* Ambient Glows */}
-          <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
+        {/* Ambient Glows */}
+        <div className="absolute top-0 right-0 -mr-24 -mt-24 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -ml-24 -mb-24 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
+        <div className="w-full relative z-10">
           {/* Section Heading & Introduction */}
-          <div className="relative z-10 max-w-3xl space-y-3 mb-8 sm:mb-10 text-center sm:text-left">
+          <div className="max-w-4xl space-y-3 mb-8 sm:mb-10 text-center sm:text-left">
             <div className="inline-flex items-center space-x-2 bg-gold-500/15 border border-gold-500/40 text-gold-300 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
               <Handshake className="w-4 h-4 text-gold-400" />
               <span>Owner & Seller Partnership</span>
@@ -877,272 +851,10 @@ export const HomePage: React.FC = () => {
               </div>
             </div>
 
-            {/* 4. Showcase on Our Website */}
-            <div className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 hover:border-gold-500/50 rounded-2xl p-5 transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
-              <div>
-                <div className="w-11 h-11 rounded-xl bg-gold-500/20 border border-gold-500/30 text-gold-400 flex items-center justify-center mb-3.5 shadow-sm">
-                  <Building2 className="w-5 h-5" />
-                </div>
-                <h3 className="font-heading font-bold text-base text-white mb-2">
-                  Showcase on Our Website
-                </h3>
-                <p className="text-xs text-slate-300 leading-relaxed">
-                  List directly on Banashankari Enterprises with photographs, dimension details, and neighborhood perks to get instant high-intent inquiries.
-                </p>
-              </div>
-              <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
-                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>High Digital Visibility</span>
-              </div>
-            </div>
-          </div>
 
-          {/* Action Strip: Trust Highlights and "List the Properties" Button */}
-          <div className="relative z-10 pt-6 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6">
-            <div className="flex flex-wrap items-center justify-center sm:justify-start gap-4 sm:gap-6 text-xs text-slate-300">
 
-              <div className="flex items-center space-x-2">
-                <ShieldCheck className="w-4 h-4 text-gold-400 shrink-0" />
-                <span>Zero Hidden Fees or Markups</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <ShieldCheck className="w-4 h-4 text-gold-400 shrink-0" />
-                <span>Instant Seller Registration</span>
-              </div>
-            </div>
 
-            <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-              <Link
-                to={sellerListingLink}
-                className="w-full sm:w-auto inline-flex items-center justify-center space-x-2 px-8 py-3.5 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-sm shadow-gold-glow transition transform hover:-translate-y-0.5"
-              >
-                <span>List the Properties</span>
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      {/* ======================================================== */}
-      {/* 4. WHY HOMEOWNERS PARTNER WITH US (Screenshot Section 3) */}
-      {/* ======================================================== */}
-      <section className="bg-white py-16 border-y border-slate-200/80">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto space-y-2 mb-12">
-            <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
-              Trust & Professional Standards
-            </span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
-              Why Bengaluru Homeowners Partner with Banashankari Enterprises
-            </h2>
-            <p className="text-sm text-slate-600">
-              We eliminate middleman ambiguities and deliver end-to-end transparency across every real estate step.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-8">
-            <div className="space-y-2 sm:space-y-3 bg-slate-50/70 p-3 sm:p-0 rounded-xl sm:rounded-none sm:bg-transparent">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-navy-900 text-gold-400 flex items-center justify-center font-bold">
-                <FileCheck2 className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 leading-tight">
-                Title-verified Documentation
-              </h4>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                Prior to publishing, every listing goes through land record checks and layout approval confirmation.
-              </p>
-            </div>
-
-            <div className="space-y-2 sm:space-y-3 bg-slate-50/70 p-3 sm:p-0 rounded-xl sm:rounded-none sm:bg-transparent">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-navy-900 text-gold-400 flex items-center justify-center font-bold">
-                <Users2 className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 leading-tight">
-                Personal Contractor Oversight
-              </h4>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                Founder Ramesh S H directly monitors construction execution, contractor compliance, and schedules.
-              </p>
-            </div>
-
-            <div className="space-y-2 sm:space-y-3 bg-slate-50/70 p-3 sm:p-0 rounded-xl sm:rounded-none sm:bg-transparent">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-navy-900 text-gold-400 flex items-center justify-center font-bold">
-                <Banknote className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 leading-tight">
-                Bank Loan & KHB Guidance
-              </h4>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                Seamless coordination for bank sanctions and statutory KHB documentation without cumbersome delays.
-              </p>
-            </div>
-
-            <div className="space-y-2 sm:space-y-3 bg-slate-50/70 p-3 sm:p-0 rounded-xl sm:rounded-none sm:bg-transparent">
-              <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-navy-900 text-gold-400 flex items-center justify-center font-bold">
-                <Shield className="w-4 h-4 sm:w-5 sm:h-5" />
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 leading-tight">
-                Transparent Execution
-              </h4>
-              <p className="text-[11px] sm:text-xs text-slate-600 leading-relaxed">
-                No hidden brokerage charges, no surprise project variations, and complete contractual transparency.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ======================================================== */}
-      {/* 5. BENGALURU CONSTRUCTION CRAFTSMANSHIP (Screenshot Section 4) */}
-      {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto space-y-2 mb-12">
-          <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
-            Execution Standards
-          </span>
-          <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
-            Bengaluru Construction Craftsmanship
-          </h2>
-          <p className="text-sm text-slate-600">
-            Real milestone progress across ongoing and completed residential sites built to endure.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
-          {/* Stage 1 */}
-          <div className="relative group rounded-2xl overflow-hidden shadow-luxury aspect-[4/5] bg-navy-950">
-            <img
-              src="https://images.unsplash.com/photo-1610079732288-72a77bd816c9?q=80&w=2664&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D"
-              alt="Foundation & Structural Framing"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent flex flex-col justify-end p-5">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-gold-400 mb-1">Stage 01</span>
-              <h4 className="font-heading font-bold text-white text-base leading-tight">
-                Foundation & Structural Framing
-              </h4>
-              <p className="text-[11px] text-slate-300 mt-1">Deep footing & Fe550 steel reinforcement</p>
-            </div>
-          </div>
-
-          {/* Stage 2 */}
-          <div className="relative group rounded-2xl overflow-hidden shadow-luxury aspect-[4/5] bg-navy-950">
-            <img
-              src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
-              alt="RCC Pouring & Brick Masonry"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent flex flex-col justify-end p-5">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-gold-400 mb-1">Stage 02</span>
-              <h4 className="font-heading font-bold text-white text-base leading-tight">
-                RCC Pouring & Brick Masonry
-              </h4>
-              <p className="text-[11px] text-slate-300 mt-1">Ready-mix concrete with slump testing</p>
-            </div>
-          </div>
-
-          {/* Stage 3 */}
-          <div className="relative group rounded-2xl overflow-hidden shadow-luxury aspect-[4/5] bg-navy-950">
-            <img
-              src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=800&q=80"
-              alt="Electrical & Plumbing Rough-ins"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent flex flex-col justify-end p-5">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-gold-400 mb-1">Stage 03</span>
-              <h4 className="font-heading font-bold text-white text-base leading-tight">
-                Electrical & Plumbing Rough-ins
-              </h4>
-              <p className="text-[11px] text-slate-300 mt-1">Concealed CPVC lines & fire-retardant wiring</p>
-            </div>
-          </div>
-
-          {/* Stage 4 */}
-          <div className="relative group rounded-2xl overflow-hidden shadow-luxury aspect-[4/5] bg-navy-950">
-            <img
-              src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80"
-              alt="Luxury Interior Fitouts"
-              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-85"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent flex flex-col justify-end p-5">
-              <span className="text-[10px] uppercase font-bold tracking-wider text-gold-400 mb-1">Stage 04</span>
-              <h4 className="font-heading font-bold text-white text-base leading-tight">
-                Luxury Interior Woodwork
-              </h4>
-              <p className="text-[11px] text-slate-300 mt-1">Teakwood framing & bespoke finishings</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="text-center mt-8">
-          <Link
-            to="/construction"
-            className="inline-flex items-center space-x-2 bg-navy-900 text-white hover:bg-gold-600 px-6 py-3 rounded-xl text-xs font-semibold shadow transition"
-          >
-            <span>Request Detailed Construction Estimate & Quotation</span>
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </section>
-
-      {/* ======================================================== */}
-      {/* 6. HOW WE HELP YOU BUILD OR INVEST (Screenshot Section 5) */}
-      {/* ======================================================== */}
-      <section className="bg-cream-100 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto space-y-2 mb-12">
-            <span className="text-xs font-bold tracking-widest uppercase text-gold-600 block">
-              Step-by-Step Process
-            </span>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
-              How We Help You Build or Invest
-            </h2>
-            <p className="text-sm text-slate-600">
-              A structured, stress-free path to acquiring property or building your family home.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6">
-            <div className="bg-white p-3.5 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm relative">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gold-500 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs mb-2 sm:mb-4">
-                1
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 mb-1 sm:mb-2 leading-tight">Discuss & Inspect</h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-relaxed">
-                Connect with our team to review preferred locality, plot dimensions, or budget with on-ground visits.
-              </p>
-            </div>
-
-            <div className="bg-white p-3.5 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm relative">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gold-500 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs mb-2 sm:mb-4">
-                2
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 mb-1 sm:mb-2 leading-tight">Custom Plan</h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-relaxed">
-                We detail architectural layouts, Vaastu preferences, material finishes, and rental yield expectations.
-              </p>
-            </div>
-
-            <div className="bg-white p-3.5 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm relative">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gold-500 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs mb-2 sm:mb-4">
-                3
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 mb-1 sm:mb-2 leading-tight">Plan & Price</h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-relaxed">
-                Receive clear documentation checklists, verified title copies, and itemized construction cost estimations.
-              </p>
-            </div>
-
-            <div className="bg-white p-3.5 sm:p-6 rounded-xl sm:rounded-2xl border border-slate-200/80 shadow-sm relative">
-              <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-gold-500 text-white font-bold flex items-center justify-center text-[10px] sm:text-xs mb-2 sm:mb-4">
-                4
-              </div>
-              <h4 className="font-heading font-bold text-xs sm:text-base text-navy-900 mb-1 sm:mb-2 leading-tight">Execute & Loan</h4>
-              <p className="text-[10px] sm:text-xs text-slate-600 leading-relaxed">
-                We coordinate bank loan disbursements, KHB paperwork, registration execution, and turnkey site handover.
-              </p>
-            </div>
           </div>
         </div>
       </section>
@@ -1152,8 +864,8 @@ export const HomePage: React.FC = () => {
       {/* ======================================================== */}
       {/* 9. CUSTOMER ENQUIRY & CONTACT FORM */}
       {/* ======================================================== */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl border border-slate-200/80 shadow-luxury overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+      <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+        <div className="w-full bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-luxury overflow-hidden grid grid-cols-1 lg:grid-cols-12">
           {/* Info column */}
           <div className="lg:col-span-5 bg-navy-950 text-white p-8 sm:p-10 flex flex-col justify-between space-y-8">
             <div className="space-y-4">
@@ -1173,8 +885,8 @@ export const HomePage: React.FC = () => {
                 <PhoneCall className="w-5 h-5 text-gold-400 shrink-0" />
                 <div>
                   <span className="text-slate-400 block text-[10px]">Direct Call</span>
-                  <a href={`tel:${COMPANY_INFO.phone}`} className="font-bold text-white hover:text-gold-400 text-sm">
-                    {COMPANY_INFO.phone}
+                  <a href={phoneCallUrl} className="font-bold text-white hover:text-gold-400 text-sm">
+                    {phone}
                   </a>
                 </div>
               </div>

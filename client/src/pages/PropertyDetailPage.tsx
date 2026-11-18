@@ -20,10 +20,12 @@ import { PropertyCard, formatIndianCurrency } from '../components/property/Prope
 import { api } from '../services/api';
 import { IProperty, COMPANY_INFO } from '@shared/types';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 
 export const PropertyDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { user } = useAuth();
+  const { phone, phoneCallUrl, whatsappNumber, getWhatsAppUrl } = useSettings();
   const [property, setProperty] = useState<IProperty | null>(null);
   const [similar, setSimilar] = useState<IProperty[]>([]);
   const [loading, setLoading] = useState(true);
@@ -359,13 +361,13 @@ export const PropertyDetailPage: React.FC = () => {
             </p>
 
             <a
-              href={`${COMPANY_INFO.whatsappUrl}?text=${prefilledWhatsapp}`}
+              href={getWhatsAppUrl(prefilledWhatsapp)}
               target="_blank"
               rel="noopener noreferrer"
               className="w-full bg-white hover:bg-slate-100 text-emerald-900 py-3 rounded-xl text-xs font-bold flex items-center justify-center space-x-2 shadow transition"
             >
               <MessageSquare className="w-4 h-4 text-emerald-600" />
-              <span>Enquire on WhatsApp (+91 997 253 6991)</span>
+              <span>Enquire on WhatsApp ({whatsappNumber || phone})</span>
             </a>
           </div>
 
@@ -449,7 +451,10 @@ export const PropertyDetailPage: React.FC = () => {
             )}
 
             <div className="pt-2 text-center text-[11px] text-slate-400">
-              Office Phone: <strong className="text-navy-900">{COMPANY_INFO.phone}</strong>
+              Office Phone:{' '}
+              <a href={phoneCallUrl} className="hover:text-gold-600 transition">
+                <strong className="text-navy-900">{phone}</strong>
+              </a>
             </div>
           </div>
         </div>

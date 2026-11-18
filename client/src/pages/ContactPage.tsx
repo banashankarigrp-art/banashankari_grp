@@ -13,9 +13,11 @@ import {
 import { api } from '../services/api';
 import { COMPANY_INFO } from '@shared/types';
 import { useAuth } from '../context/AuthContext';
+import { useSettings } from '../context/SettingsContext';
 
 export const ContactPage: React.FC = () => {
   const { user } = useAuth();
+  const { phone, phoneCallUrl, whatsappNumber, getWhatsAppUrl } = useSettings();
   const [formData, setFormData] = useState({
     customerName: user?.name || '',
     phone: user?.phone || '',
@@ -86,8 +88,8 @@ export const ContactPage: React.FC = () => {
                 <Phone className="w-4 h-4 text-gold-400 shrink-0 mt-0.5" />
                 <div>
                   <span className="text-slate-400 block text-[10px] uppercase font-bold">Call Founder / Desk</span>
-                  <a href={`tel:${COMPANY_INFO.phone}`} className="font-bold text-white hover:text-gold-400 text-sm">
-                    {COMPANY_INFO.phone}
+                  <a href={phoneCallUrl} className="font-bold text-white hover:text-gold-400 text-sm">
+                    {phone}
                   </a>
                 </div>
               </div>
@@ -98,14 +100,14 @@ export const ContactPage: React.FC = () => {
                 <div>
                   <span className="text-emerald-300 block text-[10px] uppercase font-bold">WhatsApp Direct</span>
                   <a
-                    href={`${COMPANY_INFO.whatsappUrl}?text=${encodeURIComponent(
+                    href={getWhatsAppUrl(
                       'Hello Banashankari Enterprises, I would like to enquire about your services in Bangalore.'
-                    )}`}
+                    )}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-bold text-emerald-400 hover:text-emerald-300 text-sm"
                   >
-                    +91 997 253 6991 (Chat Now)
+                    {whatsappNumber || phone} (Chat Now)
                   </a>
                 </div>
               </div>
