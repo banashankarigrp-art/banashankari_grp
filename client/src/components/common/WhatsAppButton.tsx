@@ -1,19 +1,28 @@
 import React from 'react';
 import { useSettings } from '../../context/SettingsContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 interface FloatingContactButtonsProps {
   defaultMessage?: string;
 }
 
 export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
-  defaultMessage = 'Hello Banashankari Enterprises, I would like to enquire about your properties and services in Bangalore.',
+  defaultMessage,
 }) => {
   const { phone, phoneCallUrl, whatsappNumber, getWhatsAppUrl } = useSettings();
-  const whatsappUrl = getWhatsAppUrl(defaultMessage);
+  const { isKn, t } = useLanguage();
+
+  const msg =
+    defaultMessage ||
+    (isKn
+      ? 'ನಮಸ್ಕಾರ ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್, ಬೆಂಗಳೂರಿನಲ್ಲಿ ನಿಮ್ಮ ಆಸ್ತಿಗಳು ಮತ್ತು ಸೇವೆಗಳ ಕುರಿತು ವಿಚಾರಿಸಲು ನಾನು ಬಯಸುತ್ತೇನೆ.'
+      : 'Hello Banashankari Enterprises, I would like to enquire about your properties and services in Bangalore.');
+
+  const whatsappUrl = getWhatsAppUrl(msg);
 
   return (
     <aside
-      aria-label="Quick Connect Options"
+      aria-label={isKn ? 'ತ್ವರಿತ ಸಂಪರ್ಕ ಆಯ್ಕೆಗಳು' : 'Quick Connect Options'}
       className="fixed top-[60%] -translate-y-1/2 right-3 sm:right-5 z-50 flex flex-col items-center gap-3 sm:gap-3.5 select-none"
     >
       {/* 1. WhatsApp Floating App Icon (First / On top) */}
@@ -21,8 +30,8 @@ export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
         href={whatsappUrl}
         target="_blank"
         rel="noopener noreferrer"
-        aria-label="Chat directly on WhatsApp"
-        title={`Chat on WhatsApp (${whatsappNumber || phone})`}
+        aria-label={isKn ? 'ವಾಟ್ಸಾಪ್‌ನಲ್ಲಿ ನೇರವಾಗಿ ಚಾಟ್ ಮಾಡಿ' : 'Chat directly on WhatsApp'}
+        title={`${t('tooltip.whatsapp', 'WhatsApp Chat')} (${whatsappNumber || phone})`}
         className="w-14 h-14 sm:w-16 sm:h-16 rounded-[20px] sm:rounded-[22px] bg-gradient-to-b from-[#3CF36C] via-[#2CE161] to-[#20BA53] text-white flex items-center justify-center shadow-xl shadow-green-950/25 hover:shadow-2xl hover:shadow-green-950/35 transition-all duration-200 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-green-400 focus:ring-offset-2"
       >
         <svg
@@ -52,8 +61,8 @@ export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
       {/* 2. Direct Phone Call Floating App Icon (Second / Below) */}
       <a
         href={phoneCallUrl}
-        aria-label="Direct Phone Call to Ramesh S H"
-        title={`Direct Call (${phone})`}
+        aria-label={isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಗೆ ನೇರ ಫೋನ್ ಕರೆ' : 'Direct Phone Call to Ramesh S H'}
+        title={`${t('tooltip.call', 'Direct Call')} (${phone})`}
         className="w-14 h-14 sm:w-16 sm:h-16 rounded-[20px] sm:rounded-[22px] bg-gradient-to-b from-[#FF6E40] via-[#FF5221] to-[#E63900] text-white flex items-center justify-center shadow-xl shadow-orange-950/25 hover:shadow-2xl hover:shadow-orange-950/35 transition-all duration-200 transform hover:scale-110 active:scale-95 focus:outline-none focus:ring-2 focus:ring-orange-400 focus:ring-offset-2"
       >
         <svg

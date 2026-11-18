@@ -26,6 +26,7 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
+import { useLanguage } from '../context/LanguageContext';
 import { api } from '../services/api';
 import { IProperty, COMPANY_INFO, ISiteSettings } from '@shared/types';
 
@@ -112,6 +113,7 @@ const AnimatedCounter: React.FC<AnimatedCounterProps> = ({
 export const HomePage: React.FC = () => {
   const { isAuthenticated, user } = useAuth();
   const { phone, phoneCallUrl, clientsCount, completedProjectsCount, yearsExperience, settings } = useSettings();
+  const { language, isKn, t } = useLanguage();
   const [properties, setProperties] = useState<IProperty[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -217,58 +219,66 @@ export const HomePage: React.FC = () => {
   const heroServices = [
     {
       id: 'real-estate',
-      service: 'Real Estate',
-      tagline: 'SURYA NAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES',
-      headline: 'REAL ESTATE & LAND SOLUTIONS',
-      description:
-        'Verified BDA, BMRDA, and KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.',
+      service: t('banner.real_estate_service', 'Real Estate'),
+      tagline: t('banner.real_estate_tagline', 'SURYA NAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES'),
+      headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'),
+      description: t(
+        'banner.real_estate_desc',
+        'Verified BDA, BMRDA, and KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.'
+      ),
       image:
         'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1920&q=85',
       fallbackImage: '/solutions/plots.jpg',
       link: '/real-estate',
-      linkText: 'Explore Real Estate',
-      experience: '15 Years of Experience Since 2011',
+      linkText: t('nav.real_estate', 'Explore Real Estate'),
+      experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
     },
     {
       id: 'construction',
-      service: 'Construction',
-      tagline: 'GET YOUR DREAM HOME CONSTRUCTED BY THE EXPERTS',
-      headline: 'A RESIDENTIAL CONSTRUCTION COMPANY',
-      description:
-        'Turnkey architectural design, municipal plan sanctions, structural RCC execution, and bespoke interior finishes delivered with transparent itemized billing.',
+      service: t('banner.construction_service', 'Construction'),
+      tagline: t('banner.construction_tagline', 'GET YOUR DREAM HOME CONSTRUCTED BY THE EXPERTS'),
+      headline: t('banner.construction_headline', 'A RESIDENTIAL CONSTRUCTION COMPANY'),
+      description: t(
+        'banner.construction_desc',
+        'Turnkey architectural design, municipal plan sanctions, structural RCC execution, and bespoke interior finishes delivered with transparent itemized billing.'
+      ),
       image: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85',
       fallbackImage: 'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=85',
       link: '/construction',
-      linkText: 'Explore Construction',
-      experience: '15 Years of Experience Since 2011',
+      linkText: t('nav.construction', 'Explore Construction'),
+      experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
     },
     {
       id: 'khb-services',
-      service: 'KHB Property Services',
-      tagline: 'STATUTORY HOUSING BOARD DOCUMENTATION & TRANSFERS',
-      headline: 'KHB PROPERTY SERVICES',
-      description:
-        'Official procedural guidance for Karnataka Housing Board allotments, title deed scrutiny, ownership transfers, and encumbrance checks.',
+      service: t('banner.khb_service', 'KHB Property Services'),
+      tagline: t('banner.khb_tagline', 'STATUTORY HOUSING BOARD DOCUMENTATION & TRANSFERS'),
+      headline: t('banner.khb_headline', 'KHB PROPERTY SERVICES'),
+      description: t(
+        'banner.khb_desc',
+        'Official procedural guidance for Karnataka Housing Board allotments, title deed scrutiny, ownership transfers, and encumbrance checks.'
+      ),
       image:
         'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1920&q=85',
       fallbackImage: '/solutions/plots.jpg',
       link: '/khb-property-services',
-      linkText: 'Explore KHB Services',
-      experience: '15 Years of Experience Since 2011',
+      linkText: t('nav.khb_services', 'Explore KHB Services'),
+      experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
     },
     {
       id: 'loans',
-      service: 'Loans Made Easy',
-      tagline: 'HASSLE-FREE MULTI-BANK HOME & PLOT FINANCING',
-      headline: 'LOANS MADE EASY',
-      description:
-        'Pre-qualification checks, documentation compilation, and dedicated liaison with SBI, HDFC, Canara Bank, and ICICI for fast-track loan approvals.',
+      service: t('banner.loans_service', 'Loans Made Easy'),
+      tagline: t('banner.loans_tagline', 'HASSLE-FREE MULTI-BANK HOME & PLOT FINANCING'),
+      headline: t('banner.loans_headline', 'LOANS MADE EASY'),
+      description: t(
+        'banner.loans_desc',
+        'Pre-qualification checks, documentation compilation, and dedicated liaison with SBI, HDFC, Canara Bank, and ICICI for fast-track loan approvals.'
+      ),
       image:
         'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=85',
       fallbackImage: '/solutions/loan.jpg',
       link: '/loans-made-easy',
-      linkText: 'Explore Loan Assistance',
-      experience: '15 Years of Experience Since 2011',
+      linkText: t('loan_guidance.cta', 'Explore Loan Assistance'),
+      experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
     },
   ];
 
@@ -303,12 +313,15 @@ export const HomePage: React.FC = () => {
         <div className="lg:hidden relative w-full mx-auto text-center space-y-5 sm:space-y-6 bg-black/45 backdrop-blur-md p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-500/25 shadow-2xl">
           {/* Main Hero Heading in Gold Color */}
           <h1 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold tracking-tight text-gold-400 leading-tight">
-            Buy and Build Your Dream House with Expert Guidance!
+            {t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!')}
           </h1>
 
           {/* Subtext / Description */}
           <p className="text-sm sm:text-base text-slate-100 font-normal leading-relaxed drop-shadow-sm">
-            Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.
+            {t(
+              'hero.description',
+              'Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
+            )}
           </p>
 
           {/* Founder Image (Square & Bigger) above Contact/Enquiry Button */}
@@ -317,16 +330,16 @@ export const HomePage: React.FC = () => {
               <div className="w-48 h-48 xs:w-52 xs:h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border-2 sm:border-3 border-gold-400 shadow-2xl shadow-black/50 ring-4 ring-gold-500/20 bg-navy-900">
                 <img
                   src={founderPhoto}
-                  alt={founderName}
+                  alt={isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
                 />
               </div>
               <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-4 py-1 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap shadow-lg">
-                {founderName}
+                {isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
               </div>
             </div>
             <p className="text-xs text-gold-400 font-semibold mt-4 tracking-wide">
-              {founderTitle}
+              {isKn ? 'ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ನಿರ್ದೇಶಕರು' : founderTitle}
             </p>
           </div>
 
@@ -336,7 +349,7 @@ export const HomePage: React.FC = () => {
               to="/contact"
               className="inline-flex items-center justify-center px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl text-white font-bold text-sm sm:text-base bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl shadow-red-950/40 hover:shadow-2xl border border-red-900/40 transform hover:-translate-y-0.5 space-x-2"
             >
-              <span>Enquiry Now</span>
+              <span>{t('common.enquiry_now', 'Enquiry Now')}</span>
               <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />
             </Link>
           </div>
@@ -349,30 +362,33 @@ export const HomePage: React.FC = () => {
             <div className="col-span-7 space-y-6 text-left">
               <div className="inline-flex items-center space-x-2 bg-gold-500/20 border border-gold-400/40 px-3.5 py-1 rounded-full text-gold-300 text-xs font-semibold tracking-wide shadow-sm">
                 <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-                <span>KHB Surya nagar Specialist & Turnkey Construction</span>
+                <span>{t('hero.badge', 'KHB Surya nagar Specialist & Turnkey Construction')}</span>
               </div>
 
               <h1 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-gold-400 leading-tight">
-                Buy and Build Your Dream House with Expert Guidance!
+                {t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!')}
               </h1>
 
               <p className="text-base xl:text-lg text-slate-100 font-normal leading-relaxed drop-shadow-sm max-w-2xl">
-                Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.
+                {t(
+                  'hero.description',
+                  'Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
+                )}
               </p>
 
               {/* Trust badges */}
               <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-200">
                 <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
                   <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
-                  <span>KHB Phase 1, 2, 3 & 4 Specialist</span>
+                  <span>{t('hero.badge_khb', 'KHB Phase 1, 2, 3 & 4 Specialist')}</span>
                 </span>
                 <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
                   <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
-                  <span>100% Clear Title Verification</span>
+                  <span>{t('hero.badge_title', '100% Clear Title Verification')}</span>
                 </span>
                 <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
                   <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
-                  <span>Turnkey Home Construction</span>
+                  <span>{t('hero.badge_construction', 'Turnkey Home Construction')}</span>
                 </span>
               </div>
 
@@ -382,7 +398,7 @@ export const HomePage: React.FC = () => {
                   to="/contact"
                   className="inline-flex items-center justify-center px-8 xl:px-10 py-3.5 xl:py-4 rounded-xl text-white font-bold text-sm xl:text-base bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl shadow-red-950/40 hover:shadow-2xl border border-red-900/40 transform hover:-translate-y-0.5 space-x-2 group"
                 >
-                  <span>Enquiry Now</span>
+                  <span>{t('common.enquiry_now', 'Enquiry Now')}</span>
                   <ArrowRight className="w-4 h-4 xl:w-5 xl:h-5 text-amber-300 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </div>
@@ -396,18 +412,18 @@ export const HomePage: React.FC = () => {
                 <div className="relative w-64 h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-2xl overflow-hidden border-3 border-gold-400 shadow-2xl shadow-black/70 ring-4 ring-gold-500/20 bg-navy-900">
                   <img
                     src={founderPhoto}
-                    alt={founderName}
+                    alt={isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
                     className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
                   />
                 </div>
 
                 <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-4 xl:px-5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-bold uppercase tracking-wider whitespace-nowrap shadow-xl">
-                  {founderName}
+                  {isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
                 </div>
               </div>
 
               <p className="text-xs xl:text-sm text-gold-400 font-semibold mt-5 tracking-wide text-center">
-                {founderTitle}
+                {isKn ? 'ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ನಿರ್ದೇಶಕರು' : founderTitle}
               </p>
             </div>
           </div>
@@ -424,7 +440,7 @@ export const HomePage: React.FC = () => {
         <div className="w-full px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-8 sm:mb-12">
 
           <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
-            Our One-Stop Solution for All Real Estate & Construction Needs!
+            {t('one_stop.heading', 'Our One-Stop Solution for All Real Estate & Construction Needs!')}
           </h2>
         </div>
 
@@ -524,18 +540,26 @@ export const HomePage: React.FC = () => {
             </div>
 
             <p className="text-base sm:text-lg lg:text-xl text-slate-800 font-medium leading-relaxed max-w-4xl mx-auto font-sans">
-              <strong className="text-navy-950 font-bold">Ramesh S H</strong> provides complete expert guidance and support under one roof for all KHB properties in Surya Nagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.
+              {isKn ? (
+                <span>
+                  <strong className="text-navy-950 font-bold">ರಮೇಶ್ ಎಸ್ ಹೆಚ್</strong> ಅವರು ಸೂರ್ಯ ನಗರ ಫೇಸ್ 1, 2, 3 ಮತ್ತು 4 ರಲ್ಲಿನ ಎಲ್ಲಾ ಕೆ.ಹೆಚ್.ಬಿ ಆಸ್ತಿಗಳಿಗೆ ಒಂದೇ ಸೂರಿನಡಿ ಸಂಪೂರ್ಣ ಪರಿಣಿತ ಮಾರ್ಗದರ್ಶನ ಮತ್ತು ಬೆಂಬಲವನ್ನು ನೀಡುತ್ತಾರೆ. ನಿಮ್ಮ ಆಸ್ತಿ ಖರೀದಿಯ ಪ್ರಯಾಣವನ್ನು ಸರಳ, ಸುಲಭ ಮತ್ತು ತೊಂದರೆರಹಿತವಾಗಿಸಿ, ಪ್ರತಿ ಹಂತದಲ್ಲೂ ನಿಮಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತೇವೆ.
+                </span>
+              ) : (
+                <span>
+                  <strong className="text-navy-950 font-bold">Ramesh S H</strong> provides complete expert guidance and support under one roof for all KHB properties in Surya Nagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.
+                </span>
+              )}
             </p>
 
             <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
               <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Surya Nagar Phase 1, 2, 3 & 4 Specialist</span>
+                <span>{t('one_stop.chip_specialist', 'Surya Nagar Phase 1, 2, 3 & 4 Specialist')}</span>
               </span>
 
               <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>Direct Guidance from Ramesh S H</span>
+                <span>{t('one_stop.chip_guidance', 'Direct Guidance from Ramesh S H')}</span>
               </span>
             </div>
           </div>
@@ -557,24 +581,38 @@ export const HomePage: React.FC = () => {
           <div className="w-full mb-8 sm:mb-10 text-center sm:text-left">
             <div className="inline-flex items-center space-x-2 bg-gold-50 border border-gold-200/80 text-gold-700 px-3.5 py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 shadow-sm">
               <Award className="w-3.5 h-3.5 text-gold-600" />
-              <span>Proven Track Record Since 2011</span>
+              <span>{t('trusted.badge', 'Proven Track Record Since 2011')}</span>
             </div>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight mb-3 sm:mb-4">
-              Most Trusted Real Estate & Construction Partner Since 2011!
+              {t('trusted.title', 'Most Trusted Real Estate & Construction Partner Since 2011!')}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base lg:text-lg leading-relaxed max-w-4xl">
-              With {yearsExperience} years of experience in the real estate and construction industry, <strong className="text-navy-950 font-semibold">Ramesh S H</strong> is committed on helping customers make confident property decisions through buying, construction, rental, lease and property loan assistance.
+              {isKn ? (
+                <span>
+                  ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಮತ್ತು ನಿರ್ಮಾಣ ಕ್ಷೇತ್ರದಲ್ಲಿ 15 ವರ್ಷಗಳ ಅನುಭವದೊಂದಿಗೆ, <strong className="text-navy-950 font-semibold">ರಮೇಶ್ ಎಸ್ ಹೆಚ್</strong> ಅವರು ಖರೀದಿ, ನಿರ್ಮಾಣ, ಬಾಡಿಗೆ, ಗುತ್ತಿಗೆ ಮತ್ತು ಆಸ್ತಿ ಸಾಲ ಸಹಾಯದ ಮೂಲಕ ಗ್ರಾಹಕರು ಆತ್ಮವಿಶ್ವಾಸದಿಂದ ಆಸ್ತಿ ನಿರ್ಧಾರಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳಲು ಸಹಾಯ ಮಾಡಲು ಬದ್ಧರಾಗಿದ್ದಾರೆ.
+                </span>
+              ) : (
+                <span>
+                  With {yearsExperience} years of experience in the real estate and construction industry, <strong className="text-navy-950 font-semibold">Ramesh S H</strong> is committed on helping customers make confident property decisions through buying, construction, rental, lease and property loan assistance.
+                </span>
+              )}
             </p>
 
             {/* Core Decision Pillars mentioned in text */}
             <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4">
-              {['Property Buying', 'Turnkey Construction', 'House Rentals', 'Property Leases', 'Home Loan Assistance'].map((pillar) => (
+              {[
+                { key: 'trusted.pillar_buying', label: 'Property Buying' },
+                { key: 'trusted.pillar_construction', label: 'Turnkey Construction' },
+                { key: 'trusted.pillar_rentals', label: 'House Rentals' },
+                { key: 'trusted.pillar_leases', label: 'Property Leases' },
+                { key: 'trusted.pillar_loans', label: 'Home Loan Assistance' },
+              ].map((pillar) => (
                 <span
-                  key={pillar}
+                  key={pillar.key}
                   className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
                 >
                   <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>{pillar}</span>
+                  <span>{t(pillar.key, pillar.label)}</span>
                 </span>
               ))}
             </div>
@@ -591,10 +629,10 @@ export const HomePage: React.FC = () => {
                 <AnimatedCounter target={clientsCount} suffix="+" />
               </div>
               <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
-                Happy Clients
+                {t('metric.clients_title', 'Happy Clients')}
               </h3>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
-                Families and investors guided with verified property purchases and advisory.
+                {t('metric.clients_desc', 'Families and investors guided with verified property purchases and advisory.')}
               </p>
             </div>
 
@@ -607,10 +645,10 @@ export const HomePage: React.FC = () => {
                 <AnimatedCounter target={completedProjectsCount} suffix="+" />
               </div>
               <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
-                Completed Projects
+                {t('metric.projects_title', 'Completed Projects')}
               </h3>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
-                Turnkey residential buildings, plots registered, and civil structures delivered.
+                {t('metric.projects_desc', 'Turnkey residential buildings, plots registered, and civil structures delivered.')}
               </p>
             </div>
 
@@ -623,10 +661,10 @@ export const HomePage: React.FC = () => {
                 <AnimatedCounter target={yearsExperience} suffix="+" />
               </div>
               <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
-                Years of Excellence
+                {t('metric.experience_title', 'Years of Excellence')}
               </h3>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
-                Continuous ground presence and transparent client advocacy in Bangalore.
+                {t('metric.experience_desc', 'Continuous ground presence and transparent client advocacy in Bangalore.')}
               </p>
             </div>
 
@@ -639,10 +677,10 @@ export const HomePage: React.FC = () => {
                 100%
               </div>
               <h3 className="font-semibold text-xs sm:text-sm text-navy-900 mb-0.5 sm:mb-1">
-                Title Transparency
+                {t('metric.transparency_title', 'Title Transparency')}
               </h3>
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
-                All plots and listings undergo strict BDA, BBMP, and KHB title diligence.
+                {t('metric.transparency_desc', 'All plots and listings undergo strict BDA, BBMP, and KHB title diligence.')}
               </p>
             </div>
           </div>
@@ -656,35 +694,36 @@ export const HomePage: React.FC = () => {
         <div className="w-full text-center space-y-4">
           <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-gold-600" />
-            <span>Value, Quality & Reliability</span>
+            <span>{t('affordable.badge', 'Value, Quality & Reliability')}</span>
           </div>
 
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight">
-            Affordable Properties. Superior Construction. Timely Delivery!
+            {t('affordable.title', 'Affordable Properties. Superior Construction. Timely Delivery!')}
           </h2>
 
           <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto">
-            We help you find the right property at a reasonable price and turn it into your dream home with quality construction, reliable workmanship and a commitment to timely delivery.
+            {t(
+              'affordable.description',
+              'We help you find the right property at a reasonable price and turn it into your dream home with quality construction, reliable workmanship and a commitment to timely delivery.'
+            )}
           </p>
 
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Affordable Pricing</span>
+              <span>{t('affordable.chip_price', 'Affordable Pricing')}</span>
             </span>
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Superior Construction</span>
+              <span>{t('affordable.chip_quality', 'Superior Construction')}</span>
             </span>
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>Timely Delivery</span>
+              <span>{t('affordable.chip_timely', 'Timely Delivery')}</span>
             </span>
           </div>
         </div>
       </section>
-
-
 
       {/* ======================================================== */}
       {/* 3.5. LOAN GUIDANCE SECTION */}
@@ -699,15 +738,18 @@ export const HomePage: React.FC = () => {
         <div className="w-full relative z-10 text-center space-y-4">
           <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Banknote className="w-4 h-4 text-emerald-600" />
-            <span>Multi-Bank Loan Assistance</span>
+            <span>{t('loan_guidance.badge', 'Multi-Bank Loan Assistance')}</span>
           </div>
 
           <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight max-w-4xl mx-auto">
-            The Right Loan Guidance for Your Dream Property!
+            {t('loan_guidance.title', 'The Right Loan Guidance for Your Dream Property!')}
           </h2>
 
           <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto">
-            We help you understand the home loan process, documentation requirements and explore suitable loan options with competitive interest rates from available financial institutions.
+            {t(
+              'loan_guidance.description',
+              'We help you understand the home loan process, documentation requirements and explore suitable loan options with competitive interest rates from available financial institutions.'
+            )}
           </p>
 
           {/* Key Loan Pillars */}
@@ -717,10 +759,13 @@ export const HomePage: React.FC = () => {
                 <Banknote className="w-5 h-5" />
               </div>
               <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
-                Home & Plot Loans
+                {t('loan_guidance.card1_title', 'Home & Plot Loans')}
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Structured financing for KHB plots, residential sites, independent villas, and home construction.
+                {t(
+                  'loan_guidance.card1_desc',
+                  'Structured financing for KHB plots, residential sites, independent villas, and home construction.'
+                )}
               </p>
             </div>
 
@@ -729,10 +774,13 @@ export const HomePage: React.FC = () => {
                 <FileCheck2 className="w-5 h-5" />
               </div>
               <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
-                Documentation Check
+                {t('loan_guidance.card2_title', 'Documentation Check')}
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Complete assistance compiling title deeds, Encumbrance Certificates, KYC, and builder agreements.
+                {t(
+                  'loan_guidance.card2_desc',
+                  'Complete assistance compiling title deeds, Encumbrance Certificates, KYC, and builder agreements.'
+                )}
               </p>
             </div>
 
@@ -741,10 +789,13 @@ export const HomePage: React.FC = () => {
                 <ShieldCheck className="w-5 h-5" />
               </div>
               <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
-                Competitive Rates
+                {t('loan_guidance.card3_title', 'Competitive Rates')}
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Direct coordination across SBI, HDFC, Canara Bank, and ICICI to find suitable borrowing terms.
+                {t(
+                  'loan_guidance.card3_desc',
+                  'Direct coordination across SBI, HDFC, Canara Bank, and ICICI to find suitable borrowing terms.'
+                )}
               </p>
             </div>
 
@@ -753,10 +804,13 @@ export const HomePage: React.FC = () => {
                 <Sparkles className="w-5 h-5" />
               </div>
               <h3 className="font-heading font-bold text-sm sm:text-base text-navy-900 mb-1">
-                Fast-Track Sanction
+                {t('loan_guidance.card4_title', 'Fast-Track Sanction')}
               </h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                Pre-qualification checks and institutional follow-ups to minimize disbursement waiting times.
+                {t(
+                  'loan_guidance.card4_desc',
+                  'Pre-qualification checks and institutional follow-ups to minimize disbursement waiting times.'
+                )}
               </p>
             </div>
           </div>
@@ -766,7 +820,7 @@ export const HomePage: React.FC = () => {
               to="/loans-made-easy"
               className="inline-flex items-center space-x-2 px-8 py-3.5 rounded-xl bg-navy-900 hover:bg-gold-600 text-white font-bold text-xs sm:text-sm shadow-md transition transform hover:-translate-y-0.5"
             >
-              <span>Explore Loan Assistance</span>
+              <span>{t('loan_guidance.cta', 'Explore Loan Assistance')}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
           </div>
@@ -786,17 +840,20 @@ export const HomePage: React.FC = () => {
           <div className="max-w-4xl space-y-3 mb-8 sm:mb-10 text-center sm:text-left">
             <div className="inline-flex items-center space-x-2 bg-gold-500/15 border border-gold-500/40 text-gold-300 px-3.5 py-1.5 rounded-full text-xs font-bold tracking-wider uppercase">
               <Handshake className="w-4 h-4 text-gold-400" />
-              <span>Owner & Seller Partnership</span>
+              <span>{t('partnership.badge', 'Owner & Seller Partnership')}</span>
             </div>
             <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
-              Partner With Us to Sell, Rent & Lease Your Properties
+              {t('partnership.title', 'Partner With Us to Sell, Rent & Lease Your Properties')}
             </h2>
             <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-              Our company helps you sell your land, independent house, or find dependable tenants for rent and lease. You can also showcase and list your properties directly on our website to reach thousands of verified buyers and active tenants across Bangalore.
+              {t(
+                'partnership.description',
+                'Our company helps you sell your land, independent house, or find dependable tenants for rent and lease. You can also showcase and list your properties directly on our website to reach thousands of verified buyers and active tenants across Bangalore.'
+              )}
             </p>
           </div>
 
-          {/* 4 Feature Columns: Land, House, Rent & Lease, Website Showcase */}
+          {/* 4 Feature Columns: Land, House, Rent & Lease */}
           <div className="relative z-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-8 sm:mb-10">
             {/* 1. Sell Land & Plots */}
             <div className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 hover:border-gold-500/50 rounded-2xl p-5 transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
@@ -805,15 +862,18 @@ export const HomePage: React.FC = () => {
                   <MapPin className="w-5 h-5" />
                 </div>
                 <h3 className="font-heading font-bold text-base text-white mb-2">
-                  Sell Your Land & Plots
+                  {t('partnership.card1_title', 'Sell Your Land & Plots')}
                 </h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Fast-track genuine buyers for BDA, BMRDA, DC-converted, and residential layout sites with complete title diligence and verification.
+                  {t(
+                    'partnership.card1_desc',
+                    'Fast-track genuine buyers for BDA, BMRDA, DC-converted, and residential layout sites with complete title diligence and verification.'
+                  )}
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Immediate Buyer Match</span>
+                <span>{t('partnership.card1_chip', 'Immediate Buyer Match')}</span>
               </div>
             </div>
 
@@ -824,15 +884,18 @@ export const HomePage: React.FC = () => {
                   <Home className="w-5 h-5" />
                 </div>
                 <h3 className="font-heading font-bold text-base text-white mb-2">
-                  Sell Your House & Villas
+                  {t('partnership.card2_title', 'Sell Your House & Villas')}
                 </h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Showcase independent houses, duplex villas, and residential buildings to serious Bangalore buyers with transparent fair market pricing.
+                  {t(
+                    'partnership.card2_desc',
+                    'Showcase independent houses, duplex villas, and residential buildings to serious Bangalore buyers with transparent fair market pricing.'
+                  )}
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Guided Site Inspections</span>
+                <span>{t('partnership.card2_chip', 'Guided Site Inspections')}</span>
               </div>
             </div>
 
@@ -843,15 +906,40 @@ export const HomePage: React.FC = () => {
                   <Key className="w-5 h-5" />
                 </div>
                 <h3 className="font-heading font-bold text-base text-white mb-2">
-                  Rent & Lease Spaces
+                  {t('partnership.card3_title', 'Rent & Lease Spaces')}
                 </h3>
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Connect with screened, verified tenants for apartments, homes, and commercial units with structured rental agreements and deposit support.
+                  {t(
+                    'partnership.card3_desc',
+                    'Connect with screened, verified tenants for apartments, homes, and commercial units with structured rental agreements and deposit support.'
+                  )}
                 </p>
               </div>
               <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
                 <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
-                <span>Verified Tenant Vetting</span>
+                <span>{t('partnership.card3_chip', 'Verified Tenant Vetting')}</span>
+              </div>
+            </div>
+
+            {/* 4. Showcase on Website */}
+            <div className="bg-white/[0.06] hover:bg-white/[0.1] border border-white/10 hover:border-gold-500/50 rounded-2xl p-5 transition duration-300 transform hover:-translate-y-1 flex flex-col justify-between">
+              <div>
+                <div className="w-11 h-11 rounded-xl bg-gold-500/20 border border-gold-500/30 text-gold-400 flex items-center justify-center mb-3.5 shadow-sm">
+                  <Sparkles className="w-5 h-5" />
+                </div>
+                <h3 className="font-heading font-bold text-base text-white mb-2">
+                  {t('partnership.card4_title', 'Showcase on Website')}
+                </h3>
+                <p className="text-xs text-slate-300 leading-relaxed">
+                  {t(
+                    'partnership.card4_desc',
+                    'List directly on Banashankari Enterprises with photos, dimensions, and amenities for high-intent enquiries.'
+                  )}
+                </p>
+              </div>
+              <div className="mt-4 pt-3 border-t border-white/10 flex items-center space-x-1.5 text-[11px] font-semibold text-gold-300">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0" />
+                <span>{t('partnership.card4_chip', 'High Visibility Online')}</span>
               </div>
             </div>
 
@@ -874,13 +962,16 @@ export const HomePage: React.FC = () => {
           <div className="lg:col-span-5 bg-navy-950 text-white p-8 sm:p-10 flex flex-col justify-between space-y-8">
             <div className="space-y-4">
               <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
-                Direct Consultation
+                {t('enquiry.direct_consultation', 'Direct Consultation')}
               </span>
               <h3 className="font-heading text-2xl sm:text-3xl font-bold leading-tight">
-                Connect with Ramesh S H & Banashankari Enterprises
+                {t('enquiry.consultation_title', 'Connect with Ramesh S H & Banashankari Enterprises')}
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
-                Whether you need assistance with plot purchase, turnkey home construction, rental agreements, or KHB title verification, our team is ready to assist.
+                {t(
+                  'enquiry.consultation_desc',
+                  'Whether you need assistance with plot purchase, turnkey home construction, rental agreements, or KHB title verification, our team is ready to assist.'
+                )}
               </p>
             </div>
 
@@ -888,7 +979,7 @@ export const HomePage: React.FC = () => {
               <div className="flex items-center space-x-3 bg-navy-900 p-3 rounded-xl border border-navy-850">
                 <PhoneCall className="w-5 h-5 text-gold-400 shrink-0" />
                 <div>
-                  <span className="text-slate-400 block text-[10px]">Direct Call</span>
+                  <span className="text-slate-400 block text-[10px]">{t('common.direct_call', 'Direct Call')}</span>
                   <a href={phoneCallUrl} className="font-bold text-white hover:text-gold-400 text-sm">
                     {phone}
                   </a>
@@ -898,8 +989,8 @@ export const HomePage: React.FC = () => {
               <div className="flex items-center space-x-3 bg-navy-900 p-3 rounded-xl border border-navy-850">
                 <Clock className="w-5 h-5 text-gold-400 shrink-0" />
                 <div>
-                  <span className="text-slate-400 block text-[10px]">Business Timings</span>
-                  <span className="text-white font-medium">Mon - Sat: 9:30 AM – 7:30 PM (IST)</span>
+                  <span className="text-slate-400 block text-[10px]">{t('common.business_hours', 'Business Timings')}</span>
+                  <span className="text-white font-medium">{t('common.mon_sat_hours', 'Mon - Sat: 9:30 AM – 7:30 PM (IST)')}</span>
                 </div>
               </div>
             </div>
@@ -907,9 +998,11 @@ export const HomePage: React.FC = () => {
 
           {/* Form column */}
           <div className="lg:col-span-7 p-8 sm:p-10">
-            <h4 className="font-heading font-bold text-xl text-navy-900 mb-2">Send an Instant Enquiry</h4>
+            <h4 className="font-heading font-bold text-xl text-navy-900 mb-2">
+              {t('enquiry.form_title', 'Send an Instant Enquiry')}
+            </h4>
             <p className="text-xs text-slate-500 mb-6">
-              Fill in your details below and we will follow up with verified recommendations.
+              {t('enquiry.form_subtitle', 'Fill in your details below and we will follow up with verified recommendations.')}
             </p>
 
             {enquirySuccess ? (
@@ -920,7 +1013,7 @@ export const HomePage: React.FC = () => {
                     to="/my-enquiries"
                     className="inline-flex items-center space-x-1 font-bold text-emerald-900 underline hover:text-emerald-700"
                   >
-                    <span>Track in My Enquiries →</span>
+                    <span>{t('enquiry.track_link', 'Track in My Enquiries →')}</span>
                   </Link>
                 </div>
               </div>
@@ -928,18 +1021,22 @@ export const HomePage: React.FC = () => {
               <form onSubmit={handleQuickEnquiry} className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Your Full Name *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {t('common.name_label', 'Your Full Name *')}
+                    </label>
                     <input
                       type="text"
                       required
                       value={enquiryForm.customerName}
                       onChange={(e) => setEnquiryForm({ ...enquiryForm, customerName: e.target.value })}
-                      placeholder="e.g. Ramesh Kumar"
+                      placeholder={isKn ? 'ಉದಾ. ರಮೇಶ್ ಕುಮಾರ್' : 'e.g. Ramesh Kumar'}
                       className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Phone Number (10 digits) *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {t('common.phone_label', 'Phone Number (10 digits) *')}
+                    </label>
                     <div className="relative flex rounded-xl border border-slate-300 focus-within:ring-2 focus-within:ring-gold-500 overflow-hidden bg-white">
                       <span className="inline-flex items-center px-3.5 bg-slate-50 border-r border-slate-200 text-slate-700 font-bold text-xs select-none">
                         +91
@@ -951,7 +1048,7 @@ export const HomePage: React.FC = () => {
                         pattern="[0-9]{10}"
                         maxLength={10}
                         minLength={10}
-                        title="Please enter a 10-digit mobile number"
+                        title={isKn ? 'ದಯವಿಟ್ಟು 10 ಅಂಕಿಗಳ ಮೊಬೈಲ್ ಸಂಖ್ಯೆಯನ್ನು ನಮೂದಿಸಿ' : 'Please enter a 10-digit mobile number'}
                         value={enquiryForm.phone}
                         onChange={(e) => {
                           let digits = e.target.value.replace(/\D/g, '');
@@ -971,7 +1068,9 @@ export const HomePage: React.FC = () => {
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Email Address *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {t('common.email_label', 'Email Address *')}
+                    </label>
                     <input
                       type="email"
                       required
@@ -982,30 +1081,35 @@ export const HomePage: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1">Service Required *</label>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      {t('enquiry.service_required', 'Service Required *')}
+                    </label>
                     <select
                       value={enquiryForm.category}
                       onChange={(e) => setEnquiryForm({ ...enquiryForm, category: e.target.value })}
                       className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
                     >
-                      <option value="general">General Real Estate Guidance</option>
-                      <option value="property">Property Inspection / Purchase</option>
-                      <option value="construction">Turnkey Home Construction</option>
-                      <option value="loan">Banking Loan Assistance</option>
-                      <option value="khb">KHB Documentation Assistance</option>
+                      <option value="general">{t('enquiry.service_general', 'General Real Estate Guidance')}</option>
+                      <option value="property">{t('enquiry.service_property', 'Property Inspection / Purchase')}</option>
+                      <option value="construction">{t('enquiry.service_construction', 'Turnkey Home Construction')}</option>
+                      <option value="loan">{t('enquiry.service_loan', 'Banking Loan Assistance')}</option>
+                      <option value="khb">{t('enquiry.service_khb', 'KHB Documentation Assistance')}</option>
                     </select>
                   </div>
                 </div>
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Describe Your Requirements
+                    {t('common.message_label', 'Describe Your Requirements')}
                   </label>
                   <textarea
                     rows={3}
                     value={enquiryForm.message}
                     onChange={(e) => setEnquiryForm({ ...enquiryForm, message: e.target.value })}
-                    placeholder="Tell us about the locality, budget, plot size, or specific assistance you need..."
+                    placeholder={t(
+                      'enquiry.placeholder_desc',
+                      'Tell us about the locality, budget, plot size, or specific assistance you need...'
+                    )}
                     className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
                   />
                 </div>
@@ -1015,7 +1119,11 @@ export const HomePage: React.FC = () => {
                   disabled={enquirySubmitting}
                   className="w-full bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-6 rounded-xl text-xs shadow-sm transition flex items-center justify-center space-x-2"
                 >
-                  <span>{enquirySubmitting ? 'Submitting...' : 'Submit Enquiry & Request Call'}</span>
+                  <span>
+                    {enquirySubmitting
+                      ? t('common.submitting', 'Submitting...')
+                      : t('enquiry.submit_button', 'Submit Enquiry & Request Call')}
+                  </span>
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </form>

@@ -11,9 +11,11 @@ import {
 import { api } from '../services/api';
 import { COMPANY_INFO } from '@shared/types';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export const KhbAssistancePage: React.FC = () => {
   const { user } = useAuth();
+  const { isKn, t } = useLanguage();
   const [formData, setFormData] = useState({
     customerName: user?.name || '',
     phone: (user?.phone || '').replace(/\D/g, '').slice(-10),
@@ -81,13 +83,16 @@ export const KhbAssistancePage: React.FC = () => {
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
-          Specialized Transaction Advisory
+          {isKn ? 'ವಿಶೇಷ ಆಸ್ತಿ ಸಲಹಾ ಸೇವೆ' : 'Specialized Transaction Advisory'}
         </span>
         <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
-          Karnataka Housing Board (KHB) Assistance
+          {t('khb.title', 'Karnataka Housing Board (KHB) Assistance')}
         </h1>
         <p className="text-sm text-slate-600 leading-relaxed font-light">
-          Reliable advisory and documentation coordination for property buyers and allottees across Bangalore KHB residential layouts.
+          {t(
+            'khb.subtitle',
+            'Reliable advisory and documentation coordination for property buyers and allottees across Bangalore KHB residential layouts.'
+          )}
         </p>
       </div>
 

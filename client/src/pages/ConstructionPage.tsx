@@ -14,9 +14,11 @@ import {
 import { api } from '../services/api';
 import { IConstructionProject, COMPANY_INFO } from '@shared/types';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export const ConstructionPage: React.FC = () => {
   const { user } = useAuth();
+  const { isKn, t } = useLanguage();
   const [projects, setProjects] = useState<IConstructionProject[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -106,13 +108,16 @@ export const ConstructionPage: React.FC = () => {
       {/* Hero Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
-          Turnkey Building Coordination
+          {isKn ? 'ಟರ್ನ್‌ಕೀ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಸಮನ್ವಯ' : 'Turnkey Building Coordination'}
         </span>
         <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
-          Bespoke Home Construction in Bengaluru
+          {t('construction.title', 'Bespoke Home Construction in Bengaluru')}
         </h1>
         <p className="text-sm text-slate-600 leading-relaxed font-light">
-          From vacant residential plots to finished luxury duplex residences. Led directly by Ramesh S H with rigid quality standards and transparent milestone accounting.
+          {t(
+            'construction.subtitle',
+            'From vacant residential plots to finished luxury duplex residences. Led directly by Ramesh S H with rigid quality standards and transparent milestone accounting.'
+          )}
         </p>
       </div>
 
@@ -120,10 +125,12 @@ export const ConstructionPage: React.FC = () => {
       <div className="bg-white rounded-3xl border border-slate-200 p-8 sm:p-12 shadow-luxury space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-navy-900">
-            Our 9-Stage Construction Methodology
+            {t('construction.methodology_title', 'Our 9-Stage Construction Methodology')}
           </h2>
           <p className="text-xs sm:text-sm text-slate-500">
-            Engineered for durability, aesthetic distinction, and total budget control.
+            {isKn
+              ? 'ಬಾಳಿಕೆ, ಸೌಂದರ್ಯ ಮತ್ತು ಸಂಪೂರ್ಣ ಬಜೆಟ್ ನಿಯಂತ್ರಣಕ್ಕಾಗಿ ವಿನ್ಯಾಸಗೊಳಿಸಲಾಗಿದೆ.'
+              : 'Engineered for durability, aesthetic distinction, and total budget control.'}
           </p>
         </div>
 

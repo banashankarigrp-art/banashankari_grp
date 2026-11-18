@@ -18,15 +18,22 @@ import {
   PhoneCall,
   ChevronRight,
   Layers,
+  Languages,
+  Check,
+  Globe,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
+import { useLanguage } from '../../context/LanguageContext';
 
 export const Navbar: React.FC = () => {
   const [userDropdownOpen, setUserDropdownOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
+  const langDropdownRef = useRef<HTMLDivElement | null>(null);
   const [headerHeight, setHeaderHeight] = useState(115);
   const { user, isAuthenticated, isAdmin, logout } = useAuth();
+  const { language, setLanguage, isKn, t } = useLanguage();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -42,10 +49,11 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener('resize', updateHeaderHeight);
   }, []);
 
-  // Close drawer and user dropdown on route change
+  // Close drawer and dropdowns on route change
   useEffect(() => {
     setDrawerOpen(false);
     setUserDropdownOpen(false);
+    setLangDropdownOpen(false);
   }, [location.pathname]);
 
   // Lock body scroll when drawer is open
@@ -60,17 +68,33 @@ export const Navbar: React.FC = () => {
     };
   }, [drawerOpen]);
 
-  // Handle ESC key to close drawer
+  // Handle ESC key to close drawer and dropdowns
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
         setDrawerOpen(false);
         setUserDropdownOpen(false);
+        setLangDropdownOpen(false);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, []);
+
+  // Handle outside click for language dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) {
+        setLangDropdownOpen(false);
+      }
+    };
+    if (langDropdownOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [langDropdownOpen]);
 
   // Auto-close mobile drawer when window is resized to desktop/tablet (>= 768px)
   useEffect(() => {
@@ -91,13 +115,13 @@ export const Navbar: React.FC = () => {
   };
 
   const navLinks = [
-    { label: 'Home', shortLabel: 'Home', path: '/', icon: Home, desc: 'Overview & verified listings' },
-    { label: 'Real Estate', shortLabel: 'Real Estate', path: '/real-estate', icon: Building2, desc: 'BDA plots, houses & rentals' },
-    { label: 'Construction', shortLabel: 'Construction', path: '/construction', icon: HardHat, desc: 'Turnkey residential building' },
-    { label: 'Our Projects', shortLabel: 'Our Projects', path: '/our-projects', icon: Layers, desc: 'Completed & ongoing landmarks' },
-    { label: 'KHB Property Services', shortLabel: 'KHB Services', path: '/khb-property-services', icon: FileCheck2, desc: 'Documentation & transfers' },
-    { label: 'Loans Made Easy', shortLabel: 'Loans Made Easy', path: '/loans-made-easy', icon: Banknote, desc: 'Multi-bank financing assistance' },
-    { label: 'Contact Us', shortLabel: 'Contact Us', path: '/contact', icon: PhoneCall, desc: 'Direct advisory & site visits' },
+    { label: t('nav.home', 'Home'), shortLabel: t('nav.home', 'Home'), path: '/', icon: Home, desc: t('nav.desc.home', 'Overview & verified listings') },
+    { label: t('nav.real_estate', 'Real Estate'), shortLabel: t('nav.real_estate', 'Real Estate'), path: '/real-estate', icon: Building2, desc: t('nav.desc.real_estate', 'BDA plots, houses & rentals') },
+    { label: t('nav.construction', 'Construction'), shortLabel: t('nav.construction', 'Construction'), path: '/construction', icon: HardHat, desc: t('nav.desc.construction', 'Turnkey residential building') },
+    { label: t('nav.our_projects', 'Our Projects'), shortLabel: t('nav.our_projects', 'Our Projects'), path: '/our-projects', icon: Layers, desc: t('nav.desc.projects', 'Completed & ongoing landmarks') },
+    { label: t('nav.khb_services', 'KHB Property Services'), shortLabel: isKn ? 'ಕೆ.ಹೆಚ್.ಬಿ ಸೇವೆಗಳು' : 'KHB Services', path: '/khb-property-services', icon: FileCheck2, desc: t('nav.desc.khb', 'Documentation & transfers') },
+    { label: t('nav.loans_made_easy', 'Loans Made Easy'), shortLabel: isKn ? 'ಸುಲಭ ಸಾಲ' : 'Loans Made Easy', path: '/loans-made-easy', icon: Banknote, desc: t('nav.desc.loans', 'Multi-bank financing assistance') },
+    { label: t('nav.contact_us', 'Contact Us'), shortLabel: t('nav.contact_us', 'Contact Us'), path: '/contact', icon: PhoneCall, desc: t('nav.desc.contact', 'Direct advisory & site visits') },
   ];
 
   const isActive = (path: string) => {
@@ -137,11 +161,11 @@ export const Navbar: React.FC = () => {
             <div className="text-center flex-1 min-w-0 px-1 sm:px-4">
               <Link to="/" className="inline-block group focus:outline-none w-full">
                 <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-navy-950 tracking-wide uppercase leading-tight sm:leading-snug group-hover:text-gold-700 transition">
-                  <span className="block sm:inline">BANASHANKARI </span>
-                  <span className="block sm:inline">ENTERPRISES</span>
+                  <span className="block sm:inline">{isKn ? 'ಬನಶಂಕರಿ ' : 'BANASHANKARI '}</span>
+                  <span className="block sm:inline">{isKn ? 'ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'ENTERPRISES'}</span>
                 </h1>
                 <p className="text-[8.5px] xs:text-[10px] sm:text-xs md:text-xs lg:text-sm font-bold tracking-wider sm:tracking-widest uppercase text-gold-600 mt-0.5 sm:mt-1 font-sans leading-tight">
-                  REAL ESTATE AND CONSTRUCTIONS
+                  {isKn ? 'ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಮತ್ತು ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ಸ್' : 'REAL ESTATE AND CONSTRUCTIONS'}
                 </p>
               </Link>
             </div>
@@ -190,13 +214,96 @@ export const Navbar: React.FC = () => {
                 })}
               </nav>
 
-              {/* Right: Actions Container (Login Button BEFORE Hamburger Menu, Hamburger Menu LAST) */}
+              {/* Right: Actions Container (Language Dropdown, Login Button BEFORE Hamburger Menu, Hamburger Menu LAST) */}
               <div className="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
+                {/* Language Dropdown Selector (BEFORE Login Button) */}
+                <div className="relative" ref={langDropdownRef}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setLangDropdownOpen(!langDropdownOpen);
+                      setUserDropdownOpen(false);
+                    }}
+                    className={`flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition shadow-2xs border ${
+                      langDropdownOpen
+                        ? 'bg-amber-50 text-navy-950 border-gold-400 ring-2 ring-gold-400/20'
+                        : 'bg-white hover:bg-slate-100 border-slate-200 text-navy-900'
+                    }`}
+                    aria-label="Select Language / ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"
+                    aria-expanded={langDropdownOpen}
+                    aria-haspopup="true"
+                  >
+                    <Globe className="w-4 h-4 text-gold-600 shrink-0" />
+                    <span className="font-bold text-xs sm:text-sm">
+                      {language === 'kn' ? 'ಕನ್ನಡ' : 'English'}
+                    </span>
+                    <ChevronDown
+                      className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
+                        langDropdownOpen ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {langDropdownOpen && (
+                    <div
+                      className="absolute right-0 mt-2 w-48 bg-white rounded-2xl shadow-2xl border border-slate-100 py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150"
+                      onMouseLeave={() => setLangDropdownOpen(false)}
+                    >
+                      <div className="px-3.5 py-1.5 text-[10px] font-bold text-slate-400 uppercase tracking-wider border-b border-slate-100">
+                        {isKn ? 'ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ' : 'Select Language'}
+                      </div>
+
+                      {/* 1. English Option */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLanguage('en');
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm transition ${
+                          language === 'en'
+                            ? 'bg-amber-50/80 text-navy-950 font-bold'
+                            : 'text-slate-700 hover:bg-slate-50 font-medium'
+                        }`}
+                      >
+                        <span className="flex items-center space-x-2">
+                          <span className="text-sm">🇬🇧</span>
+                          <span>English</span>
+                        </span>
+                        {language === 'en' && <Check className="w-4 h-4 text-gold-600 font-bold" />}
+                      </button>
+
+                      {/* 2. Kannada Option */}
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setLanguage('kn');
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm transition ${
+                          language === 'kn'
+                            ? 'bg-amber-50/80 text-navy-950 font-bold'
+                            : 'text-slate-700 hover:bg-slate-50 font-medium'
+                        }`}
+                      >
+                        <span className="flex items-center space-x-2">
+                          <span className="text-sm">🇮🇳</span>
+                          <span>ಕನ್ನಡ (Kannada)</span>
+                        </span>
+                        {language === 'kn' && <Check className="w-4 h-4 text-gold-600 font-bold" />}
+                      </button>
+                    </div>
+                  )}
+                </div>
+
                 {isAuthenticated ? (
                   /* Authenticated User Button / Dropdown */
                   <div className="relative">
                     <button
-                      onClick={() => setUserDropdownOpen(!userDropdownOpen)}
+                      onClick={() => {
+                        setUserDropdownOpen(!userDropdownOpen);
+                        setLangDropdownOpen(false);
+                      }}
                       className="flex items-center space-x-1.5 bg-white hover:bg-slate-100 border border-slate-200 text-navy-900 px-2 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-semibold transition shadow-2xs"
                       aria-expanded={userDropdownOpen}
                       aria-haspopup="true"
@@ -216,15 +323,15 @@ export const Navbar: React.FC = () => {
                         onMouseLeave={() => setUserDropdownOpen(false)}
                       >
                         <div className="px-4 py-2.5 border-b border-slate-100">
-                          <p className="text-xs text-slate-400 font-medium">Signed in as</p>
+                          <p className="text-xs text-slate-400 font-medium">{t('nav.signed_in_as', 'Signed in as')}</p>
                           <p className="text-sm font-bold text-navy-950 truncate">{user?.name}</p>
                           <p className="text-xs text-slate-500 truncate">{user?.email}</p>
                           <span className="inline-block mt-1.5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
                             {user?.role === 'seller'
-                              ? 'Seller / Owner'
+                              ? (isKn ? 'ಮಾರಾಟಗಾರರು / ಮಾಲೀಕರು' : 'Seller / Owner')
                               : user?.role === 'admin'
-                              ? 'Administrator'
-                              : 'Customer'}
+                              ? (isKn ? 'ನಿರ್ವಾಹಕರು' : 'Administrator')
+                              : (isKn ? 'ಗ್ರಾಹಕರು' : 'Customer')}
                           </span>
                         </div>
 
@@ -236,7 +343,7 @@ export const Navbar: React.FC = () => {
                               className="flex items-center space-x-2 px-4 py-2.5 text-sm text-navy-900 hover:bg-slate-50 font-medium transition"
                             >
                               <ShieldAlert className="w-4 h-4 text-amber-600" />
-                              <span>Admin Console</span>
+                              <span>{t('nav.admin_console', 'Admin Console')}</span>
                             </Link>
                             <Link
                               to="/sell-property"
@@ -244,7 +351,7 @@ export const Navbar: React.FC = () => {
                               className="flex items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 font-medium transition"
                             >
                               <PlusCircle className="w-4 h-4 text-amber-600" />
-                              <span>List a Property</span>
+                              <span>{t('nav.list_property', 'List a Property')}</span>
                             </Link>
                           </>
                         ) : user?.role === 'seller' ? (
@@ -255,21 +362,21 @@ export const Navbar: React.FC = () => {
                               className="flex items-center space-x-2 px-4 py-2.5 text-sm text-navy-900 hover:bg-slate-50 font-medium transition"
                             >
                               <LayoutDashboard className="w-4 h-4 text-slate-500" />
-                              <span>Seller Dashboard</span>
+                              <span>{t('nav.seller_dashboard', 'Seller Dashboard')}</span>
                             </Link>
                             <Link
                               to="/dashboard/properties"
                               onClick={() => setUserDropdownOpen(false)}
                               className="flex items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 font-medium transition"
                             >
-                              <span>My Submitted Listings</span>
+                              <span>{t('nav.my_listings', 'My Submitted Listings')}</span>
                             </Link>
                             <Link
                               to="/sell-property"
                               onClick={() => setUserDropdownOpen(false)}
                               className="flex items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 font-medium transition"
                             >
-                              <span>List a Property</span>
+                              <span>{t('nav.list_property', 'List a Property')}</span>
                             </Link>
                           </>
                         ) : (
@@ -279,7 +386,7 @@ export const Navbar: React.FC = () => {
                             className="flex items-center space-x-2 px-4 py-2.5 text-sm text-navy-900 hover:bg-slate-50 font-medium transition"
                           >
                             <FileText className="w-4 h-4 text-gold-600" />
-                            <span>My Enquiries</span>
+                            <span>{t('nav.my_enquiries', 'My Enquiries')}</span>
                           </Link>
                         )}
 
@@ -290,7 +397,7 @@ export const Navbar: React.FC = () => {
                           className="w-full flex items-center space-x-2 px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 text-left font-medium transition"
                         >
                           <LogOut className="w-4 h-4" />
-                          <span>Log Out</span>
+                          <span>{t('nav.logout', 'Log Out')}</span>
                         </button>
                       </div>
                     )}
@@ -301,7 +408,7 @@ export const Navbar: React.FC = () => {
                     to="/login"
                     className="inline-flex items-center px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold text-white bg-gradient-to-r from-amber-500 via-gold-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 shadow-sm hover:shadow transition transform hover:-translate-y-0.5 shrink-0"
                   >
-                    <span>Login</span>
+                    <span>{t('nav.login', 'Login')}</span>
                   </Link>
                 )}
 
@@ -342,20 +449,52 @@ export const Navbar: React.FC = () => {
           {/* Full-width Top-to-Bottom Menu Panel */}
           <div className="relative z-50 w-full bg-white border-b-2 border-gold-500/50 shadow-2xl overflow-y-auto max-h-[calc(100vh-6rem)] transform transition-all animate-in slide-in-from-top duration-300">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-              {/* Mobile Drawer Header with Clear Large Logo */}
-              <div className="flex items-center space-x-3.5 pb-4 mb-4 border-b border-slate-100">
-                <img
-                  src="/khb-logo-circle.png"
-                  alt="KHB Suryanagar Properties Emblem"
-                  className="w-16 h-16 object-contain rounded-full shadow-xs shrink-0"
-                />
-                <div className="min-w-0">
-                  <h2 className="font-heading font-black text-sm text-navy-950 uppercase leading-snug">
-                    BANASHANKARI ENTERPRISES
-                  </h2>
-                  <p className="text-[10px] font-bold text-gold-600 uppercase tracking-wider">
-                    REAL ESTATE AND CONSTRUCTIONS
-                  </p>
+              {/* Mobile Drawer Header with Clear Large Logo & Language Selector */}
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+                <div className="flex items-center space-x-3.5">
+                  <img
+                    src="/khb-logo-circle.png"
+                    alt="KHB Suryanagar Properties Emblem"
+                    className="w-14 h-14 object-contain rounded-full shadow-xs shrink-0"
+                  />
+                  <div className="min-w-0">
+                    <h2 className="font-heading font-black text-sm text-navy-950 uppercase leading-snug">
+                      {isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'BANASHANKARI ENTERPRISES'}
+                    </h2>
+                    <p className="text-[10px] font-bold text-gold-600 uppercase tracking-wider">
+                      {isKn ? 'ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಮತ್ತು ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ಸ್' : 'REAL ESTATE AND CONSTRUCTIONS'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Mobile Language Switcher Pill */}
+                <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 self-start sm:self-auto">
+                  <span className="text-[11px] font-bold text-slate-500 px-2 flex items-center space-x-1">
+                    <Globe className="w-3.5 h-3.5 text-gold-600" />
+                    <span>{isKn ? 'ಭಾಷೆ:' : 'Language:'}</span>
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage('en')}
+                    className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                      language === 'en'
+                        ? 'bg-white text-navy-950 shadow-xs'
+                        : 'text-slate-600 hover:text-navy-900'
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setLanguage('kn')}
+                    className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
+                      language === 'kn'
+                        ? 'bg-white text-navy-950 shadow-xs'
+                        : 'text-slate-600 hover:text-navy-900'
+                    }`}
+                  >
+                    ಕನ್ನಡ
+                  </button>
                 </div>
               </div>
 

@@ -12,9 +12,11 @@ import {
 import { api } from '../services/api';
 import { COMPANY_INFO } from '@shared/types';
 import { useAuth } from '../context/AuthContext';
+import { useLanguage } from '../context/LanguageContext';
 
 export const LoanAssistancePage: React.FC = () => {
   const { user } = useAuth();
+  const { isKn, t } = useLanguage();
   const [formData, setFormData] = useState({
     customerName: user?.name || '',
     phone: (user?.phone || '').replace(/\D/g, '').slice(-10),
@@ -91,13 +93,16 @@ export const LoanAssistancePage: React.FC = () => {
       {/* Top Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
         <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
-          Liaison & Documentation Support
+          {isKn ? 'ಸಮನ್ವಯ & ದಾಖಲೆಗಳ ಬೆಂಬಲ' : 'Liaison & Documentation Support'}
         </span>
         <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
-          Property & Construction Loan Assistance
+          {t('loans.title', 'Property & Construction Loan Assistance')}
         </h1>
         <p className="text-sm text-slate-600 leading-relaxed font-light">
-          We help Bangalore property buyers compile clean documentation dossiers and coordinate with institutional lenders to expedite approval workflows.
+          {t(
+            'loans.subtitle',
+            'We help Bangalore property buyers compile clean documentation dossiers and coordinate with institutional lenders to expedite approval workflows.'
+          )}
         </p>
       </div>
 
