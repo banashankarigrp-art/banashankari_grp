@@ -218,13 +218,28 @@ export const HomePage: React.FC = () => {
   // One-Stop Solution Hero Banners Carousel (Services & 15 Years Experience Since 2011)
   const heroServices = [
     {
+      id: 'hero-founder',
+      service: t('hero.badge', 'KHB Surya nagar Specialist'),
+      tagline: isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಂದ ನೇರ ಮಾರ್ಗದರ್ಶನ' : 'DIRECT GUIDANCE FROM RAMESH S H',
+      headline: t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!'),
+      description: t(
+        'hero.description',
+        'Looking to buy a property, build your dream home,or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4.Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
+      ),
+      image: '/site-bg.jpg',
+      fallbackImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85',
+      link: '/contact',
+      linkText: t('common.enquiry_now', 'Enquiry Now'),
+      experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
+    },
+    {
       id: 'real-estate',
       service: t('banner.real_estate_service', 'Real Estate'),
       tagline: t('banner.real_estate_tagline', 'SURYA NAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES'),
       headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'),
       description: t(
         'banner.real_estate_desc',
-        'Verified BDA, BMRDA, and KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.'
+        'Verified KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.'
       ),
       image:
         'https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1920&q=85',
@@ -280,21 +295,6 @@ export const HomePage: React.FC = () => {
       linkText: t('loan_guidance.cta', 'Explore Loan Assistance'),
       experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
     },
-    {
-      id: 'hero-founder',
-      service: t('hero.badge', 'KHB Surya nagar Specialist'),
-      tagline: isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಂದ ನೇರ ಮಾರ್ಗದರ್ಶನ' : 'DIRECT GUIDANCE FROM RAMESH S H',
-      headline: t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!'),
-      description: t(
-        'hero.description',
-        'Looking to buy a property, build your dream home,or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4.Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
-      ),
-      image: '/site-bg.jpg',
-      fallbackImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85',
-      link: '/contact',
-      linkText: t('common.enquiry_now', 'Enquiry Now'),
-      experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
-    },
   ];
 
   const [activeBannerIdx, setActiveBannerIdx] = useState(0);
@@ -320,7 +320,7 @@ export const HomePage: React.FC = () => {
   return (
     <div className="w-full flex flex-col space-y-12 sm:space-y-16 lg:space-y-20 pb-20 overflow-x-hidden">
       {/* ======================================================== */}
-      {/* 1. HERO BANNERS CAROUSEL (Edge-to-Edge Full Width, Hero Section as 5th Banner at the End) */}
+      {/* 1. HERO BANNERS CAROUSEL (Edge-to-Edge Full Width, Hero Section as 1st Banner) */}
       {/* ======================================================== */}
       <section className="relative w-full">
         <div
@@ -374,7 +374,7 @@ export const HomePage: React.FC = () => {
 
                 {/* Slide Content */}
                 {isFounderSlide ? (
-                  /* 5th Banner: Hero Section with Ramesh S H and Enquiry Now */
+                  /* 1st Banner: Hero Section with Ramesh S H and Enquiry Now */
                   <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-8 lg:px-14 xl:px-20 py-8 sm:py-10">
                     {/* Desktop & Tablet (lg+): 2-Column Luxury Grid */}
                     <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center w-full max-w-6xl mx-auto">
@@ -508,8 +508,8 @@ export const HomePage: React.FC = () => {
                 key={idx}
                 onClick={() => setActiveBannerIdx(idx)}
                 className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${activeBannerIdx === idx
-                    ? 'w-8 sm:w-12 bg-gold-400 shadow-md ring-1 ring-gold-300'
-                    : 'w-4 sm:w-6 bg-white/40 hover:bg-white/70'
+                  ? 'w-8 sm:w-12 bg-gold-400 shadow-md ring-1 ring-gold-300'
+                  : 'w-4 sm:w-6 bg-white/40 hover:bg-white/70'
                   }`}
                 aria-label={`Show slide ${idx + 1}`}
               />
