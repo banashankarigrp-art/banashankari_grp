@@ -141,46 +141,68 @@ export const Navbar: React.FC = () => {
         {/* ======================================================== */}
         {/* Tier 1: Top Center Company Name with Circular Logo Left & Right */}
         {/* ======================================================== */}
-        <div className="bg-white border-b border-slate-100">
+        <div className="bg-[#488B38] border-b border-[#3B732E] shadow-sm">
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between gap-2 sm:gap-4">
             
-            {/* Top Left: Attached "Grow Together" Logo */}
+            {/* Top Left: Attached "Grow Together" Logo & RGB Text Below */}
             <Link
               to="/"
-              className="flex items-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-gold-500 rounded-full"
+              className="flex flex-col items-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-[#FFD700] rounded-xl p-0.5 sm:p-1 transition"
               aria-label="Banashankari Enterprises - Return to Home"
             >
               <img
                 src="/grow-together-circle.png"
                 alt="Grow Together - Banashankari Enterprises"
-                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-sm group-hover:scale-105 transition-transform duration-200"
+                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
               />
+              <span
+                className="mt-1 sm:mt-1.5 text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-heading font-black tracking-wide uppercase text-center leading-tight max-w-[85px] xs:max-w-[105px] sm:max-w-[135px] md:max-w-none group-hover:brightness-110 transition"
+                style={{
+                  background: 'linear-gradient(90deg, rgb(255, 82, 82), rgb(255, 215, 0), rgb(0, 229, 255))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 3px rgba(0, 0, 0, 0.75))',
+                }}
+              >
+                {isKn ? 'ಜೊತೆಯಾಗಿ ಬೆಳೆಯೋಣ' : 'Grow Together'}
+              </span>
             </Link>
 
             {/* Top Center: Official Company Name and Subtitle */}
             <div className="text-center flex-1 min-w-0 px-1 sm:px-4">
               <Link to="/" className="inline-block group focus:outline-none w-full">
-                <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-navy-950 tracking-wide uppercase leading-tight sm:leading-snug group-hover:text-gold-700 transition">
+                <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#FFD700] tracking-wide uppercase leading-tight sm:leading-snug group-hover:text-[#FFE57F] transition drop-shadow-sm">
                   <span className="block sm:inline">{isKn ? 'ಬನಶಂಕರಿ ' : 'BANASHANKARI '}</span>
                   <span className="block sm:inline">{isKn ? 'ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'ENTERPRISES'}</span>
                 </h1>
-                <p className="text-[8.5px] xs:text-[10px] sm:text-xs md:text-xs lg:text-sm font-bold tracking-wider sm:tracking-widest uppercase text-gold-600 mt-0.5 sm:mt-1 font-sans leading-tight">
+                <p className="text-[8.5px] xs:text-[10px] sm:text-xs md:text-xs lg:text-sm font-black tracking-wider sm:tracking-widest uppercase text-black mt-0.5 sm:mt-1 font-sans leading-tight">
                   {isKn ? 'ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಮತ್ತು ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ಸ್' : 'REAL ESTATE AND CONSTRUCTIONS'}
                 </p>
               </Link>
             </div>
 
-            {/* Top Right: Attached Circular Logo */}
+            {/* Top Right: Attached Circular Logo & RGB One Stop Solution Text Below */}
             <Link
               to="/"
-              className="flex items-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-gold-500 rounded-full"
+              className="flex flex-col items-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-[#FFD700] rounded-xl p-0.5 sm:p-1 transition"
               aria-label="Banashankari Enterprises - Return to Home"
             >
               <img
                 src="/khb-logo-circle.png"
                 alt="KHB Suryanagar Properties Emblem - Right"
-                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-sm group-hover:scale-105 transition-transform duration-200"
+                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
               />
+              <span
+                className="mt-1 sm:mt-1.5 text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-heading font-black tracking-wide uppercase text-center leading-tight max-w-[85px] xs:max-w-[105px] sm:max-w-[135px] md:max-w-none group-hover:brightness-110 transition"
+                style={{
+                  background: 'linear-gradient(90deg, rgb(255, 82, 82), rgb(255, 215, 0), rgb(0, 229, 255))',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  filter: 'drop-shadow(0 2px 3px rgba(0, 0, 0, 0.75))',
+                }}
+              >
+                {isKn ? 'ಒನ್ ಸ್ಟಾಪ್ ಪರಿಹಾರ' : 'One Stop Solution'}
+              </span>
             </Link>
 
           </div>
@@ -450,27 +472,27 @@ export const Navbar: React.FC = () => {
           <div className="relative z-50 w-full bg-white border-b-2 border-gold-500/50 shadow-2xl overflow-y-auto max-h-[calc(100vh-6rem)] transform transition-all animate-in slide-in-from-top duration-300">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
               {/* Mobile Drawer Header with Clear Large Logo & Language Selector */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4 border-b border-slate-100">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 mb-4 rounded-2xl bg-[#488B38] border border-[#3B732E] shadow-sm">
                 <div className="flex items-center space-x-3.5">
                   <img
                     src="/khb-logo-circle.png"
                     alt="KHB Suryanagar Properties Emblem"
-                    className="w-14 h-14 object-contain rounded-full shadow-xs shrink-0"
+                    className="w-14 h-14 object-contain rounded-full shadow-xs shrink-0 ring-2 ring-white/70 bg-white"
                   />
                   <div className="min-w-0">
-                    <h2 className="font-heading font-black text-sm text-navy-950 uppercase leading-snug">
+                    <h2 className="font-heading font-black text-sm text-[#FFD700] uppercase leading-snug drop-shadow-sm">
                       {isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'BANASHANKARI ENTERPRISES'}
                     </h2>
-                    <p className="text-[10px] font-bold text-gold-600 uppercase tracking-wider">
+                    <p className="text-[10px] font-black text-black uppercase tracking-wider">
                       {isKn ? 'ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಮತ್ತು ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ಸ್' : 'REAL ESTATE AND CONSTRUCTIONS'}
                     </p>
                   </div>
                 </div>
 
                 {/* Mobile Language Switcher Pill */}
-                <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 self-start sm:self-auto">
-                  <span className="text-[11px] font-bold text-slate-500 px-2 flex items-center space-x-1">
-                    <Globe className="w-3.5 h-3.5 text-gold-600" />
+                <div className="flex items-center bg-white/95 p-1 rounded-xl border border-white/60 self-start sm:self-auto shadow-xs">
+                  <span className="text-[11px] font-bold text-slate-700 px-2 flex items-center space-x-1">
+                    <Globe className="w-3.5 h-3.5 text-[#488B38]" />
                     <span>{isKn ? 'ಭಾಷೆ:' : 'Language:'}</span>
                   </span>
                   <button

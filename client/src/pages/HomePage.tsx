@@ -280,6 +280,21 @@ export const HomePage: React.FC = () => {
       linkText: t('loan_guidance.cta', 'Explore Loan Assistance'),
       experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
     },
+    {
+      id: 'hero-founder',
+      service: t('hero.badge', 'KHB Surya nagar Specialist & Turnkey Construction'),
+      tagline: isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಂದ ನೇರ ಮಾರ್ಗದರ್ಶನ' : 'DIRECT GUIDANCE FROM RAMESH S H',
+      headline: t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!'),
+      description: t(
+        'hero.description',
+        'Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
+      ),
+      image: '/site-bg.jpg',
+      fallbackImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85',
+      link: '/contact',
+      linkText: t('common.enquiry_now', 'Enquiry Now'),
+      experience: isKn ? '2011 ರಿಂದ 15 ವರ್ಷಗಳ ಅನುಭವ' : '15 Years of Experience Since 2011',
+    },
   ];
 
   const [activeBannerIdx, setActiveBannerIdx] = useState(0);
@@ -305,148 +320,11 @@ export const HomePage: React.FC = () => {
   return (
     <div className="w-full flex flex-col space-y-12 sm:space-y-16 lg:space-y-20 pb-20 overflow-x-hidden">
       {/* ======================================================== */}
-      {/* 1. HERO SECTION (Transparent with Clear Background Image Behind) */}
+      {/* 1. HERO BANNERS CAROUSEL (Edge-to-Edge Full Width, Hero Section as 5th Banner at the End) */}
       {/* ======================================================== */}
-      <section className="relative w-full bg-transparent text-white pt-4 sm:pt-6 lg:pt-8 pb-10 sm:pb-14 lg:pb-16 px-3 sm:px-6 lg:px-10 xl:px-14">
-
-        {/* MOBILE & TABLET LAYOUT (< lg: 1024px): Centered Vertical Stack matching mobile view */}
-        <div className="lg:hidden relative w-full mx-auto text-center space-y-5 sm:space-y-6 bg-black/45 backdrop-blur-md p-5 sm:p-8 rounded-2xl sm:rounded-3xl border border-gold-500/25 shadow-2xl">
-          {/* Main Hero Heading in Gold Color */}
-          <h1 className="font-heading text-2xl xs:text-3xl sm:text-4xl font-extrabold tracking-tight text-gold-400 leading-tight">
-            {t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!')}
-          </h1>
-
-          {/* Subtext / Description */}
-          <p className="text-sm sm:text-base text-slate-100 font-normal leading-relaxed drop-shadow-sm">
-            {t(
-              'hero.description',
-              'Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
-            )}
-          </p>
-
-          {/* Founder Image (Square & Bigger) above Contact/Enquiry Button */}
-          <div className="flex flex-col items-center justify-center pt-2">
-            <div className="relative group">
-              <div className="w-48 h-48 xs:w-52 xs:h-52 sm:w-60 sm:h-60 rounded-2xl overflow-hidden border-2 sm:border-3 border-gold-400 shadow-2xl shadow-black/50 ring-4 ring-gold-500/20 bg-navy-900">
-                <img
-                  src={founderPhoto}
-                  alt={isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
-                  className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-4 py-1 rounded-full text-xs sm:text-sm font-bold uppercase tracking-wider whitespace-nowrap shadow-lg">
-                {isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
-              </div>
-            </div>
-            <p className="text-xs text-gold-400 font-semibold mt-4 tracking-wide">
-              {isKn ? 'ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ನಿರ್ದೇಶಕರು' : founderTitle}
-            </p>
-          </div>
-
-          {/* Enquiry Now Button (Reddish Brown, in Middle, Links to Contact Page) */}
-          <div className="flex items-center justify-center pt-2">
-            <Link
-              to="/contact"
-              className="inline-flex items-center justify-center px-8 sm:px-10 py-3.5 sm:py-4 rounded-xl text-white font-bold text-sm sm:text-base bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl shadow-red-950/40 hover:shadow-2xl border border-red-900/40 transform hover:-translate-y-0.5 space-x-2"
-            >
-              <span>{t('common.enquiry_now', 'Enquiry Now')}</span>
-              <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-amber-300" />
-            </Link>
-          </div>
-        </div>
-
-        {/* LAPTOP & DESKTOP LAYOUT (>= lg: 1024px): 2-Column Balanced Luxury Grid */}
-        <div className="hidden lg:block relative w-full mx-auto bg-black/45 backdrop-blur-md p-8 lg:p-10 xl:p-12 rounded-2xl sm:rounded-3xl border border-gold-500/25 shadow-2xl">
-          <div className="grid grid-cols-12 gap-8 xl:gap-12 items-center">
-            {/* Left Column (7 cols): Heading, Paragraph, Trust Badges, Enquiry Now Button */}
-            <div className="col-span-7 space-y-6 text-left">
-              <div className="inline-flex items-center space-x-2 bg-gold-500/20 border border-gold-400/40 px-3.5 py-1 rounded-full text-gold-300 text-xs font-semibold tracking-wide shadow-sm">
-                <Sparkles className="w-3.5 h-3.5 text-gold-400" />
-                <span>{t('hero.badge', 'KHB Surya nagar Specialist & Turnkey Construction')}</span>
-              </div>
-
-              <h1 className="font-heading text-3xl lg:text-4xl xl:text-5xl font-extrabold tracking-tight text-gold-400 leading-tight">
-                {t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!')}
-              </h1>
-
-              <p className="text-base xl:text-lg text-slate-100 font-normal leading-relaxed drop-shadow-sm max-w-2xl">
-                {t(
-                  'hero.description',
-                  'Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
-                )}
-              </p>
-
-              {/* Trust badges */}
-              <div className="flex flex-wrap items-center gap-3 pt-1 text-xs text-slate-200">
-                <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
-                  <span>{t('hero.badge_khb', 'KHB Phase 1, 2, 3 & 4 Specialist')}</span>
-                </span>
-                <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
-                  <span>{t('hero.badge_title', '100% Clear Title Verification')}</span>
-                </span>
-                <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
-                  <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
-                  <span>{t('hero.badge_construction', 'Turnkey Home Construction')}</span>
-                </span>
-              </div>
-
-              {/* Enquiry Now Button */}
-              <div className="pt-2">
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center px-8 xl:px-10 py-3.5 xl:py-4 rounded-xl text-white font-bold text-sm xl:text-base bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl shadow-red-950/40 hover:shadow-2xl border border-red-900/40 transform hover:-translate-y-0.5 space-x-2 group"
-                >
-                  <span>{t('common.enquiry_now', 'Enquiry Now')}</span>
-                  <ArrowRight className="w-4 h-4 xl:w-5 xl:h-5 text-amber-300 group-hover:translate-x-1 transition-transform" />
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Column (5 cols): Square Framed Founder Photo with Gold Border and Badges */}
-            <div className="col-span-5 flex flex-col items-center justify-center">
-              <div className="relative group">
-                <div className="absolute -inset-2 bg-gold-500/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition duration-300 pointer-events-none" />
-
-                <div className="relative w-64 h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 rounded-2xl overflow-hidden border-3 border-gold-400 shadow-2xl shadow-black/70 ring-4 ring-gold-500/20 bg-navy-900">
-                  <img
-                    src={founderPhoto}
-                    alt={isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
-                    className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-
-                <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-4 xl:px-5 py-1 xl:py-1.5 rounded-full text-xs xl:text-sm font-bold uppercase tracking-wider whitespace-nowrap shadow-xl">
-                  {isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
-                </div>
-              </div>
-
-              <p className="text-xs xl:text-sm text-gold-400 font-semibold mt-5 tracking-wide text-center">
-                {isKn ? 'ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ನಿರ್ದೇಶಕರು' : founderTitle}
-              </p>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      {/* ======================================================== */}
-      {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
-      {/* ======================================================== */}
-      <section className="w-full bg-[#F5ECE1] py-12 sm:py-16 lg:py-20 border-y border-[#E2D2BF]/80 shadow-xs">
-
-        {/* HEADING / TOPIC (Full width centered) */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-8 sm:mb-12">
-
-          <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
-            {t('one_stop.heading', 'Our One-Stop Solution for All Real Estate & Construction Needs!')}
-          </h2>
-        </div>
-
-        {/* HERO BANNERS (Fully Covered Right and Left: w-full edge-to-edge, Arrows removed) */}
+      <section className="relative w-full">
         <div
-          className="relative w-full overflow-hidden shadow-2xl group select-none min-h-[400px] sm:min-h-[460px] lg:min-h-[520px] flex items-center justify-center bg-navy-950"
+          className="relative w-full overflow-hidden shadow-2xl group select-none min-h-[460px] sm:min-h-[520px] lg:min-h-[560px] xl:min-h-[600px] flex items-center justify-center bg-navy-950"
           onMouseEnter={() => setIsBannerPaused(true)}
           onMouseLeave={() => setIsBannerPaused(false)}
           onTouchStart={(e) => {
@@ -465,11 +343,14 @@ export const HomePage: React.FC = () => {
         >
           {heroServices.map((slide, idx) => {
             const isActive = activeBannerIdx === idx;
+            const isFounderSlide = slide.id === 'hero-founder';
+
             return (
               <div
                 key={slide.id}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
-                  }`}
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                  isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
+                }`}
               >
                 {/* Background Image */}
                 <img
@@ -482,11 +363,8 @@ export const HomePage: React.FC = () => {
                   loading={idx === 0 ? 'eager' : 'lazy'}
                 />
 
-                {/* Dark Twilight Ambient Overlay matching the Reference Image */}
-                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/65 to-navy-950/45" />
-
-                {/* Top Corner Milestone Badge on the Banner */}
-
+                {/* Dark Twilight Ambient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-950/95 via-navy-950/70 to-navy-950/50" />
 
                 {/* Service Category Tag on Top Left */}
                 <div className="absolute top-4 sm:top-6 left-4 sm:left-8 z-20">
@@ -495,45 +373,168 @@ export const HomePage: React.FC = () => {
                   </span>
                 </div>
 
-                {/* Centered Content Typography (Matches Reference Screenshot Structure) */}
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-12 lg:px-20 z-10 max-w-4xl mx-auto space-y-3 sm:space-y-4">
-                  {/* Small Subtitle in All Caps with Wide Tracking */}
-                  <p className="font-sans font-semibold text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gold-300 drop-shadow-md">
-                    {slide.tagline}
-                  </p>
+                {/* Slide Content */}
+                {isFounderSlide ? (
+                  /* 5th Banner: Hero Section with Ramesh S H and Enquiry Now */
+                  <div className="absolute inset-0 flex items-center justify-center z-10 px-4 sm:px-8 lg:px-14 xl:px-20 py-8 sm:py-10">
+                    {/* Desktop & Tablet (lg+): 2-Column Luxury Grid */}
+                    <div className="hidden lg:grid grid-cols-12 gap-8 xl:gap-12 items-center w-full max-w-6xl mx-auto">
+                      {/* Left: Heading, Paragraph, Trust Badges, Enquiry Now Button */}
+                      <div className="col-span-7 space-y-4 xl:space-y-5 text-left">
+                        <p className="font-sans font-semibold text-xs uppercase tracking-[0.2em] text-gold-300 drop-shadow-md">
+                          {slide.tagline}
+                        </p>
 
-                  {/* Main Bold Headline */}
-                  <h3 className="font-heading font-extrabold text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white uppercase tracking-wider leading-tight drop-shadow-xl">
-                    {slide.headline}
-                  </h3>
+                        <h2 className="font-heading font-extrabold text-2xl xl:text-4xl text-gold-400 uppercase tracking-wide leading-tight drop-shadow-xl">
+                          {slide.headline}
+                        </h2>
 
-                  {/* Description Paragraph */}
-                  <p className="text-xs sm:text-sm md:text-base text-slate-100 font-light leading-relaxed max-w-2xl drop-shadow-md hidden xs:block">
-                    {slide.description}
-                  </p>
-                </div>
+                        <p className="text-xs xl:text-sm text-slate-100 font-light leading-relaxed max-w-2xl drop-shadow-md">
+                          {slide.description}
+                        </p>
+
+                        {/* Trust Badges */}
+                        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-slate-200">
+                          <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
+                            <span>{t('hero.badge_khb', 'KHB Phase 1, 2, 3 & 4 Specialist')}</span>
+                          </span>
+                          <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
+                            <span>{t('hero.badge_title', '100% Clear Title Verification')}</span>
+                          </span>
+                          <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
+                            <span>{t('hero.badge_construction', 'Turnkey Home Construction')}</span>
+                          </span>
+                        </div>
+
+                        {/* Enquiry Now Button */}
+                        <div className="pt-2">
+                          <Link
+                            to="/contact"
+                            className="inline-flex items-center justify-center px-8 py-3.5 rounded-xl text-white font-bold text-xs sm:text-sm bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl shadow-red-950/40 hover:shadow-2xl border border-red-900/40 transform hover:-translate-y-0.5 space-x-2 group"
+                          >
+                            <span>{t('common.enquiry_now', 'Enquiry Now')}</span>
+                            <ArrowRight className="w-4 h-4 text-amber-300 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Right: Founder Photo */}
+                      <div className="col-span-5 flex flex-col items-center justify-center">
+                        <div className="relative group">
+                          <div className="absolute -inset-2 bg-gold-500/20 rounded-3xl blur-xl opacity-60 group-hover:opacity-90 transition duration-300 pointer-events-none" />
+                          <div className="relative w-52 h-52 xl:w-64 xl:h-64 rounded-2xl overflow-hidden border-3 border-gold-400 shadow-2xl shadow-black/70 ring-4 ring-gold-500/20 bg-navy-900">
+                            <img
+                              src={founderPhoto}
+                              alt={isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
+                              className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                            />
+                          </div>
+                          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap shadow-xl">
+                            {isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
+                          </div>
+                        </div>
+                        <p className="text-xs text-gold-400 font-semibold mt-4 tracking-wide text-center">
+                          {isKn ? 'ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ನಿರ್ದೇಶಕರು' : founderTitle}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* Mobile & Small Screen (< lg) Layout */}
+                    <div className="lg:hidden flex flex-col items-center justify-center text-center space-y-3 sm:space-y-4 max-w-xl mx-auto">
+                      <p className="font-sans font-semibold text-[10px] sm:text-xs uppercase tracking-[0.2em] text-gold-300 drop-shadow-md">
+                        {slide.tagline}
+                      </p>
+
+                      <h2 className="font-heading font-extrabold text-xl xs:text-2xl sm:text-3xl text-gold-400 uppercase tracking-wide leading-tight drop-shadow-xl">
+                        {slide.headline}
+                      </h2>
+
+                      <p className="text-xs sm:text-sm text-slate-100 font-light leading-relaxed drop-shadow-md line-clamp-3 xs:line-clamp-none">
+                        {slide.description}
+                      </p>
+
+                      <div className="flex flex-col items-center justify-center pt-1">
+                        <div className="relative">
+                          <div className="w-28 h-28 xs:w-32 xs:h-32 sm:w-36 sm:h-36 rounded-2xl overflow-hidden border-2 border-gold-400 shadow-xl bg-navy-900">
+                            <img
+                              src={founderPhoto}
+                              alt={isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
+                              className="w-full h-full object-cover object-top"
+                            />
+                          </div>
+                          <div className="absolute -bottom-2.5 left-1/2 -translate-x-1/2 bg-navy-950/95 border border-gold-400 text-gold-300 px-3 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider whitespace-nowrap shadow-md">
+                            {isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್' : founderName}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="pt-2">
+                        <Link
+                          to="/contact"
+                          className="inline-flex items-center justify-center px-6 py-2.5 rounded-xl text-white font-bold text-xs sm:text-sm bg-[#8B2613] hover:bg-[#731E0E] active:scale-95 transition-all duration-200 shadow-xl border border-red-900/40 space-x-1.5"
+                        >
+                          <span>{t('common.enquiry_now', 'Enquiry Now')}</span>
+                          <ArrowRight className="w-4 h-4 text-amber-300" />
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  /* Standard Banner Content Typography (Slides 1-4, Buttons & Arrows Removed as requested) */
+                  <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 sm:px-12 lg:px-20 z-10 max-w-4xl mx-auto space-y-3 sm:space-y-4">
+                    <p className="font-sans font-semibold text-[11px] sm:text-xs md:text-sm uppercase tracking-[0.2em] sm:tracking-[0.25em] text-gold-300 drop-shadow-md">
+                      {slide.tagline}
+                    </p>
+
+                    <h3 className="font-heading font-extrabold text-2xl xs:text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-white uppercase tracking-wider leading-tight drop-shadow-xl">
+                      {slide.headline}
+                    </h3>
+
+                    <p className="text-xs sm:text-sm md:text-base text-slate-100 font-light leading-relaxed max-w-2xl drop-shadow-md hidden xs:block">
+                      {slide.description}
+                    </p>
+                  </div>
+                )}
               </div>
             );
           })}
 
-          {/* Dash / Pill Indicators at Bottom Center (Exact match to reference photo '— — — —', Arrows removed) */}
-          <div className="absolute bottom-5 sm:bottom-7 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-2 sm:space-x-3">
+          {/* Dash / Pill Indicators at Bottom Center (for all 5 slides) */}
+          <div className="absolute bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-20 flex items-center space-x-2 sm:space-x-2.5">
             {heroServices.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setActiveBannerIdx(idx)}
-                className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${activeBannerIdx === idx
-                  ? 'w-8 sm:w-12 bg-gold-400 shadow-md ring-1 ring-gold-300'
-                  : 'w-4 sm:w-6 bg-white/40 hover:bg-white/70'
-                  }`}
-                aria-label={`Show ${heroServices[idx].service} slide`}
+                className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${
+                  activeBannerIdx === idx
+                    ? 'w-8 sm:w-12 bg-gold-400 shadow-md ring-1 ring-gold-300'
+                    : 'w-4 sm:w-6 bg-white/40 hover:bg-white/70'
+                }`}
+                aria-label={`Show slide ${idx + 1}`}
               />
             ))}
           </div>
         </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
+      {/* ======================================================== */}
+      <section className="w-full bg-[#F5ECE1] py-12 sm:py-16 lg:py-20 border-y border-[#E2D2BF]/80 shadow-xs">
+
+        {/* HEADING / TOPIC (Full width centered) */}
+        <div className="w-full px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-6 sm:mb-8">
+
+          <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
+            {t('one_stop.heading', 'Our One-Stop Solution for All Real Estate & Construction Needs!')}
+          </h2>
+        </div>
 
         {/* CONTENT (Covering full width right and left) */}
-        <div className="mt-8 sm:mt-12 w-full px-4 sm:px-8 lg:px-12 xl:px-16">
+        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
           <div className="relative w-full bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#E2D2BF] shadow-luxury text-center space-y-4">
             <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mx-auto shadow-xs">
               <Sparkles className="w-6 h-6" />
