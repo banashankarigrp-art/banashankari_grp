@@ -282,12 +282,12 @@ export const HomePage: React.FC = () => {
     },
     {
       id: 'hero-founder',
-      service: t('hero.badge', 'KHB Surya nagar Specialist & Turnkey Construction'),
+      service: t('hero.badge', 'KHB Surya nagar Specialist'),
       tagline: isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಂದ ನೇರ ಮಾರ್ಗದರ್ಶನ' : 'DIRECT GUIDANCE FROM RAMESH S H',
       headline: t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!'),
       description: t(
         'hero.description',
-        'Looking to buy a property, build your dream home, or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4. Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
+        'Looking to buy a property, build your dream home,or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4.Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
       ),
       image: '/site-bg.jpg',
       fallbackImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85',
@@ -348,9 +348,8 @@ export const HomePage: React.FC = () => {
             return (
               <div
                 key={slide.id}
-                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
-                  isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
-                }`}
+                className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${isActive ? 'opacity-100 z-10 pointer-events-auto' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
               >
                 {/* Background Image */}
                 <img
@@ -508,11 +507,10 @@ export const HomePage: React.FC = () => {
               <button
                 key={idx}
                 onClick={() => setActiveBannerIdx(idx)}
-                className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${
-                  activeBannerIdx === idx
+                className={`h-1 sm:h-1.5 rounded-full transition-all duration-300 ${activeBannerIdx === idx
                     ? 'w-8 sm:w-12 bg-gold-400 shadow-md ring-1 ring-gold-300'
                     : 'w-4 sm:w-6 bg-white/40 hover:bg-white/70'
-                }`}
+                  }`}
                 aria-label={`Show slide ${idx + 1}`}
               />
             ))}
