@@ -96,18 +96,6 @@ export const KhbAssistancePage: React.FC = () => {
         </p>
       </div>
 
-      {/* Statutory Disclaimer Box */}
-      <div className="bg-amber-50/70 border border-amber-300 rounded-2xl p-5 sm:p-6 flex items-start space-x-4 text-xs text-amber-900 leading-relaxed shadow-sm">
-        <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-        <div>
-          <h4 className="font-bold text-sm text-amber-950 mb-1">
-            Official KHB Advisory Notice
-          </h4>
-          <p>
-            Banashankari Enterprises is an independent real estate advisory firm and is not an official branch, authorized agency, or affiliate of the Karnataka Housing Board (KHB) or the Government of Karnataka. We provide documentation assistance, process guidance, and transaction liaison where legally permitted. All official approvals, sanctions, allotment transfers, and legal certifications rest solely with the Karnataka Housing Board and competent statutory authorities.
-          </p>
-        </div>
-      </div>
 
       {/* Services Grid */}
       <div className="space-y-6">
@@ -125,6 +113,19 @@ export const KhbAssistancePage: React.FC = () => {
               <p className="text-xs text-slate-600 leading-relaxed pl-6">{item.desc}</p>
             </div>
           ))}
+        </div>
+      </div>
+
+      {/* Statutory Disclaimer Box */}
+      <div className="bg-amber-50/70 border border-amber-300 rounded-2xl p-5 sm:p-6 flex items-start space-x-4 text-xs text-amber-900 leading-relaxed shadow-sm">
+        <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+        <div>
+          <h4 className="font-bold text-sm text-amber-950 mb-1">
+            Official KHB Advisory Notice
+          </h4>
+          <p>
+            Banashankari Enterprises is an independent real estate advisory firm and is not an official branch, authorized agency, or affiliate of the Karnataka Housing Board (KHB) or the Government of Karnataka. We provide documentation assistance, process guidance, and transaction liaison where legally permitted. All official approvals, sanctions, allotment transfers, and legal certifications rest solely with the Karnataka Housing Board and competent statutory authorities.
+          </p>
         </div>
       </div>
 
