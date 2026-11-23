@@ -107,19 +107,6 @@ export const LoanAssistancePage: React.FC = () => {
         </p>
       </div>
 
-      {/* Crucial Regulatory Disclaimer Box (Prompt Requirement) */}
-      <div className="bg-amber-50/70 border border-amber-300 rounded-2xl p-5 sm:p-6 flex items-start space-x-4 text-xs text-amber-900 leading-relaxed shadow-sm">
-        <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
-        <div>
-          <h4 className="font-bold text-sm text-amber-950 mb-1">
-            Important Banking & Financial Disclaimer
-          </h4>
-          <p>
-            Banashankari Enterprises acts purely as a real estate documentation liaison and loan assistance facilitator. We are not a bank, non-banking financial company (NBFC), or money lender. Final loan sanction, interest rates, approved loan-to-value (LTV), processing fees, and repayment terms are determined exclusively by the respective lending institution based on applicant underwriting and property title clearance.
-          </p>
-        </div>
-      </div>
-
       {/* Supported Loan Categories */}
       <div className="space-y-6">
         <div className="text-center max-w-2xl mx-auto">
@@ -146,57 +133,6 @@ export const LoanAssistancePage: React.FC = () => {
           <p>
             Banashankari Enterprises acts purely as a real estate documentation liaison and loan assistance facilitator. We are not a bank, non-banking financial company (NBFC), or money lender. Final loan sanction, interest rates, approved loan-to-value (LTV), processing fees, and repayment terms are determined exclusively by the respective lending institution based on applicant underwriting and property title clearance.
           </p>
-        </div>
-      </div>
-      
-      {/* EMI Calculator */}
-      <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-luxury space-y-6">
-        <h3 className="font-heading font-bold text-xl text-navy-900 flex items-center space-x-2">
-          <Calculator className="w-5 h-5 text-gold-600" />
-          <span>Quick Home Loan EMI Calculator</span>
-        </h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
-          <div>
-            <label className="font-semibold text-slate-700 block mb-1">Loan Amount (₹)</label>
-            <input
-              type="number"
-              value={amount}
-              onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
-            />
-          </div>
-          <div>
-            <label className="font-semibold text-slate-700 block mb-1">Interest Rate (% p.a.)</label>
-            <input
-              type="number"
-              step="0.1"
-              value={rate}
-              onChange={(e) => setRate(Number(e.target.value))}
-              className="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
-            />
-          </div>
-          <div>
-            <label className="font-semibold text-slate-700 block mb-1">Tenure (Years)</label>
-            <input
-              type="number"
-              value={tenure}
-              onChange={(e) => setTenure(Number(e.target.value))}
-              className="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
-            />
-          </div>
-        </div>
-
-        <div className="bg-navy-950 text-white p-5 rounded-2xl flex items-center justify-between">
-          <div>
-            <span className="text-xs text-slate-300 block">Indicative Monthly Installment (EMI)</span>
-            <span className="text-2xl font-bold text-gold-400 font-sans">
-              ₹{calculateEmi().toLocaleString('en-IN')} / month
-            </span>
-          </div>
-          <span className="text-xs text-slate-400 hidden sm:inline">
-            Principal + Interest amortized over {tenure} years
-          </span>
         </div>
       </div>
 
