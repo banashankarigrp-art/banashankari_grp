@@ -80,14 +80,14 @@ export const LoanAssistancePage: React.FC = () => {
   };
 
   const loanCategories = [
-    { title: 'Home Construction Loans', desc: 'We assist customers building a home on their own plot with document preparation, loan applications and bank follow-up. Loan approval and disbursement are subject to the lender’s assessment.' },
-    { title: 'Home Purchase Loans', desc: 'We assist customers buying a House, Villa or Apartment by helping them prepare property and income documents, submit the loan application, coordinate legal and valuation requirements, and follow up until the loan process is completed.' },
-    { title: 'Plot Purchase Loans', desc: 'We assist customers buying a Plot by helping them prepare property and income documents, submit the loan application, coordinate legal and valuation requirements, and follow up until the loan process is completed.' },
-    { title: 'Home Renovation Loans', desc: 'We assist customers planning to renovate or upgrade their existing homes, including structural modifications, additional floor construction and interior improvements. Our team helps prepare the required documents, submit the loan application, coordinate lender requirements, and follow up throughout the loan process.' },
-    { title: 'Loan Against Property (LAP)', desc: 'We assist customers seeking funds against their existing residential or commercial property. Our team helps prepare property and income documents, submit the loan application, coordinate legal and valuation requirements, and follow up throughout the loan process.' },
-    { title: 'Balance Transfer Assistance', desc: 'We assist customers transfer their existing home loan to another lender. We compare available offers, explain interest rates, EMIs and transfer costs, prepare the required documents, submit the application, and follow up throughout the transfer process.' },
-    { title: 'BASIC Home Loans - DSA Franchise', desc: 'As an authorised franchise partner of BASIC Home Loan, we help customers access home loans, loans against property and other financial solutions from leading banks and NBFCs. Combining our real estate experience with BASIC’s technology-driven platform, we make property financing simpler, smoother and more accessible.' },
-    { title: 'NHB Senior Citizen Housing Schemes', desc: 'The National Housing Bank supports housing finance initiatives such as Reverse Mortgage Loans, enabling eligible senior citizens to convert their home equity into regular income while continuing to live in their homes. These facilities promote financial independence and security during retirement through participating banks and Housing Finance Companies.' },
+    { title: 'Home Construction Loans', desc: 'We help customers secure home construction loans through document preparation, application submission and bank coordination, subject to lender approval.' },
+    { title: 'Home Purchase Loans', desc: 'We assist homebuyers with documentation, loan applications, legal and valuation coordination, and bank follow-ups to simplify the home loan process.' },
+    { title: 'Plot Purchase Loans', desc: 'We help plot buyers with documentation, loan applications, legal and valuation coordination, and bank follow-ups throughout the loan process.' },
+    { title: 'Home Renovation Loans', desc: 'We help customers finance home renovations, structural modifications, floor extensions and interior upgrades through documentation, loan applications and lender coordination.' },
+    { title: 'Loan Against Property (LAP)', desc: 'We help customers secure funds against residential or commercial properties through documentation, loan applications, legal and valuation coordination, and bank follow-ups.' },
+    { title: 'Balance Transfer Assistance', desc: 'We help customers transfer existing home loans to better lending options through offer comparison, documentation, application support and bank coordination.' },
+    { title: 'BASIC Home Loans - DSA Franchise', desc: 'As an authorised BASIC Home Loan franchise partner, we help customers access loans from leading banks and NBFCs, making property financing simpler and easier.' },
+    { title: 'National Housing Bank (NHB) - Senior Citizen Housing Schemes', desc: 'We help eligible senior citizens access Reverse Mortgage Loans, converting home equity into regular income while continuing to live in their homes, supporting financial independence during retirement.' },
   ];
 
   return (
