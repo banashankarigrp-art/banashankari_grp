@@ -102,8 +102,7 @@ export const LoanAssistancePage: React.FC = () => {
         <p className="text-sm text-slate-600 leading-relaxed font-light">
           {t(
             'loans.subtitle',
-            'BASIC Home Loans - DSA Franchise',
-            'Through our BASIC Home Loans DSA Franchise partnership, we connect customers with leading banks and NBFCs, offering a wide range of loan solutions, including home purchases, construction, renovations, property-backed loans and senior citizen housing schemes, with expert guidance and support throughout the loan journey.'
+            'BASIC Home Loans - DSA Franchise ** Through our BASIC Home Loans DSA Franchise partnership, we connect customers with leading banks and NBFCs, offering a wide range of loan solutions, including home purchases, construction, renovations, property-backed loans and senior citizen housing schemes, with expert guidance and support throughout the loan journey.'
           )}
         </p>
       </div>
