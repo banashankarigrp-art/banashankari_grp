@@ -136,6 +136,19 @@ export const LoanAssistancePage: React.FC = () => {
         </div>
       </div>
 
+      {/* Crucial Regulatory Disclaimer Box (Prompt Requirement) */}
+      <div className="bg-amber-50/70 border border-amber-300 rounded-2xl p-5 sm:p-6 flex items-start space-x-4 text-xs text-amber-900 leading-relaxed shadow-sm">
+        <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+        <div>
+          <h4 className="font-bold text-sm text-amber-950 mb-1">
+            Important Banking & Financial Disclaimer
+          </h4>
+          <p>
+            Banashankari Enterprises acts purely as a real estate documentation liaison and loan assistance facilitator. We are not a bank, non-banking financial company (NBFC), or money lender. Final loan sanction, interest rates, approved loan-to-value (LTV), processing fees, and repayment terms are determined exclusively by the respective lending institution based on applicant underwriting and property title clearance.
+          </p>
+        </div>
+      </div>
+      
       {/* EMI Calculator */}
       <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-luxury space-y-6">
         <h3 className="font-heading font-bold text-xl text-navy-900 flex items-center space-x-2">
