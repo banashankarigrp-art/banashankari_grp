@@ -21,7 +21,7 @@ export const KhbAssistancePage: React.FC = () => {
     phone: (user?.phone || '').replace(/\D/g, '').slice(-10),
     email: user?.email || '',
     khbAssistanceType: 'transfer_assistance',
-    khbLocality: 'Kengeri KHB Layout',
+    khbLocality: 'KHB Layout',
     message: '',
   });
 
@@ -91,7 +91,7 @@ export const KhbAssistancePage: React.FC = () => {
         <p className="text-sm text-slate-600 leading-relaxed font-light">
           {t(
             'khb.subtitle',
-            'Reliable advisory and documentation coordination for property buyers and allottees across Bangalore KHB residential layouts.'
+            'Reliable advisory and documentation coordination for property buyers and allottees across KHB residential layouts.'
           )}
         </p>
       </div>
