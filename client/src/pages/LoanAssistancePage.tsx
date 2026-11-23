@@ -96,7 +96,7 @@ export const LoanAssistancePage: React.FC = () => {
           {isKn ? 'ಸಮನ್ವಯ & ದಾಖಲೆಗಳ ಬೆಂಬಲ' : 'Liaison & Documentation Support'}
         </span>
         <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
-          {t('loans.title', 'Property & Construction Loan Assistance BASIC Home Loans - DSA Franchise')}
+          {t('loans.title', 'Property & Home Loan Solutions – BASIC Home Loans DSA Franchise')}
         </h1>
         <p className="text-sm text-slate-600 leading-relaxed font-light">
           {t(
