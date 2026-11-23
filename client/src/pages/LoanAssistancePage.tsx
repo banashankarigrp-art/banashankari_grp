@@ -96,12 +96,12 @@ export const LoanAssistancePage: React.FC = () => {
           {isKn ? 'ಸಮನ್ವಯ & ದಾಖಲೆಗಳ ಬೆಂಬಲ' : 'Liaison & Documentation Support'}
         </span>
         <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
-          {t('loans.title', 'Property & Home Loan Solutions – BASIC Home Loans DSA Franchise')}
+          {t('loans.title', 'Property & Home Loan Solutions through BASIC Home Loans DSA Franchise')}
         </h1>
         <p className="text-sm text-slate-600 leading-relaxed font-light">
           {t(
             'loans.subtitle',
-            'Through our BASIC Home Loans DSA Franchise partnership, we connect customers with leading banks and NBFCs, offering a wide range of loan solutions, including home purchases, construction, renovations, property-backed loans and senior citizen housing schemes, with expert guidance and support throughout the loan journey.'
+            'Our BASIC Home Loans DSA Franchise connects customers with leading banks and NBFCs, offering diverse loan solutions for home purchases, construction, renovations, loans against property and reverse mortgages, backed by expert guidance and end-to-end assistance.'
           )}
         </p>
       </div>
