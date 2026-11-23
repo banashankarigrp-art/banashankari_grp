@@ -80,12 +80,12 @@ export const LoanAssistancePage: React.FC = () => {
   };
 
   const loanCategories = [
-    { title: 'Home Construction Loans', desc: 'Assistance for building your own home on a verified plot with staged disbursals based on site civil completion.' },
-    { title: 'Home Purchase Loans', desc: 'Guidance on documentation and valuation for purchasing ready-to-move or under-construction villas and apartments.' },
-    { title: 'Plot Purchase Loans', desc: 'Liaison for acquiring BDA, BMRDA, and DC-converted residential plots through leading retail banks.' },
-    { title: 'Home Renovation Loans', desc: 'Funding support for major structural modifications, floor extensions, and premium interior renovations.' },
-    { title: 'Loan Against Property (LAP)', desc: 'Unlocking liquidity against existing clear-title residential or commercial properties in Bangalore.' },
-    { title: 'Balance Transfer Assistance', desc: 'Exploring refinancing options to lower existing mortgage interest burdens and reduce overall EMIs.' },
+    { title: 'Home Construction Loans', desc: 'We assist customers building a home on their own plot with document preparation, loan applications and bank follow-up. Loan approval and disbursement are subject to the lender’s assessment.' },
+    { title: 'Home Purchase Loans', desc: 'We assist customers buying a house, villa or apartment by helping them prepare property and income documents, submit the loan application, coordinate legal and valuation requirements, and follow up until the loan process is completed.' },
+    { title: 'Plot Purchase Loans', desc: 'We assist customers purchasing KHB-allotted resale sites, BDA sites and other eligible residential plots. Our team helps prepare property and income documents, submit the loan application, coordinate legal and valuation requirements, and follow up through the loan process.' },
+    { title: 'Home Renovation Loans', desc: 'We assist customers planning to renovate or upgrade their existing homes, including structural modifications, additional floor construction and interior improvements. Our team helps prepare the required documents, submit the loan application, coordinate lender requirements, and follow up throughout the loan process.' },
+    { title: 'Loan Against Property (LAP)', desc: 'We assist customers seeking funds against their existing residential or commercial property. Our team helps prepare property and income documents, submit the loan application, coordinate legal and valuation requirements, and follow up throughout the loan process.' },
+    { title: 'Balance Transfer Assistance', desc: 'We assist customers transfer their existing home loan to another lender. We compare available offers, explain interest rates, EMIs and transfer costs, prepare the required documents, submit the application, and follow up throughout the transfer process.' },
   ];
 
   return (
@@ -114,7 +114,7 @@ export const LoanAssistancePage: React.FC = () => {
             Important Banking & Financial Disclaimer
           </h4>
           <p>
-            Banashankari Enterprises acts purely as a real estate documentation liaison and loan assistance facilitator. We are not a bank, non-banking financial company (NBFC), or money lender. Final loan sanction, interest rates, approved loan-to-value (LTV), processing fees, and repayment terms are determined exclusively by the respective lending institution based on applicant underwriting and property title clearance. We do not promise guaranteed loan approvals.
+            Banashankari Enterprises acts purely as a real estate documentation liaison and loan assistance facilitator. We are not a bank, non-banking financial company (NBFC), or money lender. Final loan sanction, interest rates, approved loan-to-value (LTV), processing fees, and repayment terms are determined exclusively by the respective lending institution based on applicant underwriting and property title clearance.
           </p>
         </div>
       </div>
