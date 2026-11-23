@@ -62,19 +62,19 @@ export const KhbAssistancePage: React.FC = () => {
   const services = [
     {
       title: 'Documentation Checklist & Verification',
-      desc: 'Assistance in auditing allotment letters, possession certificates, absolute sale deeds, and encumbrance certificates (Form 15 & 16) issued under Karnataka Housing Board schemes.',
+      desc: 'Assistance in auditing allotment letters, possession certificates, absolute sale deeds, e-Khata, and encumbrance certificates (Form 15 & 16) issued under Karnataka Housing Board schemes.',
     },
     {
-      title: 'Property Transfer Liaison',
-      desc: 'Procedural guidance on transfer of allotment, legal heir succession records, and documentation coordination with competent KHB sub-division offices.',
+      title: 'Property Transfer Assistance',
+      desc: 'We help buyers, sellers and families prepare the available documents for KHB property transfer requests, including sale deed and legal-heir related cases. We assist with application submission and follow-up with the concerned office. The transfer is completed only after the authority reviews and approves the application.',
     },
     {
-      title: 'Title Due-Diligence & Clearances',
-      desc: 'Legal verification ensuring the plot or house is unencumbered and meets regulatory resale conditions prior to executing purchase transactions.',
+      title: 'Property Document & Legal Review Assistance',
+      desc: 'We help buyers collect and organise the sale deed, allotment records, khata, tax receipts and encumbrance certificate for review by a qualified property lawyer. The lawyer’s findings help buyers understand any title issues or resale conditions before proceeding.',
     },
     {
-      title: 'KHB Consultation & Allotment Advice',
-      desc: 'Orientation on KHB residential schemes across Bangalore suburban development belts (Kengeri, Suryanagar, Bidadi, Nelamangala).',
+      title: 'KHB Property Services',
+      desc: 'We assist buyers and sellers with available KHB resale sites and homes in Suryanagar, Kengeri, Bidadi, Nelamangala and other locations where we operate. Our support includes property enquiries, site visits, document coordination and purchase assistance.',
     },
   ];
 
