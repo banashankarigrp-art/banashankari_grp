@@ -192,7 +192,7 @@ export const KhbAssistancePage: React.FC = () => {
                       }
                       setFormData({ ...formData, phone: digits.slice(0, 10) });
                     }}
-                    placeholder="98450 12345"
+                    placeholder="7353 275 925"
                     className="w-full px-3 py-2.5 text-xs focus:outline-none bg-transparent"
                   />
                 </div>
@@ -204,7 +204,7 @@ export const KhbAssistancePage: React.FC = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="you@example.com"
+                  placeholder="ramesh@example.com"
                   className="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
                 />
               </div>
@@ -232,7 +232,7 @@ export const KhbAssistancePage: React.FC = () => {
                   required
                   value={formData.khbLocality}
                   onChange={(e) => setFormData({ ...formData, khbLocality: e.target.value })}
-                  placeholder="e.g. Kengeri KHB, Suryanagar, Bidadi..."
+                  placeholder="e.g. KHB, Suryanagar, Phase1, Phase2, Phase3 & 4..."
                   className="w-full p-2.5 rounded-xl border border-slate-300"
                 />
               </div>
