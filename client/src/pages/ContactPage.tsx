@@ -212,7 +212,7 @@ export const ContactPage: React.FC = () => {
                     required
                     value={formData.customerName}
                     onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                    placeholder={isKn ? 'ಉದಾ. ಆನಂದ್ ಗೌಡ' : 'e.g. Anand Gowda'}
+                    placeholder={isKn ? 'ಉದಾ. ಆನಂದ್ ಗೌಡ' : 'e.g. Ramesh SH'}
                     className="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
                   />
                 </div>
@@ -242,7 +242,7 @@ export const ContactPage: React.FC = () => {
                         }
                         setFormData({ ...formData, phone: digits.slice(0, 10) });
                       }}
-                      placeholder="98450 12345"
+                      placeholder="7353 275 925"
                       className="w-full px-3 py-3 text-xs focus:outline-none bg-transparent"
                     />
                   </div>
@@ -259,7 +259,7 @@ export const ContactPage: React.FC = () => {
                     required
                     value={formData.email}
                     onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    placeholder="anand@example.com"
+                    placeholder="ramesh@example.com"
                     className="w-full p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
                   />
                 </div>
