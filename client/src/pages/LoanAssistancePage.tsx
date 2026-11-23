@@ -171,7 +171,7 @@ export const LoanAssistancePage: React.FC = () => {
                   required
                   value={formData.customerName}
                   onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                  placeholder="e.g. Anand Gowda"
+                  placeholder="e.g. Ramesh"
                   className="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
                 />
               </div>
@@ -199,7 +199,7 @@ export const LoanAssistancePage: React.FC = () => {
                       }
                       setFormData({ ...formData, phone: digits.slice(0, 10) });
                     }}
-                    placeholder="98450 12345"
+                    placeholder="7353 275 925"
                     className="w-full px-3 py-2.5 text-xs focus:outline-none bg-transparent"
                   />
                 </div>
@@ -211,7 +211,7 @@ export const LoanAssistancePage: React.FC = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="anand@example.com"
+                  placeholder="ramesh@example.com"
                   className="w-full p-2.5 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500"
                 />
               </div>
@@ -233,59 +233,6 @@ export const LoanAssistancePage: React.FC = () => {
                   <option value="balance_transfer">Balance Transfer</option>
                 </select>
               </div>
-
-              <div>
-                <label className="font-semibold text-slate-700 block mb-1">Approximate Amount (₹) *</label>
-                <input
-                  type="number"
-                  required
-                  value={formData.approximateLoanAmount}
-                  onChange={(e) => setFormData({ ...formData, approximateLoanAmount: Number(e.target.value) })}
-                  className="w-full p-2.5 rounded-xl border border-slate-300"
-                />
-              </div>
-
-              <div>
-                <label className="font-semibold text-slate-700 block mb-1">Employment Type *</label>
-                <select
-                  value={formData.employmentType}
-                  onChange={(e) => setFormData({ ...formData, employmentType: e.target.value })}
-                  className="w-full p-2.5 rounded-xl border border-slate-300"
-                >
-                  <option value="salaried">Salaried Professional</option>
-                  <option value="self_employed">Self Employed / Professional</option>
-                  <option value="business">Business Proprietor</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <div>
-                <label className="font-semibold text-slate-700 block mb-1">Monthly Income Bracket</label>
-                <select
-                  value={formData.monthlyIncomeRange}
-                  onChange={(e) => setFormData({ ...formData, monthlyIncomeRange: e.target.value })}
-                  className="w-full p-2.5 rounded-xl border border-slate-300"
-                >
-                  <option value="below_50k">Under ₹50,000</option>
-                  <option value="50k_1l">₹50,000 – ₹1,00,000</option>
-                  <option value="1l_1.5l">₹1,00,000 – ₹1,50,000</option>
-                  <option value="above_1.5l">Above ₹1,50,000</option>
-                </select>
-              </div>
-              <div>
-                <label className="font-semibold text-slate-700 block mb-1">Preferred Time to Receive Call</label>
-                <select
-                  value={formData.preferredContactTime}
-                  onChange={(e) => setFormData({ ...formData, preferredContactTime: e.target.value })}
-                  className="w-full p-2.5 rounded-xl border border-slate-300"
-                >
-                  <option value="morning">Morning (10:00 AM – 1:00 PM)</option>
-                  <option value="afternoon">Afternoon (2:00 PM – 5:00 PM)</option>
-                  <option value="evening">Evening (5:00 PM – 7:30 PM)</option>
-                </select>
-              </div>
-            </div>
 
             <div>
               <label className="font-semibold text-slate-700 block mb-1">Additional Notes</label>
