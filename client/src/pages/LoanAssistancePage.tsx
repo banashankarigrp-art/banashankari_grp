@@ -85,7 +85,6 @@ export const LoanAssistancePage: React.FC = () => {
     { title: 'Home Renovation Loans', desc: 'We help customers finance home renovations, structural modifications, floor extensions and interior upgrades through documentation, loan applications and lender coordination.' },
     { title: 'Loan Against Property (LAP)', desc: 'We help customers secure funds against residential or commercial properties through documentation, loan applications, legal and valuation coordination, and bank follow-ups.' },
     { title: 'Balance Transfer Assistance', desc: 'We help customers transfer existing home loans to better lending options through offer comparison, documentation, application support and bank coordination.' },
-    { title: 'BASIC Home Loans - DSA Franchise', desc: 'As an authorised BASIC Home Loan franchise partner, we help customers access loans from leading banks and NBFCs, making property financing simpler and easier.' },
     { title: 'National Housing Bank (NHB) - Senior Citizen Housing Schemes', desc: 'We help eligible senior citizens access Reverse Mortgage Loans, converting home equity into regular income while continuing to live in their homes, supporting financial independence during retirement.' },  
   ];
 
