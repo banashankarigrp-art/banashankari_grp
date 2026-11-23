@@ -233,7 +233,7 @@ export const LoanAssistancePage: React.FC = () => {
                   <option value="balance_transfer">Balance Transfer</option>
                 </select>
               </div>
-
+            </div>
             <div>
               <label className="font-semibold text-slate-700 block mb-1">Additional Notes</label>
               <textarea
