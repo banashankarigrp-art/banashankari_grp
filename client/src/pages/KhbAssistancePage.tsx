@@ -21,7 +21,7 @@ export const KhbAssistancePage: React.FC = () => {
     phone: (user?.phone || '').replace(/\D/g, '').slice(-10),
     email: user?.email || '',
     khbAssistanceType: 'transfer_assistance',
-    khbLocality: 'KHB Layout',
+    khbLocality: '',
     message: '',
   });
 
