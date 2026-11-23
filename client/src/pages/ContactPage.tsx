@@ -141,7 +141,7 @@ export const ContactPage: React.FC = () => {
                   <p className="text-slate-200">
                     {isKn
                       ? 'ಬನಶಂಕರಿ & ಬೆಂಗಳೂರು ಸುತ್ತಮುತ್ತಲಿನ ಪ್ರದೇಶಗಳು, ಕರ್ನಾಟಕ, ಭಾರತ'
-                      : 'Banashankari & Bangalore Suburban Belts, Karnataka, India'}
+                      : 'KHB Surya nagar & Bangalore Suburban Belts, Karnataka, India'}
                   </p>
                 </div>
               </div>
