@@ -213,8 +213,23 @@ export const Navbar: React.FC = () => {
         {/* ======================================================== */}
         <div className="bg-slate-50/95 backdrop-blur-md border-b border-slate-200/80">
           <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-end md:justify-between h-11 sm:h-12 gap-2">
+            <div className="flex items-center justify-between h-11 sm:h-12 gap-2">
               
+              {/* Mobile Left: Hamburger Menu Toggle Button */}
+              <button
+                type="button"
+                onClick={() => setDrawerOpen(!drawerOpen)}
+                className={`md:hidden inline-flex items-center justify-center p-2 sm:p-2.5 rounded-xl border transition focus:outline-hidden focus:ring-2 focus:ring-gold-500 shrink-0 ${
+                  drawerOpen
+                    ? 'bg-navy-950 text-white border-navy-950 shadow-sm'
+                    : 'text-navy-900 bg-white hover:bg-slate-100 border-slate-200 shadow-2xs'
+                }`}
+                aria-label="Navigation Menu"
+                aria-expanded={drawerOpen}
+              >
+                {drawerOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              </button>
+
               {/* Desktop Navigation Links */}
               <nav className="hidden md:flex items-center space-x-1 lg:space-x-1.5 xl:space-x-2 flex-1 overflow-x-auto py-1 scrollbar-none" aria-label="Main Navigation">
                 {navLinks.map((item) => {
@@ -236,7 +251,7 @@ export const Navbar: React.FC = () => {
                 })}
               </nav>
 
-              {/* Right: Actions Container (Language Dropdown, Login Button BEFORE Hamburger Menu, Hamburger Menu LAST) */}
+              {/* Right: Actions Container (Language Dropdown, Login / User Profile Button) */}
               <div className="flex items-center space-x-2 sm:space-x-2.5 shrink-0">
                 {/* Language Dropdown Selector (BEFORE Login Button) */}
                 <div className="relative" ref={langDropdownRef}>
@@ -433,21 +448,6 @@ export const Navbar: React.FC = () => {
                     <span>{t('nav.login', 'Login')}</span>
                   </Link>
                 )}
-
-                {/* Hamburger Menu Toggle Button (Right side LAST, wording removed) */}
-                <button
-                  type="button"
-                  onClick={() => setDrawerOpen(!drawerOpen)}
-                  className={`md:hidden inline-flex items-center justify-center p-2 sm:p-2.5 rounded-xl border transition focus:outline-hidden focus:ring-2 focus:ring-gold-500 shrink-0 ${
-                    drawerOpen
-                      ? 'bg-navy-950 text-white border-navy-950 shadow-sm'
-                      : 'text-navy-900 bg-white hover:bg-slate-100 border-slate-200 shadow-2xs'
-                  }`}
-                  aria-label="Navigation Menu"
-                  aria-expanded={drawerOpen}
-                >
-                  {drawerOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-                </button>
               </div>
             </div>
           </div>
@@ -470,58 +470,9 @@ export const Navbar: React.FC = () => {
 
           {/* Full-width Top-to-Bottom Menu Panel */}
           <div className="relative z-50 w-full bg-white border-b-2 border-gold-500/50 shadow-2xl overflow-y-auto max-h-[calc(100vh-6rem)] transform transition-all animate-in slide-in-from-top duration-300">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6">
-              {/* Mobile Drawer Header with Clear Large Logo & Language Selector */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3.5 mb-4 rounded-2xl bg-[#488B38] border border-[#3B732E] shadow-sm">
-                <div className="flex items-center space-x-3.5">
-                  <img
-                    src="/khb-logo-circle.png"
-                    alt="KHB Suryanagar Properties Emblem"
-                    className="w-14 h-14 object-contain rounded-full shadow-xs shrink-0 ring-2 ring-white/70 bg-white"
-                  />
-                  <div className="min-w-0">
-                    <h2 className="font-heading font-black text-sm text-[#FFD700] uppercase leading-snug drop-shadow-sm">
-                      {isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'BANASHANKARI ENTERPRISES'}
-                    </h2>
-                    <p className="text-[10px] font-black text-black uppercase tracking-wider">
-                      {isKn ? 'ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಮತ್ತು ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ಸ್' : 'REAL ESTATE AND CONSTRUCTIONS'}
-                    </p>
-                  </div>
-                </div>
-
-                {/* Mobile Language Switcher Pill */}
-                <div className="flex items-center bg-white/95 p-1 rounded-xl border border-white/60 self-start sm:self-auto shadow-xs">
-                  <span className="text-[11px] font-bold text-slate-700 px-2 flex items-center space-x-1">
-                    <Globe className="w-3.5 h-3.5 text-[#488B38]" />
-                    <span>{isKn ? 'ಭಾಷೆ:' : 'Language:'}</span>
-                  </span>
-                  <button
-                    type="button"
-                    onClick={() => setLanguage('en')}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
-                      language === 'en'
-                        ? 'bg-white text-navy-950 shadow-xs'
-                        : 'text-slate-600 hover:text-navy-900'
-                    }`}
-                  >
-                    English
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setLanguage('kn')}
-                    className={`px-3 py-1 rounded-lg text-xs font-bold transition ${
-                      language === 'kn'
-                        ? 'bg-white text-navy-950 shadow-xs'
-                        : 'text-slate-600 hover:text-navy-900'
-                    }`}
-                  >
-                    ಕನ್ನಡ
-                  </button>
-                </div>
-              </div>
-
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-4">
               {/* Navigation Links Grid / List (Top to Bottom) */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-3.5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                 {navLinks.map((item) => {
                   const Icon = item.icon;
                   const active = isActive(item.path);

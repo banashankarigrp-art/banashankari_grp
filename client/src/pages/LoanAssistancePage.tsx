@@ -80,12 +80,44 @@ export const LoanAssistancePage: React.FC = () => {
   };
 
   const loanCategories = [
-    { title: 'Home Construction Loans', desc: 'We help customers secure home construction loans through document preparation, application submission and bank coordination, subject to lender approval.' },
-    { title: 'Home & Plot Purchase Loans', desc: 'We assist homebuyers & Plotbuyers with documentation, loan applications, legal and valuation coordination, and bank follow-ups to simplify the home loan process.' },
-    { title: 'Home Renovation Loans', desc: 'We help customers finance home renovations, structural modifications, floor extensions and interior upgrades through documentation, loan applications and lender coordination.' },
-    { title: 'Loan Against Property (LAP)', desc: 'We help customers secure funds against residential or commercial properties through documentation, loan applications, legal and valuation coordination, and bank follow-ups.' },
-    { title: 'Balance Transfer Assistance', desc: 'We help customers transfer existing home loans to better lending options through offer comparison, documentation, application support and bank coordination.' },
-    { title: 'National Housing Bank (NHB) - Senior Citizen Housing Schemes', desc: 'We help eligible senior citizens access Reverse Mortgage Loans, converting home equity into regular income while continuing to live in their homes, supporting financial independence during retirement.' },  
+    {
+      title: 'Home Construction Loans',
+      knTitle: 'ಗೃಹ ನಿರ್ಮಾಣ ಸಾಲಗಳು (Home Construction Loans)',
+      image: '/loans/home-construction-loans.jpg',
+      desc: 'We help customers secure home construction loans through document preparation, application submission and bank coordination, subject to lender approval.',
+      knDesc: 'ದಾಖಲೆಗಳ ಸಿದ್ಧತೆ, ಅರ್ಜಿ ಸಲ್ಲಿಕೆ ಮತ್ತು ಬ್ಯಾಂಕ್ ಸಮನ್ವಯದ ಮೂಲಕ ಗ್ರಾಹಕರಿಗೆ ಗೃಹ ನಿರ್ಮಾಣ ಸಾಲಗಳನ್ನು ಪಡೆಯಲು ನಾವು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ, ಸಾಲದಾತರ ಅನುಮೋದನೆಗೆ ಒಳಪಟ್ಟಿರುತ್ತದೆ.',
+    },
+    {
+      title: 'Home & Plot Purchase Loans',
+      knTitle: 'ಮನೆ & ನಿವೇಶನ ಖರೀದಿ ಸಾಲಗಳು (Home & Plot Purchase Loans)',
+      image: '/loans/home-plot-purchase-loans.jpg',
+      desc: 'We assist homebuyers & Plotbuyers with documentation, loan applications, legal and valuation coordination, and bank follow-ups to simplify the home loan process.',
+      knDesc: 'ಗೃಹ ಸಾಲ ಪ್ರಕ್ರಿಯೆಯನ್ನು ಸುಲಭಗೊಳಿಸಲು ನಾವು ಮನೆ ಮತ್ತು ನಿವೇಶನ ಖರೀದಿದಾರರಿಗೆ ದಾಖಲೆಗಳು, ಸಾಲ ಅರ್ಜಿಗಳು, ಕಾನೂನು ಮತ್ತು ಮೌಲ್ಯಮಾಪನ ಸಮನ್ವಯದೊಂದಿಗೆ ಬೆಂಬಲ ನೀಡುತ್ತೇವೆ.',
+    },
+    {
+      title: 'Home Renovation Loans',
+      knTitle: 'ಮನೆ ನವೀಕರಣ ಸಾಲಗಳು (Home Renovation Loans)',
+      desc: 'We help customers finance home renovations, structural modifications, floor extensions and interior upgrades through documentation, loan applications and lender coordination.',
+      knDesc: 'ದಾಖಲೆಗಳು, ಸಾಲ ಅರ್ಜಿಗಳು ಮತ್ತು ಸಾಲದಾತರ ಸಮನ್ವಯದ ಮೂಲಕ ಮನೆ ನವೀಕರಣ, ರಚನಾತ್ಮಕ ಬದಲಾವಣೆಗಳು, ಹೆಚ್ಚುವರಿ ಮಹಡಿ ವಿಸ್ತರಣೆ ಮತ್ತು ಇಂಟೀರಿಯರ್ ಅಪ್‌ಗ್ರೇಡ್‌ಗಳಿಗೆ ಹಣಕಾಸು ಒದಗಿಸಲು ನಾವು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
+    },
+    {
+      title: 'Loan Against Property (LAP)',
+      knTitle: 'ಆಸ್ತಿಯ ಮೇಲಿನ ಸಾಲ (Loan Against Property)',
+      desc: 'We help customers secure funds against residential or commercial properties through documentation, loan applications, legal and valuation coordination, and bank follow-ups.',
+      knDesc: 'ದಾಖಲೆಗಳು, ಸಾಲ ಅರ್ಜಿಗಳು, ಕಾನೂನು ಮತ್ತು ಮೌಲ್ಯಮಾಪನ ಸಮನ್ವಯ ಮತ್ತು ಬ್ಯಾಂಕ್ ಫಾಲೋ-ಅಪ್‌ಗಳ ಮೂಲಕ ವಸತಿ ಅಥವಾ ವಾಣಿಜ್ಯ ಆಸ್ತಿಗಳ ಮೇಲೆ ನಿಧಿ ಪಡೆಯಲು ನಾವು ಗ್ರಾಹಕರಿಗೆ ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
+    },
+    {
+      title: 'Balance Transfer Assistance',
+      knTitle: 'ಬ್ಯಾಲೆನ್ಸ್ ವರ್ಗಾವಣೆ ನೆರವು (Balance Transfer Assistance)',
+      desc: 'We help customers transfer existing home loans to better lending options through offer comparison, documentation, application support and bank coordination.',
+      knDesc: 'ಆಫರ್‌ಗಳ ಹೋಲಿಕೆ, ದಾಖಲಾತಿ, ಅರ್ಜಿ ಬೆಂಬಲ ಮತ್ತು ಬ್ಯಾಂಕ್ ಸಮನ್ವಯದ ಮೂಲಕ ಉತ್ತಮ ಸಾಲದ ಆಯ್ಕೆಗಳಿಗೆ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಗೃಹ ಸಾಲಗಳನ್ನು ವರ್ಗಾಯಿಸಲು ನಾವು ಗ್ರಾಹಕರಿಗೆ ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
+    },
+    {
+      title: 'National Housing Bank (NHB) - Senior Citizen Housing Schemes',
+      knTitle: 'ರಾಷ್ಟ್ರೀಯ ವಸತಿ ಬ್ಯಾಂಕ್ (NHB) - ಹಿರಿಯ ನಾಗರಿಕರ ಯೋಜನೆಗಳು',
+      desc: 'We help eligible senior citizens access Reverse Mortgage Loans, converting home equity into regular income while continuing to live in their homes, supporting financial independence during retirement.',
+      knDesc: 'ಅರ್ಹ ಹಿರಿಯ ನಾಗರಿಕರಿಗೆ ರಿವರ್ಸ್ ಮಾರ್ಟ್ಗೇಜ್ ಸಾಲಗಳನ್ನು ಪಡೆಯಲು, ಮನೆಯಲ್ಲಿಯೇ ವಾಸಿಸುತ್ತಾ ಆರ್ಥಿಕ ಸ್ವಾತಂತ್ರ್ಯವನ್ನು ಕಾಪಾಡಿಕೊಳ್ಳಲು ನಾವು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
+    },  
   ];
 
   return (
@@ -112,11 +144,30 @@ export const LoanAssistancePage: React.FC = () => {
           <h2 className="font-heading text-2xl font-bold text-navy-900">Assisted Loan Categories</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {loanCategories.map((cat, idx) => (
-            <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-luxury space-y-2">
-              <h3 className="font-heading font-bold text-base text-navy-900">{cat.title}</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">{cat.desc}</p>
+            <div
+              key={idx}
+              className="bg-white rounded-2xl border border-slate-200/90 shadow-luxury overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300"
+            >
+              {cat.image && (
+                <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                  <img
+                    src={cat.image}
+                    alt={isKn ? cat.knTitle || cat.title : cat.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div className="p-6 flex-1 flex flex-col space-y-2">
+                <h3 className="font-heading font-bold text-base text-navy-900 group-hover:text-gold-600 transition-colors">
+                  {isKn ? cat.knTitle || cat.title : cat.title}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed font-light">
+                  {isKn ? cat.knDesc || cat.desc : cat.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>

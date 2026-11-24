@@ -269,6 +269,8 @@ export const knTranslations: Record<string, string> = {
   'construction.title': 'ಬೆಂಗಳೂರಿನಲ್ಲಿ ಕಸ್ಟಮ್ ಮನೆ ನಿರ್ಮಾಣ',
   'construction.subtitle': 'ಖಾಲಿ ನಿವೇಶನಗಳಿಂದ ಸುಂದರ ಐಷಾರಾಮಿ ಡ್ಯೂಪ್ಲೆಕ್ಸ್ ಮನೆಗಳವರೆಗೆ. ಕಟ್ಟುನಿಟ್ಟಾದ ಗುಣಮಟ್ಟ ಮತ್ತು ಪಾರದರ್ಶಕ ಲೆಕ್ಕಪತ್ರದೊಂದಿಗೆ ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಂದ ನೇರ ನಿರ್ವಹಣೆ.',
   'construction.methodology_title': 'ನಮ್ಮ 9-ಹಂತದ ನಿರ್ಮಾಣ ವಿಧಾನ',
+  'construction.video_title': 'ಮನೆ ನಿರ್ಮಾಣದ 3D ನೋಟ (3D View of Construction of Home)',
+  'construction.video_subtitle': 'ಭೂಮಿ ಪೂಜೆಯಿಂದ ಹಿಡಿದು ಕೀ ಹಸ್ತಾಂತರದವರೆಗೆ ಸಂಪೂರ್ಣ ಮನೆ ನಿರ್ಮಾಣ ಪ್ರಕ್ರಿಯೆಯ ವಾಸ್ತವಿಕ 3D ವಾಸ್ತುಶಿಲ್ಪ ನೋಟ.',
   'construction.form_title': 'ನಿರ್ಮಾಣ ಕೊಟೇಶನ್ ಮತ್ತು ಅಂದಾಜು ವಿನಂತಿಸಿ',
 
   // KHB Page

@@ -10,6 +10,9 @@ import {
   ShieldCheck,
   Send,
   Building,
+  Video,
+  ExternalLink,
+  Sparkles,
 } from 'lucide-react';
 import { api } from '../services/api';
 import { IConstructionProject, COMPANY_INFO } from '@shared/types';
@@ -92,15 +95,78 @@ export const ConstructionPage: React.FC = () => {
   };
 
   const workflowSteps = [
-    { title: '1. Initial Consultation', desc: 'Detailed discussion on architectural layout, Vaastu requirements, budget boundaries, and family living preferences.' },
-    { title: '2. Site Assessment', desc: 'On-ground soil testing, road approach evaluation, Cauvery water line and BESCOM electrical grid verification.' },
-    { title: '3. Design & Planning', desc: '2D architectural floor plans, 3D elevation renderings, structural engineering vetting, and municipal sanction drawings.' },
-    { title: '4. Transparent Estimation', desc: 'Comprehensive itemized Bill of Quantities (BOQ) covering cement grades (53 grade), Fe550 TMT steel, and fixtures.' },
-    { title: '5. Material & Contractor Oversight', desc: 'Direct on-site material inspections by Ramesh S H with zero unapproved brand substitutions.' },
-    { title: '6. Structural Execution', desc: 'Excavation, footing concrete, RCC column casting, brick masonry, and slab reinforcement pouring.' },
-    { title: '7. Quality Inspections', desc: 'Cube compressive strength testing, plumbing pressure checks, and concealed electrical insulation tests.' },
-    { title: '8. Milestone Updates', desc: 'Regular digital progress reports with high-resolution site photographs sent directly to the client.' },
-    { title: '9. Handover & Completion', desc: 'Final deep cleaning, key handover ceremony, structural warranty documentation, and as-built drawing handover.' },
+    {
+      stepNumber: '01',
+      title: '1. Initial Consultation',
+      knTitle: '1. ಆರಂಭಿಕ ಸಮಾಲೋಚನೆ',
+      image: '/methodology/stage-1-initial-consultation.jpg',
+      desc: 'Detailed discussion on architectural layout, Vaastu requirements, budget boundaries, and family living preferences.',
+      knDesc: 'ವಾಸ್ತು ನಿಯಮಗಳು, ವಾಸ್ತುಶಿಲ್ಪ ವಿನ್ಯಾಸ, ಬಜೆಟ್ ಮಿತಿಗಳು ಮತ್ತು ಕುಟುಂಬದ ಅಗತ್ಯತೆಗಳ ವಿವರವಾದ ಚರ್ಚೆ.',
+    },
+    {
+      stepNumber: '02',
+      title: '2. Site Assessment',
+      knTitle: '2. ನಿವೇಶನ ಪರಿಶೀಲನೆ',
+      image: '/methodology/stage-2-site-assessment.jpg',
+      desc: 'On-ground soil testing, road approach evaluation, Cauvery water line and BESCOM electrical grid verification.',
+      knDesc: 'ಸ್ಥಳದಲ್ಲಿ ಮಣ್ಣಿನ ಪರೀಕ್ಷೆ, ರಸ್ತೆ ಸಂಪರ್ಕ ಪರಿಶೀಲನೆ, ಕಾವೇರಿ ನೀರಿನ ಲೈನ್ ಮತ್ತು ಬೆಸ್ಕಾಂ ವಿದ್ಯುತ್ ಗ್ರಿಡ್ ಪರಿಶೀಲನೆ.',
+    },
+    {
+      stepNumber: '03',
+      title: '3. Design & Planning',
+      knTitle: '3. ವಿನ್ಯಾಸ & ಯೋಜನೆ',
+      image: '/methodology/stage-3-design-planning.jpg',
+      desc: '2D architectural floor plans, 3D elevation renderings, structural engineering vetting, and municipal sanction drawings.',
+      knDesc: '2D ವಾಸ್ತುಶಿಲ್ಪ ನೆಲಮಹಡಿ ನಕ್ಷೆಗಳು, 3D ಎಲಿವೇಶನ್ ಚಿತ್ರಗಳು, ಸ್ಟ್ರಕ್ಚರಲ್ ಎಂಜಿನಿಯರಿಂಗ್ ವಿನ್ಯಾಸ ಮತ್ತು ಪಾಲಿಕೆ ಅನುಮೋದನೆ ರೇಖಾಚಿತ್ರಗಳು.',
+    },
+    {
+      stepNumber: '04',
+      title: '4. Transparent Estimation',
+      knTitle: '4. ಪಾರದರ್ಶಕ ಅಂದಾಜು ಪಟ್ಟಿ',
+      image: '/methodology/stage-4-transparent-estimation.jpg',
+      desc: 'Comprehensive itemized Bill of Quantities (BOQ) covering cement grades (53 grade), Fe550 TMT steel, and fixtures.',
+      knDesc: 'ಸಿಮೆಂಟ್ ಗ್ರೇಡ್‌ಗಳು (53 ಗ್ರೇಡ್), Fe550 TMT ಉಕ್ಕು ಮತ್ತು ಫಿಕ್ಚರ್‌ಗಳನ್ನು ಒಳಗೊಂಡ ಸಮಗ್ರ ಐಟಂವಾರು ಬಿಲ್ ಆಫ್ ಕ್ವಾಂಟಿಟೀಸ್ (BOQ).',
+    },
+    {
+      stepNumber: '05',
+      title: '5. Material & Contractor Oversight',
+      knTitle: '5. ಸಾಮಗ್ರಿ & ಗುತ್ತಿಗೆದಾರರ ಮೇಲ್ವಿಚಾರಣೆ',
+      image: '/methodology/stage-5-material-oversight.jpg',
+      desc: 'Direct on-site material inspections by Ramesh S H with zero unapproved brand substitutions.',
+      knDesc: 'ಅನಧಿಕೃತ ಬ್ರ್ಯಾಂಡ್ ಬದಲಾವಣೆಗಳಿಲ್ಲದೆ ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಂದ ನೇರ ಸೈಟ್ ಸಾಮಗ್ರಿ ಪರಿಶೀಲನೆ.',
+    },
+    {
+      stepNumber: '06',
+      title: '6. Structural Execution',
+      knTitle: '6. ರಚನಾತ್ಮಕ ಕಾಮಗಾರಿ ನಿರ್ವಹಣೆ',
+      image: '/methodology/stage-6-structural-execution.jpg',
+      desc: 'Excavation, footing concrete, RCC column casting, brick masonry, and slab reinforcement pouring.',
+      knDesc: 'ಅಗೆಯುವಿಕೆ, ಫೂಟಿಂಗ್ ಕಾಂಕ್ರೀಟ್, RCC ಪಿಲ್ಲರ್ ಕಾಸ್ಟಿಂಗ್, ಇಟ್ಟಿಗೆ ಕಲ್ಲುಕೆಲಸ ಮತ್ತು ಛಾವಣಿ ಸ್ಲ್ಯಾಬ್ ಕಾಂಕ್ರೀಟ್ ಸುರಿಯುವುದು.',
+    },
+    {
+      stepNumber: '07',
+      title: '7. Quality Inspections',
+      knTitle: '7. ಗುಣಮಟ್ಟ ತಪಾಸಣೆಗಳು',
+      image: '/methodology/stage-7-quality-inspections.jpg',
+      desc: 'Cube compressive strength testing, plumbing pressure checks, and concealed electrical insulation tests.',
+      knDesc: 'ಕಾಂಕ್ರೀಟ್ ಕ್ಯೂಬ್ ಸಾಮರ್ಥ್ಯ ಪರೀಕ್ಷೆ, ಪ್ಲಂಬಿಂಗ್ ಒತ್ತಡ ಪರೀಕ್ಷೆಗಳು ಮತ್ತು ಮರೆಮಾಚಲಾದ ವಿದ್ಯುತ್ ಇನ್ಸುಲೇಶನ್ ಪರೀಕ್ಷೆಗಳು.',
+    },
+    {
+      stepNumber: '08',
+      title: '8. Milestone Updates',
+      knTitle: '8. ಹಂತವಾರು ಪ್ರಗತಿ ವರದಿಗಳು',
+      image: '/methodology/stage-8-milestone-updates.jpg',
+      desc: 'Regular digital progress reports with high-resolution site photographs sent directly to the client.',
+      knDesc: 'ಗ್ರಾಹಕರಿಗೆ ನೇರವಾಗಿ ಕಳುಹಿಸಲಾಗುವ ಹೈ-ರೆಸಲ್ಯೂಶನ್ ಸೈಟ್ ಫೋಟೋಗಳೊಂದಿಗೆ ನಿಯಮಿತ ಡಿಜಿಟಲ್ ಪ್ರಗತಿ ವರದಿಗಳು.',
+    },
+    {
+      stepNumber: '09',
+      title: '9. Handover & Completion',
+      knTitle: '9. ಹಸ್ತಾಂತರ & ಗೃಹಪ್ರವೇಶ',
+      image: '/methodology/stage-9-handover-completion.jpg',
+      desc: 'Final deep cleaning, key handover ceremony, structural warranty documentation, and as-built drawing handover.',
+      knDesc: 'ಅಂತಿಮ ಸ್ವಚ್ಛಗೊಳಿಸುವಿಕೆ, ಕೀ ಹಸ್ತಾಂತರ ಸಮಾರಂಭ, ಸ್ಟ್ರಕ್ಚರಲ್ ವಾರಂಟಿ ದಾಖಲೆಗಳು ಮತ್ತು ನಕ್ಷೆಗಳ ಹಸ್ತಾಂತರ.',
+    },
   ];
 
   return (
@@ -134,14 +200,82 @@ export const ConstructionPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {workflowSteps.map((step, idx) => (
-            <div key={idx} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-2">
-              <span className="font-heading font-bold text-sm text-navy-900 block">{step.title}</span>
-              <p className="text-xs text-slate-600 leading-relaxed">{step.desc}</p>
+            <div
+              key={idx}
+              className="group bg-white rounded-2xl border border-slate-200/90 overflow-hidden shadow-sm hover:shadow-luxury transition-all duration-300 flex flex-col"
+            >
+              {/* Image Above */}
+              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                <img
+                  src={step.image}
+                  alt={isKn ? step.knTitle || step.title : step.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                />
+                <div className="absolute top-3 left-3 bg-navy-950/85 backdrop-blur-sm text-gold-400 font-bold text-[11px] px-2.5 py-1 rounded-full border border-gold-500/30 tracking-wider shadow-sm">
+                  STAGE {step.stepNumber}
+                </div>
+              </div>
+
+              {/* Wordings Under */}
+              <div className="p-5 sm:p-6 flex-1 flex flex-col justify-between space-y-2.5 bg-gradient-to-b from-white to-slate-50/50">
+                <span className="font-heading font-bold text-base text-navy-900 block group-hover:text-gold-600 transition-colors">
+                  {isKn ? step.knTitle || step.title : step.title}
+                </span>
+                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed font-light">
+                  {isKn ? step.knDesc || step.desc : step.desc}
+                </p>
+              </div>
             </div>
           ))}
         </div>
+      </div>
+
+      {/* 3D View of Construction of Home Video Section */}
+      <div className="bg-gradient-to-b from-navy-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 lg:p-12 shadow-2xl border border-navy-800 space-y-8">
+        <div className="text-center max-w-2xl mx-auto space-y-3">
+          <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-gold-500/10 border border-gold-500/25 text-gold-400 text-xs font-bold uppercase tracking-widest">
+            <Video className="w-3.5 h-3.5" />
+            <span>{isKn ? '3D ವಾಸ್ತುಶಿಲ್ಪದ ಅನಿಮೇಷನ್' : '3D Architectural Walkthrough'}</span>
+          </div>
+          <h2 className="font-heading text-2xl sm:text-4xl font-bold text-white tracking-tight capitalize">
+            {t('construction.video_title', '3d view of construction of home')}
+          </h2>
+          <p className="text-xs sm:text-sm text-slate-300 font-light leading-relaxed">
+            {t(
+              'construction.video_subtitle',
+              'Experience the end-to-end structural and architectural progression of home construction in vivid 3D detail.'
+            )}
+          </p>
+        </div>
+
+        {/* Video Player Container */}
+        <div className="max-w-4xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl bg-black aspect-video">
+            <video
+              className="w-full h-full object-contain bg-black"
+              controls
+              playsInline
+              preload="metadata"
+              poster="/methodology/stage-3-design-planning.jpg"
+            >
+              <source src="/videos/home-construction-3d-view.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+
+          <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 px-1">
+            <div className="flex items-center space-x-2">
+              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+              <span>Ultra-HD 3D Visualization of turnkey home construction stages</span>
+            </div>
+
+          </div>
+        </div>
+
+
       </div>
 
       {/* Portfolio Showcase */}
