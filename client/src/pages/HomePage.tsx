@@ -762,11 +762,11 @@ export const HomePage: React.FC = () => {
             </span>
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>{t('affordable.chip_quality', 'Superior Construction')}</span>
+              <span>{t('affordable.chip_quality', 'Documentation Check')}</span>
             </span>
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-              <span>{t('affordable.chip_timely', 'Timely Delivery')}</span>
+              <span>{t('affordable.chip_timely', 'Competitive Rates')}</span>
             </span>
           </div>
 
