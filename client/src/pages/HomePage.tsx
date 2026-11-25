@@ -744,7 +744,8 @@ export const HomePage: React.FC = () => {
             <span>{t('loan_guidance.badge', 'Multi-Bank Loan Assistance')}</span>
           </div>
 
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight max-w-4xl mx-auto">
+          {/* <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight max-w-4xl mx-auto"> */}
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
             {t('loan_guidance.title', 'The Right Loan Guidance for Your Dream Property!')}
           </h2>
 
@@ -755,7 +756,6 @@ export const HomePage: React.FC = () => {
             )}
           </p>
 
-{/* Comment */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
