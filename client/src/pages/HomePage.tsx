@@ -519,6 +519,33 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
+  {/* ======================================================== */}
+      {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
+      {/* ======================================================== */}
+      {/* <section className="w-full bg-white/95 backdrop-blur-md py-12 sm:py-16 lg:py-20 border-y border-slate-200/90 px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs"> */}
+       <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
+        <div className="w-full text-center space-y-4">
+          <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-gold-600" />
+            <span>{t('affordable.badge', 'Value, Quality & Reliability')}</span>
+          </div>
+
+         {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
+         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+            {t('one_stop.heading', 'One Stop Solution for All Real Estate & Construction Needs!')}
+          </h2>
+
+        {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
+            {t(
+              'affordable.description',
+              'Ramesh S H provides complete expert guidance and support under one roof for all KHB properties in Suryanagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.'
+            )}
+          </p>
+        </div>
+      </section>
+
+
       {/* ======================================================== */}
       {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
       {/* ======================================================== */}
