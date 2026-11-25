@@ -757,7 +757,7 @@ export const HomePage: React.FC = () => {
 
 
           {/* Key Loan Pillars */}
-          <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 text-left max-w-6xl mx-auto">
+          { /* <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 text-left max-w-6xl mx-auto">
             <div className="bg-white rounded-xl sm:rounded-2xl p-5 border border-[#E8DFD3] shadow-sm hover:shadow-luxury transition">
               <div className="w-10 h-10 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mb-3">
                 <Banknote className="w-5 h-5" />
@@ -817,7 +817,7 @@ export const HomePage: React.FC = () => {
                 )}
               </p>
             </div>
-          </div>
+          </div> */}
 
           <div className="pt-6 flex flex-wrap items-center justify-center gap-4">
             <Link
