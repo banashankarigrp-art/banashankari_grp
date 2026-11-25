@@ -762,7 +762,8 @@ export const HomePage: React.FC = () => {
       {/* 9. CUSTOMER ENQUIRY & CONTACT FORM */}
       {/* ======================================================== */}
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-        <div className="w-full bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-luxury overflow-hidden grid grid-cols-1 lg:grid-cols-12">
+        {/* <div className="w-full bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-luxury overflow-hidden grid grid-cols-1 lg:grid-cols-12"> */}
+        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-luxury space-y-6">
           {/* Info column */}
           { /* <div className="lg:col-span-5 bg-navy-950 text-white p-8 sm:p-10 flex flex-col justify-between space-y-8">
             <div className="space-y-4">
