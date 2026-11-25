@@ -750,7 +750,7 @@ export const HomePage: React.FC = () => {
           </h2>
 
          {/* <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
-         <p className="text-sm sm:text-sm text-slate-300 leading-relaxed font-light">
+         <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-light">
             {t(
               'loan_guidance.description',
               'We help you understand the home loan process, documentation requirements and explore suitable loan options with competitive interest rates from available financial institutions.'
