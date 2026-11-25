@@ -753,6 +753,10 @@ export const HomePage: React.FC = () => {
             )}
           </p>
 
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight">
+            {t('affordable.title', 'Affordable Properties. Superior Construction. Timely Delivery!')}
+          </h2>
+
           {/* Key Loan Pillars */}
           <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 text-left max-w-6xl mx-auto">
             <div className="bg-white rounded-xl sm:rounded-2xl p-5 border border-[#E8DFD3] shadow-sm hover:shadow-luxury transition">
