@@ -730,7 +730,8 @@ export const HomePage: React.FC = () => {
       {/* ======================================================== */}
       {/* 3.5. LOAN GUIDANCE SECTION */}
       {/* ======================================================== */}
-      <section className="w-full bg-[#FAF7F2] py-14 sm:py-20 border-y border-[#E8DFD3] px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs relative overflow-hidden">
+     {/*  <section className="w-full bg-[#FAF7F2] py-14 sm:py-20 border-y border-[#E8DFD3] px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs relative overflow-hidden"> */}
+      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
         {/* Subtle decorative background accent */}
         <div
           className="absolute -top-12 -right-12 w-80 h-80 bg-amber-500/5 rounded-full blur-3xl pointer-events-none"
