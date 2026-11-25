@@ -977,7 +977,7 @@ export const HomePage: React.FC = () => {
       <section className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
         <div className="w-full bg-white rounded-2xl sm:rounded-3xl border border-slate-200/80 shadow-luxury overflow-hidden grid grid-cols-1 lg:grid-cols-12">
           {/* Info column */}
-          <div className="lg:col-span-5 bg-navy-950 text-white p-8 sm:p-10 flex flex-col justify-between space-y-8">
+          { /* <div className="lg:col-span-5 bg-navy-950 text-white p-8 sm:p-10 flex flex-col justify-between space-y-8">
             <div className="space-y-4">
               <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
                 {t('enquiry.direct_consultation', 'Direct Consultation')}
@@ -1012,7 +1012,7 @@ export const HomePage: React.FC = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
           {/* Form column */}
           <div className="lg:col-span-7 p-8 sm:p-10">
