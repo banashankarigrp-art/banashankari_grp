@@ -408,7 +408,7 @@ export const HomePage: React.FC = () => {
                           </span>
                         </div>
                        */}
-                       
+
                         {/* Enquiry Now Button */}
                         <div className="pt-2">
                           <Link
@@ -528,7 +528,7 @@ export const HomePage: React.FC = () => {
         <div className="w-full px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-6 sm:mb-8">
 
           <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
-            {t('one_stop.heading', 'Our One-Stop Solution for All Real Estate & Construction Needs!')}
+            {t('one_stop.heading', 'One Stop Solution for All Real Estate & Construction Needs!')}
           </h2>
         </div>
 
@@ -551,17 +551,18 @@ export const HomePage: React.FC = () => {
               )}
             </p>
 
-            <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
+            {/* <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
               <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>{t('one_stop.chip_specialist', 'Surya Nagar Phase 1, 2, 3 & 4 Specialist')}</span>
+                <span>{t('one_stop.chip_specialist', 'Suryanagar Phase 1, 2, 3 & 4 Specialist')}</span>
               </span>
 
               <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
                 <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>{t('one_stop.chip_guidance', 'Direct Guidance from Ramesh S H')}</span>
               </span>
-            </div>
+            </div> */}
+            
           </div>
         </div>
 
