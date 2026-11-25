@@ -708,7 +708,7 @@ export const HomePage: React.FC = () => {
               'We help you find the right property at a reasonable price and turn it into your dream home with quality construction, reliable workmanship and a commitment to timely delivery.'
             )}
           </p>
-{/* Comment */}
+
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -750,7 +750,7 @@ export const HomePage: React.FC = () => {
           </h2>
 
          {/* <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
-         <p className="text-xs sm:text-sm text-slate-300 leading-relaxed font-light">
+         <p className="text-sm sm:text-sm text-slate-300 leading-relaxed font-light">
             {t(
               'loan_guidance.description',
               'We help you understand the home loan process, documentation requirements and explore suitable loan options with competitive interest rates from available financial institutions.'
