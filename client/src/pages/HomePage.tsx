@@ -1028,7 +1028,7 @@ export const HomePage: React.FC = () => {
                       required
                       value={enquiryForm.customerName}
                       onChange={(e) => setEnquiryForm({ ...enquiryForm, customerName: e.target.value })}
-                      placeholder={isKn ? 'ಉದಾ. ರಮೇಶ್ ಕುಮಾರ್' : 'e.g. Ramesh Kumar'}
+                      placeholder={isKn ? 'ಉದಾ. ರಮೇಶ್ ಕುಮಾರ್' : 'e.g. Ramesh'}
                       className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
                     />
                   </div>
@@ -1058,7 +1058,7 @@ export const HomePage: React.FC = () => {
                           }
                           setEnquiryForm({ ...enquiryForm, phone: digits.slice(0, 10) });
                         }}
-                        placeholder="98450 12345"
+                        placeholder="7353275925"
                         className="w-full px-3 py-3 text-xs focus:outline-none bg-transparent"
                       />
                     </div>
@@ -1075,7 +1075,7 @@ export const HomePage: React.FC = () => {
                       required
                       value={enquiryForm.email}
                       onChange={(e) => setEnquiryForm({ ...enquiryForm, email: e.target.value })}
-                      placeholder="you@example.com"
+                      placeholder="ramesh@example.com"
                       className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
                     />
                   </div>

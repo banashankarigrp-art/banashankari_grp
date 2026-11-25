@@ -40,50 +40,7 @@ export const Footer: React.FC = () => {
             </div>
           </div>
 
-          {/* Col 2: Key Portals */}
-          <div className="space-y-3">
-            <h4 className="text-sm font-semibold tracking-wider uppercase text-white font-sans border-b border-navy-800 pb-2">
-              {t('footer.key_portals', 'Key Portals')}
-            </h4>
-            <ul className="space-y-2 text-sm text-slate-400">
-              <li>
-                <Link to="/properties?purpose=sale" className="hover:text-gold-400 transition flex items-center space-x-1.5">
-                  <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>{t('footer.prop_sale', 'Properties for Sale')}</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/properties?purpose=rent" className="hover:text-gold-400 transition flex items-center space-x-1.5">
-                  <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>{t('footer.prop_rent', 'Rental & Leases')}</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/properties?type=plot" className="hover:text-gold-400 transition flex items-center space-x-1.5">
-                  <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>{t('footer.prop_plots', 'Residential Plots & Land')}</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/my-enquiries" className="hover:text-gold-400 transition flex items-center space-x-1.5 text-gold-300 font-medium">
-                  <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>{t('footer.prop_my_enquiries', 'My Raised Enquiries')}</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/sell-property" className="hover:text-gold-400 transition flex items-center space-x-1.5">
-                  <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>{t('footer.prop_submit_sale', 'Submit Property for Sale')}</span>
-                </Link>
-              </li>
-              <li>
-                <Link to="/rent-lease-property" className="hover:text-gold-400 transition flex items-center space-x-1.5">
-                  <ArrowRight className="w-3 h-3 text-gold-500" />
-                  <span>{t('footer.prop_list_rent', 'List House / Flat for Rent')}</span>
-                </Link>
-              </li>
-            </ul>
-          </div>
+
 
           {/* Col 3: Services */}
           <div className="space-y-3">
@@ -188,14 +145,7 @@ export const Footer: React.FC = () => {
             © {new Date().getFullYear()} {isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'Banashankari Enterprises'}.{' '}
             {t('footer.all_rights', 'All Rights Reserved.')} {t('footer.led_by', 'Led by Ramesh S H.')}
           </p>
-          <div className="flex space-x-6 text-slate-400">
-            <Link to="/contact" className="hover:text-white transition">
-              {t('footer.contact', 'Contact')}
-            </Link>
-            <Link to="/admin/login" className="hover:text-slate-500 transition text-[10px]">
-              {t('footer.admin_access', 'Admin Access')}
-            </Link>
-          </div>
+
         </div>
       </div>
     </footer>
