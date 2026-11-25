@@ -571,7 +571,7 @@ export const HomePage: React.FC = () => {
         </div>
 
           {/* Core Decision Pillars mentioned in text */}
-            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4">
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4">
               {[
                 { key: 'trusted.pillar_buying', label: 'Property Buying' },
                 { key: 'trusted.pillar_construction', label: 'Turnkey Construction' },
