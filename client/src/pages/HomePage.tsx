@@ -620,7 +620,7 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Metric Counter Cards with Scroll-Animated Increase */}
-          { /* <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 w-full">
+          { /* <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 w-full"> */}
             {/* Metric 1: Happy Clients */}
            {/* <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
