@@ -545,56 +545,32 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-
       {/* ======================================================== */}
-      {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
+      {/* 2.4. ABOUT COMPANY & LIVE METRICS (Covering full width right and left) */}
       {/* ======================================================== */}
-     {/* <section className="w-full bg-[#F5ECE1] py-12 sm:py-16 lg:py-20 border-y border-[#E2D2BF]/80 shadow-xs"> */}
-      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
-        {/* HEADING / TOPIC (Full width centered) */}
-        <div className="w-full px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-6 sm:mb-8">
-
-        {/*  <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight"> */}
-        <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
-            {t('one_stop.heading', 'One Stop Solution for All Real Estate & Construction Needs!')}
-          </h2>
-        </div>
-
-        {/* CONTENT (Covering full width right and left) */}
-        <div className="w-full px-4 sm:px-8 lg:px-12 xl:px-16">
-          <div className="relative w-full bg-white/95 backdrop-blur-md rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 border border-[#E2D2BF] shadow-luxury text-center space-y-4">
-            <div className="w-12 h-12 rounded-2xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center mx-auto shadow-xs">
-              <Sparkles className="w-6 h-6" />
-            </div>
-
-            <p className="text-base sm:text-lg lg:text-xl text-slate-800 font-medium leading-relaxed max-w-4xl mx-auto font-sans">
-              {isKn ? (
-                <span>
-                  <strong className="text-navy-950 font-bold">ರಮೇಶ್ ಎಸ್ ಹೆಚ್</strong> ಅವರು ಸೂರ್ಯ ನಗರ ಫೇಸ್ 1, 2, 3 ಮತ್ತು 4 ರಲ್ಲಿನ ಎಲ್ಲಾ ಕೆ.ಹೆಚ್.ಬಿ ಆಸ್ತಿಗಳಿಗೆ ಒಂದೇ ಸೂರಿನಡಿ ಸಂಪೂರ್ಣ ಪರಿಣಿತ ಮಾರ್ಗದರ್ಶನ ಮತ್ತು ಬೆಂಬಲವನ್ನು ನೀಡುತ್ತಾರೆ. ನಿಮ್ಮ ಆಸ್ತಿ ಖರೀದಿಯ ಪ್ರಯಾಣವನ್ನು ಸರಳ, ಸುಲಭ ಮತ್ತು ತೊಂದರೆರಹಿತವಾಗಿಸಿ, ಪ್ರತಿ ಹಂತದಲ್ಲೂ ನಿಮಗೆ ಮಾರ್ಗದರ್ಶನ ನೀಡುತ್ತೇವೆ.
-                </span>
-              ) : (
-                <span>
-                  <strong className="text-navy-950 font-bold">Ramesh S H</strong> provides complete expert guidance and support under one roof for all KHB properties in Suryanagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.
-                </span>
-              )}
-            </p>
-
-            {/* <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
-              <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>{t('one_stop.chip_specialist', 'Suryanagar Phase 1, 2, 3 & 4 Specialist')}</span>
-              </span>
-
-              <span className="inline-flex items-center space-x-1.5 bg-[#FAF5EE] border border-[#E2D2BF] px-3.5 py-1.5 rounded-lg shadow-2xs">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>{t('one_stop.chip_guidance', 'Direct Guidance from Ramesh S H')}</span>
-              </span>
-            </div> */}
-
+      {/* <section className="w-full bg-white/95 backdrop-blur-md py-12 sm:py-16 lg:py-20 border-y border-slate-200/90 px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs"> */}
+       <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
+        <div className="w-full text-center space-y-4">
+          <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-gold-600" />
+            <span>{t('affordable.badge', 'Value, Quality & Reliability')}</span>
           </div>
-        </div>
 
+         {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
+         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+            {t('trusted.title', 'Most Trusted Real Estate & Construction Partner Since 2011!')}
+          </h2>
+
+        {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
+            {t(
+              'mosttrusted.description',
+              'With 15 years of experience in the real estate and construction industry, Ramesh S H is committed on helping customers make confident property decisions through buying, construction, rental, lease and property loan assistance.'
+            )}
+          </p>
+        </div>
       </section>
+
 
       {/* ======================================================== */}
       {/* 2.4. ABOUT COMPANY & LIVE METRICS (Covering full width right and left) */}
