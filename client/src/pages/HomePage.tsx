@@ -569,6 +569,25 @@ export const HomePage: React.FC = () => {
             )}
           </p>
         </div>
+
+          {/* Core Decision Pillars mentioned in text */}
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3 mt-4">
+              {[
+                { key: 'trusted.pillar_buying', label: 'Property Buying' },
+                { key: 'trusted.pillar_construction', label: 'Turnkey Construction' },
+                { key: 'trusted.pillar_rentals', label: 'House Rentals' },
+                { key: 'trusted.pillar_leases', label: 'Property Leases' },
+                { key: 'trusted.pillar_loans', label: 'Home Loan Assistance' },
+              ].map((pillar) => (
+                <span
+                  key={pillar.key}
+                  className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <span>{t(pillar.key, pillar.label)}</span>
+                </span>
+              ))}
+            </div>
       </section>
 
 
