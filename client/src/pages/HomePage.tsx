@@ -708,7 +708,7 @@ export const HomePage: React.FC = () => {
               'We help you find the right property at a reasonable price and turn it into your dream home with quality construction, reliable workmanship and a commitment to timely delivery.'
             )}
           </p>
-
+{/* Comment */}
           <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
             <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
               <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
@@ -723,6 +723,7 @@ export const HomePage: React.FC = () => {
               <span>{t('affordable.chip_timely', 'Timely Delivery')}</span>
             </span>
           </div>
+
         </div>
       </section>
 
@@ -753,9 +754,7 @@ export const HomePage: React.FC = () => {
             )}
           </p>
 
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight">
-            {t('affordable.title', 'Affordable Properties. Superior Construction. Timely Delivery!')}
-          </h2>
+
 
           {/* Key Loan Pillars */}
           <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 text-left max-w-6xl mx-auto">
