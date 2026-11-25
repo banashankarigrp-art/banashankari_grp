@@ -621,8 +621,8 @@ export const HomePage: React.FC = () => {
 
           {/* Metric Counter Cards with Scroll-Animated Increase */}
           { /* <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 w-full">
-            {/* Metric 1: Happy Clients 
-            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+            {/* Metric 1: Happy Clients */}
+           {/* <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <Users className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -635,10 +635,10 @@ export const HomePage: React.FC = () => {
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
                 {t('metric.clients_desc', 'Families and investors guided with verified property purchases and advisory.')}
               </p>
-            </div>
+            </div> */}
 
             {/* Metric 2: Completed Projects */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+           {/* <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <Building2 className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -651,10 +651,10 @@ export const HomePage: React.FC = () => {
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
                 {t('metric.projects_desc', 'Turnkey residential buildings, plots registered, and civil structures delivered.')}
               </p>
-            </div>
+            </div> */}
 
-            {/* Metric 3: Years of Experience */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+            {/* Metric 3: Years of Experience */} 
+            {/* <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <Award className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -667,10 +667,10 @@ export const HomePage: React.FC = () => {
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
                 {t('metric.experience_desc', 'Continuous ground presence and transparent client advocacy in Bangalore.')}
               </p>
-            </div>
+            </div> */}
 
             {/* Metric 4: Verified Title Scrutiny */}
-            <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
+            {/* <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <ShieldCheck className="w-4 h-4 sm:w-5 sm:h-5" />
               </div>
@@ -683,7 +683,7 @@ export const HomePage: React.FC = () => {
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
                 {t('metric.transparency_desc', 'All plots and listings undergo strict BDA, BBMP, and KHB title diligence.')}
               </p>
-            </div>
+            </div> */}
           </div> 
         </div> 
       </section>
