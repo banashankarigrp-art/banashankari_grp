@@ -188,7 +188,7 @@ export const Navbar: React.FC = () => {
               aria-label="Banashankari Enterprises - Return to Home"
             >
               <img
-                src="/khb-logo-circle.png"
+                src="/KHB Logo.jpg"
                 alt="KHB Suryanagar Properties Emblem - Right"
                 className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
               />
