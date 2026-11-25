@@ -644,8 +644,13 @@ export const HomePage: React.FC = () => {
         />
 
         <div className="w-full relative z-10 text-center space-y-4">
-          <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
+          {/* <div className="inline-flex items-center space-x-2 bg-emerald-50 border border-emerald-200 text-emerald-800 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Banknote className="w-4 h-4 text-emerald-600" />
+            <span>{t('loan_guidance.badge', 'Multi-Bank Loan Assistance')}</span>
+          </div> */}
+          
+          <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
+            <Sparkles className="w-3.5 h-3.5 text-gold-600" />
             <span>{t('loan_guidance.badge', 'Multi-Bank Loan Assistance')}</span>
           </div>
 
