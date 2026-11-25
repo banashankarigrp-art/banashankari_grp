@@ -171,7 +171,7 @@ export const Navbar: React.FC = () => {
             {/* Top Center: Official Company Name and Subtitle */}
             <div className="text-center flex-1 min-w-0 px-1 sm:px-4">
               <Link to="/" className="inline-block group focus:outline-none w-full">
-                <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#FFD700] tracking-wide uppercase leading-tight sm:leading-snug group-hover:text-[#FFE57F] transition drop-shadow-sm">
+                <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#FFD700] tracking-widest uppercase leading-tight sm:leading-snug group-hover:text-[#FFE57F] transition drop-shadow-sm">
                   <span className="block sm:inline">{isKn ? 'ಬನಶಂಕರಿ ' : 'BANASHANKARI '}</span>
                   <span className="block sm:inline">{isKn ? 'ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'ENTERPRISES'}</span>
                 </h1>
