@@ -219,7 +219,7 @@ export const HomePage: React.FC = () => {
   const heroServices = [
     {
       id: 'hero-founder',
-      service: t('hero.badge', 'KHB Surya nagar Specialist'),
+      service: t('hero.badge', 'YOUR DREAM HOUSE'),
       tagline: isKn ? 'ರಮೇಶ್ ಎಸ್ ಹೆಚ್ ಅವರಿಂದ ನೇರ ಮಾರ್ಗದರ್ಶನ' : 'DIRECT GUIDANCE FROM RAMESH S H',
       headline: t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!'),
       description: t(
@@ -393,7 +393,7 @@ export const HomePage: React.FC = () => {
                         </p>
 
                         {/* Trust Badges */}
-                        <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-slate-200">
+                       { /* <div className="flex flex-wrap items-center gap-2 pt-1 text-xs text-slate-200">
                           <span className="inline-flex items-center space-x-1.5 bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg border border-white/15">
                             <CheckCircle2 className="w-3.5 h-3.5 text-gold-400" />
                             <span>{t('hero.badge_khb', 'KHB Phase 1, 2, 3 & 4 Specialist')}</span>
@@ -407,7 +407,8 @@ export const HomePage: React.FC = () => {
                             <span>{t('hero.badge_construction', 'Turnkey Home Construction')}</span>
                           </span>
                         </div>
-
+                       */}
+                       
                         {/* Enquiry Now Button */}
                         <div className="pt-2">
                           <Link
