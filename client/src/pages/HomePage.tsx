@@ -553,7 +553,7 @@ export const HomePage: React.FC = () => {
         <div className="w-full text-center space-y-4">
           <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-gold-600" />
-            <span>{t('affordable.badge', 'Value, Quality & Reliability')}</span>
+            <span>{t('trusted.badge', 'Proven Track Record Since 2011')}</span>
           </div>
 
          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
