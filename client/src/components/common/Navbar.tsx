@@ -141,7 +141,7 @@ export const Navbar: React.FC = () => {
         {/* ======================================================== */}
         {/* Tier 1: Top Center Company Name with Circular Logo Left & Right */}
         {/* ======================================================== */}
-        <div className="bg-[#488B38] border-b border-[#3B732E] shadow-sm">
+        <div className="bg-[#D5EBD0] border-b border-[#3B732E] shadow-sm">
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between gap-2 sm:gap-4">
             
             {/* Top Left: Attached "Grow Together" Logo & RGB Text Below */}
