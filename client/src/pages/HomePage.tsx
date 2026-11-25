@@ -754,7 +754,21 @@ export const HomePage: React.FC = () => {
             )}
           </p>
 
-
+{/* Comment */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3 sm:gap-4 text-xs font-semibold text-slate-700">
+            <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{t('affordable.chip_price', 'Home & Plot Loans')}</span>
+            </span>
+            <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{t('affordable.chip_quality', 'Superior Construction')}</span>
+            </span>
+            <span className="inline-flex items-center space-x-2 bg-slate-50 border border-slate-200 px-4 py-2 rounded-xl shadow-2xs">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+              <span>{t('affordable.chip_timely', 'Timely Delivery')}</span>
+            </span>
+          </div>
 
           {/* Key Loan Pillars */}
           { /* <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-6 text-left max-w-6xl mx-auto">
