@@ -522,12 +522,13 @@ export const HomePage: React.FC = () => {
       {/* ======================================================== */}
       {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
       {/* ======================================================== */}
-      <section className="w-full bg-[#F5ECE1] py-12 sm:py-16 lg:py-20 border-y border-[#E2D2BF]/80 shadow-xs">
-
+     {/* <section className="w-full bg-[#F5ECE1] py-12 sm:py-16 lg:py-20 border-y border-[#E2D2BF]/80 shadow-xs"> */}
+      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
         {/* HEADING / TOPIC (Full width centered) */}
         <div className="w-full px-4 sm:px-6 lg:px-8 text-center space-y-3 mb-6 sm:mb-8">
 
-          <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight">
+        {/*  <h2 className="font-heading text-2xl xs:text-3xl sm:text-4xl lg:text-5xl font-extrabold text-navy-950 tracking-tight leading-tight"> */}
+        <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
             {t('one_stop.heading', 'One Stop Solution for All Real Estate & Construction Needs!')}
           </h2>
         </div>
