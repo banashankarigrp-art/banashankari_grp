@@ -224,7 +224,7 @@ export const HomePage: React.FC = () => {
       headline: t('hero.title', 'Buy and Build Your Dream House with Expert Guidance!'),
       description: t(
         'hero.description',
-        'Looking to buy a property, build your dream home,or explore real estate opportunities in KHB Surya nagar Phase 1, 2, 3 and 4.Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
+        'Looking to buy a property, build your dream home,or explore real estate opportunities in KHB Suryanagar Phase 1, 2, 3 and 4.Get trusted and expert guidance from Ramesh S H, your reliable partner in Real Estate and Construction.'
       ),
       image: '/site-bg.jpg',
       fallbackImage: 'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=85',
@@ -235,7 +235,7 @@ export const HomePage: React.FC = () => {
     {
       id: 'real-estate',
       service: t('banner.real_estate_service', 'Real Estate'),
-      tagline: t('banner.real_estate_tagline', 'SURYA NAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES'),
+      tagline: t('banner.real_estate_tagline', 'SURYANAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES'),
       headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'),
       description: t(
         'banner.real_estate_desc',
@@ -546,7 +546,7 @@ export const HomePage: React.FC = () => {
                 </span>
               ) : (
                 <span>
-                  <strong className="text-navy-950 font-bold">Ramesh S H</strong> provides complete expert guidance and support under one roof for all KHB properties in Surya Nagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.
+                  <strong className="text-navy-950 font-bold">Ramesh S H</strong> provides complete expert guidance and support under one roof for all KHB properties in Suryanagar Phase 1, 2, 3 and 4. We make your property journey simple, convenient and hassle-free, guiding you every step of the way.
                 </span>
               )}
             </p>
@@ -562,7 +562,7 @@ export const HomePage: React.FC = () => {
                 <span>{t('one_stop.chip_guidance', 'Direct Guidance from Ramesh S H')}</span>
               </span>
             </div> */}
-            
+
           </div>
         </div>
 
@@ -620,8 +620,8 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* Metric Counter Cards with Scroll-Animated Increase */}
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 w-full">
-            {/* Metric 1: Happy Clients */}
+          { /* <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 w-full">
+            {/* Metric 1: Happy Clients 
             <div className="bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 border border-slate-200/90 shadow-sm hover:shadow-luxury hover:border-gold-500/40 transition group">
               <div className="w-9 h-9 sm:w-11 sm:h-11 rounded-xl bg-gold-50 border border-gold-200 text-gold-600 flex items-center justify-center mb-2.5 sm:mb-4 group-hover:scale-105 transition">
                 <Users className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -684,8 +684,8 @@ export const HomePage: React.FC = () => {
                 {t('metric.transparency_desc', 'All plots and listings undergo strict BDA, BBMP, and KHB title diligence.')}
               </p>
             </div>
-          </div>
-        </div>
+          </div> 
+        </div> 
       </section>
 
       {/* ======================================================== */}
