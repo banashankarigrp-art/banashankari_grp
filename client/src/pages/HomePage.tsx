@@ -683,8 +683,8 @@ export const HomePage: React.FC = () => {
               <p className="text-[10px] sm:text-xs text-slate-500 leading-relaxed hidden sm:block">
                 {t('metric.transparency_desc', 'All plots and listings undergo strict BDA, BBMP, and KHB title diligence.')}
               </p>
-            </div> */}
-          </div> 
+            </div> 
+          </div> */}
         </div> 
       </section>
 
