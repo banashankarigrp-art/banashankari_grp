@@ -96,12 +96,14 @@ export const LoanAssistancePage: React.FC = () => {
     },
     {
       title: 'Home Renovation Loans',
+      image: '/loans/Home renovation loans.jpg',
       knTitle: 'ಮನೆ ನವೀಕರಣ ಸಾಲಗಳು (Home Renovation Loans)',
       desc: 'We help customers finance home renovations, structural modifications, floor extensions and interior upgrades through documentation, loan applications and lender coordination.',
       knDesc: 'ದಾಖಲೆಗಳು, ಸಾಲ ಅರ್ಜಿಗಳು ಮತ್ತು ಸಾಲದಾತರ ಸಮನ್ವಯದ ಮೂಲಕ ಮನೆ ನವೀಕರಣ, ರಚನಾತ್ಮಕ ಬದಲಾವಣೆಗಳು, ಹೆಚ್ಚುವರಿ ಮಹಡಿ ವಿಸ್ತರಣೆ ಮತ್ತು ಇಂಟೀರಿಯರ್ ಅಪ್‌ಗ್ರೇಡ್‌ಗಳಿಗೆ ಹಣಕಾಸು ಒದಗಿಸಲು ನಾವು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
     },
     {
       title: 'Loan Against Property (LAP)',
+      image: '/loans/Loan against property.jpg',
       knTitle: 'ಆಸ್ತಿಯ ಮೇಲಿನ ಸಾಲ (Loan Against Property)',
       desc: 'We help customers secure funds against residential or commercial properties through documentation, loan applications, legal and valuation coordination, and bank follow-ups.',
       knDesc: 'ದಾಖಲೆಗಳು, ಸಾಲ ಅರ್ಜಿಗಳು, ಕಾನೂನು ಮತ್ತು ಮೌಲ್ಯಮಾಪನ ಸಮನ್ವಯ ಮತ್ತು ಬ್ಯಾಂಕ್ ಫಾಲೋ-ಅಪ್‌ಗಳ ಮೂಲಕ ವಸತಿ ಅಥವಾ ವಾಣಿಜ್ಯ ಆಸ್ತಿಗಳ ಮೇಲೆ ನಿಧಿ ಪಡೆಯಲು ನಾವು ಗ್ರಾಹಕರಿಗೆ ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
@@ -115,6 +117,7 @@ export const LoanAssistancePage: React.FC = () => {
     },
     {
       title: 'National Housing Bank (NHB) - Senior Citizen Housing Schemes',
+      image: '/loans/NHB Loans.jpg',
       knTitle: 'ರಾಷ್ಟ್ರೀಯ ವಸತಿ ಬ್ಯಾಂಕ್ (NHB) - ಹಿರಿಯ ನಾಗರಿಕರ ಯೋಜನೆಗಳು',
       desc: 'We help eligible senior citizens access Reverse Mortgage Loans, converting home equity into regular income while continuing to live in their homes, supporting financial independence during retirement.',
       knDesc: 'ಅರ್ಹ ಹಿರಿಯ ನಾಗರಿಕರಿಗೆ ರಿವರ್ಸ್ ಮಾರ್ಟ್ಗೇಜ್ ಸಾಲಗಳನ್ನು ಪಡೆಯಲು, ಮನೆಯಲ್ಲಿಯೇ ವಾಸಿಸುತ್ತಾ ಆರ್ಥಿಕ ಸ್ವಾತಂತ್ರ್ಯವನ್ನು ಕಾಪಾಡಿಕೊಳ್ಳಲು ನಾವು ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
