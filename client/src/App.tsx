@@ -64,7 +64,7 @@ export const App: React.FC = () => {
               <Route path="/our-projects" element={<OurProjectsPage />} />
               <Route path="/projects" element={<OurProjectsPage />} />
 
-              {/* 5. KHB Property Services */}
+              {/* 5. KHB Property Services - Update*/}
               <Route path="/khb-property-services" element={<KhbAssistancePage />} />
               <Route path="/khb-assistance" element={<KhbAssistancePage />} />
             
