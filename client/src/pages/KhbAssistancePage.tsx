@@ -61,21 +61,23 @@ export const KhbAssistancePage: React.FC = () => {
 
   const services = [
     {
-      title: 'Documentation Checklist & Verification',
+      title: 'Documentation Checklist',
       image: '/khbassistance/Documentation checklist.jpg',
       desc: 'Assistance in auditing allotment letters, possession certificates, absolute sale deeds, e-Khata, and encumbrance certificates (Form 15 & 16) issued under Karnataka Housing Board schemes.',
     },
     {
-      title: 'Property Transfer Assistance',
+      title: 'Property Transfer',
       image: '/khbassistance/Property Transfer.jpg',
       desc: 'We help buyers, sellers and families prepare the available documents for KHB property transfer requests, including sale deed and legal-heir related cases. We assist with application submission and follow-up with the concerned office. The transfer is completed only after the authority reviews and approves the application.',
     },
     {
-      title: 'Property Document & Legal Review Assistance',
+      title: 'Property and Legal Review',
+      image: '/khbassistance/Property and legal review.jpg',
       desc: 'We help buyers collect and organise the sale deed, allotment records, khata, tax receipts and encumbrance certificate for review by a qualified property lawyer. The lawyer’s findings help buyers understand any title issues or resale conditions before proceeding.',
     },
     {
       title: 'KHB Property Services',
+      image: '/khbassistance/KHB property services.jpg',
       desc: 'We assist buyers and sellers with available KHB resale sites and homes in Suryanagar, Kengeri, Bidadi, Nelamangala and other locations where we operate. Our support includes property enquiries, site visits, document coordination and purchase assistance.',
     },
   ];
@@ -107,12 +109,29 @@ export const KhbAssistancePage: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {services.map((item, idx) => (
-            <div key={idx} className="bg-white p-6 rounded-2xl border border-slate-200 shadow-luxury space-y-2">
-              <div className="flex items-center space-x-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
-                <h3 className="font-heading font-bold text-base text-navy-900">{item.title}</h3>
+            <div
+              key={idx}
+              className="bg-white rounded-2xl border border-slate-200/90 shadow-luxury overflow-hidden flex flex-col group hover:shadow-xl transition-all duration-300"
+            >
+              {item.image && (
+                <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
+                  <img
+                    src={item.image}
+                    alt={item.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              <div className="p-6 flex-1 flex flex-col space-y-2">
+                <div className="flex items-center space-x-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
+                  <h3 className="font-heading font-bold text-base text-navy-900 group-hover:text-gold-600 transition-colors">
+                    {item.title}
+                  </h3>
+                </div>
+                <p className="text-xs text-slate-600 leading-relaxed pl-6">{item.desc}</p>
               </div>
-              <p className="text-xs text-slate-600 leading-relaxed pl-6">{item.desc}</p>
             </div>
           ))}
         </div>

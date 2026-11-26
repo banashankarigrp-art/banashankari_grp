@@ -137,13 +137,13 @@ export const Navbar: React.FC = () => {
     <>
       {/* Top Header across all UI screens */}
       <header ref={headerRef} className="sticky top-0 z-40 shadow-sm">
-        
+
         {/* ======================================================== */}
         {/* Tier 1: Top Center Company Name with Circular Logo Left & Right */}
         {/* ======================================================== */}
         <div className="bg-[#6BBF59] border-b border-[#3B732E] shadow-sm">
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between gap-2 sm:gap-4">
-            
+
             {/* Top Left: Attached "Grow Together" Logo & RGB Text Below */}
             <Link
               to="/"
@@ -155,17 +155,7 @@ export const Navbar: React.FC = () => {
                 alt="Grow Together - Banashankari Enterprises"
                 className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
               />
-              <span
-                className="mt-1 sm:mt-1.5 text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-heading font-black tracking-wide uppercase text-center leading-tight max-w-[85px] xs:max-w-[105px] sm:max-w-[135px] md:max-w-none group-hover:brightness-110 transition"
-                style={{
-                  background: 'linear-gradient(90deg, rgb(255, 82, 82), rgb(255, 215, 0), rgb(0, 229, 255))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  filter: 'drop-shadow(0 2px 3px rgba(0, 0, 0, 0.75))',
-                }}
-              >
-                {isKn ? 'ಜೊತೆಯಾಗಿ ಬೆಳೆಯೋಣ' : 'Grow Together'}
-              </span>
+
             </Link>
 
             {/* Top Center: Official Company Name and Subtitle */}
@@ -188,21 +178,11 @@ export const Navbar: React.FC = () => {
               aria-label="Banashankari Enterprises - Return to Home"
             >
               <img
-                src="/KHB Logo.jpg"
+                src="/khb-logo-circle.png"
                 alt="KHB Suryanagar Properties Emblem - Right"
-                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
+                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70"
               />
-              <span
-                className="mt-1 sm:mt-1.5 text-[11px] xs:text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl font-heading font-black tracking-wide uppercase text-center leading-tight max-w-[85px] xs:max-w-[105px] sm:max-w-[135px] md:max-w-none group-hover:brightness-110 transition"
-                style={{
-                  background: 'linear-gradient(90deg, rgb(255, 82, 82), rgb(255, 215, 0), rgb(0, 229, 255))',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  filter: 'drop-shadow(0 2px 3px rgba(0, 0, 0, 0.75))',
-                }}
-              >
-                {isKn ? 'ಒನ್ ಸ್ಟಾಪ್ ಪರಿಹಾರ' : 'One Stop Solution'}
-              </span>
+
             </Link>
 
           </div>
@@ -214,16 +194,15 @@ export const Navbar: React.FC = () => {
         <div className="bg-slate-50/95 backdrop-blur-md border-b border-slate-200/80">
           <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between h-11 sm:h-12 gap-2">
-              
+
               {/* Mobile Left: Hamburger Menu Toggle Button */}
               <button
                 type="button"
                 onClick={() => setDrawerOpen(!drawerOpen)}
-                className={`md:hidden inline-flex items-center justify-center p-2 sm:p-2.5 rounded-xl border transition focus:outline-hidden focus:ring-2 focus:ring-gold-500 shrink-0 ${
-                  drawerOpen
-                    ? 'bg-navy-950 text-white border-navy-950 shadow-sm'
-                    : 'text-navy-900 bg-white hover:bg-slate-100 border-slate-200 shadow-2xs'
-                }`}
+                className={`md:hidden inline-flex items-center justify-center p-2 sm:p-2.5 rounded-xl border transition focus:outline-hidden focus:ring-2 focus:ring-gold-500 shrink-0 ${drawerOpen
+                  ? 'bg-navy-950 text-white border-navy-950 shadow-sm'
+                  : 'text-navy-900 bg-white hover:bg-slate-100 border-slate-200 shadow-2xs'
+                  }`}
                 aria-label="Navigation Menu"
                 aria-expanded={drawerOpen}
               >
@@ -238,11 +217,10 @@ export const Navbar: React.FC = () => {
                     <Link
                       key={item.path}
                       to={item.path}
-                      className={`px-2 lg:px-2.5 xl:px-3 py-1.5 rounded-xl text-xs xl:text-sm font-semibold transition whitespace-nowrap ${
-                        active
-                          ? 'text-navy-950 bg-white font-bold shadow-2xs border border-slate-200/90 text-gold-700'
-                          : 'text-slate-600 hover:text-navy-950 hover:bg-white/80'
-                      }`}
+                      className={`px-2 lg:px-2.5 xl:px-3 py-1.5 rounded-xl text-xs xl:text-sm font-semibold transition whitespace-nowrap ${active
+                        ? 'text-navy-950 bg-white font-bold shadow-2xs border border-slate-200/90 text-gold-700'
+                        : 'text-slate-600 hover:text-navy-950 hover:bg-white/80'
+                        }`}
                     >
                       <span className="md:inline xl:hidden">{item.shortLabel}</span>
                       <span className="hidden xl:inline">{item.label}</span>
@@ -261,11 +239,10 @@ export const Navbar: React.FC = () => {
                       setLangDropdownOpen(!langDropdownOpen);
                       setUserDropdownOpen(false);
                     }}
-                    className={`flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition shadow-2xs border ${
-                      langDropdownOpen
-                        ? 'bg-amber-50 text-navy-950 border-gold-400 ring-2 ring-gold-400/20'
-                        : 'bg-white hover:bg-slate-100 border-slate-200 text-navy-900'
-                    }`}
+                    className={`flex items-center space-x-1.5 px-2.5 sm:px-3 py-1.5 sm:py-2 rounded-xl text-xs sm:text-sm font-bold transition shadow-2xs border ${langDropdownOpen
+                      ? 'bg-amber-50 text-navy-950 border-gold-400 ring-2 ring-gold-400/20'
+                      : 'bg-white hover:bg-slate-100 border-slate-200 text-navy-900'
+                      }`}
                     aria-label="Select Language / ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ"
                     aria-expanded={langDropdownOpen}
                     aria-haspopup="true"
@@ -275,9 +252,8 @@ export const Navbar: React.FC = () => {
                       {language === 'kn' ? 'ಕನ್ನಡ' : 'English'}
                     </span>
                     <ChevronDown
-                      className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${
-                        langDropdownOpen ? 'rotate-180' : ''
-                      }`}
+                      className={`w-3.5 h-3.5 text-slate-400 transition-transform duration-200 ${langDropdownOpen ? 'rotate-180' : ''
+                        }`}
                     />
                   </button>
 
@@ -297,11 +273,10 @@ export const Navbar: React.FC = () => {
                           setLanguage('en');
                           setLangDropdownOpen(false);
                         }}
-                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm transition ${
-                          language === 'en'
-                            ? 'bg-amber-50/80 text-navy-950 font-bold'
-                            : 'text-slate-700 hover:bg-slate-50 font-medium'
-                        }`}
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm transition ${language === 'en'
+                          ? 'bg-amber-50/80 text-navy-950 font-bold'
+                          : 'text-slate-700 hover:bg-slate-50 font-medium'
+                          }`}
                       >
                         <span className="flex items-center space-x-2">
                           <span className="text-sm">🇬🇧</span>
@@ -317,11 +292,10 @@ export const Navbar: React.FC = () => {
                           setLanguage('kn');
                           setLangDropdownOpen(false);
                         }}
-                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm transition ${
-                          language === 'kn'
-                            ? 'bg-amber-50/80 text-navy-950 font-bold'
-                            : 'text-slate-700 hover:bg-slate-50 font-medium'
-                        }`}
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 text-xs sm:text-sm transition ${language === 'kn'
+                          ? 'bg-amber-50/80 text-navy-950 font-bold'
+                          : 'text-slate-700 hover:bg-slate-50 font-medium'
+                          }`}
                       >
                         <span className="flex items-center space-x-2">
                           <span className="text-sm">🇮🇳</span>
@@ -367,8 +341,8 @@ export const Navbar: React.FC = () => {
                             {user?.role === 'seller'
                               ? (isKn ? 'ಮಾರಾಟಗಾರರು / ಮಾಲೀಕರು' : 'Seller / Owner')
                               : user?.role === 'admin'
-                              ? (isKn ? 'ನಿರ್ವಾಹಕರು' : 'Administrator')
-                              : (isKn ? 'ಗ್ರಾಹಕರು' : 'Customer')}
+                                ? (isKn ? 'ನಿರ್ವಾಹಕರು' : 'Administrator')
+                                : (isKn ? 'ಗ್ರಾಹಕರು' : 'Customer')}
                           </span>
                         </div>
 
@@ -481,45 +455,40 @@ export const Navbar: React.FC = () => {
                       key={item.path}
                       to={item.path}
                       onClick={() => setDrawerOpen(false)}
-                      className={`flex items-center justify-between p-3.5 sm:p-4 rounded-2xl transition group ${
-                        active
-                          ? 'bg-navy-950 text-white shadow-md'
-                          : 'text-navy-900 bg-slate-50 hover:bg-slate-100/90 border border-slate-100 hover:border-gold-500/30'
-                      }`}
+                      className={`flex items-center justify-between p-3.5 sm:p-4 rounded-2xl transition group ${active
+                        ? 'bg-navy-950 text-white shadow-md'
+                        : 'text-navy-900 bg-slate-50 hover:bg-slate-100/90 border border-slate-100 hover:border-gold-500/30'
+                        }`}
                     >
                       <div className="flex items-center space-x-3.5 min-w-0">
                         <div
-                          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition ${
-                            active
-                              ? 'bg-gold-500/20 text-gold-400'
-                              : 'bg-white text-navy-900 shadow-2xs border border-slate-200/80 group-hover:bg-gold-50 group-hover:text-gold-600 group-hover:border-gold-300'
-                          }`}
+                          className={`w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition ${active
+                            ? 'bg-gold-500/20 text-gold-400'
+                            : 'bg-white text-navy-900 shadow-2xs border border-slate-200/80 group-hover:bg-gold-50 group-hover:text-gold-600 group-hover:border-gold-300'
+                            }`}
                         >
                           <Icon className="w-5 h-5" />
                         </div>
                         <div className="min-w-0">
                           <p
-                            className={`text-sm sm:text-base font-bold truncate ${
-                              active ? 'text-white' : 'text-navy-950 group-hover:text-gold-600'
-                            }`}
+                            className={`text-sm sm:text-base font-bold truncate ${active ? 'text-white' : 'text-navy-950 group-hover:text-gold-600'
+                              }`}
                           >
                             {item.label}
                           </p>
                           <p
-                            className={`text-xs truncate ${
-                              active ? 'text-slate-300' : 'text-slate-500'
-                            }`}
+                            className={`text-xs truncate ${active ? 'text-slate-300' : 'text-slate-500'
+                              }`}
                           >
                             {item.desc}
                           </p>
                         </div>
                       </div>
                       <ChevronRight
-                        className={`w-4 h-4 shrink-0 transition ${
-                          active
-                            ? 'text-gold-400'
-                            : 'text-slate-400 group-hover:text-gold-600 group-hover:translate-x-1'
-                        }`}
+                        className={`w-4 h-4 shrink-0 transition ${active
+                          ? 'text-gold-400'
+                          : 'text-slate-400 group-hover:text-gold-600 group-hover:translate-x-1'
+                          }`}
                       />
                     </Link>
                   );
