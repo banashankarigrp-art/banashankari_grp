@@ -128,13 +128,13 @@ export const LoanAssistancePage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
       {/* Top Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
+        <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
           {isKn ? 'ಸಮನ್ವಯ & ದಾಖಲೆಗಳ ಬೆಂಬಲ' : 'Liaison & Documentation Support'}
         </span>
-        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
+        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-white leading-tight">
           {t('loans.title', 'Property & Home Loan Solutions through BASIC Home Loans DSA Franchise')}
         </h1>
-        <p className="text-sm text-slate-600 leading-relaxed font-light">
+        <p className="text-sm text-slate-300 leading-relaxed font-light">
           {t(
             'loans.subtitle',
             'Our BASIC Home Loans DSA Franchise connects customers with leading banks and NBFCs, offering diverse loan solutions for home purchases, construction, renovations, loans against property and reverse mortgages, backed by expert guidance and end-to-end assistance.'
@@ -145,7 +145,7 @@ export const LoanAssistancePage: React.FC = () => {
       {/* Supported Loan Categories */}
       <div className="space-y-6">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="font-heading text-2xl font-bold text-navy-900">Assisted Loan Categories</h2>
+          <h2 className="font-heading text-2xl font-bold text-white">Assisted Loan Categories</h2>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

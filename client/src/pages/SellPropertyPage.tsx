@@ -375,13 +375,13 @@ export const SellPropertyPage: React.FC = () => {
 
       {/* Page Header */}
       <div className="text-center space-y-2">
-        <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
+        <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
           {isAdmin ? 'Admin Property Creator' : 'Direct Seller Onboarding'}
         </span>
-        <h1 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
+        <h1 className="font-heading text-3xl sm:text-4xl font-bold text-white">
           {isAdmin ? 'Create & Publish Property Listing Live' : 'List Your Property for Sale in Bengaluru'}
         </h1>
-        <p className="text-xs sm:text-sm text-slate-500 max-w-xl mx-auto">
+        <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
           {isAdmin
             ? 'Publish residential plots, houses, villas, or commercial properties directly to the live catalog with instant approval.'
             : 'Submit your plot, house, villa, or commercial property for direct administrative review and verified buyer matching.'}

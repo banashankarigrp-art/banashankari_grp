@@ -142,7 +142,7 @@ export const Navbar: React.FC = () => {
         {/* Tier 1: Top Center Company Name with Circular Logo Left & Right */}
         {/* ======================================================== */}
         <div className="bg-[#6BBF59] border-b border-[#3B732E] shadow-sm">
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between gap-2 sm:gap-4">
+          <div className="w-full px-2 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between gap-2 sm:gap-4">
 
             {/* Top Left: Attached "Grow Together" Logo & RGB Text Below */}
             <Link
@@ -153,7 +153,7 @@ export const Navbar: React.FC = () => {
               <img
                 src="/grow-together-circle.png"
                 alt="Grow Together - Banashankari Enterprises"
-                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
+                className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
               />
 
             </Link>
@@ -180,7 +180,7 @@ export const Navbar: React.FC = () => {
               <img
                 src="/khb-logo-circle.png"
                 alt="KHB Suryanagar Properties Emblem - Right"
-                className="w-14 h-14 xs:w-16 xs:h-16 sm:w-18 sm:h-18 md:w-20 md:h-20 lg:w-20 lg:h-20 xl:w-22 xl:h-22 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70"
+                className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70"
               />
 
             </Link>

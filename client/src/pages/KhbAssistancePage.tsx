@@ -86,13 +86,13 @@ export const KhbAssistancePage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
+        <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
           {isKn ? 'ವಿಶೇಷ ಆಸ್ತಿ ಸಲಹಾ ಸೇವೆ' : 'Specialized Transaction Advisory'}
         </span>
-        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
+        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-white leading-tight">
           {t('khb.title', 'Karnataka Housing Board (KHB) Assistance')}
         </h1>
-        <p className="text-sm text-slate-600 leading-relaxed font-light">
+        <p className="text-sm text-slate-300 leading-relaxed font-light">
           {t(
             'khb.subtitle',
             'Reliable advisory and documentation coordination for property buyers and allottees across KHB residential layouts.'
@@ -104,10 +104,10 @@ export const KhbAssistancePage: React.FC = () => {
       {/* Services Grid */}
       <div className="space-y-6">
         <div className="text-center max-w-2xl mx-auto">
-          <h2 className="font-heading text-2xl font-bold text-navy-900">Our Scope of KHB Services</h2>
+          <h2 className="font-heading text-2xl font-bold text-white">Our Scope of KHB Services</h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {services.map((item, idx) => (
             <div
               key={idx}

@@ -147,16 +147,16 @@ export const PropertyDetailPage: React.FC = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-10">
       {/* Breadcrumb */}
-      <div className="flex items-center space-x-2 text-xs text-slate-500">
-        <Link to="/" className="hover:text-gold-600">Home</Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-        <Link to="/properties" className="hover:text-gold-600">Properties</Link>
-        <ChevronRight className="w-3.5 h-3.5 text-slate-400" />
-        <span className="text-navy-900 font-medium truncate max-w-xs">{property.title}</span>
+      <div className="flex items-center space-x-2 text-xs text-slate-300">
+        <Link to="/" className="hover:text-gold-400">Home</Link>
+        <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+        <Link to="/properties" className="hover:text-gold-400">Properties</Link>
+        <ChevronRight className="w-3.5 h-3.5 text-slate-500" />
+        <span className="text-white font-medium truncate max-w-xs">{property.title}</span>
       </div>
 
       {/* Main Top Header */}
-      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-slate-200">
+      <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 pb-6 border-b border-navy-800">
         <div className="space-y-3 max-w-3xl">
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-bold px-3 py-1 rounded bg-navy-950 text-gold-400 border border-gold-500/30">
@@ -170,12 +170,12 @@ export const PropertyDetailPage: React.FC = () => {
             </span>
           </div>
 
-          <h1 className="font-heading text-2xl sm:text-4xl font-bold text-navy-900 leading-snug">
+          <h1 className="font-heading text-2xl sm:text-4xl font-bold text-white leading-snug">
             {property.title}
           </h1>
 
-          <div className="flex items-center space-x-2 text-xs sm:text-sm text-slate-600">
-            <MapPin className="w-4 h-4 text-gold-600 shrink-0" />
+          <div className="flex items-center space-x-2 text-xs sm:text-sm text-slate-300">
+            <MapPin className="w-4 h-4 text-gold-400 shrink-0" />
             <span>
               {property.location.address || `${property.location.locality}, Bangalore, Karnataka`}
             </span>

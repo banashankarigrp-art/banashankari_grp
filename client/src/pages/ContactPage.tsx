@@ -63,13 +63,13 @@ export const ContactPage: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-12">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
+        <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
           {t('contact.get_in_touch', 'Get in Touch')}
         </span>
-        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
+        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-white leading-tight">
           {t('contact.page_title', 'Contact Banashankari Enterprises')}
         </h1>
-        <p className="text-sm text-slate-600 leading-relaxed font-light">
+        <p className="text-sm text-slate-300 leading-relaxed font-light">
           {t(
             'contact.page_subtitle',
             'Reach out for property inspections, construction cost estimates, loan guidance, or KHB documentation consultation.'

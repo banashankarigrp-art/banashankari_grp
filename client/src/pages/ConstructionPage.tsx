@@ -173,13 +173,13 @@ export const ConstructionPage: React.FC = () => {
     <div className="space-y-16 py-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       {/* Hero Header */}
       <div className="text-center max-w-3xl mx-auto space-y-3">
-        <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">
+        <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">
           {isKn ? 'ಟರ್ನ್‌ಕೀ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಸಮನ್ವಯ' : 'Turnkey Building Coordination'}
         </span>
-        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-navy-900 leading-tight">
+        <h1 className="font-heading text-3xl sm:text-5xl font-bold text-white leading-tight">
           {t('construction.title', 'Bespoke Home Construction in Bengaluru')}
         </h1>
-        <p className="text-sm text-slate-600 leading-relaxed font-light">
+        <p className="text-sm text-slate-300 leading-relaxed font-light">
           {t(
             'construction.subtitle',
             'From vacant residential plots to finished luxury duplex residences. Led directly by Ramesh S H with rigid quality standards and transparent milestone accounting.'
@@ -281,8 +281,8 @@ export const ConstructionPage: React.FC = () => {
       {/* Portfolio Showcase */}
       <div className="space-y-8">
         <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-gold-600 block">Portfolio</span>
-          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-navy-900">
+          <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">Portfolio</span>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white">
             Featured Construction Projects
           </h2>
         </div>

@@ -83,10 +83,10 @@ export const PropertiesPage: React.FC = () => {
       <div className="space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="font-heading text-3xl sm:text-4xl font-bold text-navy-900">
+            <h1 className="font-heading text-3xl sm:text-4xl font-bold text-white">
               Bengaluru Property Discovery
             </h1>
-            <p className="text-xs sm:text-sm text-slate-500 mt-1">
+            <p className="text-xs sm:text-sm text-slate-300 mt-1">
               Browse verified residential plots, independent villas, apartments, and rental properties across Bangalore.
             </p>
           </div>
