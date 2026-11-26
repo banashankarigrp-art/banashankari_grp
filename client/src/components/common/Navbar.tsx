@@ -128,7 +128,7 @@ export const Navbar: React.FC = () => {
     if (path === '/') return location.pathname === '/';
     if (path === '/real-estate') return location.pathname.startsWith('/real-estate') || location.pathname.startsWith('/properties');
     if (path === '/our-projects') return location.pathname.startsWith('/our-projects') || location.pathname.startsWith('/projects');
-    if (path === '/khb-property-services') return location.pathname.startsWith('/khb-property-services') || location.pathname.startsWith('/khb_assistance');
+    if (path === '/khb-property-services') return location.pathname.startsWith('/khb-property-services') || location.pathname.startsWith('/khb-assistance');
     if (path === '/loans-made-easy') return location.pathname.startsWith('/loans-made-easy') || location.pathname.startsWith('/loans');
     return location.pathname.startsWith(path);
   };
