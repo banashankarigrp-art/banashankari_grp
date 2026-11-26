@@ -108,6 +108,7 @@ export const LoanAssistancePage: React.FC = () => {
     },
     {
       title: 'Balance Transfer Assistance',
+      image: '/loans/Balance transfer loan.jpg',
       knTitle: 'ಬ್ಯಾಲೆನ್ಸ್ ವರ್ಗಾವಣೆ ನೆರವು (Balance Transfer Assistance)',
       desc: 'We help customers transfer existing home loans to better lending options through offer comparison, documentation, application support and bank coordination.',
       knDesc: 'ಆಫರ್‌ಗಳ ಹೋಲಿಕೆ, ದಾಖಲಾತಿ, ಅರ್ಜಿ ಬೆಂಬಲ ಮತ್ತು ಬ್ಯಾಂಕ್ ಸಮನ್ವಯದ ಮೂಲಕ ಉತ್ತಮ ಸಾಲದ ಆಯ್ಕೆಗಳಿಗೆ ಅಸ್ತಿತ್ವದಲ್ಲಿರುವ ಗೃಹ ಸಾಲಗಳನ್ನು ವರ್ಗಾಯಿಸಲು ನಾವು ಗ್ರಾಹಕರಿಗೆ ಸಹಾಯ ಮಾಡುತ್ತೇವೆ.',
