@@ -63,7 +63,7 @@ export const KhbAssistancePage: React.FC = () => {
     {
       title: 'Documentation Checklist & Verification',
       image: '/khbservices/Documentation checklist.jpg',
-      desc: 'Assistance in auditing allotment letters, possession certificates, absolute sale deeds, e-Khata, and encumbrance certificates (Form 15 & 16) issued under Karnataka Housing Board schemes.',
+      desc: 'KHB-Assistance in auditing allotment letters, possession certificates, absolute sale deeds, e-Khata, and encumbrance certificates (Form 15 & 16) issued under Karnataka Housing Board schemes.',
     },
     {
       title: 'Property Transfer Assistance',
