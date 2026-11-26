@@ -62,12 +62,11 @@ export const KhbAssistancePage: React.FC = () => {
   const services = [
     {
       title: 'Documentation Checklist & Verification',
-      image: '/khbservices/Documentation checklist.jpg',
+      image: '/khb-assistance/Documentation checklist.jpg',
       desc: 'Assistance in auditing allotment letters, possession certificates, absolute sale deeds, e-Khata, and encumbrance certificates (Form 15 & 16) issued under Karnataka Housing Board schemes.',
     },
     {
       title: 'Property Transfer Assistance',
-      image: '/loans/Loan against property.jpg',
       desc: 'We help buyers, sellers and families prepare the available documents for KHB property transfer requests, including sale deed and legal-heir related cases. We assist with application submission and follow-up with the concerned office. The transfer is completed only after the authority reviews and approves the application.',
     },
     {
