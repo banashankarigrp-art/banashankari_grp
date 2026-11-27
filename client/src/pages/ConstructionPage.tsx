@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Hammer,
@@ -15,15 +15,13 @@ import {
   Sparkles,
 } from 'lucide-react';
 import { api } from '../services/api';
-import { IConstructionProject, COMPANY_INFO } from '@shared/types';
+import { COMPANY_INFO } from '@shared/types';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../context/LanguageContext';
 
 export const ConstructionPage: React.FC = () => {
   const { user } = useAuth();
   const { isKn, t } = useLanguage();
-  const [projects, setProjects] = useState<IConstructionProject[]>([]);
-  const [loading, setLoading] = useState(true);
 
   // Form State
   const [formData, setFormData] = useState({
@@ -41,23 +39,6 @@ export const ConstructionPage: React.FC = () => {
 
   const [submitted, setSubmitted] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        setLoading(true);
-        const res: any = await api.get('/content/projects');
-        if (res.success && res.data) {
-          setProjects(res.data);
-        }
-      } catch (err) {
-        console.error('Error fetching construction projects:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProjects();
-  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -251,62 +232,35 @@ export const ConstructionPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Video Player Container */}
-        <div className="max-w-4xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl bg-black aspect-video">
-            <video
-              className="w-full h-full object-contain bg-black"
-              controls
-              playsInline
-              preload="metadata"
-              poster="/methodology/stage-3-design-planning.jpg"
-            >
-              <source src="/videos/home-construction-3d-view.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-
-          <div className="mt-4 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-slate-400 px-1">
-            <div className="flex items-center space-x-2">
-              <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-              <span>Ultra-HD 3D Visualization of turnkey home construction stages</span>
-            </div>
-
-          </div>
-        </div>
-
-
-      </div>
-
-      {/* Portfolio Showcase */}
-      <div className="space-y-8">
-        <div className="text-center max-w-2xl mx-auto space-y-2">
-          <span className="text-xs font-bold uppercase tracking-widest text-gold-400 block">Portfolio</span>
-          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-white">
-            Featured Construction Projects
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {projects.map((proj) => (
-            <div key={proj._id} className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-luxury">
-              <div className="relative aspect-[16/10] overflow-hidden bg-slate-100">
-                <img src={proj.coverImage} alt={proj.title} className="w-full h-full object-cover" />
-                <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded bg-navy-950 text-gold-400">
-                  {proj.status.replace('_', ' ')}
-                </span>
+        {/* Video Players Grid (4 Videos) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {[
+            { src: '/videos/vedio1.mp4', title: 'Construction Walkthrough 1' },
+            { src: '/videos/vedio 2.mp4', title: 'Construction Walkthrough 2' },
+            { src: '/videos/vedio 3.mp4', title: 'Construction Walkthrough 3' },
+            { src: '/videos/vedio 4.mp4', title: 'Construction Walkthrough 4' },
+          ].map((vid, idx) => (
+            <div key={idx} className="space-y-2.5">
+              <div className="relative rounded-2xl overflow-hidden border border-slate-700/60 shadow-2xl bg-black aspect-video">
+                <video
+                  className="w-full h-full object-contain bg-black"
+                  controls
+                  playsInline
+                  preload="metadata"
+                >
+                  <source src={vid.src} type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
               </div>
-              <div className="p-6 space-y-3">
-                <h3 className="font-heading font-bold text-lg text-navy-900">{proj.title}</h3>
-                <p className="text-xs text-slate-500">{proj.location}</p>
-                <div className="text-xs font-semibold text-gold-700 bg-gold-50 p-2 rounded-lg">
-                  Built-up Area: {proj.builtUpArea}
-                </div>
-                <p className="text-xs text-slate-600 leading-relaxed">{proj.description}</p>
+              <div className="flex items-center space-x-2 text-xs text-slate-300 px-1">
+                <span className="inline-block w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="font-semibold">{vid.title}</span>
               </div>
             </div>
           ))}
         </div>
+
+
       </div>
 
       {/* Interactive Quotation Form */}
@@ -347,7 +301,7 @@ export const ConstructionPage: React.FC = () => {
                   required
                   value={formData.customerName}
                   onChange={(e) => setFormData({ ...formData, customerName: e.target.value })}
-                  placeholder="e.g. Anand Gowda"
+                  placeholder="e.g.ramesh"
                   className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-2 focus:ring-gold-500"
                 />
               </div>
@@ -375,7 +329,7 @@ export const ConstructionPage: React.FC = () => {
                       }
                       setFormData({ ...formData, phone: digits.slice(0, 10) });
                     }}
-                    placeholder="98450 12345"
+                    placeholder="7353275925"
                     className="w-full px-3 py-3 text-xs focus:outline-none bg-transparent text-white"
                   />
                 </div>
@@ -387,7 +341,7 @@ export const ConstructionPage: React.FC = () => {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="anand@example.com"
+                  placeholder="ramesh@example.com"
                   className="w-full p-3 rounded-xl bg-navy-900 border border-navy-800 text-white focus:ring-2 focus:ring-gold-500"
                 />
               </div>

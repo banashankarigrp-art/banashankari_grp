@@ -23,7 +23,7 @@ export const WhatsAppButton: React.FC<FloatingContactButtonsProps> = ({
   return (
     <aside
       aria-label={isKn ? 'ತ್ವರಿತ ಸಂಪರ್ಕ ಆಯ್ಕೆಗಳು' : 'Quick Connect Options'}
-      className="fixed top-[60%] -translate-y-1/2 right-3 sm:right-5 z-50 flex flex-col items-center gap-3 sm:gap-3.5 select-none"
+      className="fixed top-[72%] -translate-y-1/2 right-3 sm:right-5 z-50 flex flex-col items-center gap-3 sm:gap-3.5 select-none"
     >
       {/* 1. WhatsApp Floating App Icon (First / On top) */}
       <a

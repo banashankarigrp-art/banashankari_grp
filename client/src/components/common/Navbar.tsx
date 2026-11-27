@@ -151,21 +151,21 @@ export const Navbar: React.FC = () => {
               aria-label="Banashankari Enterprises - Return to Home"
             >
               <img
-                src="/grow-together-circle.png"
-                alt="Grow Together - Banashankari Enterprises"
-                className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-contain rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70 bg-white"
+                src="/founder-logo-circle.png"
+                alt="Ramesh S H - Founder, Banashankari Enterprises"
+                className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-cover rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70"
               />
 
             </Link>
 
             {/* Top Center: Official Company Name and Subtitle */}
-            <div className="text-center flex-1 min-w-0 px-1 sm:px-4">
+            <div className="text-center flex-1 min-w-0 px-1 sm:px-4 lg:px-6">
               <Link to="/" className="inline-block group focus:outline-none w-full">
-                <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-[#FFD700] tracking-widest uppercase leading-tight sm:leading-snug group-hover:text-[#FFE57F] transition drop-shadow-sm">
+                <h1 className="font-heading font-black text-sm xs:text-base sm:text-xl md:text-2xl lg:text-4xl xl:text-5xl 2xl:text-6xl text-[#FFEA00] tracking-widest lg:tracking-[0.14em] uppercase leading-tight sm:leading-snug group-hover:text-[#FFF566] transition drop-shadow-[0_2px_4px_rgba(0,0,0,0.45)]">
                   <span className="block sm:inline">{isKn ? 'ಬನಶಂಕರಿ ' : 'BANASHANKARI '}</span>
                   <span className="block sm:inline">{isKn ? 'ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'ENTERPRISES'}</span>
                 </h1>
-                <p className="text-[8.5px] xs:text-[10px] sm:text-xs md:text-xs lg:text-sm font-black tracking-wider sm:tracking-widest uppercase text-black mt-0.5 sm:mt-1 font-sans leading-tight">
+                <p className="text-[8.5px] xs:text-[10px] sm:text-xs md:text-sm lg:text-lg xl:text-2xl font-black tracking-wider sm:tracking-widest lg:tracking-[0.22em] uppercase text-black mt-0.5 sm:mt-1 lg:mt-2.5 xl:mt-3 font-sans leading-tight">
                   {isKn ? 'ರಿಯಲ್ ಎಸ್ಟೇಟ್ ಮತ್ತು ಕನ್‌ಸ್ಟ್ರಕ್ಷನ್ಸ್' : 'REAL ESTATE AND CONSTRUCTIONS'}
                 </p>
               </Link>
