@@ -231,7 +231,8 @@ export const HomePage: React.FC = () => {
       id: 'real-estate',
       service: t('banner.real_estate_service', 'Real Estate'),
       tagline: t('banner.real_estate_tagline', 'SURYANAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES'),
-      headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'),
+    // headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'), 
+    headline: t('hero.title', 'REAL ESTATE & LAND SOLUTIONS'),
       description: t(
         'banner.real_estate_desc',
         'Verified KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.'
