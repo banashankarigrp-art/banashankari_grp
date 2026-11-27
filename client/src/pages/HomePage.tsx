@@ -526,7 +526,7 @@ export const HomePage: React.FC = () => {
           </div>
 
          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('one_stop.heading', 'One Stop Solution for All Real Estate & Construction Needs!')}
           </h2>
 
