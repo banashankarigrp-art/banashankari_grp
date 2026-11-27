@@ -233,8 +233,8 @@ export const HomePage: React.FC = () => {
       id: 'real-estate',
       service: t('banner.real_estate_service', 'Real Estate'),
       tagline: t('banner.real_estate_tagline', 'SURYANAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES'),
-    // headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'), 
-    headline: t('hero.title', 'REAL ESTATE & LAND SOLUTIONS'),
+      // headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'), 
+      headline: t('hero.title', 'REAL ESTATE & LAND SOLUTIONS'),
       description: t(
         'banner.real_estate_desc',
         'Verified KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.'
@@ -435,23 +435,23 @@ export const HomePage: React.FC = () => {
         </div>
       </section>
 
-  {/* ======================================================== */}
+      {/* ======================================================== */}
       {/* 2. ONE-STOP SOLUTION FOR ALL REAL ESTATE & CONSTRUCTION NEEDS */}
       {/* ======================================================== */}
       {/* <section className="w-full bg-white/95 backdrop-blur-md py-12 sm:py-16 lg:py-20 border-y border-slate-200/90 px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs"> */}
-       <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
+      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
         <div className="w-full text-center space-y-4">
           <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-gold-600" />
             <span>{t('affordable.badge', 'Value, Quality & Reliability')}</span>
           </div>
 
-         {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
+          <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('one_stop.heading', 'One Stop Solution for All Real Estate & Construction Needs!')}
           </h2>
 
-        {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
+          {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
             {t(
               'affordable.description',
@@ -461,41 +461,41 @@ export const HomePage: React.FC = () => {
         </div>
 
         {/* Core Decision Pillars mentioned in text */}
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4">
-              {[
-                { key: 'trusted.pillar_buying', label: 'Property Sales & Purchase' },
-                { key: 'trusted.pillar_construction', label: 'Rentals & Lease' },
-                { key: 'trusted.pillar_rentals', label: 'End-to-End Construction Solutions' },
-                { key: 'trusted.pillar_loans', label: 'Loan Assistance' },
-              ].map((pillar) => (
-                <span
-                  key={pillar.key}
-                  className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
-                >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>{t(pillar.key, pillar.label)}</span>
-                </span>
-              ))}
-            </div>
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4">
+          {[
+            { key: 'trusted.pillar_buying', label: 'Property Sales & Purchase' },
+            { key: 'trusted.pillar_construction', label: 'Rentals & Lease' },
+            { key: 'trusted.pillar_rentals', label: 'End-to-End Construction Solutions' },
+            { key: 'trusted.pillar_loans', label: 'Loan Assistance' },
+          ].map((pillar) => (
+            <span
+              key={pillar.key}
+              className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+              <span>{t(pillar.key, pillar.label)}</span>
+            </span>
+          ))}
+        </div>
       </section>
 
       {/* ======================================================== */}
       {/* 2.4. ABOUT COMPANY & LIVE METRICS (Covering full width right and left) */}
       {/* ======================================================== */}
       {/* <section className="w-full bg-white/95 backdrop-blur-md py-12 sm:py-16 lg:py-20 border-y border-slate-200/90 px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs"> */}
-       <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
+      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
         <div className="w-full text-center space-y-4">
           <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-gold-600" />
             <span>{t('trusted.badge', 'Proven Track Record Since 2011')}</span>
           </div>
 
-         {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
+          <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('trusted.title', 'Most Trusted Real Estate & Construction Partner Since 2011!')}
           </h2>
 
-        {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
+          {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
             {t(
               'mosttrusted.description',
@@ -504,43 +504,43 @@ export const HomePage: React.FC = () => {
           </p>
         </div>
 
-          {/* Core Decision Pillars mentioned in text */}
-            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4">
-              {[
-                { key: 'trusted.pillar_buying', label: 'Property Buying' },
-                { key: 'trusted.pillar_construction', label: 'Turnkey Construction' },
-                { key: 'trusted.pillar_rentals', label: 'House Rentals' },
-                { key: 'trusted.pillar_leases', label: 'Property Leases' },
-                { key: 'trusted.pillar_loans', label: 'Home Loan Assistance' },
-              ].map((pillar) => (
-                <span
-                  key={pillar.key}
-                  className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
-                >
-                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
-                  <span>{t(pillar.key, pillar.label)}</span>
-                </span>
-              ))}
-            </div>
+        {/* Core Decision Pillars mentioned in text */}
+        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4">
+          {[
+            { key: 'trusted.pillar_buying', label: 'Property Buying' },
+            { key: 'trusted.pillar_construction', label: 'Turnkey Construction' },
+            { key: 'trusted.pillar_rentals', label: 'House Rentals' },
+            { key: 'trusted.pillar_leases', label: 'Property Leases' },
+            { key: 'trusted.pillar_loans', label: 'Home Loan Assistance' },
+          ].map((pillar) => (
+            <span
+              key={pillar.key}
+              className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
+            >
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+              <span>{t(pillar.key, pillar.label)}</span>
+            </span>
+          ))}
+        </div>
       </section>
 
       {/* ======================================================== */}
       {/* 3. AFFORDABLE PROPERTIES & SUPERIOR CONSTRUCTION (Covering full width) */}
       {/* ======================================================== */}
       {/* <section className="w-full bg-white/95 backdrop-blur-md py-12 sm:py-16 lg:py-20 border-y border-slate-200/90 px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs"> */}
-       <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
+      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
         <div className="w-full text-center space-y-4">
           <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-gold-600" />
             <span>{t('affordable.badge', 'Value, Quality & Reliability')}</span>
           </div>
 
-         {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
+          <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('affordable.title', 'Affordable Properties. Superior Construction. Timely Delivery!')}
           </h2>
 
-        {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
+          {/*  <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
           <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
             {t(
               'affordable.description',
@@ -569,7 +569,7 @@ export const HomePage: React.FC = () => {
       {/* ======================================================== */}
       {/* 3.5. LOAN GUIDANCE SECTION */}
       {/* ======================================================== */}
-     {/*  <section className="w-full bg-[#FAF7F2] py-14 sm:py-20 border-y border-[#E8DFD3] px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs relative overflow-hidden"> */}
+      {/*  <section className="w-full bg-[#FAF7F2] py-14 sm:py-20 border-y border-[#E8DFD3] px-4 sm:px-8 lg:px-12 xl:px-16 shadow-xs relative overflow-hidden"> */}
       <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
         {/* Subtle decorative background accent */}
         <div
@@ -582,7 +582,7 @@ export const HomePage: React.FC = () => {
             <Banknote className="w-4 h-4 text-emerald-600" />
             <span>{t('loan_guidance.badge', 'Multi-Bank Loan Assistance')}</span>
           </div> */}
-          
+
           <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
             <Sparkles className="w-3.5 h-3.5 text-gold-600" />
             <span>{t('loan_guidance.badge', 'Multi-Bank Loan Assistance')}</span>
@@ -593,8 +593,8 @@ export const HomePage: React.FC = () => {
             {t('loan_guidance.title', 'The Right Loan Guidance for Your Dream Property!')}
           </h2>
 
-         {/* <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
-         <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
+          {/* <p className="text-sm sm:text-base lg:text-lg text-slate-600 leading-relaxed font-normal max-w-4xl mx-auto"> */}
+          <p className="text-base sm:text-lg text-slate-300 leading-relaxed font-light">
             {t(
               'loan_guidance.description',
               'We help you understand the home loan process, documentation requirements and explore suitable loan options with competitive interest rates from available financial institutions.'
@@ -766,14 +766,14 @@ export const HomePage: React.FC = () => {
               className="inline-flex items-center space-x-2 px-8 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-navy-950 font-bold text-xs sm:text-sm shadow-lg transition transform hover:-translate-y-0.5"
             >
               <Video className="w-4 h-4" />
-              <span>{isKn ? 'ಹೆಚ್ಚಿನ ವೀಡಿಯೊಗಳಿಗಾಗಿ ಫೇಸ್‌ಬುಕ್ ನೋಡಿ' : 'More Videos on Facebook'}</span>
+              <span>{isKn ? 'ಹೆಚ್ಚಿನ  ವೀಡಿಯೊಗಳಿಗಾಗಿ ಫೇಸ್‌ಬುಕ್ ನೋಡಿ' : 'More Videos on Facebook'}</span>
               <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>
       </section>
 
-    
+
       {/* ======================================================== */}
       {/* 9. CUSTOMER ENQUIRY & CONTACT FORM */}
       {/* ======================================================== */}
