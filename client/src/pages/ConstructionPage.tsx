@@ -158,12 +158,12 @@ export const ConstructionPage: React.FC = () => {
           {isKn ? 'ಟರ್ನ್‌ಕೀ ಕಟ್ಟಡ ನಿರ್ಮಾಣ ಸಮನ್ವಯ' : 'Turnkey Building Coordination'}
         </span>
         <h1 className="font-heading text-3xl sm:text-5xl font-bold text-white leading-tight">
-          {t('construction.title', 'Bespoke Home Construction in Bengaluru')}
+          {t('construction.title', 'Leadership, Quality & Construction Excellence')}
         </h1>
         <p className="text-sm text-slate-300 leading-relaxed font-light">
           {t(
             'construction.subtitle',
-            'From vacant residential plots to finished luxury duplex residences. Led directly by Ramesh S H with rigid quality standards and transparent milestone accounting.'
+            'From strategic residential plot acquisitions to the development of luxury residences, every project is personally overseen by Ramesh S H, reflecting an uncompromising commitment to construction excellence, quality control, transparent financial practices and lasting client relationships.'
           )}
         </p>
       </div>

@@ -63,7 +63,7 @@ export const OurProjectsPage: React.FC = () => {
           </h1>
 
           <p className="text-slate-300 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed font-light">
-            Explore turnkey residences, independent duplex homes, and civil structures completed and managed under the direct supervision of Ramesh S H across Bengaluru.
+            Explore our portfolio of turnkey residences, independent duplex homes and civil construction projects across Bengaluru, executed under the direct supervision of Ramesh S H with a commitment to quality and excellence.
           </p>
 
           {/* Quick Metrics Strip */}

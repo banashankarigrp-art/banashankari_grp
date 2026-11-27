@@ -95,7 +95,7 @@ export const KhbAssistancePage: React.FC = () => {
         <p className="text-sm text-slate-300 leading-relaxed font-light">
           {t(
             'khb.subtitle',
-            'Reliable advisory and documentation coordination for property buyers and allottees across KHB residential layouts.'
+            'We provide professional advisory and end-to-end documentation assistance for property buyers and allottees across KHB residential layouts. Our approach ensures transparent guidance, streamlined processes and a seamless property acquisition experience.'
           )}
         </p>
       </div>

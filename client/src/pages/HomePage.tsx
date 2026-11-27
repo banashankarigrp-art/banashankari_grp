@@ -231,7 +231,8 @@ export const HomePage: React.FC = () => {
       id: 'real-estate',
       service: t('banner.real_estate_service', 'Real Estate'),
       tagline: t('banner.real_estate_tagline', 'SURYANAGAR PHASE 1, 2, 3 & 4 PLOTS & RESIDENCES'),
-      headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'),
+    // headline: t('banner.real_estate_headline', 'REAL ESTATE & LAND SOLUTIONS'), 
+    headline: t('hero.title', 'REAL ESTATE & LAND SOLUTIONS'),
       description: t(
         'banner.real_estate_desc',
         'Verified KHB residential plots with 100% clear legal titles, on-ground inspections, and seamless registration assistance.'
@@ -444,7 +445,7 @@ export const HomePage: React.FC = () => {
           </div>
 
          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('one_stop.heading', 'One Stop Solution for All Real Estate & Construction Needs!')}
           </h2>
 
@@ -456,6 +457,24 @@ export const HomePage: React.FC = () => {
             )}
           </p>
         </div>
+
+        {/* Core Decision Pillars mentioned in text */}
+            <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 mt-4">
+              {[
+                { key: 'trusted.pillar_buying', label: 'Property Sales & Purchase' },
+                { key: 'trusted.pillar_construction', label: 'Rentals & Lease' },
+                { key: 'trusted.pillar_rentals', label: 'End-to-End Construction Solutions' },
+                { key: 'trusted.pillar_loans', label: 'Loan Assistance' },
+              ].map((pillar) => (
+                <span
+                  key={pillar.key}
+                  className="inline-flex items-center space-x-1.5 bg-white border border-slate-200/90 text-navy-900 font-semibold text-xs px-3 py-1.5 rounded-lg shadow-2xs"
+                >
+                  <CheckCircle2 className="w-3.5 h-3.5 text-emerald-500" />
+                  <span>{t(pillar.key, pillar.label)}</span>
+                </span>
+              ))}
+            </div>
       </section>
 
       {/* ======================================================== */}
@@ -470,7 +489,7 @@ export const HomePage: React.FC = () => {
           </div>
 
          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('trusted.title', 'Most Trusted Real Estate & Construction Partner Since 2011!')}
           </h2>
 
@@ -515,7 +534,7 @@ export const HomePage: React.FC = () => {
           </div>
 
          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('affordable.title', 'Affordable Properties. Superior Construction. Timely Delivery!')}
           </h2>
 
@@ -568,7 +587,7 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight max-w-4xl mx-auto"> */}
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+          <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('loan_guidance.title', 'The Right Loan Guidance for Your Dream Property!')}
           </h2>
 
