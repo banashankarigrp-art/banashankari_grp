@@ -226,43 +226,9 @@ export const MyEnquiriesPage: React.FC = () => {
           <div className="inline-flex bg-white p-1 rounded-2xl border border-slate-200 shadow-sm text-xs font-medium">
             <button
               onClick={() => setSelectedFilter('all')}
-              className={`px-3.5 py-2 rounded-xl transition ${
-                selectedFilter === 'all'
-                  ? 'bg-navy-950 text-white font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-navy-900'
-              }`}
+              className="px-3.5 py-2 rounded-xl transition bg-navy-950 text-white font-semibold shadow-sm"
             >
               All Enquiries ({enquiries.length})
-            </button>
-            <button
-              onClick={() => setSelectedFilter('plots')}
-              className={`px-3.5 py-2 rounded-xl transition ${
-                selectedFilter === 'plots'
-                  ? 'bg-navy-950 text-white font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-navy-900'
-              }`}
-            >
-              Plots & Site Visits
-            </button>
-            <button
-              onClick={() => setSelectedFilter('construction')}
-              className={`px-3.5 py-2 rounded-xl transition ${
-                selectedFilter === 'construction'
-                  ? 'bg-navy-950 text-white font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-navy-900'
-              }`}
-            >
-              Construction
-            </button>
-            <button
-              onClick={() => setSelectedFilter('finance')}
-              className={`px-3.5 py-2 rounded-xl transition ${
-                selectedFilter === 'finance'
-                  ? 'bg-navy-950 text-white font-semibold shadow-sm'
-                  : 'text-slate-600 hover:text-navy-900'
-              }`}
-            >
-              Loans & KHB
             </button>
           </div>
 
@@ -275,13 +241,6 @@ export const MyEnquiriesPage: React.FC = () => {
               <RefreshCw className={`w-3.5 h-3.5 text-slate-500 ${loading ? 'animate-spin' : ''}`} />
               <span>Refresh</span>
             </button>
-            <Link
-              to="/properties"
-              className="inline-flex items-center space-x-1.5 px-4 py-2 rounded-xl bg-gold-500 hover:bg-gold-600 text-white text-xs font-bold transition shadow-sm"
-            >
-              <Compass className="w-3.5 h-3.5" />
-              <span>Explore Verified Plots</span>
-            </Link>
           </div>
         </div>
 

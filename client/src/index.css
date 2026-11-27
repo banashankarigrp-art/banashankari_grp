@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme mode support (Tailwind darkMode: class) */
+
 @layer base {
   html {
     scroll-behavior: smooth;

@@ -8,9 +8,9 @@ import { AuthenticatedRequest } from '../middleware/auth.js';
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { name, email, phone, password, role } = req.body;
+    const { name, email, phone, password } = req.body;
     const normalizedEmail = email.toLowerCase().trim();
-    const userRole = role === 'seller' ? 'seller' : 'customer';
+    const userRole = 'customer';
 
     if (mongoose.connection.readyState === 1) {
       const existingUser = await User.findOne({ email: normalizedEmail });

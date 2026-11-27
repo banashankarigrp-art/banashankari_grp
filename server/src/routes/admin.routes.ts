@@ -2,15 +2,15 @@ import { Router } from 'express';
 import {
   getAnalytics,
   getAllPropertiesAdmin,
-  approveProperty,
-  rejectProperty,
   togglePublishProperty,
   toggleFeatureProperty,
   updatePropertyAvailability,
   getAllUsers,
   updateUserStatus,
+  deleteUser,
   getAllEnquiriesAdmin,
   updateEnquiryStatusAndNotes,
+  deleteEnquiry,
   getAuditLogs,
 } from '../controllers/admin.controller.js';
 import { authenticate, requireAdmin } from '../middleware/auth.js';
@@ -23,10 +23,8 @@ router.use(authenticate, requireAdmin);
 // Analytics
 router.get('/analytics', getAnalytics);
 
-// Properties moderation & queue
+// Properties management
 router.get('/properties', getAllPropertiesAdmin);
-router.post('/properties/:id/approve', approveProperty);
-router.post('/properties/:id/reject', rejectProperty);
 router.post('/properties/:id/toggle-publish', togglePublishProperty);
 router.post('/properties/:id/toggle-feature', toggleFeatureProperty);
 router.patch('/properties/:id/availability', updatePropertyAvailability);
@@ -34,10 +32,12 @@ router.patch('/properties/:id/availability', updatePropertyAvailability);
 // Users management
 router.get('/users', getAllUsers);
 router.patch('/users/:id/status', updateUserStatus);
+router.delete('/users/:id', deleteUser);
 
 // Enquiries moderation
 router.get('/enquiries', getAllEnquiriesAdmin);
 router.patch('/enquiries/:id', updateEnquiryStatusAndNotes);
+router.delete('/enquiries/:id', deleteEnquiry);
 
 // Audit trail
 router.get('/audit-logs', getAuditLogs);

@@ -338,58 +338,21 @@ export const Navbar: React.FC = () => {
                           <p className="text-sm font-bold text-navy-950 truncate">{user?.name}</p>
                           <p className="text-xs text-slate-500 truncate">{user?.email}</p>
                           <span className="inline-block mt-1.5 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-amber-50 text-amber-800 border border-amber-200">
-                            {user?.role === 'seller'
-                              ? (isKn ? 'ಮಾರಾಟಗಾರರು / ಮಾಲೀಕರು' : 'Seller / Owner')
-                              : user?.role === 'admin'
-                                ? (isKn ? 'ನಿರ್ವಾಹಕರು' : 'Administrator')
-                                : (isKn ? 'ಗ್ರಾಹಕರು' : 'Customer')}
+                            {user?.role === 'admin'
+                              ? (isKn ? 'ನಿರ್ವಾಹಕರು' : 'Administrator')
+                              : (isKn ? 'ಗ್ರಾಹಕರು' : 'Customer')}
                           </span>
                         </div>
 
                         {isAdmin ? (
-                          <>
-                            <Link
-                              to="/admin"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-4 py-2.5 text-sm text-navy-900 hover:bg-slate-50 font-medium transition"
-                            >
-                              <ShieldAlert className="w-4 h-4 text-amber-600" />
-                              <span>{t('nav.admin_console', 'Admin Console')}</span>
-                            </Link>
-                            <Link
-                              to="/sell-property"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 font-medium transition"
-                            >
-                              <PlusCircle className="w-4 h-4 text-amber-600" />
-                              <span>{t('nav.list_property', 'List a Property')}</span>
-                            </Link>
-                          </>
-                        ) : user?.role === 'seller' ? (
-                          <>
-                            <Link
-                              to="/dashboard"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-4 py-2.5 text-sm text-navy-900 hover:bg-slate-50 font-medium transition"
-                            >
-                              <LayoutDashboard className="w-4 h-4 text-slate-500" />
-                              <span>{t('nav.seller_dashboard', 'Seller Dashboard')}</span>
-                            </Link>
-                            <Link
-                              to="/dashboard/properties"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 font-medium transition"
-                            >
-                              <span>{t('nav.my_listings', 'My Submitted Listings')}</span>
-                            </Link>
-                            <Link
-                              to="/sell-property"
-                              onClick={() => setUserDropdownOpen(false)}
-                              className="flex items-center space-x-2 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 font-medium transition"
-                            >
-                              <span>{t('nav.list_property', 'List a Property')}</span>
-                            </Link>
-                          </>
+                          <Link
+                            to="/admin"
+                            onClick={() => setUserDropdownOpen(false)}
+                            className="flex items-center space-x-2 px-4 py-2.5 text-sm text-navy-900 hover:bg-slate-50 font-medium transition"
+                          >
+                            <ShieldAlert className="w-4 h-4 text-amber-600" />
+                            <span>{t('nav.admin_console', 'Admin Console')}</span>
+                          </Link>
                         ) : (
                           <Link
                             to="/my-enquiries"

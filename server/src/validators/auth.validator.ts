@@ -15,8 +15,8 @@ export const registerSchema = z.object({
     ),
   role: z
     .preprocess(
-      (v) => (v === 'seller' ? 'seller' : 'customer'),
-      z.enum(['customer', 'seller'])
+      () => 'customer',
+      z.enum(['customer'])
     ),
   password: z
     .string()

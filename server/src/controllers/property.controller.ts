@@ -270,8 +270,8 @@ const saveBase64Images = (images: any[], referenceId: string) => {
 
 export const createProperty = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
   try {
-    if (!req.user) {
-      res.status(401).json({ success: false, message: 'Please log in to submit a property' });
+    if (!req.user || req.user.role !== 'admin') {
+      res.status(403).json({ success: false, message: 'Only administrators can list properties.' });
       return;
     }
 
@@ -279,7 +279,6 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response): 
     const referenceId = generatePropRefId();
     const slug = slugify(payload.title);
 
-    const isAdmin = req.user.role === 'admin';
     const processedImages = saveBase64Images(payload.images || [], referenceId);
 
     const propertyData = {
@@ -288,8 +287,8 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response): 
       referenceId,
       slug,
       ownerId: req.user.userId,
-      approvalStatus: isAdmin ? 'approved' : 'pending_review',
-      publicationStatus: isAdmin ? 'published' : 'unpublished',
+      approvalStatus: 'approved',
+      publicationStatus: 'published',
       featured: payload.featured || false,
       availabilityStatus: 'available',
     };
@@ -297,22 +296,17 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response): 
     if (mongoose.connection.readyState === 1) {
       const property = await Property.create(propertyData);
 
-      // Create confirmation notification
       await Notification.create({
         userId: req.user.userId,
-        title: isAdmin ? 'Property Listed & Published Live' : 'Listing Submitted for Review',
-        message: isAdmin
-          ? `Property listing "${property.title}" (Ref: ${referenceId}) has been created and published live directly.`
-          : `Your property listing "${property.title}" (Ref: ${referenceId}) has been received and is under administrative review.`,
+        title: 'Property Listed & Published Live',
+        message: `Property listing "${property.title}" (Ref: ${referenceId}) has been created and published live directly.`,
         type: 'listing_update',
-        link: isAdmin ? '/admin/properties' : `/dashboard/properties`,
+        link: '/admin/properties',
       });
 
       res.status(201).json({
         success: true,
-        message: isAdmin
-          ? 'Property listing created and published live successfully!'
-          : 'Property listing submitted successfully! Our administrative team will verify and publish it.',
+        message: 'Property listing created and published live successfully!',
         data: property,
       });
     } else {
@@ -328,136 +322,22 @@ export const createProperty = async (req: AuthenticatedRequest, res: Response): 
       inMemoryStore.notifications.push({
         _id: new mongoose.Types.ObjectId().toString(),
         userId: req.user.userId,
-        title: isAdmin ? 'Property Listed & Published Live' : 'Listing Submitted for Review',
-        message: isAdmin
-          ? `Property listing "${newProp.title}" (Ref: ${referenceId}) has been created and published live directly.`
-          : `Your property listing "${newProp.title}" (Ref: ${referenceId}) has been received and is under administrative review.`,
+        title: 'Property Listed & Published Live',
+        message: `Property listing "${newProp.title}" (Ref: ${referenceId}) has been created and published live directly.`,
         type: 'listing_update',
-        link: isAdmin ? '/admin/properties' : `/dashboard/properties`,
+        link: '/admin/properties',
         isRead: false,
         createdAt: new Date(),
       });
 
       res.status(201).json({
         success: true,
-        message: isAdmin
-          ? 'Property listing created and published live successfully!'
-          : 'Property listing submitted successfully! Our administrative team will verify and publish it.',
+        message: 'Property listing created and published live successfully!',
         data: newProp,
       });
     }
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message || 'Failed to submit property' });
-  }
-};
-
-export const getMyProperties = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-  try {
-    if (!req.user) {
-      res.status(401).json({ success: false, message: 'Authentication required' });
-      return;
-    }
-
-    if (mongoose.connection.readyState === 1) {
-      const properties = await Property.find({ ownerId: req.user.userId }).sort({ createdAt: -1 });
-      res.json({ success: true, data: properties });
-    } else {
-      const properties = inMemoryStore.properties.filter((p) => p.ownerId === req.user?.userId);
-      res.json({ success: true, data: properties });
-    }
-  } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message || 'Error fetching user properties' });
-  }
-};
-
-export const updateMyProperty = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-  try {
-    const { id } = req.params;
-    if (!req.user) {
-      res.status(401).json({ success: false, message: 'Authentication required' });
-      return;
-    }
-
-    if (mongoose.connection.readyState === 1) {
-      const property = await Property.findOne({ _id: id, ownerId: req.user.userId });
-      if (!property) {
-        res.status(404).json({ success: false, message: 'Property not found or unauthorized' });
-        return;
-      }
-
-      // Material edit returns to review
-      Object.assign(property, req.body);
-      property.approvalStatus = 'pending_review';
-      property.publicationStatus = 'unpublished';
-      await property.save();
-
-      res.json({
-        success: true,
-        message: 'Listing updated and resubmitted for administrative verification',
-        data: property,
-      });
-    } else {
-      const property = inMemoryStore.properties.find(
-        (p) => p._id === id && p.ownerId === req.user?.userId
-      );
-      if (!property) {
-        res.status(404).json({ success: false, message: 'Property not found or unauthorized' });
-        return;
-      }
-
-      Object.assign(property, req.body, {
-        approvalStatus: 'pending_review',
-        publicationStatus: 'unpublished',
-        updatedAt: new Date(),
-      });
-
-      res.json({
-        success: true,
-        message: 'Listing updated and resubmitted for administrative verification',
-        data: property,
-      });
-    }
-  } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message || 'Failed to update property' });
-  }
-};
-
-export const withdrawMyProperty = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
-  try {
-    const { id } = req.params;
-    if (!req.user) {
-      res.status(401).json({ success: false, message: 'Authentication required' });
-      return;
-    }
-
-    if (mongoose.connection.readyState === 1) {
-      const property = await Property.findOne({ _id: id, ownerId: req.user.userId });
-      if (!property) {
-        res.status(404).json({ success: false, message: 'Property not found or unauthorized' });
-        return;
-      }
-
-      property.availabilityStatus = 'withdrawn';
-      property.publicationStatus = 'unpublished';
-      await property.save();
-
-      res.json({ success: true, message: 'Listing withdrawn successfully', data: property });
-    } else {
-      const property = inMemoryStore.properties.find(
-        (p) => p._id === id && p.ownerId === req.user?.userId
-      );
-      if (!property) {
-        res.status(404).json({ success: false, message: 'Property not found or unauthorized' });
-        return;
-      }
-
-      property.availabilityStatus = 'withdrawn';
-      property.publicationStatus = 'unpublished';
-
-      res.json({ success: true, message: 'Listing withdrawn successfully', data: property });
-    }
-  } catch (error: any) {
-    res.status(500).json({ success: false, message: error.message || 'Failed to withdraw property' });
   }
 };
 

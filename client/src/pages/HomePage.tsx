@@ -117,11 +117,6 @@ export const HomePage: React.FC = () => {
   const [properties, setProperties] = useState<IProperty[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Direct property listing CTA link destination
-  const sellerListingLink = !isAuthenticated
-    ? '/register'
-    : '/sell-property';
-
   // FAQ Accordion
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 

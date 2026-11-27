@@ -3,15 +3,12 @@ import {
   getProperties,
   getPropertyBySlugOrId,
   createProperty,
-  getMyProperties,
-  updateMyProperty,
-  withdrawMyProperty,
   toggleSaveProperty,
   getSavedProperties,
 } from '../controllers/property.controller.js';
-import { authenticate } from '../middleware/auth.js';
+import { authenticate, requireAdmin } from '../middleware/auth.js';
 import { validateRequest } from '../middleware/validation.js';
-import { propertyCreateSchema, propertyUpdateSchema } from '../validators/property.validator.js';
+import { propertyCreateSchema } from '../validators/property.validator.js';
 
 const router = Router();
 
@@ -19,11 +16,8 @@ const router = Router();
 router.get('/', getProperties);
 router.get('/detail/:identifier', getPropertyBySlugOrId);
 
-// Customer protected property routes
-router.post('/', authenticate, validateRequest(propertyCreateSchema), createProperty);
-router.get('/user/mine', authenticate, getMyProperties);
-router.patch('/user/:id', authenticate, validateRequest(propertyUpdateSchema), updateMyProperty);
-router.post('/user/:id/withdraw', authenticate, withdrawMyProperty);
+// Admin-only property creation
+router.post('/', authenticate, requireAdmin, validateRequest(propertyCreateSchema), createProperty);
 
 // Bookmarks / Saved
 router.get('/user/saved', authenticate, getSavedProperties);

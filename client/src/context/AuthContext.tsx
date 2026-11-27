@@ -6,7 +6,6 @@ interface AuthContextType {
   user: IUser | null;
   isAuthenticated: boolean;
   isAdmin: boolean;
-  isSeller: boolean;
   isCustomer: boolean;
   isLoading: boolean;
   login: (credentials: { email?: string; identifier?: string; phone?: string; password: string }) => Promise<IUser>;
@@ -78,7 +77,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         user,
         isAuthenticated: !!user,
         isAdmin: user?.role === 'admin',
-        isSeller: user?.role === 'seller',
         isCustomer: user?.role === 'customer',
         isLoading,
         login,

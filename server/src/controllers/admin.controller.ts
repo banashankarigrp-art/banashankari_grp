@@ -5,6 +5,7 @@ import { Property } from '../models/Property.js';
 import { Enquiry } from '../models/Enquiry.js';
 import { AuditLog } from '../models/AuditLog.js';
 import { Notification } from '../models/Notification.js';
+import { SavedProperty } from '../models/SavedProperty.js';
 import { SiteSettings } from '../models/SiteSettings.js';
 import { inMemoryStore } from '../services/store.js';
 import { AuthenticatedRequest } from '../middleware/auth.js';
@@ -615,6 +616,71 @@ export const updateUserStatus = async (req: AuthenticatedRequest, res: Response)
   }
 };
 
+export const deleteUser = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  try {
+    const id = String(req.params.id);
+
+    if (mongoose.connection.readyState === 1) {
+      const user = await User.findById(id);
+      if (!user) {
+        res.status(404).json({ success: false, message: 'User not found' });
+        return;
+      }
+
+      if (user.role === 'admin' || user._id.toString() === req.user?.userId) {
+        res.status(400).json({ success: false, message: 'Administrator accounts cannot be deleted' });
+        return;
+      }
+
+      await Promise.all([
+        User.findByIdAndDelete(id),
+        SavedProperty.deleteMany({ userId: id }),
+        Notification.deleteMany({ userId: id }),
+      ]);
+
+      await logAdminAction(
+        req.user!,
+        'DELETE_USER',
+        'User',
+        id,
+        { email: user.email, name: user.name },
+        req.ip
+      );
+
+      res.json({ success: true, message: 'User deleted successfully' });
+    } else {
+      const idx = inMemoryStore.users.findIndex((u) => u._id === id);
+      if (idx === -1) {
+        res.status(404).json({ success: false, message: 'User not found' });
+        return;
+      }
+
+      const user = inMemoryStore.users[idx];
+      if (user.role === 'admin' || user._id === req.user?.userId) {
+        res.status(400).json({ success: false, message: 'Administrator accounts cannot be deleted' });
+        return;
+      }
+
+      inMemoryStore.users.splice(idx, 1);
+      inMemoryStore.savedProperties = inMemoryStore.savedProperties.filter((s) => s.userId !== id);
+      inMemoryStore.notifications = inMemoryStore.notifications.filter((n) => n.userId !== id);
+
+      await logAdminAction(
+        req.user!,
+        'DELETE_USER',
+        'User',
+        id,
+        { email: user.email, name: user.name },
+        req.ip
+      );
+
+      res.json({ success: true, message: 'User deleted successfully' });
+    }
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message || 'Error deleting user' });
+  }
+};
+
 export const getAllEnquiriesAdmin = async (req: Request, res: Response): Promise<void> => {
   try {
     const { category, status, search } = req.query;
@@ -738,6 +804,52 @@ export const updateEnquiryStatusAndNotes = async (req: AuthenticatedRequest, res
     }
   } catch (error: any) {
     res.status(500).json({ success: false, message: error.message || 'Error updating enquiry' });
+  }
+};
+
+export const deleteEnquiry = async (req: AuthenticatedRequest, res: Response): Promise<void> => {
+  try {
+    const id = String(req.params.id);
+
+    if (mongoose.connection.readyState === 1) {
+      const enquiry = await Enquiry.findByIdAndDelete(id);
+      if (!enquiry) {
+        res.status(404).json({ success: false, message: 'Enquiry not found' });
+        return;
+      }
+
+      await logAdminAction(
+        req.user!,
+        'DELETE_ENQUIRY',
+        'Enquiry',
+        id,
+        { referenceId: enquiry.referenceId, customerName: enquiry.customerName },
+        req.ip
+      );
+
+      res.json({ success: true, message: 'Enquiry deleted successfully' });
+    } else {
+      const idx = inMemoryStore.enquiries.findIndex((e) => e._id === id);
+      if (idx === -1) {
+        res.status(404).json({ success: false, message: 'Enquiry not found' });
+        return;
+      }
+
+      const [removed] = inMemoryStore.enquiries.splice(idx, 1);
+
+      await logAdminAction(
+        req.user!,
+        'DELETE_ENQUIRY',
+        'Enquiry',
+        id,
+        { referenceId: removed.referenceId, customerName: removed.customerName },
+        req.ip
+      );
+
+      res.json({ success: true, message: 'Enquiry deleted successfully' });
+    }
+  } catch (error: any) {
+    res.status(500).json({ success: false, message: error.message || 'Error deleting enquiry' });
   }
 };
 

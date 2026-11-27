@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, Navigate } from 'react-router-dom';
 import {
   Building2,
   CheckCircle2,
@@ -24,7 +24,7 @@ import { formatIndianCurrency } from '../components/property/PropertyCard';
 
 export const SellPropertyPage: React.FC = () => {
   const navigate = useNavigate();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, isAdmin, user } = useAuth();
   const [currentStep, setCurrentStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionSuccess, setSubmissionSuccess] = useState<any>(null);
@@ -85,6 +85,10 @@ export const SellPropertyPage: React.FC = () => {
   ]);
   const [photoError, setPhotoError] = useState<string>('');
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  if (!isAuthenticated || !isAdmin) {
+    return <Navigate to="/admin/login" replace />;
+  }
 
   const handleDevicePhotoUpload = (filesList: FileList | File[] | null) => {
     setPhotoError('');
@@ -261,8 +265,6 @@ export const SellPropertyPage: React.FC = () => {
       setIsSubmitting(false);
     }
   };
-
-  const isAdmin = user?.role === 'admin';
 
   if (submissionSuccess) {
     return (

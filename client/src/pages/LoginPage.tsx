@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import {
   Lock,
-  Mail,
-  Phone,
+  User,
   ArrowRight,
   AlertCircle,
   ShieldCheck,
@@ -18,9 +17,7 @@ export const LoginPage: React.FC = () => {
   const location = useLocation();
   const { login } = useAuth();
 
-  const [loginMethod, setLoginMethod] = useState<'mobile' | 'email'>('mobile');
-  const [mobileNumber, setMobileNumber] = useState('');
-  const [email, setEmail] = useState('');
+  const [identifier, setIdentifier] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
@@ -36,37 +33,38 @@ export const LoginPage: React.FC = () => {
     e.preventDefault();
     setError('');
 
-    let identifier = '';
-    if (loginMethod === 'mobile') {
-      const cleanDigits = mobileNumber.replace(/\D/g, '');
-      if (cleanDigits.length < 10) {
-        setError('Please enter a valid 10-digit mobile number');
+    const raw = identifier.trim();
+    if (!raw) {
+      setError('Please enter your mobile number or Gmail / email address');
+      return;
+    }
+
+    let normalizedIdentifier = '';
+    if (raw.includes('@')) {
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(raw)) {
+        setError('Please enter a valid Gmail / email address');
         return;
       }
-      identifier = `+91 ${cleanDigits}`;
+      normalizedIdentifier = raw.toLowerCase();
     } else {
-      if (!email.trim() || !email.includes('@')) {
-        setError('Please enter a valid Gmail / Email address');
+      const cleanDigits = raw.replace(/\D/g, '');
+      if (cleanDigits.length < 10) {
+        setError('Please enter a valid 10-digit mobile number or Gmail / email address');
         return;
       }
-      identifier = email.trim().toLowerCase();
+      normalizedIdentifier = `+91 ${cleanDigits.slice(-10)}`;
     }
 
     try {
       setIsSubmitting(true);
-      const user = await login({ identifier, password });
+      const user = await login({ identifier: normalizedIdentifier, password });
       if (user.role === 'admin') {
         navigate('/admin');
       } else {
         navigate(fromLocation ? from : '/properties');
       }
     } catch (err: any) {
-      setError(
-        err.message ||
-          (loginMethod === 'mobile'
-            ? 'Invalid mobile number or password'
-            : 'Invalid Gmail / Email or password')
-      );
+      setError(err.message || 'Invalid mobile number / email or password');
     } finally {
       setIsSubmitting(false);
     }
@@ -96,89 +94,29 @@ export const LoginPage: React.FC = () => {
           </div>
         )}
 
-        {/* Login Method Toggle: Mobile (+91) vs Gmail / Email */}
-        <div className="grid grid-cols-2 gap-2 p-1 bg-slate-100 rounded-2xl">
-          <button
-            type="button"
-            onClick={() => {
-              setLoginMethod('mobile');
-              setError('');
-            }}
-            className={`py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
-              loginMethod === 'mobile'
-                ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60'
-                : 'text-slate-600 hover:text-navy-950'
-            }`}
-          >
-            <Phone className="w-3.5 h-3.5 text-gold-600" />
-            <span>Mobile (+91)</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => {
-              setLoginMethod('email');
-              setError('');
-            }}
-            className={`py-2 px-3 rounded-xl text-xs font-bold transition flex items-center justify-center space-x-1.5 ${
-              loginMethod === 'email'
-                ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60'
-                : 'text-slate-600 hover:text-navy-950'
-            }`}
-          >
-            <Mail className="w-3.5 h-3.5 text-gold-600" />
-            <span>Gmail / Email</span>
-          </button>
-        </div>
-
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-          {loginMethod === 'mobile' ? (
-            /* Mobile Number Login with Static +91 Prefix */
-            <div>
-              <label className="font-semibold text-slate-700 block mb-1">Mobile Number *</label>
-              <div className="relative flex rounded-xl border border-slate-300 focus-within:ring-2 focus-within:ring-gold-500 overflow-hidden bg-white">
-                <span className="inline-flex items-center px-3.5 bg-slate-50 border-r border-slate-200 text-slate-800 font-bold text-xs select-none">
-                  +91
-                </span>
-                <input
-                  type="tel"
-                  required
-                  value={mobileNumber}
-                  onChange={(e) => {
-                    const digits = e.target.value.replace(/[^0-9]/g, '');
-                    setMobileNumber(digits);
-                  }}
-                  maxLength={10}
-                  placeholder="98450 12345"
-                  className="w-full px-3 py-3 text-xs focus:outline-none"
-                  autoFocus
-                />
-              </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Enter your registered 10-digit mobile number
-              </p>
+          {/* Single Identifier Field: Mobile Number or Gmail / Email */}
+          <div>
+            <label className="font-semibold text-slate-700 block mb-1">
+              Mobile Number or Gmail / Email *
+            </label>
+            <div className="relative">
+              <User className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
+              <input
+                type="text"
+                required
+                autoComplete="username"
+                value={identifier}
+                onChange={(e) => setIdentifier(e.target.value)}
+                placeholder="e.g. 9845012345 or name@gmail.com"
+                className="w-full pl-9 pr-3 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
+                autoFocus
+              />
             </div>
-          ) : (
-            /* Gmail / Email Login */
-            <div>
-              <label className="font-semibold text-slate-700 block mb-1">Gmail / Email Address *</label>
-              <div className="relative">
-                <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="name@gmail.com"
-                  className="w-full pl-9 pr-3 py-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
-                  autoFocus
-                />
-              </div>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Enter your registered email address
-              </p>
-            </div>
-          )}
+            <p className="text-[11px] text-slate-400 mt-1">
+              Enter your registered 10-digit mobile number or Gmail / email address
+            </p>
+          </div>
 
           <div>
             <div className="flex justify-between items-center mb-1">

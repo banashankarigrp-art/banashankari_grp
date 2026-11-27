@@ -197,23 +197,8 @@ export const CustomerDashboardPage: React.FC = () => {
                 Ready to Sell or Rent Another Property?
               </h3>
               <p className="text-xs sm:text-sm text-slate-300 font-light max-w-xl">
-                Submit plots, houses, or commercial spaces for verified publication on Banashankari Enterprises.
+                View your enquiries and account activity on Banashankari Enterprises.
               </p>
-            </div>
-            <div className="flex space-x-3 shrink-0">
-              <Link
-                to="/sell-property"
-                className="bg-gold-500 hover:bg-gold-600 text-white text-xs font-semibold px-5 py-3 rounded-xl shadow-gold-glow flex items-center space-x-2 transition"
-              >
-                <PlusCircle className="w-4 h-4" />
-                <span>Submit for Sale</span>
-              </Link>
-              <Link
-                to="/rent-lease-property"
-                className="border border-slate-400 hover:bg-white/10 text-white text-xs font-semibold px-5 py-3 rounded-xl transition"
-              >
-                <span>List for Rent</span>
-              </Link>
             </div>
           </div>
 
@@ -269,13 +254,6 @@ export const CustomerDashboardPage: React.FC = () => {
             <h2 className="font-heading font-bold text-xl text-navy-900">
               My Submitted Properties ({myProperties.length})
             </h2>
-            <Link
-              to="/sell-property"
-              className="bg-gold-500 hover:bg-gold-600 text-white text-xs font-semibold px-4 py-2 rounded-xl flex items-center space-x-1.5 shadow"
-            >
-              <PlusCircle className="w-4 h-4" />
-              <span>Add Property</span>
-            </Link>
           </div>
 
           {myProperties.length === 0 ? (
@@ -283,11 +261,8 @@ export const CustomerDashboardPage: React.FC = () => {
               <Home className="w-12 h-12 text-slate-300 mx-auto" />
               <h3 className="font-heading font-bold text-base text-navy-900">No properties submitted yet</h3>
               <p className="text-xs text-slate-500">
-                You can submit your residential plot, villa, apartment, or commercial space for sale or rent.
+                Property listings are managed exclusively by the Banashankari Enterprises administration team.
               </p>
-              <Link to="/sell-property" className="inline-block bg-navy-900 text-white px-5 py-2.5 rounded-xl text-xs font-semibold">
-                Submit Property for Sale
-              </Link>
             </div>
           ) : (
             <div className="space-y-4">

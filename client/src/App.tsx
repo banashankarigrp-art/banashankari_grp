@@ -13,7 +13,6 @@ import { HomePage } from './pages/HomePage';
 import { PropertiesPage } from './pages/PropertiesPage';
 import { PropertyDetailPage } from './pages/PropertyDetailPage';
 import { SellPropertyPage } from './pages/SellPropertyPage';
-import { RentLeasePropertyPage } from './pages/RentLeasePropertyPage';
 import { ConstructionPage } from './pages/ConstructionPage';
 import { OurProjectsPage } from './pages/OurProjectsPage';
 import { LoanAssistancePage } from './pages/LoanAssistancePage';
@@ -76,8 +75,6 @@ export const App: React.FC = () => {
               <Route path="/contact" element={<ContactPage />} />
 
               {/* Auxiliary Public Flow Routes */}
-              <Route path="/sell-property" element={<SellPropertyPage />} />
-              <Route path="/rent-lease-property" element={<RentLeasePropertyPage />} />
               <Route path="/my-enquiries" element={<MyEnquiriesPage />} />
               <Route path="/about" element={<Navigate to="/" replace />} />
               <Route path="/login" element={<LoginPage />} />
@@ -105,7 +102,6 @@ export const App: React.FC = () => {
             {/* Admin Console Protected Routes */}
             <Route path="/admin" element={<AdminDashboardLayout />}>
               <Route index element={<AdminDashboardPage />} />
-              <Route path="approvals" element={<AdminDashboardPage />} />
               <Route path="properties" element={<AdminDashboardPage />} />
               <Route path="properties/new" element={<SellPropertyPage />} />
               <Route path="projects" element={<AdminDashboardPage />} />
