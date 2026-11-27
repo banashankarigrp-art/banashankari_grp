@@ -23,6 +23,8 @@ import {
   ChevronRight,
   Handshake,
   Key,
+  Video,
+  ExternalLink,
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { useSettings } from '../context/SettingsContext';
@@ -685,6 +687,88 @@ export const HomePage: React.FC = () => {
               <span>{t('loan_guidance.cta', 'Explore Loan Assistance')}</span>
               <ArrowRight className="w-4 h-4" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ======================================================== */}
+      {/* 4. COMPANY VIDEOS SECTION (Facebook Reels) */}
+      {/* ======================================================== */}
+      <section className="w-full bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white py-14 sm:py-20 px-4 sm:px-8 lg:px-12 xl:px-16 border-y border-gold-500/30 relative overflow-hidden shadow-2xl">
+        <div className="max-w-6xl mx-auto relative z-10 text-center space-y-6">
+          <div className="space-y-3">
+            <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-2xs">
+              <Video className="w-3.5 h-3.5 text-gold-600" />
+              <span>{isKn ? 'ಕಂಪನಿ ವೀಡಿಯೊಗಳು' : 'Company Videos & Reels'}</span>
+            </div>
+
+            <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
+              {isKn
+                ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್ ವೀಡಿಯೊಗಳನ್ನು ವೀಕ್ಷಿಸಿ'
+                : 'Watch Videos About Banashankari Enterprises'}
+            </h2>
+
+            <p className="text-sm sm:text-base text-slate-300 leading-relaxed font-light max-w-2xl mx-auto">
+              {isKn
+                ? 'ನಮ್ಮ ಆಸ್ತಿ ಪರಿಶೀಲನೆಗಳು, ನಿರ್ಮಾಣ ಯೋಜನೆಗಳು ಮತ್ತು ಗ್ರಾಹಕರ ಅನುಭವಗಳನ್ನು ವೀಡಿಯೊಗಳ ಮೂಲಕ ನೋಡಿ.'
+                : 'Explore our site visits, ongoing construction highlights, and property insights directly from our official Facebook Reels.'}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pt-2">
+            {[
+              {
+                url: 'https://www.facebook.com/reel/30016954861222223',
+                title: 'Banashankari Enterprises — Featured Reel 1',
+              },
+              {
+                url: 'https://www.facebook.com/reel/1684863053310739',
+                title: 'Banashankari Enterprises — Featured Reel 2',
+              },
+            ].map((reel, idx) => (
+              <div
+                key={idx}
+                className="bg-navy-950/90 border border-gold-500/30 rounded-2xl overflow-hidden shadow-xl flex flex-col"
+              >
+                <div className="relative w-full h-[460px] bg-black">
+                  <iframe
+                    src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+                      reel.url
+                    )}&show_text=false&width=360`}
+                    title={reel.title}
+                    className="w-full h-full border-0"
+                    scrolling="no"
+                    allowFullScreen
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                  />
+                </div>
+                <div className="px-4 py-3 bg-navy-900/90 border-t border-navy-800 flex items-center justify-between text-xs">
+                  <span className="font-semibold text-slate-200 truncate">{reel.title}</span>
+                  <a
+                    href={reel.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center space-x-1 text-gold-400 hover:text-gold-300 font-bold shrink-0 ml-2"
+                  >
+                    <span>Open Reel</span>
+                    <ExternalLink className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="pt-4">
+            <a
+              href="https://www.facebook.com/profile.php?id=100007333176502&sk=reels_tab"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center space-x-2 px-8 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-navy-950 font-bold text-xs sm:text-sm shadow-lg transition transform hover:-translate-y-0.5"
+            >
+              <Video className="w-4 h-4" />
+              <span>{isKn ? 'ಹೆಚ್ಚಿನ ವೀಡಿಯೊಗಳಿಗಾಗಿ ಫೇಸ್‌ಬುಕ್ ನೋಡಿ' : 'More Videos on Facebook'}</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
           </div>
         </div>
       </section>
