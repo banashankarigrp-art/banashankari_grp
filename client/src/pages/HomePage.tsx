@@ -570,7 +570,7 @@ export const HomePage: React.FC = () => {
           </div>
 
          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('trusted.title', 'Most Trusted Real Estate & Construction Partner Since 2011!')}
           </h2>
 
@@ -615,7 +615,7 @@ export const HomePage: React.FC = () => {
           </div>
 
          {/*  <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight"> */}
-         <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+         <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('affordable.title', 'Affordable Properties. Superior Construction. Timely Delivery!')}
           </h2>
 
@@ -668,7 +668,7 @@ export const HomePage: React.FC = () => {
           </div>
 
           {/* <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-extrabold text-navy-900 tracking-tight leading-tight max-w-4xl mx-auto"> */}
-          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold text-white tracking-tight">
+          <h2 className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold text-white tracking-tight">
             {t('loan_guidance.title', 'The Right Loan Guidance for Your Dream Property!')}
           </h2>
 
