@@ -715,45 +715,63 @@ export const HomePage: React.FC = () => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto pt-2">
+          {/* Vertical Portrait Facebook Reel Embed Cards (click opens Facebook) */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 pt-4">
             {[
               {
                 url: 'https://www.facebook.com/reel/30016954861222223',
-                title: 'Banashankari Enterprises — Featured Reel 1',
+                title: isKn ? 'ಆಸ್ತಿ ಪರಿಶೀಲನೆ' : 'Property Highlight',
+                subtitle: isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'Banashankari Reels',
               },
               {
                 url: 'https://www.facebook.com/reel/1684863053310739',
-                title: 'Banashankari Enterprises — Featured Reel 2',
+                title: isKn ? 'ನಿರ್ಮಾಣ ನವೀಕರಣ' : 'Construction Update',
+                subtitle: isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'Banashankari Reels',
               },
+              {
+                url: 'https://www.facebook.com/reel/1725351415283798',
+                title: isKn ? 'ಸೈಟ್ ವಿಸಿಟ್' : 'Site Walkthrough',
+                subtitle: isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'Banashankari Reels',
+              },
+              {
+                url: 'https://www.facebook.com/reel/1035749112541142',
+                title: isKn ? 'ಯೋಜನೆಯ ವಿವರ' : 'Project Showcase',
+                subtitle: isKn ? 'ಬನಶಂಕರಿ ಎಂಟರ್‌ಪ್ರೈಸಸ್' : 'Banashankari Reels',
+              },
+
             ].map((reel, idx) => (
               <div
                 key={idx}
-                className="bg-navy-950/90 border border-gold-500/30 rounded-2xl overflow-hidden shadow-xl flex flex-col"
+                className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-black border border-white/15 hover:border-amber-400/80 shadow-xl transition-all duration-300 hover:-translate-y-1"
               >
-                <div className="relative w-full h-[460px] bg-black">
-                  <iframe
-                    src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
-                      reel.url
-                    )}&show_text=false&width=360`}
-                    title={reel.title}
-                    className="w-full h-full border-0"
-                    scrolling="no"
-                    allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  />
-                </div>
-                <div className="px-4 py-3 bg-navy-900/90 border-t border-navy-800 flex items-center justify-between text-xs">
-                  <span className="font-semibold text-slate-200 truncate">{reel.title}</span>
-                  <a
-                    href={reel.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center space-x-1 text-gold-400 hover:text-gold-300 font-bold shrink-0 ml-2"
-                  >
-                    <span>Open Reel</span>
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
+                <iframe
+                  src={`https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(
+                    reel.url
+                  )}&show_text=false&autoplay=true&mute=1`}
+                  title={reel.title}
+                  className="w-full h-full border-0 pointer-events-none"
+                  scrolling="no"
+                  allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+                />
+
+                {/* Full-card clickable overlay that opens Facebook directly */}
+                <a
+                  href={reel.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${reel.title} — ${isKn ? 'ಫೇಸ್‌ಬುಕ್‌ನಲ್ಲಿ ವೀಕ್ಷಿಸಿ' : 'Watch on Facebook'}`}
+                  className="absolute inset-0 z-10 focus:outline-none focus:ring-2 focus:ring-amber-400"
+                >
+                  {/* Bottom-Left Title & Subtitle Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent pt-12 pb-3.5 px-3.5 text-left">
+                    <p className="text-sm sm:text-base font-bold text-white leading-snug truncate drop-shadow">
+                      {reel.title}
+                    </p>
+                    <p className="text-[11px] sm:text-xs text-slate-200/90 truncate mt-0.5">
+                      {reel.subtitle}
+                    </p>
+                  </div>
+                </a>
               </div>
             ))}
           </div>

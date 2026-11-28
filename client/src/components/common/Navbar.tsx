@@ -144,17 +144,24 @@ export const Navbar: React.FC = () => {
         <div className="bg-[#6BBF59] border-b border-[#3B732E] shadow-sm">
           <div className="w-full px-2 sm:px-6 lg:px-8 py-2 sm:py-2.5 lg:py-3 flex items-center justify-between gap-2 sm:gap-4">
 
-            {/* Top Left: Attached "Grow Together" Logo & RGB Text Below */}
+            {/* Top Left: Founder Circular Logo with Name Inside */}
             <Link
               to="/"
               className="flex flex-col items-center shrink-0 group focus:outline-none focus:ring-2 focus:ring-[#FFD700] rounded-xl p-0.5 sm:p-1 transition"
               aria-label="Banashankari Enterprises - Return to Home"
             >
-              <img
-                src="/founder-logo-circle.png"
-                alt="Ramesh S H - Founder, Banashankari Enterprises"
-                className="w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 object-cover rounded-full drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70"
-              />
+              <div className="relative w-16 h-16 xs:w-20 xs:h-20 sm:w-24 sm:h-24 md:w-24 md:h-24 lg:w-28 lg:h-28 xl:w-32 xl:h-32 rounded-full overflow-hidden drop-shadow-md group-hover:scale-105 transition-transform duration-200 ring-2 ring-white/70">
+                <img
+                  src="/founder-logo-circle.png"
+                  alt="Ramesh S H - Founder, Banashankari Enterprises"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/70 to-transparent pt-2 pb-1 sm:pb-1.5 px-1 text-center">
+                  <span className="block text-[6.5px] xs:text-[8px] sm:text-[9.5px] lg:text-[11px] xl:text-xs font-extrabold tracking-wide text-[#FFEA00] leading-none whitespace-nowrap drop-shadow">
+                    Ramesh S H
+                  </span>
+                </div>
+              </div>
 
             </Link>
 
