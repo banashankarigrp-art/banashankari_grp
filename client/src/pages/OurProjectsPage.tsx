@@ -1,44 +1,87 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Building2,
-  HardHat,
   MapPin,
   CheckCircle2,
   ArrowRight,
-  PhoneCall,
   Calendar,
   Layers,
-  Sparkles,
-  ShieldCheck,
-  Check,
 } from 'lucide-react';
-import { api } from '../services/api';
-import { IConstructionProject, COMPANY_INFO } from '@shared/types';
-import { useSettings } from '../context/SettingsContext';
+
+interface FrontendProject {
+  _id: string;
+  title: string;
+  location: string;
+  clientType: string;
+  status: 'completed' | 'in_progress';
+  builtUpArea: string;
+  coverImage: string;
+  description: string;
+  features: string[];
+  completionYear: number;
+}
+
+const ONGOING_PROJECTS: FrontendProject[] = [
+  {
+    _id: 'ongoing-1',
+    title: 'Multi-Storey Residential Building (G+3)',
+    location: 'Bengaluru, Karnataka',
+    clientType: 'Turnkey Residential',
+    status: 'in_progress',
+    builtUpArea: '4,200 sq. ft.',
+    coverImage: '/projects/ongoing-project-1.jpg',
+    description:
+      'Ongoing multi-storey residential construction featuring stilt parking, modern elevation with natural ventilation, and structural RCC execution under direct supervision.',
+    features: [
+      'Stilt Parking + 3 Residential Floors',
+      'Earthquake-Resistant RCC Frame Structure',
+      'Direct Site Supervision by Ramesh S H',
+    ],
+    completionYear: 2026,
+  },
+  {
+    _id: 'ongoing-2',
+    title: 'Modern Stilt + 2 Floor Residence',
+    location: 'Bengaluru, Karnataka',
+    clientType: 'Custom Home',
+    status: 'in_progress',
+    builtUpArea: '3,100 sq. ft.',
+    coverImage: '/projects/ongoing-project-2.jpg',
+    description:
+      'Ongoing contemporary residential home with dedicated stilt car parking, architectural facade lighting, wooden cladding accents, and premium turnkey finishing.',
+    features: [
+      'Dedicated Stilt Car & Two-Wheeler Parking',
+      'Contemporary Facade with Warm LED Accent Lighting',
+      'A-Grade Cement & Fe-550D Steel Execution',
+    ],
+    completionYear: 2026,
+  },
+];
 
 export const OurProjectsPage: React.FC = () => {
-  const { phoneCallUrl } = useSettings();
-  const [projects, setProjects] = useState<IConstructionProject[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [projects] = useState<FrontendProject[]>(ONGOING_PROJECTS);
   const [activeFilter, setActiveFilter] = useState<'all' | 'completed' | 'in_progress'>('all');
+  const [enquiryForm, setEnquiryForm] = useState({
+    customerName: '',
+    phone: '',
+    email: '',
+    category: 'construction',
+    message: '',
+  });
+  const [enquirySuccess, setEnquirySuccess] = useState('');
 
-  useEffect(() => {
-    const fetchProjects = async () => {
-      try {
-        setLoading(true);
-        const res: any = await api.get('/content/projects');
-        if (res.success && res.data) {
-          setProjects(res.data);
-        }
-      } catch (err) {
-        console.error('Error fetching construction projects:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProjects();
-  }, []);
+  const handleProjectEnquiry = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (enquiryForm.phone.length !== 10) {
+      alert('Please enter a valid 10-digit mobile number');
+      return;
+    }
+    setEnquirySuccess(
+      `Thank you, ${enquiryForm.customerName}! Your enquiry details have been noted. Ramesh S H and our team will contact you shortly on +91 ${enquiryForm.phone}.`
+    );
+    setEnquiryForm({ customerName: '', phone: '', email: '', category: 'construction', message: '' });
+  };
 
   const filteredProjects = projects.filter((p) => {
     if (activeFilter === 'all') return true;
@@ -46,102 +89,55 @@ export const OurProjectsPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-12 sm:space-y-16 pb-20">
-      {/* Header Banner */}
-      <section className="bg-navy-950 text-white py-16 sm:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-gold-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-5xl mx-auto text-center space-y-4 relative z-10">
-          <div className="inline-flex items-center space-x-2 bg-navy-900 border border-gold-500/30 text-gold-400 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
-            <Layers className="w-3.5 h-3.5" />
-            <span>Turnkey Execution Portfolio</span>
-          </div>
-
-          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight">
-            Our Landmark Projects
-          </h1>
-
-          <p className="text-slate-300 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed font-light">
-            Explore our portfolio of turnkey residences, independent duplex homes and civil construction projects across Bengaluru, executed under the direct supervision of Ramesh S H with a commitment to quality and excellence.
-          </p>
-
-          {/* Quick Metrics Strip */}
-          <div className="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-3xl mx-auto">
-            <div className="p-3 bg-navy-900/80 rounded-2xl border border-navy-800 text-center">
-              <span className="block font-heading text-xl sm:text-2xl font-bold text-gold-400">200+</span>
-              <span className="text-[11px] text-slate-400">Projects Completed</span>
-            </div>
-            <div className="p-3 bg-navy-900/80 rounded-2xl border border-navy-800 text-center">
-              <span className="block font-heading text-xl sm:text-2xl font-bold text-gold-400">15+</span>
-              <span className="text-[11px] text-slate-400">Years of Integrity</span>
-            </div>
-            <div className="p-3 bg-navy-900/80 rounded-2xl border border-navy-800 text-center">
-              <span className="block font-heading text-xl sm:text-2xl font-bold text-gold-400">100%</span>
-              <span className="text-[11px] text-slate-400">RCC Grade Certified</span>
-            </div>
-            <div className="p-3 bg-navy-900/80 rounded-2xl border border-navy-800 text-center">
-              <span className="block font-heading text-xl sm:text-2xl font-bold text-gold-400">1,000+</span>
-              <span className="text-[11px] text-slate-400">Satisfied Families</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
+    <div className="space-y-12 sm:space-y-16 pt-8 sm:pt-12 pb-20">
       {/* Main Content Area */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+        {/* Page Title */}
+        <div className="text-center space-y-3">
+          <div className="inline-flex items-center space-x-2 bg-amber-50 border border-amber-200 text-amber-700 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">
+            <Layers className="w-3.5 h-3.5 text-gold-600" />
+            <span>Turnkey Execution Portfolio</span>
+          </div>
+          <h1 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
+            Our Landmark Projects
+          </h1>
+        </div>
+
         {/* Filter Controls */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-slate-200 pb-4">
           <div className="inline-flex bg-slate-100 p-1 rounded-2xl border border-slate-200/80 text-xs font-semibold">
             <button
               onClick={() => setActiveFilter('all')}
-              className={`px-4 py-2 rounded-xl transition ${
-                activeFilter === 'all'
-                  ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60 font-bold'
-                  : 'text-slate-600 hover:text-navy-950'
-              }`}
+              className={`px-4 py-2 rounded-xl transition ${activeFilter === 'all'
+                ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60 font-bold'
+                : 'text-slate-600 hover:text-navy-950'
+                }`}
             >
               All Projects ({projects.length})
             </button>
             <button
               onClick={() => setActiveFilter('completed')}
-              className={`px-4 py-2 rounded-xl transition ${
-                activeFilter === 'completed'
-                  ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60 font-bold'
-                  : 'text-slate-600 hover:text-navy-950'
-              }`}
+              className={`px-4 py-2 rounded-xl transition ${activeFilter === 'completed'
+                ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60 font-bold'
+                : 'text-slate-600 hover:text-navy-950'
+                }`}
             >
               Completed ({projects.filter((p) => p.status === 'completed').length})
             </button>
             <button
               onClick={() => setActiveFilter('in_progress')}
-              className={`px-4 py-2 rounded-xl transition ${
-                activeFilter === 'in_progress'
-                  ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60 font-bold'
-                  : 'text-slate-600 hover:text-navy-950'
-              }`}
+              className={`px-4 py-2 rounded-xl transition ${activeFilter === 'in_progress'
+                ? 'bg-white text-navy-950 shadow-sm border border-slate-200/60 font-bold'
+                : 'text-slate-600 hover:text-navy-950'
+                }`}
             >
               Ongoing Construction ({projects.filter((p) => p.status === 'in_progress').length})
             </button>
           </div>
-
-          <Link
-            to="/construction"
-            className="inline-flex items-center space-x-1.5 text-xs font-bold text-gold-600 hover:text-gold-700"
-          >
-            <span>Request Custom Home Estimate</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </Link>
         </div>
 
         {/* Projects Grid */}
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="bg-white rounded-3xl h-96 animate-pulse border border-slate-200" />
-            ))}
-          </div>
-        ) : filteredProjects.length === 0 ? (
+        {filteredProjects.length === 0 ? (
           <div className="bg-white rounded-3xl border border-slate-200 p-12 text-center space-y-3">
             <Building2 className="w-12 h-12 text-slate-300 mx-auto" />
             <h3 className="font-heading font-bold text-lg text-navy-900">No projects found in this category</h3>
@@ -166,11 +162,10 @@ export const OurProjectsPage: React.FC = () => {
                       {proj.clientType}
                     </div>
                     <span
-                      className={`absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm ${
-                        proj.status === 'completed'
-                          ? 'bg-emerald-600 text-white'
-                          : 'bg-amber-500 text-white'
-                      }`}
+                      className={`absolute top-3 right-3 text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full shadow-sm ${proj.status === 'completed'
+                        ? 'bg-emerald-600 text-white'
+                        : 'bg-amber-500 text-white'
+                        }`}
                     >
                       {proj.status === 'completed' ? 'Completed Handover' : 'Under Construction'}
                     </span>
@@ -210,20 +205,12 @@ export const OurProjectsPage: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Footer Action */}
+                {/* Footer Info */}
                 <div className="px-5 sm:px-6 pb-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
                   <div className="flex items-center space-x-1 text-slate-400">
                     <Calendar className="w-3.5 h-3.5" />
                     <span>Year: {proj.completionYear || 2024}</span>
                   </div>
-
-                  <Link
-                    to="/contact"
-                    className="inline-flex items-center space-x-1 text-xs font-bold text-navy-900 hover:text-gold-600 transition"
-                  >
-                    <span>Enquire Design</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
                 </div>
               </div>
             ))}
@@ -231,35 +218,132 @@ export const OurProjectsPage: React.FC = () => {
         )}
       </section>
 
-      {/* Bottom Consultation Strip */}
+      {/* Project Enquiry Form Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="rounded-3xl bg-gradient-to-br from-navy-950 via-navy-900 to-navy-950 text-white p-8 sm:p-12 border border-gold-500/30 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <span className="text-xs uppercase tracking-widest text-gold-400 font-bold block">
-              Direct Builder Supervision
-            </span>
-            <h3 className="font-heading text-2xl sm:text-3xl font-bold">
-              Ready to construct your home in Bengaluru?
+        <div className="bg-white rounded-3xl border border-slate-200 p-6 sm:p-10 shadow-luxury">
+          <div className="max-w-3xl">
+            <h3 className="font-heading font-bold text-2xl text-navy-900 mb-2">
+              Enquire About a Project or Custom Home
             </h3>
-            <p className="text-xs sm:text-sm text-slate-300 font-light max-w-xl">
-              From soil testing and BDA/BBMP plan sanction to structural RCC pouring and interior woodwork, Ramesh S H provides complete personal oversight.
+            <p className="text-xs sm:text-sm text-slate-500 mb-6">
+              Fill in your details below and our team will get back to you with project specifications, site visit scheduling, and estimates.
             </p>
-          </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto shrink-0">
-            <Link
-              to="/construction"
-              className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gold-500 hover:bg-gold-600 text-white font-bold text-xs shadow-gold-sm transition text-center"
-            >
-              Get Free Estimate
-            </Link>
-            <a
-              href={phoneCallUrl}
-              className="w-full sm:w-auto px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold text-xs transition flex items-center justify-center space-x-1.5"
-            >
-              <PhoneCall className="w-3.5 h-3.5 text-gold-400" />
-              <span>Call Builder Directly</span>
-            </a>
+            {enquirySuccess ? (
+              <div className="p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs leading-relaxed space-y-2">
+                <p>{enquirySuccess}</p>
+                <div className="pt-1">
+                  <Link
+                    to="/my-enquiries"
+                    className="inline-flex items-center space-x-1 font-bold text-emerald-900 underline hover:text-emerald-700"
+                  >
+                    <span>Track in My Enquiries →</span>
+                  </Link>
+                </div>
+              </div>
+            ) : (
+              <form onSubmit={handleProjectEnquiry} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Your Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={enquiryForm.customerName}
+                      onChange={(e) => setEnquiryForm({ ...enquiryForm, customerName: e.target.value })}
+                      placeholder="e.g. Ramesh"
+                      className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Phone Number (10 digits) *
+                    </label>
+                    <div className="relative flex rounded-xl border border-slate-300 focus-within:ring-2 focus-within:ring-gold-500 overflow-hidden bg-white">
+                      <span className="inline-flex items-center px-3.5 bg-slate-50 border-r border-slate-200 text-slate-700 font-bold text-xs select-none">
+                        +91
+                      </span>
+                      <input
+                        type="tel"
+                        required
+                        inputMode="numeric"
+                        pattern="[0-9]{10}"
+                        maxLength={10}
+                        minLength={10}
+                        title="Please enter a 10-digit mobile number"
+                        value={enquiryForm.phone}
+                        onChange={(e) => {
+                          let digits = e.target.value.replace(/\D/g, '');
+                          if (digits.length === 12 && digits.startsWith('91')) {
+                            digits = digits.slice(2);
+                          } else if (digits.length === 11 && digits.startsWith('0')) {
+                            digits = digits.slice(1);
+                          }
+                          setEnquiryForm({ ...enquiryForm, phone: digits.slice(0, 10) });
+                        }}
+                        placeholder="7353275925"
+                        className="w-full px-3 py-3 text-xs focus:outline-none bg-transparent"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      value={enquiryForm.email}
+                      onChange={(e) => setEnquiryForm({ ...enquiryForm, email: e.target.value })}
+                      placeholder="ramesh@example.com"
+                      className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-700 mb-1">
+                      Service Required *
+                    </label>
+                    <select
+                      value={enquiryForm.category}
+                      onChange={(e) => setEnquiryForm({ ...enquiryForm, category: e.target.value })}
+                      className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
+                    >
+                      <option value="construction">Turnkey Home Construction</option>
+                      <option value="property">Property Inspection / Purchase</option>
+                      <option value="loan">Banking Loan Assistance</option>
+                      <option value="khb">KHB Documentation Assistance</option>
+                      <option value="general">General Real Estate Guidance</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold text-slate-700 mb-1">
+                    Describe Your Requirements
+                  </label>
+                  <textarea
+                    rows={3}
+                    value={enquiryForm.message}
+                    onChange={(e) => setEnquiryForm({ ...enquiryForm, message: e.target.value })}
+                    placeholder="Tell us about your plot size, preferred project, locality, or construction requirements..."
+                    className="w-full text-xs p-3 rounded-xl border border-slate-300 focus:ring-2 focus:ring-gold-500 focus:outline-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full sm:w-auto bg-gold-500 hover:bg-gold-600 text-white font-semibold py-3 px-8 rounded-xl text-xs shadow-sm transition inline-flex items-center justify-center space-x-2"
+                >
+                  <span>Submit Enquiry</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>
